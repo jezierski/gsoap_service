@@ -8,8 +8,8 @@
 #ifndef CSOAPSERVER_H
 #define	CSOAPSERVER_H
 #include <string>
-#include "webservice/soaphomesysService.h"
-#include "webservice/homesys.nsmap"
+#include "../webservice/soaphomesysService.h"
+#include "../webservice/homesys.nsmap"
 
 
 using namespace std;
