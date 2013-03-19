@@ -11,8 +11,6 @@ compiling, linking, and/or using OpenSSL is allowed.
 #ifndef soaphomesysService_H
 #define soaphomesysService_H
 #include "soapH.h"
-//#include "homesys.nsmap"
-
 class SOAP_CMAC homesysService : public soap
 { public:
 	/// Constructor

@@ -17,7 +17,7 @@ set (SOURCES
 homesys/homesys.cpp homesys/CSoapServer.cpp
 
 #webservice:
-webservice/soapC.cpp webservice/soaphomesysService.cpp
+webservice/soapC.cpp webservice/soaphomesysService.cpp 
 )
 
 add_executable(${BINARY} ${SOURCES})

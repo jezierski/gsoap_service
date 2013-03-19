@@ -9,17 +9,17 @@
 #define	CSOAPSERVER_H
 #include <string>
 #include "../webservice/soaphomesysService.h"
-#include "../webservice/homesys.nsmap"
+
 
 
 using namespace std;
-class CSoapServer{// : public homesysService {
+class CSoapServer : public homesysService {
 public:
     CSoapServer();
     CSoapServer(const CSoapServer& orig);
     virtual ~CSoapServer();
     
-//    int getCurrentTime(string &time);
+    int getCurrentTime(string &time);
 private:
 
 };

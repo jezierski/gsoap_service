@@ -176,36 +176,6 @@ typedef char *_XML;
 \******************************************************************************/
 
 
-/******************************************************************************\
- *                                                                            *
- * Server-Side Operations                                                     *
- *                                                                            *
-\******************************************************************************/
-
-
-SOAP_FMAC5 int SOAP_FMAC6 ns1__getCurrentTime(struct soap*, std::string &time);
-
-/******************************************************************************\
- *                                                                            *
- * Server-Side Skeletons to Invoke Service Operations                         *
- *                                                                            *
-\******************************************************************************/
-
-SOAP_FMAC5 int SOAP_FMAC6 soap_serve(struct soap*);
-
-SOAP_FMAC5 int SOAP_FMAC6 soap_serve_request(struct soap*);
-
-SOAP_FMAC5 int SOAP_FMAC6 soap_serve_ns1__getCurrentTime(struct soap*);
-
-/******************************************************************************\
- *                                                                            *
- * Client-Side Call Stubs                                                     *
- *                                                                            *
-\******************************************************************************/
-
-
-SOAP_FMAC5 int SOAP_FMAC6 soap_call_ns1__getCurrentTime(struct soap *soap, const char *soap_endpoint, const char *soap_action, std::string &time);
-
 #endif
 
 /* End of soapStub.h */

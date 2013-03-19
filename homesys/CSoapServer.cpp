@@ -16,6 +16,8 @@ CSoapServer::CSoapServer(const CSoapServer& orig) {
 CSoapServer::~CSoapServer() {
 }
 
-//int CSoapServer::getCurrentTime(string& time){
-//   return SOAP_OK; 
-//}
+int CSoapServer::getCurrentTime(string& time){
+    time = "12:34";
+    
+   return SOAP_OK; 
+}
