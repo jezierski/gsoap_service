@@ -1,1 +1,0 @@
-/usr/bin/g++   -g -Wall -std=gnu++0x    CMakeFiles/build/homesys.dir/homesys/homesys.cpp.o CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.o CMakeFiles/build/homesys.dir/webservice/soapC.cpp.o CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.o  -o build/homesys -rdynamic -lgsoap++ 
