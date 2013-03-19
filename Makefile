@@ -99,41 +99,113 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named build/server
+# Target rules for targets named build/homesys
 
 # Build rule for target.
-build/server: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 build/server
-.PHONY : build/server
+build/homesys: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 build/homesys
+.PHONY : build/homesys
 
 # fast build rule for target.
-build/server/fast:
-	$(MAKE) -f CMakeFiles/build/server.dir/build.make CMakeFiles/build/server.dir/build
-.PHONY : build/server/fast
+build/homesys/fast:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/build
+.PHONY : build/homesys/fast
 
-server.o: server.cpp.o
-.PHONY : server.o
+homesys/CSoapServer.o: homesys/CSoapServer.cpp.o
+.PHONY : homesys/CSoapServer.o
 
 # target to build an object file
-server.cpp.o:
-	$(MAKE) -f CMakeFiles/build/server.dir/build.make CMakeFiles/build/server.dir/server.cpp.o
-.PHONY : server.cpp.o
+homesys/CSoapServer.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.o
+.PHONY : homesys/CSoapServer.cpp.o
 
-server.i: server.cpp.i
-.PHONY : server.i
+homesys/CSoapServer.i: homesys/CSoapServer.cpp.i
+.PHONY : homesys/CSoapServer.i
 
 # target to preprocess a source file
-server.cpp.i:
-	$(MAKE) -f CMakeFiles/build/server.dir/build.make CMakeFiles/build/server.dir/server.cpp.i
-.PHONY : server.cpp.i
+homesys/CSoapServer.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.i
+.PHONY : homesys/CSoapServer.cpp.i
 
-server.s: server.cpp.s
-.PHONY : server.s
+homesys/CSoapServer.s: homesys/CSoapServer.cpp.s
+.PHONY : homesys/CSoapServer.s
 
 # target to generate assembly for a file
-server.cpp.s:
-	$(MAKE) -f CMakeFiles/build/server.dir/build.make CMakeFiles/build/server.dir/server.cpp.s
-.PHONY : server.cpp.s
+homesys/CSoapServer.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.s
+.PHONY : homesys/CSoapServer.cpp.s
+
+homesys/homesys.o: homesys/homesys.cpp.o
+.PHONY : homesys/homesys.o
+
+# target to build an object file
+homesys/homesys.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/homesys.cpp.o
+.PHONY : homesys/homesys.cpp.o
+
+homesys/homesys.i: homesys/homesys.cpp.i
+.PHONY : homesys/homesys.i
+
+# target to preprocess a source file
+homesys/homesys.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/homesys.cpp.i
+.PHONY : homesys/homesys.cpp.i
+
+homesys/homesys.s: homesys/homesys.cpp.s
+.PHONY : homesys/homesys.s
+
+# target to generate assembly for a file
+homesys/homesys.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/homesys.cpp.s
+.PHONY : homesys/homesys.cpp.s
+
+webservice/soapC.o: webservice/soapC.cpp.o
+.PHONY : webservice/soapC.o
+
+# target to build an object file
+webservice/soapC.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soapC.cpp.o
+.PHONY : webservice/soapC.cpp.o
+
+webservice/soapC.i: webservice/soapC.cpp.i
+.PHONY : webservice/soapC.i
+
+# target to preprocess a source file
+webservice/soapC.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soapC.cpp.i
+.PHONY : webservice/soapC.cpp.i
+
+webservice/soapC.s: webservice/soapC.cpp.s
+.PHONY : webservice/soapC.s
+
+# target to generate assembly for a file
+webservice/soapC.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soapC.cpp.s
+.PHONY : webservice/soapC.cpp.s
+
+webservice/soaphomesysService.o: webservice/soaphomesysService.cpp.o
+.PHONY : webservice/soaphomesysService.o
+
+# target to build an object file
+webservice/soaphomesysService.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.o
+.PHONY : webservice/soaphomesysService.cpp.o
+
+webservice/soaphomesysService.i: webservice/soaphomesysService.cpp.i
+.PHONY : webservice/soaphomesysService.i
+
+# target to preprocess a source file
+webservice/soaphomesysService.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.i
+.PHONY : webservice/soaphomesysService.cpp.i
+
+webservice/soaphomesysService.s: webservice/soaphomesysService.cpp.s
+.PHONY : webservice/soaphomesysService.s
+
+# target to generate assembly for a file
+webservice/soaphomesysService.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.s
+.PHONY : webservice/soaphomesysService.cpp.s
 
 # Help Target
 help:
@@ -141,12 +213,21 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... build/server"
+	@echo "... build/homesys"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
+	@echo "... homesys/CSoapServer.o"
+	@echo "... homesys/CSoapServer.i"
+	@echo "... homesys/CSoapServer.s"
+	@echo "... homesys/homesys.o"
+	@echo "... homesys/homesys.i"
+	@echo "... homesys/homesys.s"
+	@echo "... webservice/soapC.o"
+	@echo "... webservice/soapC.i"
+	@echo "... webservice/soapC.s"
+	@echo "... webservice/soaphomesysService.o"
+	@echo "... webservice/soaphomesysService.i"
+	@echo "... webservice/soaphomesysService.s"
 .PHONY : help
 
 
