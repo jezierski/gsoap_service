@@ -19,6 +19,7 @@ public:
     CSoapServer(const CSoapServer& orig);
     virtual ~CSoapServer();
     
+    void start();
     int getCurrentTime(string &time);
 private:
 

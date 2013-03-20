@@ -110,7 +110,7 @@ int homesysProxy::getCurrentTime(const char *endpoint, const char *soap_action, 
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (!soap_endpoint)
-		soap_endpoint = "http://adjserwer.dyndns.org:1234";
+		soap_endpoint = "http://192.168.1.39:1234";
 	if (!soap_action)
 		soap_action = "";
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";

@@ -9,7 +9,6 @@ compiling, linking, and/or using OpenSSL is allowed.
 */
 
 #include "soaphomesysService.h"
-
 homesysService::homesysService()
 {	homesysService_init(SOAP_IO_DEFAULT, SOAP_IO_DEFAULT);
 }

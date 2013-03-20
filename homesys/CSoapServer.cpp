@@ -21,3 +21,8 @@ int CSoapServer::getCurrentTime(string& time){
     
    return SOAP_OK; 
 }
+
+void CSoapServer::start(){
+    int error = run(1234);
+    cout<<"start server error code: "<<error<<endl;
+}

@@ -12,7 +12,7 @@ CApplication::~CApplication() {
 void CApplication::run() {
     cout<<"application is running......"<<endl;
     CSoapServer server;
-    server.run(1234);
+    server.start();
     
     while(1);
 }
