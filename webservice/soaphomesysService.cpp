@@ -9,6 +9,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 */
 
 #include "soaphomesysService.h"
+
 homesysService::homesysService()
 {	homesysService_init(SOAP_IO_DEFAULT, SOAP_IO_DEFAULT);
 }
@@ -162,11 +163,14 @@ int homesysService::serve()
 }
 
 static int serve_ns1__getCurrentTime(homesysService*);
+static int serve_ns1__getValue(homesysService*);
 
 int homesysService::dispatch()
 {	soap_peek_element(this);
 	if (!soap_match_tag(this, this->tag, "ns1:getCurrentTime"))
 		return serve_ns1__getCurrentTime(this);
+	if (!soap_match_tag(this, this->tag, "ns1:getValue"))
+		return serve_ns1__getValue(this);
 	return this->error = SOAP_NO_METHOD;
 }
 
@@ -204,6 +208,47 @@ static int serve_ns1__getCurrentTime(homesysService *soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_ns1__getCurrentTimeResponse(soap, &soap_tmp_ns1__getCurrentTimeResponse, "ns1:getCurrentTimeResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_ns1__getValue(homesysService *soap)
+{	struct ns1__getValue soap_tmp_ns1__getValue;
+	struct ns1__getValueResponse soap_tmp_ns1__getValueResponse;
+	soap_default_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse);
+	soap_default_ns1__getValue(soap, &soap_tmp_ns1__getValue);
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	if (!soap_get_ns1__getValue(soap, &soap_tmp_ns1__getValue, "ns1:getValue", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = soap->getValue(soap_tmp_ns1__getValue.id, soap_tmp_ns1__getValueResponse.result);
+	if (soap->error)
+		return soap->error;
+	soap_serializeheader(soap);
+	soap_serialize_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse, "ns1:getValueResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse, "ns1:getValueResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

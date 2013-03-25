@@ -8,6 +8,7 @@
 #ifndef CSOAPSERVER_H
 #define	CSOAPSERVER_H
 #include <string>
+#include <time.h>
 #include "../webservice/soaphomesysService.h"
 
 
@@ -21,6 +22,7 @@ public:
     
     void start();
     int getCurrentTime(string &time);
+    int getValue(string id, string &result);
 private:
 
 };

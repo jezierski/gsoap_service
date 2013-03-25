@@ -69,10 +69,30 @@ private:
 };
 #endif
 
+#ifndef SOAP_TYPE_ns1__getValueResponse
+#define SOAP_TYPE_ns1__getValueResponse (14)
+/* ns1:getValueResponse */
+struct ns1__getValueResponse
+{
+public:
+	std::string result;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* required element of type xsd:string */
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__getValue
+#define SOAP_TYPE_ns1__getValue (15)
+/* ns1:getValue */
+struct ns1__getValue
+{
+public:
+	std::string id;	/* required element of type xsd:string */
+};
+#endif
+
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (13)
+#define SOAP_TYPE_SOAP_ENV__Header (16)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
@@ -88,7 +108,7 @@ private:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (14)
+#define SOAP_TYPE_SOAP_ENV__Code (17)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -103,7 +123,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (16)
+#define SOAP_TYPE_SOAP_ENV__Detail (19)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -119,7 +139,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (19)
+#define SOAP_TYPE_SOAP_ENV__Reason (22)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
@@ -133,7 +153,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (20)
+#define SOAP_TYPE_SOAP_ENV__Fault (23)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {

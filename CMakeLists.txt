@@ -4,7 +4,7 @@ project(HOMESYS)
 find_package(GSOAP2)
 #find_package(SQLITE3)
 
-#set(CMAKE_CXX_COMPILER="distcc g++")
+set(CMAKE_CXX_COMPILER="distcc g++")
 set(CMAKE_CXX_FLAGS "-g -Wall -std=gnu++0x")
 #add_subdirectory(webservice)
 #add_subdirectory(homesys)

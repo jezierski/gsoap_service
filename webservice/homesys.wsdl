@@ -37,12 +37,25 @@
  <part name="time" type="xsd:string"/>
 </message>
 
+<!-- getValue -->
+<message name="getValueRequest">
+ <part name="id" type="xsd:string"/>
+</message>
+
+<message name="getValueResponse">
+ <part name="result" type="xsd:string"/>
+</message>
 
 <portType name="homesysPortType">
  <operation name="getCurrentTime">
   <documentation>Service definition of function ns__getCurrentTime</documentation>
   <input message="tns:getCurrentTimeRequest"/>
   <output message="tns:getCurrentTimeResponse"/>
+ </operation>
+ <operation name="getValue">
+  <documentation>Service definition of function ns__getValue</documentation>
+  <input message="tns:getValueRequest"/>
+  <output message="tns:getValueResponse"/>
  </operation>
 </portType>
 
@@ -57,7 +70,17 @@
      <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
   </output>
  </operation>
+ <operation name="getValue">
+  <SOAP:operation style="rpc" soapAction=""/>
+  <input>
+     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </input>
+  <output>
+     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </output>
+ </operation>
 </binding>
+
 
 <service name="homesys">
  <documentation>gSOAP 2.7.9k generated service definition</documentation>
