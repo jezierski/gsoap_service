@@ -159,6 +159,30 @@ homesys/homesys.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/homesys.cpp.s
 .PHONY : homesys/homesys.cpp.s
 
+raspberry/CGPIOClass.o: raspberry/CGPIOClass.cpp.o
+.PHONY : raspberry/CGPIOClass.o
+
+# target to build an object file
+raspberry/CGPIOClass.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.o
+.PHONY : raspberry/CGPIOClass.cpp.o
+
+raspberry/CGPIOClass.i: raspberry/CGPIOClass.cpp.i
+.PHONY : raspberry/CGPIOClass.i
+
+# target to preprocess a source file
+raspberry/CGPIOClass.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.i
+.PHONY : raspberry/CGPIOClass.cpp.i
+
+raspberry/CGPIOClass.s: raspberry/CGPIOClass.cpp.s
+.PHONY : raspberry/CGPIOClass.s
+
+# target to generate assembly for a file
+raspberry/CGPIOClass.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.s
+.PHONY : raspberry/CGPIOClass.cpp.s
+
 webservice/soapC.o: webservice/soapC.cpp.o
 .PHONY : webservice/soapC.o
 
@@ -222,6 +246,9 @@ help:
 	@echo "... homesys/homesys.o"
 	@echo "... homesys/homesys.i"
 	@echo "... homesys/homesys.s"
+	@echo "... raspberry/CGPIOClass.o"
+	@echo "... raspberry/CGPIOClass.i"
+	@echo "... raspberry/CGPIOClass.s"
 	@echo "... webservice/soapC.o"
 	@echo "... webservice/soapC.i"
 	@echo "... webservice/soapC.s"

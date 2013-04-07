@@ -67,5 +67,9 @@ class SOAP_CMAC homesysProxy : public soap
 	/// Web service operation 'getValue' (returns error code or SOAP_OK)
 	virtual	int getValue(std::string id, std::string &result) { return getValue(NULL, NULL, id, result); }
 	virtual	int getValue(const char *endpoint, const char *soap_action, std::string id, std::string &result);
+
+	/// Web service operation 'switchPort' (returns error code or SOAP_OK)
+	virtual	int switchPort(std::string pinNo, std::string &result) { return switchPort(NULL, NULL, pinNo, result); }
+	virtual	int switchPort(const char *endpoint, const char *soap_action, std::string pinNo, std::string &result);
 };
 #endif

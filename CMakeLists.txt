@@ -15,6 +15,7 @@ set (SOURCES
 
 #homesys:
 homesys/homesys.cpp homesys/CSoapServer.cpp
+raspberry/CGPIOClass.cpp
 
 #webservice:
 webservice/soapC.cpp webservice/soaphomesysService.cpp 

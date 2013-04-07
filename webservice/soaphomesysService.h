@@ -80,5 +80,10 @@ class SOAP_CMAC homesysService : public soap
 	virtual	int getValue(std::string id, std::string &result) SOAP_PURE_VIRTUAL{
             return SOAP_OK;
         }
+
+	/// Web service operation 'switchPort' (returns error code or SOAP_OK)
+	virtual	int switchPort(std::string pinNo, std::string &result) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 };
 #endif

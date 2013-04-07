@@ -15,7 +15,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2013-03-25 16:36:21 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2013-04-07 14:58:16 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -195,6 +195,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_int(soap, NULL, NULL, "xsd:int");
 	case SOAP_TYPE_std__string:
 		return soap_in_std__string(soap, NULL, NULL, "xsd:string");
+	case SOAP_TYPE_ns1__switchPort:
+		return soap_in_ns1__switchPort(soap, NULL, NULL, "ns1:switchPort");
+	case SOAP_TYPE_ns1__switchPortResponse:
+		return soap_in_ns1__switchPortResponse(soap, NULL, NULL, "ns1:switchPortResponse");
 	case SOAP_TYPE_ns1__getValue:
 		return soap_in_ns1__getValue(soap, NULL, NULL, "ns1:getValue");
 	case SOAP_TYPE_ns1__getValueResponse:
@@ -228,6 +232,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "xsd:int"))
 		{	*type = SOAP_TYPE_int;
 			return soap_in_int(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:switchPort"))
+		{	*type = SOAP_TYPE_ns1__switchPort;
+			return soap_in_ns1__switchPort(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:switchPortResponse"))
+		{	*type = SOAP_TYPE_ns1__switchPortResponse;
+			return soap_in_ns1__switchPortResponse(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "ns1:getValue"))
 		{	*type = SOAP_TYPE_ns1__getValue;
@@ -329,6 +341,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_int(soap, tag, id, (const int *)ptr, "xsd:int");
 	case SOAP_TYPE_std__string:
 		return soap_out_std__string(soap, tag, id, (const std::string *)ptr, "xsd:string");
+	case SOAP_TYPE_ns1__switchPort:
+		return soap_out_ns1__switchPort(soap, tag, id, (const struct ns1__switchPort *)ptr, "ns1:switchPort");
+	case SOAP_TYPE_ns1__switchPortResponse:
+		return soap_out_ns1__switchPortResponse(soap, tag, id, (const struct ns1__switchPortResponse *)ptr, "ns1:switchPortResponse");
 	case SOAP_TYPE_ns1__getValue:
 		return soap_out_ns1__getValue(soap, tag, id, (const struct ns1__getValue *)ptr, "ns1:getValue");
 	case SOAP_TYPE_ns1__getValueResponse:
@@ -362,6 +378,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	{
 	case SOAP_TYPE_std__string:
 		soap_serialize_std__string(soap, (const std::string *)ptr);
+		break;
+	case SOAP_TYPE_ns1__switchPort:
+		soap_serialize_ns1__switchPort(soap, (const struct ns1__switchPort *)ptr);
+		break;
+	case SOAP_TYPE_ns1__switchPortResponse:
+		soap_serialize_ns1__switchPortResponse(soap, (const struct ns1__switchPortResponse *)ptr);
 		break;
 	case SOAP_TYPE_ns1__getValue:
 		soap_serialize_ns1__getValue(soap, (const struct ns1__getValue *)ptr);
@@ -403,6 +425,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 		return (void*)soap_instantiate_ns1__getValueResponse(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__getValue:
 		return (void*)soap_instantiate_ns1__getValue(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__switchPortResponse:
+		return (void*)soap_instantiate_ns1__switchPortResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__switchPort:
+		return (void*)soap_instantiate_ns1__switchPort(soap, -1, type, arrayType, n);
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
 		return (void*)soap_instantiate_SOAP_ENV__Header(soap, -1, type, arrayType, n);
@@ -459,6 +485,18 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 			SOAP_DELETE((struct ns1__getValue*)p->ptr);
 		else
 			SOAP_DELETE_ARRAY((struct ns1__getValue*)p->ptr);
+		break;
+	case SOAP_TYPE_ns1__switchPortResponse:
+		if (p->size < 0)
+			SOAP_DELETE((struct ns1__switchPortResponse*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((struct ns1__switchPortResponse*)p->ptr);
+		break;
+	case SOAP_TYPE_ns1__switchPort:
+		if (p->size < 0)
+			SOAP_DELETE((struct ns1__switchPort*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((struct ns1__switchPort*)p->ptr);
 		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
@@ -1338,6 +1376,226 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Header(struct soap *soap, int st,
 }
 
 #endif
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__switchPort(struct soap *soap, struct ns1__switchPort *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_std__string(soap, &a->pinNo);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__switchPort(struct soap *soap, const struct ns1__switchPort *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_std__string(soap, &a->pinNo);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__switchPort(struct soap *soap, const char *tag, int id, const struct ns1__switchPort *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__switchPort), type))
+		return soap->error;
+	if (soap_out_std__string(soap, "pinNo", -1, &a->pinNo, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct ns1__switchPort * SOAP_FMAC4 soap_in_ns1__switchPort(struct soap *soap, const char *tag, struct ns1__switchPort *a, const char *type)
+{
+	size_t soap_flag_pinNo = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct ns1__switchPort *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__switchPort, sizeof(struct ns1__switchPort), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_ns1__switchPort(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_pinNo && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_std__string(soap, "pinNo", &a->pinNo, "xsd:string"))
+				{	soap_flag_pinNo--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct ns1__switchPort *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__switchPort, 0, sizeof(struct ns1__switchPort), 0, soap_copy_ns1__switchPort);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_pinNo > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__switchPort(struct soap *soap, const struct ns1__switchPort *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__switchPort);
+	if (soap_out_ns1__switchPort(soap, tag?tag:"ns1:switchPort", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct ns1__switchPort * SOAP_FMAC4 soap_get_ns1__switchPort(struct soap *soap, struct ns1__switchPort *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns1__switchPort(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct ns1__switchPort * SOAP_FMAC2 soap_instantiate_ns1__switchPort(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__switchPort(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__switchPort, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__switchPort);
+		if (size)
+			*size = sizeof(struct ns1__switchPort);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__switchPort[n]);
+		if (!cp->ptr)
+		{	soap->error = SOAP_EOM;
+			return NULL;
+		}
+		if (size)
+			*size = n * sizeof(struct ns1__switchPort);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	return (struct ns1__switchPort*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__switchPort(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__switchPort %p -> %p\n", q, p));
+	*(struct ns1__switchPort*)p = *(struct ns1__switchPort*)q;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__switchPortResponse(struct soap *soap, struct ns1__switchPortResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_std__string(soap, &a->result);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__switchPortResponse(struct soap *soap, const struct ns1__switchPortResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_std__string(soap, &a->result);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__switchPortResponse(struct soap *soap, const char *tag, int id, const struct ns1__switchPortResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__switchPortResponse), type))
+		return soap->error;
+	if (soap_out_std__string(soap, "result", -1, &a->result, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct ns1__switchPortResponse * SOAP_FMAC4 soap_in_ns1__switchPortResponse(struct soap *soap, const char *tag, struct ns1__switchPortResponse *a, const char *type)
+{
+	size_t soap_flag_result = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct ns1__switchPortResponse *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__switchPortResponse, sizeof(struct ns1__switchPortResponse), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_ns1__switchPortResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_result && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_std__string(soap, "result", &a->result, "xsd:string"))
+				{	soap_flag_result--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct ns1__switchPortResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__switchPortResponse, 0, sizeof(struct ns1__switchPortResponse), 0, soap_copy_ns1__switchPortResponse);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_result > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__switchPortResponse(struct soap *soap, const struct ns1__switchPortResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__switchPortResponse);
+	if (soap_out_ns1__switchPortResponse(soap, tag?tag:"ns1:switchPortResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct ns1__switchPortResponse * SOAP_FMAC4 soap_get_ns1__switchPortResponse(struct soap *soap, struct ns1__switchPortResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns1__switchPortResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct ns1__switchPortResponse * SOAP_FMAC2 soap_instantiate_ns1__switchPortResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__switchPortResponse(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__switchPortResponse, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__switchPortResponse);
+		if (size)
+			*size = sizeof(struct ns1__switchPortResponse);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__switchPortResponse[n]);
+		if (!cp->ptr)
+		{	soap->error = SOAP_EOM;
+			return NULL;
+		}
+		if (size)
+			*size = n * sizeof(struct ns1__switchPortResponse);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	return (struct ns1__switchPortResponse*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__switchPortResponse(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__switchPortResponse %p -> %p\n", q, p));
+	*(struct ns1__switchPortResponse*)p = *(struct ns1__switchPortResponse*)q;
+}
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getValue(struct soap *soap, struct ns1__getValue *a)
 {

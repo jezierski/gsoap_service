@@ -10,7 +10,7 @@
 #include <string>
 #include <time.h>
 #include "../webservice/soaphomesysService.h"
-
+#include "../raspberry/CGPIOClass.h"
 
 
 using namespace std;
@@ -23,6 +23,8 @@ public:
     void start();
     int getCurrentTime(string &time);
     int getValue(string id, string &result);
+    
+    int switchPort(string pinNo, string &result);
 private:
 
 };
