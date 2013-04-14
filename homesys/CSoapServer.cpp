@@ -30,23 +30,25 @@ int CSoapServer::getValue(string id, string &result){
 }
 
 int CSoapServer::switchPort(string pinNo, string &result){
-    if (pinNo != "4"){
-        result = "Bad pin number";
-        return SOAP_OK;
-    }
+//    if (pinNo != "4"){
+//        result = "Bad pin number";
+//        return SOAP_OK;
+//    }
         
     static int portState = 0;
-    CGPIOClass gpio("4");
+    CGPIOClass gpio(pinNo);
     gpio.export_gpio();
     gpio.setdir_gpio("out");
     if (portState){
         portState = 0;
         gpio.setval_gpio("0");
         result = "OK_0";
+        std::cout<<"port "<<pinNo<<" OFF"<<std::endl;
     }else{
         portState = 1;
         gpio.setval_gpio("1");
         result = "OK_1";
+        std::cout<<"port "<<pinNo<<" ON"<<std::endl;
     }
     gpio.unexport_gpio();
     
