@@ -16,6 +16,18 @@ set (SOURCES
 #homesys:
 homesys/homesys.cpp homesys/CSoapServer.cpp
 raspberry/CGPIOClass.cpp
+homesys/CDevice.cpp
+        
+#can232:
+can232/CCan232.cpp
+        
+#tools:
+tools/CBuffer.cpp 
+tools/CCanBuffer.cpp
+tools/CSerCom.cpp 
+tools/CTimeOut.cpp
+tools/CTools.cpp
+        
 
 #webservice:
 webservice/soapC.cpp webservice/soaphomesysService.cpp 

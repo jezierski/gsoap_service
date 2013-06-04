@@ -1,9 +1,11 @@
 #ifndef HOMESYS_H
 #define	HOMESYS_H
 
-#include "CSoapServer.h"
-#include "../webservice/homesys.nsmap"
 #include <iostream>
+
+#include "../webservice/homesys.nsmap"
+#include "CSoapServer.h"
+#include "../can232/CCan232.h"
 
 using namespace std;
 

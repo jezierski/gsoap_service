@@ -111,6 +111,54 @@ build/homesys/fast:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/build
 .PHONY : build/homesys/fast
 
+can232/CCan232.o: can232/CCan232.cpp.o
+.PHONY : can232/CCan232.o
+
+# target to build an object file
+can232/CCan232.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.o
+.PHONY : can232/CCan232.cpp.o
+
+can232/CCan232.i: can232/CCan232.cpp.i
+.PHONY : can232/CCan232.i
+
+# target to preprocess a source file
+can232/CCan232.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.i
+.PHONY : can232/CCan232.cpp.i
+
+can232/CCan232.s: can232/CCan232.cpp.s
+.PHONY : can232/CCan232.s
+
+# target to generate assembly for a file
+can232/CCan232.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.s
+.PHONY : can232/CCan232.cpp.s
+
+homesys/CDevice.o: homesys/CDevice.cpp.o
+.PHONY : homesys/CDevice.o
+
+# target to build an object file
+homesys/CDevice.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.o
+.PHONY : homesys/CDevice.cpp.o
+
+homesys/CDevice.i: homesys/CDevice.cpp.i
+.PHONY : homesys/CDevice.i
+
+# target to preprocess a source file
+homesys/CDevice.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.i
+.PHONY : homesys/CDevice.cpp.i
+
+homesys/CDevice.s: homesys/CDevice.cpp.s
+.PHONY : homesys/CDevice.s
+
+# target to generate assembly for a file
+homesys/CDevice.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.s
+.PHONY : homesys/CDevice.cpp.s
+
 homesys/CSoapServer.o: homesys/CSoapServer.cpp.o
 .PHONY : homesys/CSoapServer.o
 
@@ -183,6 +231,126 @@ raspberry/CGPIOClass.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.s
 .PHONY : raspberry/CGPIOClass.cpp.s
 
+tools/CBuffer.o: tools/CBuffer.cpp.o
+.PHONY : tools/CBuffer.o
+
+# target to build an object file
+tools/CBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBuffer.cpp.o
+.PHONY : tools/CBuffer.cpp.o
+
+tools/CBuffer.i: tools/CBuffer.cpp.i
+.PHONY : tools/CBuffer.i
+
+# target to preprocess a source file
+tools/CBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBuffer.cpp.i
+.PHONY : tools/CBuffer.cpp.i
+
+tools/CBuffer.s: tools/CBuffer.cpp.s
+.PHONY : tools/CBuffer.s
+
+# target to generate assembly for a file
+tools/CBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBuffer.cpp.s
+.PHONY : tools/CBuffer.cpp.s
+
+tools/CCanBuffer.o: tools/CCanBuffer.cpp.o
+.PHONY : tools/CCanBuffer.o
+
+# target to build an object file
+tools/CCanBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.o
+.PHONY : tools/CCanBuffer.cpp.o
+
+tools/CCanBuffer.i: tools/CCanBuffer.cpp.i
+.PHONY : tools/CCanBuffer.i
+
+# target to preprocess a source file
+tools/CCanBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.i
+.PHONY : tools/CCanBuffer.cpp.i
+
+tools/CCanBuffer.s: tools/CCanBuffer.cpp.s
+.PHONY : tools/CCanBuffer.s
+
+# target to generate assembly for a file
+tools/CCanBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.s
+.PHONY : tools/CCanBuffer.cpp.s
+
+tools/CSerCom.o: tools/CSerCom.cpp.o
+.PHONY : tools/CSerCom.o
+
+# target to build an object file
+tools/CSerCom.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CSerCom.cpp.o
+.PHONY : tools/CSerCom.cpp.o
+
+tools/CSerCom.i: tools/CSerCom.cpp.i
+.PHONY : tools/CSerCom.i
+
+# target to preprocess a source file
+tools/CSerCom.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CSerCom.cpp.i
+.PHONY : tools/CSerCom.cpp.i
+
+tools/CSerCom.s: tools/CSerCom.cpp.s
+.PHONY : tools/CSerCom.s
+
+# target to generate assembly for a file
+tools/CSerCom.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CSerCom.cpp.s
+.PHONY : tools/CSerCom.cpp.s
+
+tools/CTimeOut.o: tools/CTimeOut.cpp.o
+.PHONY : tools/CTimeOut.o
+
+# target to build an object file
+tools/CTimeOut.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTimeOut.cpp.o
+.PHONY : tools/CTimeOut.cpp.o
+
+tools/CTimeOut.i: tools/CTimeOut.cpp.i
+.PHONY : tools/CTimeOut.i
+
+# target to preprocess a source file
+tools/CTimeOut.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTimeOut.cpp.i
+.PHONY : tools/CTimeOut.cpp.i
+
+tools/CTimeOut.s: tools/CTimeOut.cpp.s
+.PHONY : tools/CTimeOut.s
+
+# target to generate assembly for a file
+tools/CTimeOut.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTimeOut.cpp.s
+.PHONY : tools/CTimeOut.cpp.s
+
+tools/CTools.o: tools/CTools.cpp.o
+.PHONY : tools/CTools.o
+
+# target to build an object file
+tools/CTools.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTools.cpp.o
+.PHONY : tools/CTools.cpp.o
+
+tools/CTools.i: tools/CTools.cpp.i
+.PHONY : tools/CTools.i
+
+# target to preprocess a source file
+tools/CTools.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTools.cpp.i
+.PHONY : tools/CTools.cpp.i
+
+tools/CTools.s: tools/CTools.cpp.s
+.PHONY : tools/CTools.s
+
+# target to generate assembly for a file
+tools/CTools.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTools.cpp.s
+.PHONY : tools/CTools.cpp.s
+
 webservice/soapC.o: webservice/soapC.cpp.o
 .PHONY : webservice/soapC.o
 
@@ -240,6 +408,12 @@ help:
 	@echo "... build/homesys"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... can232/CCan232.o"
+	@echo "... can232/CCan232.i"
+	@echo "... can232/CCan232.s"
+	@echo "... homesys/CDevice.o"
+	@echo "... homesys/CDevice.i"
+	@echo "... homesys/CDevice.s"
 	@echo "... homesys/CSoapServer.o"
 	@echo "... homesys/CSoapServer.i"
 	@echo "... homesys/CSoapServer.s"
@@ -249,6 +423,21 @@ help:
 	@echo "... raspberry/CGPIOClass.o"
 	@echo "... raspberry/CGPIOClass.i"
 	@echo "... raspberry/CGPIOClass.s"
+	@echo "... tools/CBuffer.o"
+	@echo "... tools/CBuffer.i"
+	@echo "... tools/CBuffer.s"
+	@echo "... tools/CCanBuffer.o"
+	@echo "... tools/CCanBuffer.i"
+	@echo "... tools/CCanBuffer.s"
+	@echo "... tools/CSerCom.o"
+	@echo "... tools/CSerCom.i"
+	@echo "... tools/CSerCom.s"
+	@echo "... tools/CTimeOut.o"
+	@echo "... tools/CTimeOut.i"
+	@echo "... tools/CTimeOut.s"
+	@echo "... tools/CTools.o"
+	@echo "... tools/CTools.i"
+	@echo "... tools/CTools.s"
 	@echo "... webservice/soapC.o"
 	@echo "... webservice/soapC.i"
 	@echo "... webservice/soapC.s"
