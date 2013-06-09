@@ -2,10 +2,13 @@
 #define	HOMESYS_H
 
 #include <iostream>
+#include <map>
 
 #include "../webservice/homesys.nsmap"
 #include "CSoapServer.h"
 #include "../can232/CCan232.h"
+#include "../tools/CConfiguration.h"
+#include "../tools/CDatabase.h"
 
 using namespace std;
 
@@ -15,5 +18,12 @@ public:
     virtual ~CApplication();
     
     void run();
+    
+private:
+    void dbConfig();
+    
+    CConfiguration *configuration;
+    CDatabase *db;
+    
 };
 #endif

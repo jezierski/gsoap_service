@@ -33,7 +33,7 @@ public:
     virtual ~CSerCom();
     /// @name Intitalize  Functions
     //@{
-    int openSerial(const char * PortName, long Baud = 9600, int DBits = 8, int SBits = 2, int Parity = 0, int Mode = 0);
+    int openSerial(string PortName, long Baud = 9600, int DBits = 8, int SBits = 2, int Parity = 0, int Mode = 0);
     void closePort();
 
     bool isOpen() {

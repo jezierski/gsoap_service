@@ -14,6 +14,15 @@
 #include "../tools/CBuffer.h"
 #include "../tools/CCanBuffer.h"
 #include "../tools/CTools.h"
+#include "../tools/CConfiguration.h"
+#include "../tools/CLog.h"
+
+
+#define HEADER  '?'
+#define CMD_SEND        'T'
+#define CMD_REQUEST     'G'
+#define CR      0x0d
+#define CMD_INIT        "Init"
 
 
 using namespace std;
@@ -38,7 +47,7 @@ public:
 
     void sendCanFrame(CCanBuffer &frame);
     CCanBuffer getCanFrame();
-   
+
 
 
 private:
@@ -47,16 +56,20 @@ private:
     void openCAN();
     void closeCAN();
     void setSpeed(ECanBaudRate baudRate);
+    void setSpeed(string baudRate);
     bool handshake();
     void setAcceptedMask(unsigned char maskId, unsigned int mask);
     void setAcceptedFilters(unsigned char filterId, unsigned int filter);
-    
+
     unsigned char getCRC(CBuffer &buffer);
     unsigned char checkCRC(CBuffer& buffer);
     bool isFrameComplete(CBuffer &frame);
     bool setCommand(CBuffer &buffer);
     CBuffer getFrame();
     CCanBuffer createCanBuffer(CBuffer &buffer);
+    
+    CConfiguration *config;
+    CLog *log;
 };
 
 #endif	/* CCAN232_H */

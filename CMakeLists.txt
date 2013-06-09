@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 project(HOMESYS)
 
 find_package(GSOAP2)
-#find_package(SQLITE3)
+find_package(SQLITE3)
 
 set(CMAKE_CXX_COMPILER="distcc g++")
 set(CMAKE_CXX_FLAGS "-g -Wall -std=gnu++0x")
@@ -27,6 +27,9 @@ tools/CCanBuffer.cpp
 tools/CSerCom.cpp 
 tools/CTimeOut.cpp
 tools/CTools.cpp
+tools/CConfiguration.cpp
+tools/CDatabase.cpp
+tools/CLog.cpp
         
 
 #webservice:
@@ -35,4 +38,4 @@ webservice/soapC.cpp webservice/soaphomesysService.cpp
 
 add_executable(${BINARY} ${SOURCES})
 
-target_link_libraries(${BINARY} ${GSOAP2_LIBRARY_RELEASE})
+target_link_libraries(${BINARY} ${GSOAP2_LIBRARY_RELEASE} ${SQLITE3_LIBRARY_RELEASE})

@@ -8,11 +8,9 @@
 #include "CCan232.h"
 #include "../tools/CTimeOut.h"
 
-
-
-#define portName "/dev/ttyAMA0"         //@TODO move to DB
-
 CCan232::CCan232() {
+    config = CConfiguration::getInstance();
+    log = CLog::getInstance();
 }
 
 //CCan232::CCan232(const CCan232& orig) {
@@ -23,7 +21,7 @@ CCan232::~CCan232() {
 
 void CCan232::connect() {
 
-    openSerial(portName, 115200, 8, 1, 0);
+    openSerial(config->getList<string>("can232")["portName"], 115200, 8, 1, 0);
 
 }
 
@@ -31,7 +29,6 @@ void CCan232::openCAN() {
 
     CBuffer buffer;
     buffer << "O";
-    buffer << (unsigned char) 0x0d; //@TODO make constans
     setCommand(buffer);
 }
 
@@ -39,7 +36,6 @@ void CCan232::closeCAN() {
 
     CBuffer buffer;
     buffer << "C";
-    buffer << (unsigned char) 0x0d; //@TODO make constans
     setCommand(buffer);
 }
 
@@ -48,6 +44,24 @@ void CCan232::setSpeed(ECanBaudRate baudRate) {
     buffer << "S";
     buffer << (unsigned char) baudRate;
     setCommand(buffer);
+}
+
+void CCan232::setSpeed(string baudRate) {
+    ECanBaudRate bps = ECanBaudRate::BPS10000;
+    if (baudRate == "10000")
+        bps = ECanBaudRate::BPS10000;
+    else if (baudRate == "20000")
+        bps = ECanBaudRate::BPS20000;
+    else if (baudRate == "40000")
+        bps = ECanBaudRate::BPS40000;
+    else if (baudRate == "80000")
+        bps = ECanBaudRate::BPS80000;
+    else if (baudRate == "160000")
+        bps = ECanBaudRate::BPS160000;
+    else if (baudRate == "320000")
+        bps = ECanBaudRate::BPS320000;
+
+    setSpeed(bps);
 }
 
 void CCan232::setAcceptedMask(unsigned char maskId, unsigned int mask) {
@@ -76,9 +90,14 @@ bool CCan232::handshake() {
             buffer.clear();
             buffer << "?";
             sendBuffer(buffer);
+            buffer.clear();
+            buffer << (unsigned char) 4;
             sendBuffer(buffer);
             buffer.clear();
-            buffer << (unsigned char) 0x0d; //@TODO make const
+            buffer << "?";
+            sendBuffer(buffer);
+            buffer.clear();
+            buffer << (unsigned char) CR;
             sendBuffer(buffer);
             rb = receiveByte();
 
@@ -89,22 +108,22 @@ bool CCan232::handshake() {
             cout << e << endl;
         }
     }
-    //    log->put();
-    cout << "Can232 device handshake failed" << endl;
+    log->error("Can232 device handshake failed");
     return false;
 }
 
-void CCan232::restoreDefaults(){
+void CCan232::restoreDefaults() {
     CBuffer buffer;
-    buffer << "Init";           //@TODO make const
+    buffer << CMD_INIT;
     setCommand(buffer);
 }
 
 bool CCan232::setCommand(CBuffer &buffer) {
     CBuffer buf;
-    buf << "?"; //@TODO make const
+    buf << (unsigned char) HEADER;
+    buf << (unsigned char) (buffer.getLength() + 3);
     buf << buffer;
-    buf << (unsigned char) 0x0d; //@TODO make const
+    buf << (unsigned char) CR;
     try {
         sendBuffer(buf);
         buf = getFrame();
@@ -112,7 +131,6 @@ bool CCan232::setCommand(CBuffer &buffer) {
             return true;
 
     } catch (string e) {
-        //log->put();)
         throw string("Set command '" + to_string(buffer[0]) + "' failed");
     }
     return false;
@@ -132,48 +150,45 @@ bool CCan232::initCan232Device() {
         handshake();
         restoreDefaults();
         closeCAN();
-        setSpeed(ECanBaudRate::BPS160000); // @TODO read from DB
-        setAcceptedMask(0, 2); // @TODO read from DB
-        setAcceptedMask(1, 2); // @TODO read from DB
-        setAcceptedFilters(0, 2); // @TODO read from DB
-        setAcceptedFilters(1, 2); // @TODO read from DB
-        setAcceptedFilters(2, 2); // @TODO read from DB
-        setAcceptedFilters(3, 2); // @TODO read from DB
-        setAcceptedFilters(4, 2); // @TODO read from DB
-        setAcceptedFilters(5, 2); // @TODO read from DB
+        setSpeed(config->getList<string>("can232")["CANspeed"]);
+        setAcceptedMask(0, config->getList<unsigned int>("canConfig")["acceptMask0"]);
+        setAcceptedMask(1, config->getList<unsigned int>("canConfig")["acceptMask1"]);
+        setAcceptedFilters(0, config->getList<unsigned int>("canConfig")["acceptFilter0"]);
+        setAcceptedFilters(1, config->getList<unsigned int>("canConfig")["acceptFilter1"]);
+        setAcceptedFilters(2, config->getList<unsigned int>("canConfig")["acceptFilter2"]);
+        setAcceptedFilters(3, config->getList<unsigned int>("canConfig")["acceptFilter3"]);
+        setAcceptedFilters(4, config->getList<unsigned int>("canConfig")["acceptFilter4"]);
+        setAcceptedFilters(5, config->getList<unsigned int>("canConfig")["acceptFilter5"]);
         openCAN();
     } catch (string e) {
-        //log->put();
-        cout << "Can232 device initialization failed: " << e << endl;
+        log->error("Can232 device initialization failed: ");
         return false;
     }
-    //log->put();
-    cout << "Can232 device initialization success" << endl;
+    log->success("Can232 device initialization success");
     return true;
 }
 
 void CCan232::sendCanFrame(CCanBuffer &frame) {
     CBuffer buf;
-    buf << "?"; //@TODO make const
-    buf << "T"; //@TODO make const
+    buf << (unsigned char) HEADER;
+    buf << (unsigned char) (frame.getLength() + 8);
+    buf << (unsigned char) CMD_SEND;
     buf << frame.frameId();
     buf << (unsigned char) frame.getLength();
     buf << frame;
-    buf << getCRC(buf);
-    buf << (unsigned char) 0x0d; //@TODO make const
+    buf << (unsigned char) getCRC(buf);
+    buf << (unsigned char) CR;
     try {
         sendBuffer(buf);
         buf = getFrame();
         if (buf.isReady()) {
             if (buf.getErrorCode()) {
-                //                log->put();
-                cout << "Sending can frame error code: " << (int) buf.getErrorCode() << endl;
+                log->error("Sending can frame error code: " + to_string((int) buf.getErrorCode()));
             }
         }
 
     } catch (string e) {
-        //log->put();)
-        cout << "Sending CAN frame failed: " << e << endl;
+        log->error("Sending CAN frame failed: " + to_string(e));
     }
 }
 
@@ -190,7 +205,7 @@ unsigned char CCan232::checkCRC(CBuffer& buffer) {
     for (size_t i = 0; i < buffer.getLength(); i++)
         crc += buffer[i];
 
-    cout<<"crc: "<<(int)crc<<endl;
+    cout << "crc: " << (int) crc << endl;
     return (0 == crc);
 }
 
@@ -200,8 +215,8 @@ CBuffer CCan232::getFrame() {
     unsigned char rbyte;
 
     rbyte = receiveByte();
-    cout << "------rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
-    if (rbyte != 'T') { //@TODO make const
+    //cout << "------rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
+    if (rbyte != CMD_SEND) {
         return buf;
     }
 
@@ -209,7 +224,7 @@ CBuffer CCan232::getFrame() {
     tout.SetMilliSec(1000);
     while (!tout.IsTimeOut()) {
         buf << (unsigned char) receiveByte();
-        cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
+        //cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
         if (isFrameComplete(buf)) {
             buf.setReady();
             return buf;
@@ -222,39 +237,39 @@ CBuffer CCan232::getFrame() {
 CCanBuffer CCan232::getCanFrame() {
     CBuffer buf;
     CCanBuffer canBuffer;
-    buf << "?"; //@TODO make const
-    buf << "G"; //@TODO make const
-    buf << 0x0d; //@TODO make const
+    buf << (unsigned char) HEADER;
+    buf << (unsigned char) 4;
+    buf << (unsigned char) CMD_REQUEST;
+    buf << (unsigned char) CR;
     try {
         sendBuffer(buf);
         buf = getFrame();
         if (buf.isReady()) {
-            canBuffer = createCanBuffer(buf);
+            if (!buf.isNoData())
+                canBuffer = createCanBuffer(buf);
         }
 
     } catch (string e) {
-        //log->put();)
-        cout << "Receiving CAN frame failed: " << e << endl;
+        log->error("Receiving CAN frame failed: " + to_string(e));
     }
-    
-    
+
+
     return canBuffer;
 }
 
-CCanBuffer CCan232::createCanBuffer(CBuffer &buffer){
+CCanBuffer CCan232::createCanBuffer(CBuffer &buffer) {
     CCanBuffer canBuffer;
     unsigned int id;
-    if (!checkCRC(buffer)){
-//        log->put();
-        cout<<"Received CAN frame CRCfailed"<<endl;
+    if (!checkCRC(buffer)) {
+        log->error("Received CAN frame CRCfailed");
         return canBuffer;
     }
     id = (buffer[1] << 8) & 0xff00;
     id |= buffer[2];
     canBuffer.insertId(id);
     for (size_t i = 0; i < buffer[3]; i++)
-        canBuffer << (unsigned char)buffer[i + 4];
-    
+        canBuffer << (unsigned char) buffer[i + 4];
+
     return canBuffer;
-    
+
 }

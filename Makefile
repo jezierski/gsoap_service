@@ -279,6 +279,78 @@ tools/CCanBuffer.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.s
 .PHONY : tools/CCanBuffer.cpp.s
 
+tools/CConfiguration.o: tools/CConfiguration.cpp.o
+.PHONY : tools/CConfiguration.o
+
+# target to build an object file
+tools/CConfiguration.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CConfiguration.cpp.o
+.PHONY : tools/CConfiguration.cpp.o
+
+tools/CConfiguration.i: tools/CConfiguration.cpp.i
+.PHONY : tools/CConfiguration.i
+
+# target to preprocess a source file
+tools/CConfiguration.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CConfiguration.cpp.i
+.PHONY : tools/CConfiguration.cpp.i
+
+tools/CConfiguration.s: tools/CConfiguration.cpp.s
+.PHONY : tools/CConfiguration.s
+
+# target to generate assembly for a file
+tools/CConfiguration.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CConfiguration.cpp.s
+.PHONY : tools/CConfiguration.cpp.s
+
+tools/CDatabase.o: tools/CDatabase.cpp.o
+.PHONY : tools/CDatabase.o
+
+# target to build an object file
+tools/CDatabase.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.o
+.PHONY : tools/CDatabase.cpp.o
+
+tools/CDatabase.i: tools/CDatabase.cpp.i
+.PHONY : tools/CDatabase.i
+
+# target to preprocess a source file
+tools/CDatabase.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.i
+.PHONY : tools/CDatabase.cpp.i
+
+tools/CDatabase.s: tools/CDatabase.cpp.s
+.PHONY : tools/CDatabase.s
+
+# target to generate assembly for a file
+tools/CDatabase.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.s
+.PHONY : tools/CDatabase.cpp.s
+
+tools/CLog.o: tools/CLog.cpp.o
+.PHONY : tools/CLog.o
+
+# target to build an object file
+tools/CLog.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CLog.cpp.o
+.PHONY : tools/CLog.cpp.o
+
+tools/CLog.i: tools/CLog.cpp.i
+.PHONY : tools/CLog.i
+
+# target to preprocess a source file
+tools/CLog.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CLog.cpp.i
+.PHONY : tools/CLog.cpp.i
+
+tools/CLog.s: tools/CLog.cpp.s
+.PHONY : tools/CLog.s
+
+# target to generate assembly for a file
+tools/CLog.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CLog.cpp.s
+.PHONY : tools/CLog.cpp.s
+
 tools/CSerCom.o: tools/CSerCom.cpp.o
 .PHONY : tools/CSerCom.o
 
@@ -429,6 +501,15 @@ help:
 	@echo "... tools/CCanBuffer.o"
 	@echo "... tools/CCanBuffer.i"
 	@echo "... tools/CCanBuffer.s"
+	@echo "... tools/CConfiguration.o"
+	@echo "... tools/CConfiguration.i"
+	@echo "... tools/CConfiguration.s"
+	@echo "... tools/CDatabase.o"
+	@echo "... tools/CDatabase.i"
+	@echo "... tools/CDatabase.s"
+	@echo "... tools/CLog.o"
+	@echo "... tools/CLog.i"
+	@echo "... tools/CLog.s"
 	@echo "... tools/CSerCom.o"
 	@echo "... tools/CSerCom.i"
 	@echo "... tools/CSerCom.s"

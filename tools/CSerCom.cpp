@@ -66,7 +66,7 @@ int CSerCom::openTermio() {
 /// \param Mode not used, free for futher options
 /// \return 0= ok or error code
 
-int CSerCom::openSerial(const char * PortName, long Baud, int DBits, int SBits, int Parity, int Mode) {
+int CSerCom::openSerial(string PortName, long Baud, int DBits, int SBits, int Parity, int Mode) {
     int error = 0;
 
     if (isOpen())
@@ -76,7 +76,7 @@ int CSerCom::openSerial(const char * PortName, long Baud, int DBits, int SBits, 
     memset(m_PortName, 0, sizeof (m_PortName));
 
 
-    strncpy(m_PortName, PortName, PORT_NAME_LEN);
+    strncpy(m_PortName, PortName.c_str(), PORT_NAME_LEN);
 
     // Convert Parameter to termio
     switch (Baud) {
@@ -274,12 +274,12 @@ int CSerCom::sendBuffer(CBuffer &buffer) {
 
     unsigned char *tempBuf = new unsigned char[len];
 
-    cout << "++++++sending buffer: "; //@TODO remove it
+//    cout << "++++++sending buffer: "; //@TODO remove it
     for (size_t i = 0; i < len; i++) {
         tempBuf[i] = buffer.getBuffer()[i];
-        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "]("<<tempBuf[i]<<") | ";
+//        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "]("<<tempBuf[i]<<") | ";
     }
-    cout << endl;
+//    cout << endl;
 
     sendBuffer(tempBuf, len);
     delete[] tempBuf;

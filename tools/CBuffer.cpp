@@ -17,6 +17,7 @@ void CBuffer::printBuffer() {
         cout << "0x" << (int) c << " ";
 
     cout << dec << endl;
+    cout<<endl;
 }
 
 
@@ -214,7 +215,11 @@ CBuffer::~CBuffer() {
 }
 
 bool CBuffer::isACK(){
-    return (this->operator [](1) == '0');               //@TODO make constans
+    return (this->operator [](1) == '0'); 
+}
+
+bool CBuffer::isNoData(){
+    return (this->operator [](1) == '3'); 
 }
 
 unsigned char CBuffer::getErrorCode(){

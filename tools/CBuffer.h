@@ -41,6 +41,7 @@ public:
     bool operator ==(CBuffer &buf);
     
     bool isACK();
+    bool isNoData();
     unsigned char getErrorCode();
 private:
     vector<unsigned char> buffer;
