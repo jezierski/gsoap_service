@@ -135,6 +135,30 @@ can232/CCan232.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.s
 .PHONY : can232/CCan232.cpp.s
 
+can_devices/CCanSimpleSwitchActor.o: can_devices/CCanSimpleSwitchActor.cpp.o
+.PHONY : can_devices/CCanSimpleSwitchActor.o
+
+# target to build an object file
+can_devices/CCanSimpleSwitchActor.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.o
+.PHONY : can_devices/CCanSimpleSwitchActor.cpp.o
+
+can_devices/CCanSimpleSwitchActor.i: can_devices/CCanSimpleSwitchActor.cpp.i
+.PHONY : can_devices/CCanSimpleSwitchActor.i
+
+# target to preprocess a source file
+can_devices/CCanSimpleSwitchActor.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.i
+.PHONY : can_devices/CCanSimpleSwitchActor.cpp.i
+
+can_devices/CCanSimpleSwitchActor.s: can_devices/CCanSimpleSwitchActor.cpp.s
+.PHONY : can_devices/CCanSimpleSwitchActor.s
+
+# target to generate assembly for a file
+can_devices/CCanSimpleSwitchActor.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.s
+.PHONY : can_devices/CCanSimpleSwitchActor.cpp.s
+
 homesys/CDevice.o: homesys/CDevice.cpp.o
 .PHONY : homesys/CDevice.o
 
@@ -483,6 +507,9 @@ help:
 	@echo "... can232/CCan232.o"
 	@echo "... can232/CCan232.i"
 	@echo "... can232/CCan232.s"
+	@echo "... can_devices/CCanSimpleSwitchActor.o"
+	@echo "... can_devices/CCanSimpleSwitchActor.i"
+	@echo "... can_devices/CCanSimpleSwitchActor.s"
 	@echo "... homesys/CDevice.o"
 	@echo "... homesys/CDevice.i"
 	@echo "... homesys/CDevice.s"

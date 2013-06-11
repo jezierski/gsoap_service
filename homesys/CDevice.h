@@ -8,7 +8,11 @@
 #ifndef CDEVICE_H
 #define	CDEVICE_H
 
-#include "../tools/CSerCom.h"
+#include <map>
+#include "../can_devices/CCanConstans.h"
+#include "../can232/CCan232.h"
+#include "../tools/CCanBuffer.h"
+
 
 
 
@@ -17,8 +21,21 @@ public:
     CDevice();
 //    CDevice(const CDevice& orig);
     virtual ~CDevice();
-private:
+    
+    void setDeviceCategory(EDeviceCategory category);
+    EDeviceCategory getDeviceCategory();
+    
+    void setCommunicationProtocol(CCan232 protocol);
+    unsigned char getNewAddress();
+    
 
+//    void addNewDevice(unsigned char address);
+    void resetAddresses();
+    
+private:
+    map<unsigned char, string> devicesDescriptionList;
+    EDeviceCategory category;
+    CCan232 canbusProtocol;
 };
 
 #endif	/* CDEVICE_H */

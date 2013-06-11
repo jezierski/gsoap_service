@@ -17,9 +17,13 @@ public:
     virtual ~CCanBuffer();
     
     void insertId(unsigned int id);
+    void insertCommand(unsigned char cmd);
     unsigned int frameId();
+    unsigned char frameCommand();
+    void buildBuffer();
 private:
     unsigned int id = 0;
+    unsigned char command;
 };
 
 #endif	/* CCANBUFFER_H */

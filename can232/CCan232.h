@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#include "../homesys/CDevice.h"
+#include "../tools/CSerCom.h"
 #include "../tools/CBuffer.h"
 #include "../tools/CCanBuffer.h"
 #include "../tools/CTools.h"

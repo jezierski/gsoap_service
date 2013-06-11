@@ -30,6 +30,9 @@ tools/CTools.cpp
 tools/CConfiguration.cpp
 tools/CDatabase.cpp
 tools/CLog.cpp
+
+#can_devices:
+can_devices/CCanSimpleSwitchActor.cpp
         
 
 #webservice:
