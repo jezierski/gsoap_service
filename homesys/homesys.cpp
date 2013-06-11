@@ -1,4 +1,5 @@
 #include "homesys.h"
+#include "../can_devices/CCanSimpleSwitchActor.h"
 
 CApplication::CApplication() {
     configuration = CConfiguration::getInstance();
@@ -21,58 +22,41 @@ void CApplication::run() {
         cout << " dbConfig: " << e << endl;
     }
 
-    CCan232 can232device;
-    can232device.initCan232Device();
+    CCan232 *can232device = new CCan232();
+    can232device->initCan232Device();
 
 
-    CCanBuffer buffer;
-    unsigned char data1, data2, dataId;
+    CCanSimpleSwitchActor actorSwitch;
+    actorSwitch.setCommunicationProtocol(can232device);
+        
+    
     //    buffer.insertId(4);
     //    buffer << (unsigned char) 1;
     //    buffer << (unsigned char) 2;
     //    buffer << (unsigned char) 3;
     //    can232device.sendCanFrame(buffer);
 
-    char x;
+    string x = "";
     while (1) {
-        //cout << "next ?";
-        //cin >> x;
-        //if (x == 'n') {
+        cout << "\r\n?? ";
+        cin >> x;
+        if (x == "reset") {
+            cout<<"> reset addresses"<<endl;
+            actorSwitch.resetAddresses();
+        }
+        
+        if (x == "init") {
+            cout<<"> init addresses"<<endl;
+            actorSwitch.initAddress();
+        }
+        
+        if (x == "assign") {
+            cout<<"> assign addresses"<<endl;
+            actorSwitch.assignAddresses();
+        }
 
-        buffer = can232device.getCanFrame();
-        if (buffer.frameId()) {
-            cout << "id: " << (int) buffer.frameId() << endl;
-            data1 = buffer[0];
-            data2 = buffer[1];
-            dataId = buffer[2];
-            buffer.printBuffer();
-        }
-        if (dataId == 3) {
-            buffer.clear();
-            buffer.insertId(4);
-            buffer << (unsigned char) 0x34;
-            buffer << (unsigned char) 0x34;
-            buffer << (unsigned char) 0x34;
-            buffer << (unsigned char) data1;
-            buffer << (unsigned char) data2;
-            can232device.sendCanFrame(buffer);
-            dataId = 0;
-        }
-        if (dataId == 4) {
-            buffer.clear();
-            buffer.insertId(3);
-            buffer << (unsigned char) 0x33;
-            buffer << (unsigned char) 0x33;
-            buffer << (unsigned char) 0x33;
-            buffer << (unsigned char) data1;
-            buffer << (unsigned char) data2;
-            can232device.sendCanFrame(buffer);
-            dataId = 0;
-        }
-        //cout << "Received buffer empty" << endl;
-        //  }
-        //            x = 0;
-        msleep(1);
+       
+        x = "";
         //sleep(1);
     }
 }
@@ -84,8 +68,8 @@ void CApplication::dbConfig() {
     configuration->updateList<string>("can232", can232config);
     
     map<string, unsigned int>canConfig;
-    canConfig["acceptMask0"] = 0x002;
-    canConfig["acceptMask1"] = 0x002;
+    canConfig["acceptMask0"] = 0x3ff;
+    canConfig["acceptMask1"] = 0x3ff;
     canConfig["acceptFilter0"] = 0x002;
     canConfig["acceptFilter1"] = 0x002;
     canConfig["acceptFilter2"] = 0x002;

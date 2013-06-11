@@ -12,7 +12,7 @@
 #include "../can_devices/CCanConstans.h"
 #include "../can232/CCan232.h"
 #include "../tools/CCanBuffer.h"
-
+#include "../tools/CTimeOut.h"
 
 
 
@@ -25,17 +25,19 @@ public:
     void setDeviceCategory(EDeviceCategory category);
     EDeviceCategory getDeviceCategory();
     
-    void setCommunicationProtocol(CCan232 protocol);
+    void setCommunicationProtocol(CCan232 *protocol);
     unsigned char getNewAddress();
     
 
 //    void addNewDevice(unsigned char address);
     void resetAddresses();
+    void initAddress();
+    void assignAddresses();
     
 private:
     map<unsigned char, string> devicesDescriptionList;
     EDeviceCategory category;
-    CCan232 canbusProtocol;
+    CCan232 *canbusProtocol;
 };
 
 #endif	/* CDEVICE_H */

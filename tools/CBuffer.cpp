@@ -37,7 +37,7 @@ unsigned char CBuffer::getCommand() {
 /// \return pointer to buffer
 
 vector<unsigned char> &CBuffer::getBuffer() {
-    return buffer; //do przeróbki
+    return buffer; 
 }
 
 //////////////////////////////////////////////////////////////////////

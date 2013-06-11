@@ -245,8 +245,9 @@ CCanBuffer CCan232::getCanFrame() {
         sendBuffer(buf);
         buf = getFrame();
         if (buf.isReady()) {
-            if (!buf.isNoData())
+            if (!buf.isNoData()){
                 canBuffer = createCanBuffer(buf);
+            }
         }
 
     } catch (string e) {

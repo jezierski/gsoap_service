@@ -270,7 +270,7 @@ int CSerCom::sendBuffer(CBuffer &buffer) {
     }
 
 
-    size_t len = buffer.getBuffer().size();
+    size_t len = buffer.getLength();
 
     unsigned char *tempBuf = new unsigned char[len];
 
@@ -308,7 +308,7 @@ int CSerCom::sendBuffer(unsigned char * Buffer, int Len) {
         written = write(m_PortFd, Buffer, rest);
 
         if (tcdrain(m_PortFd) != 0) {
-            //            cout<<"tcdrain error"<<endl;
+//                        cout<<"tcdrain error"<<endl;
             //log->error("tcdrain error");
         }
         if (written >= 0)

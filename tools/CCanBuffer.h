@@ -20,6 +20,10 @@ public:
     void insertCommand(unsigned char cmd);
     unsigned int frameId();
     unsigned char frameCommand();
+    unsigned char sourceId();
+    
+    unsigned int getUID();
+    
     void buildBuffer();
 private:
     unsigned int id = 0;
