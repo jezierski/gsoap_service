@@ -21,8 +21,10 @@ public:
     unsigned int frameId();
     unsigned char frameCommand();
     unsigned char sourceId();
+    unsigned char sourceAddress();
     
-    unsigned int getUID();
+    unsigned int getGUID();
+    unsigned char getNmbDevices();
     
     void buildBuffer();
 private:

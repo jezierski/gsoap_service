@@ -13,11 +13,14 @@ using namespace std;
 class CConfiguration {
 public:
 
-
-
+    string getConfig(string);
+    int putConfig(string, string);
+    vector<vector<string> > getConfigList(string name="");
+    int updateConfigList(string, map<string, string > );
+    
     template <typename type>
     type getValue(string field) {
-        std::istringstream is(database->getConfig(string(field)));
+        std::istringstream is(getConfig(string(field)));
         type value;
         is >> value;
         return value;
@@ -27,7 +30,7 @@ public:
     map <string, type> getList(string field) {
 
         type value;
-        vector<vector<string> > result = database->getList(field);
+        vector<vector<string> > result = getConfigList(field);
         map<string, type> resultSet;
 
         if (result.size() > 0) {
@@ -49,7 +52,7 @@ public:
 
     map <string, string> getList(string field) {
 
-        vector<vector<string> > result = database->getList(field);
+        vector<vector<string> > result = getConfigList(field);
         map<string, string> resultSet;
 
         if (result.size() > 0) {
@@ -82,7 +85,7 @@ public:
             config[(*itr).first] = ss.str();
         }
 
-        database->updateList(listName, config);
+        updateConfigList(listName, config);
     }
 
     void updateList(string listName, map<string, string> configMap) {
@@ -95,7 +98,7 @@ public:
             config[(*itr).first] = (*itr).second;
         }
 
-        database->updateList(listName, config);
+        updateConfigList(listName, config);
     }
 
     template <typename type>
@@ -122,13 +125,11 @@ public:
    
     template <typename type>
     int setValue(string value, type field) {
-        return database->putConfig(value, field);
+        return putConfig(value, field);
 
     }
 
 
-
-    string listConfig();
 
     virtual ~CConfiguration();
     static CConfiguration* getInstance();

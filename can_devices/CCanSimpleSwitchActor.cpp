@@ -8,7 +8,8 @@
 #include "CCanSimpleSwitchActor.h"
 
 CCanSimpleSwitchActor::CCanSimpleSwitchActor() {
-    setDeviceCategory(EDeviceCategory::A_SIMPLE_SWITCH);
+//    setDeviceCategory(EDeviceCategory::A_SIMPLE_SWITCH);
+    setDeviceCategory((EDeviceCategory)3);
 }
 
 //CCanSimpleSwitch::CCanSimpleSwitch(const CCanSimpleSwitch& orig) {

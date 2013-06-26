@@ -3,7 +3,7 @@
 
 CApplication::CApplication() {
     configuration = CConfiguration::getInstance();
-    db = CDatabase::getInstance();
+    devicesConfig = CDevicesConfig::getInstance();
 }
 
 CApplication::~CApplication() {
@@ -18,10 +18,12 @@ void CApplication::run() {
     
     try { //@TODO objac trykaczem funkcje inicjalizacyjne
         dbConfig();
+        
     } catch (string e) {
         cout << " dbConfig: " << e << endl;
     }
 
+   
     CCan232 *can232device = new CCan232();
     can232device->initCan232Device();
 
@@ -45,16 +47,52 @@ void CApplication::run() {
             actorSwitch.resetAddresses();
         }
         
-        if (x == "init") {
-            cout<<"> init addresses"<<endl;
-            actorSwitch.initAddress();
+        if (x == "poll") {
+            cout<<"> poll GUIDs"<<endl;
+            actorSwitch.pollGUID();
+        }
+        
+        if (x == "read") {
+            cout<<"> read GUIDs"<<endl;
+            actorSwitch.getGUIDs();
         }
         
         if (x == "assign") {
             cout<<"> assign addresses"<<endl;
-            actorSwitch.assignAddresses();
+            actorSwitch.assignAddress();
+        }
+        
+        if (x == "list") {
+            cout<<"> list addresses"<<endl;
+            actorSwitch.listAddresses();
         }
 
+        if (x == "ping") {
+            cout<<"> adr? ";
+            unsigned char a;
+            cin >> a;
+            if (actorSwitch.ping(a - 0x30))
+                cout<<"ping OK"<<endl;
+            else
+                cout<<"ping FAILED"<<endl;
+        }
+        
+        if (x == "check") {
+            cout<<"> check devices availability"<<endl;
+            actorSwitch.checkDevicesAvailability();
+        }
+        
+        if (x == "name") {
+            unsigned char adr, cat;
+            cout<<"address?";
+            cin >> adr;
+            cout<<"enter name? ";
+            string a;
+            cin >> a;
+            cout<<"category? ";
+            cin>>cat;
+            actorSwitch.setDeviceName(adr - 0x30, a, (EDeviceCategory)(cat - 0x30));
+        }
        
         x = "";
         //sleep(1);
@@ -76,6 +114,7 @@ void CApplication::dbConfig() {
     canConfig["acceptFilter3"] = 0x002;
     canConfig["acceptFilter4"] = 0x002;
     canConfig["acceptFilter5"] = 0x002;
+
     configuration->updateList<unsigned int>("canConfig", canConfig);
 
 }

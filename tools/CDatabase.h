@@ -9,28 +9,26 @@
 #include <stdio.h>
 #include <iostream>
 #include <map>
+#include "CLog.h"
 using namespace std;
 
 
 class CDatabase {
 public:
 
-    enum dbType {
-        MAIN,
-        CONFIG,
-        FINANCIAL,
-    };
+ 
 
     sqlite3 *open(string filename);
-    vector<vector<string> > query(string query, dbType type = CONFIG);
+    vector<vector<string> > query(string query);
     void close(sqlite3 *database);
     static CDatabase *getInstance();
-    bool isDatabaseOpen();
-    int putConfig(string, string);
-    string getConfig(string);
-    map<string, string> getConfiguration();
-    vector<vector<string> > getList(string name="");
-    int updateList(string, map<string, string > );
+
+    
+    
+    
+//    map<string, string> getConfiguration();
+    
+    
 private:
     
 //    /string result;
@@ -38,18 +36,16 @@ private:
     typedef struct db {
         string name;
         string path;
-        dbType type;
         sqlite3 *instance;
-    } dbDescription;
+    }db;
     
-    sqlite3 *getDb(dbType);
-    list<dbDescription> databases;
+    db database;
     CDatabase(const CDatabase& orig);
     CDatabase();
     ~CDatabase();
     static CDatabase *instance;
-    bool dbOpen;
-    int callback(void *NotUsed, int argc, char **argv, char **azColName);
+    
+    CLog *log;
 
 };
 

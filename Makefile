@@ -351,6 +351,30 @@ tools/CDatabase.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.s
 .PHONY : tools/CDatabase.cpp.s
 
+tools/CDevicesConfig.o: tools/CDevicesConfig.cpp.o
+.PHONY : tools/CDevicesConfig.o
+
+# target to build an object file
+tools/CDevicesConfig.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.o
+.PHONY : tools/CDevicesConfig.cpp.o
+
+tools/CDevicesConfig.i: tools/CDevicesConfig.cpp.i
+.PHONY : tools/CDevicesConfig.i
+
+# target to preprocess a source file
+tools/CDevicesConfig.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.i
+.PHONY : tools/CDevicesConfig.cpp.i
+
+tools/CDevicesConfig.s: tools/CDevicesConfig.cpp.s
+.PHONY : tools/CDevicesConfig.s
+
+# target to generate assembly for a file
+tools/CDevicesConfig.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.s
+.PHONY : tools/CDevicesConfig.cpp.s
+
 tools/CLog.o: tools/CLog.cpp.o
 .PHONY : tools/CLog.o
 
@@ -534,6 +558,9 @@ help:
 	@echo "... tools/CDatabase.o"
 	@echo "... tools/CDatabase.i"
 	@echo "... tools/CDatabase.s"
+	@echo "... tools/CDevicesConfig.o"
+	@echo "... tools/CDevicesConfig.i"
+	@echo "... tools/CDevicesConfig.s"
 	@echo "... tools/CLog.o"
 	@echo "... tools/CLog.i"
 	@echo "... tools/CLog.s"

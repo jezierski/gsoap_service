@@ -8,6 +8,7 @@
 #include "CSoapServer.h"
 #include "../can232/CCan232.h"
 #include "../tools/CConfiguration.h"
+#include "../tools/CDevicesConfig.h"
 #include "../tools/CDatabase.h"
 
 using namespace std;
@@ -23,7 +24,7 @@ private:
     void dbConfig();
     
     CConfiguration *configuration;
-    CDatabase *db;
+    CDevicesConfig *devicesConfig;
     
 };
 #endif

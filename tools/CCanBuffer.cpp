@@ -38,6 +38,10 @@ unsigned char CCanBuffer::sourceId(){
     return this->operator [](OFFSET_CAT_ID);
 }
 
+unsigned char CCanBuffer::sourceAddress(){
+    return this->operator [](OFFSET_SRC_ADDR);
+}
+
 void CCanBuffer::buildBuffer(){
     CCanBuffer buf;
     buf << (unsigned char) ID_MASTER;
@@ -52,11 +56,15 @@ void CCanBuffer::buildBuffer(){
     }
 }
 
-unsigned int CCanBuffer::getUID(){
-    unsigned int uid;
-    uid = ((this->operator [](OFFSET_DATA + 0) << 24) & 0xff000000);
-    uid |= ((this->operator [](OFFSET_DATA + 1) << 16) & 0x00ff0000);
-    uid |= ((this->operator [](OFFSET_DATA + 2) << 8) & 0x0000ff00);
-    uid |= ((this->operator [](OFFSET_DATA + 3) << 0) & 0x000000ff);
-    return uid;
+unsigned int CCanBuffer::getGUID(){
+    unsigned int guid;
+    guid = ((this->operator [](OFFSET_DATA + 0) << 24) & 0xff000000);
+    guid |= ((this->operator [](OFFSET_DATA + 1) << 16) & 0x00ff0000);
+    guid |= ((this->operator [](OFFSET_DATA + 2) << 8) & 0x0000ff00);
+    guid |= ((this->operator [](OFFSET_DATA + 3) << 0) & 0x000000ff);
+    return guid;
+}
+
+unsigned char CCanBuffer::getNmbDevices(){
+    return this->operator [](OFFSET_DATA + 4);
 }

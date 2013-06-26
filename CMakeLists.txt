@@ -28,6 +28,7 @@ tools/CSerCom.cpp
 tools/CTimeOut.cpp
 tools/CTools.cpp
 tools/CConfiguration.cpp
+tools/CDevicesConfig.cpp
 tools/CDatabase.cpp
 tools/CLog.cpp
 
