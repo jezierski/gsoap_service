@@ -8,6 +8,7 @@
 #include <climits>
 #include <string>
 #include <algorithm>
+#include "types.h"
 
 
 template <class T>
@@ -37,6 +38,15 @@ inline bool is_number(const std::string& s) {
 
 inline void msleep(const unsigned int ms) {
     usleep(ms * 1000);
+}
+
+inline bool operator == (SDeviceDescription dev1, SDeviceDescription dev2){
+    return (dev1.guid == dev2.guid && dev1.luid == dev2.luid);
+}
+
+inline string to_string(SDeviceDescription device){
+    string output = "[GUID: " + to_string((unsigned int)device.guid) + " LUID: " + to_string((unsigned int)device.luid) + ", ADR: " + to_string((unsigned int)device.address) + " CAT: " + to_string((unsigned int)device.category) + " NAME: " + device.name + "]";
+    return output;
 }
 
 class CTools {

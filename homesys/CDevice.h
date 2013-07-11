@@ -16,6 +16,7 @@
 #include "../tools/CTimeOut.h"
 #include "../tools/CLog.h"
 #include "../tools/types.h"
+#include "../tools/FastDelegate.h"
 
 class CDevice {
 public:
@@ -40,11 +41,39 @@ public:
     void sendPollACK(unsigned int guid);
     void assignAddress();
     void setDeviceName(unsigned char address, string name, EDeviceCategory category);
-    
+
 
 
     void listAddresses(); //@TODO remove it
-    void checkDevicesAvailability();//@TODO move to private
+    void checkDevicesAvailability(); //@TODO move to private
+    Devices getLogicalDevies();
+
+    void executeFunction(SDeviceDescription, Command, Params);
+    
+//    template<typename T>
+//    void addFunction(T *object, Command command, void(T::*function)(SDeviceDescription, Command , Params)){
+//        typedef void (T::*function)(SDeviceDescription, Command , Params);
+//        map<Command, function> dupa;
+//        dupa[command] = (T::*function)(SDeviceDescription, Command , Params);
+//    }
+//    typedef void (CDevice::*action)(SDeviceDescription, Params);
+//    map<Command, action> actionMap;
+    template<typename T>
+    void addFunction(T *object, Command command, void(T::*function)(SDeviceDescription, Params)){
+        Delegate delegateFunction;
+        delegateFunction.bind(object, function);
+        functionsMap[command] = delegateFunction;
+    }
+    
+    typedef fastdelegate::FastDelegate2<SDeviceDescription, Params> Delegate;
+    map<Command, Delegate> functionsMap;
+    /////////////////////////////////////////////////
+    
+    
+    void addCategoryDevice(SDeviceDescription dev){//@TODO remove it
+        devicesDescriptionList.push_back(dev);
+    }
+    
 private:
     void insertDevice(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address);
     void removeDevice(unsigned char address);
@@ -55,7 +84,7 @@ private:
     string getDeviceName(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     unsigned char getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     void setDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address, Devices &devicesList);
-    
+
     Devices devicesDescriptionList;
     EDeviceCategory category;
     CCan232 *canbusProtocol;

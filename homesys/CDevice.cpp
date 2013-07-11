@@ -315,3 +315,24 @@ void CDevice::listAddresses() {
         cout << "guid: " << (int) guid.first << ", dev nmb: " << (int) guid.second << endl;
     }
 }
+
+Devices CDevice::getLogicalDevies(){
+    return devicesDescriptionList;
+}
+
+void CDevice::executeFunction(SDeviceDescription device, Command command, Params params) {
+    if (functionsMap.find(command) == functionsMap.end()) {
+        log->warning("No function [" + to_string(command) + "] to invoke");
+        return;
+    }
+    for(SDeviceDescription dev : getLogicalDevies()){
+        if (dev == device){
+            cout<<"device found"<<endl;
+            (functionsMap[command])(device, params);
+            return;
+        }
+    }
+    log->warning("No device " + to_string(device)+ " found");
+   
+
+}

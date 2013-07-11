@@ -45,6 +45,7 @@ public:
 
         int put(string str, logType level = INFO);
         int error(string str);
+        int warning(string str);
         int success(string str);
         int info(string str);
  

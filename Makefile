@@ -159,6 +159,30 @@ can_devices/CCanSimpleSwitchActor.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.s
 .PHONY : can_devices/CCanSimpleSwitchActor.cpp.s
 
+can_devices/CCanSimpleSwitchSensor.o: can_devices/CCanSimpleSwitchSensor.cpp.o
+.PHONY : can_devices/CCanSimpleSwitchSensor.o
+
+# target to build an object file
+can_devices/CCanSimpleSwitchSensor.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.o
+.PHONY : can_devices/CCanSimpleSwitchSensor.cpp.o
+
+can_devices/CCanSimpleSwitchSensor.i: can_devices/CCanSimpleSwitchSensor.cpp.i
+.PHONY : can_devices/CCanSimpleSwitchSensor.i
+
+# target to preprocess a source file
+can_devices/CCanSimpleSwitchSensor.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.i
+.PHONY : can_devices/CCanSimpleSwitchSensor.cpp.i
+
+can_devices/CCanSimpleSwitchSensor.s: can_devices/CCanSimpleSwitchSensor.cpp.s
+.PHONY : can_devices/CCanSimpleSwitchSensor.s
+
+# target to generate assembly for a file
+can_devices/CCanSimpleSwitchSensor.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.s
+.PHONY : can_devices/CCanSimpleSwitchSensor.cpp.s
+
 homesys/CDevice.o: homesys/CDevice.cpp.o
 .PHONY : homesys/CDevice.o
 
@@ -182,6 +206,30 @@ homesys/CDevice.s: homesys/CDevice.cpp.s
 homesys/CDevice.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.s
 .PHONY : homesys/CDevice.cpp.s
+
+homesys/CDeviceManager.o: homesys/CDeviceManager.cpp.o
+.PHONY : homesys/CDeviceManager.o
+
+# target to build an object file
+homesys/CDeviceManager.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.o
+.PHONY : homesys/CDeviceManager.cpp.o
+
+homesys/CDeviceManager.i: homesys/CDeviceManager.cpp.i
+.PHONY : homesys/CDeviceManager.i
+
+# target to preprocess a source file
+homesys/CDeviceManager.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.i
+.PHONY : homesys/CDeviceManager.cpp.i
+
+homesys/CDeviceManager.s: homesys/CDeviceManager.cpp.s
+.PHONY : homesys/CDeviceManager.s
+
+# target to generate assembly for a file
+homesys/CDeviceManager.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.s
+.PHONY : homesys/CDeviceManager.cpp.s
 
 homesys/CSoapServer.o: homesys/CSoapServer.cpp.o
 .PHONY : homesys/CSoapServer.o
@@ -254,6 +302,30 @@ raspberry/CGPIOClass.s: raspberry/CGPIOClass.cpp.s
 raspberry/CGPIOClass.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.s
 .PHONY : raspberry/CGPIOClass.cpp.s
+
+tools/CBlob.o: tools/CBlob.cpp.o
+.PHONY : tools/CBlob.o
+
+# target to build an object file
+tools/CBlob.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBlob.cpp.o
+.PHONY : tools/CBlob.cpp.o
+
+tools/CBlob.i: tools/CBlob.cpp.i
+.PHONY : tools/CBlob.i
+
+# target to preprocess a source file
+tools/CBlob.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBlob.cpp.i
+.PHONY : tools/CBlob.cpp.i
+
+tools/CBlob.s: tools/CBlob.cpp.s
+.PHONY : tools/CBlob.s
+
+# target to generate assembly for a file
+tools/CBlob.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBlob.cpp.s
+.PHONY : tools/CBlob.cpp.s
 
 tools/CBuffer.o: tools/CBuffer.cpp.o
 .PHONY : tools/CBuffer.o
@@ -534,9 +606,15 @@ help:
 	@echo "... can_devices/CCanSimpleSwitchActor.o"
 	@echo "... can_devices/CCanSimpleSwitchActor.i"
 	@echo "... can_devices/CCanSimpleSwitchActor.s"
+	@echo "... can_devices/CCanSimpleSwitchSensor.o"
+	@echo "... can_devices/CCanSimpleSwitchSensor.i"
+	@echo "... can_devices/CCanSimpleSwitchSensor.s"
 	@echo "... homesys/CDevice.o"
 	@echo "... homesys/CDevice.i"
 	@echo "... homesys/CDevice.s"
+	@echo "... homesys/CDeviceManager.o"
+	@echo "... homesys/CDeviceManager.i"
+	@echo "... homesys/CDeviceManager.s"
 	@echo "... homesys/CSoapServer.o"
 	@echo "... homesys/CSoapServer.i"
 	@echo "... homesys/CSoapServer.s"
@@ -546,6 +624,9 @@ help:
 	@echo "... raspberry/CGPIOClass.o"
 	@echo "... raspberry/CGPIOClass.i"
 	@echo "... raspberry/CGPIOClass.s"
+	@echo "... tools/CBlob.o"
+	@echo "... tools/CBlob.i"
+	@echo "... tools/CBlob.s"
 	@echo "... tools/CBuffer.o"
 	@echo "... tools/CBuffer.i"
 	@echo "... tools/CBuffer.s"

@@ -10,6 +10,7 @@
 #include "../tools/CConfiguration.h"
 #include "../tools/CDevicesConfig.h"
 #include "../tools/CDatabase.h"
+#include "CDeviceManager.h"
 
 using namespace std;
 

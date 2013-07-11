@@ -17,6 +17,7 @@ set (SOURCES
 homesys/homesys.cpp homesys/CSoapServer.cpp
 raspberry/CGPIOClass.cpp
 homesys/CDevice.cpp
+homesys/CDeviceManager.cpp
         
 #can232:
 can232/CCan232.cpp
@@ -31,9 +32,11 @@ tools/CConfiguration.cpp
 tools/CDevicesConfig.cpp
 tools/CDatabase.cpp
 tools/CLog.cpp
+tools/CBlob.cpp
 
 #can_devices:
 can_devices/CCanSimpleSwitchActor.cpp
+can_devices/CCanSimpleSwitchSensor.cpp
         
 
 #webservice:

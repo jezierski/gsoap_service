@@ -96,6 +96,11 @@ CLog* CLog::getInstance() {
 
 }
 
+int CLog::warning(string message) {
+    put(message, CLog::WARNING);
+    return 0;
+}
+
 int CLog::error(string message) {
     put(message, CLog::ERROR);
     return 0;

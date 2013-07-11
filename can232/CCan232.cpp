@@ -9,6 +9,7 @@
 #include "../tools/CTimeOut.h"
 
 CCan232::CCan232() {
+    
     config = CConfiguration::getInstance();
     log = CLog::getInstance();
 }

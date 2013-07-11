@@ -1,5 +1,7 @@
 #include "homesys.h"
 #include "../can_devices/CCanSimpleSwitchActor.h"
+#include "../can_devices/CCanSimpleSwitchSensor.h"
+#include "CDeviceManager.h"
 
 CApplication::CApplication() {
     configuration = CConfiguration::getInstance();
@@ -11,6 +13,67 @@ CApplication::~CApplication() {
 }
 
 void CApplication::run() {
+    CDeviceManager * deviceManager = new CDeviceManager();
+    CCanSimpleSwitchActor actor;
+    CCanSimpleSwitchSensor sensor;
+    
+    SDeviceDescription d1, d2, d3, d4, d5, d6;
+    d1.address = 11;
+    d1.category = EDeviceCategory::A_SIMPLE_SWITCH;
+    d1.guid = 123;
+    d1.luid = 1;
+    d1.name = "jeden A";
+    actor.addCategoryDevice(d1);
+    d2.address = 22;
+    d2.category = EDeviceCategory::A_SIMPLE_SWITCH;
+    d2.guid = 123;
+    d2.luid = 2;
+    d2.name = "dwa A";
+    actor.addCategoryDevice(d2);
+    d3.address = 1;
+    d3.category = EDeviceCategory::A_SIMPLE_SWITCH;
+    d3.guid = 321;
+    d3.luid = 1;
+    d3.name = "trzy A";
+    actor.addCategoryDevice(d3);
+    d4.address = 44;
+    d4.category = EDeviceCategory::S_SIMPLE_SWITCH;
+    d4.guid = 456;
+    d4.luid = 1;
+    d4.name = "jeden S";
+    sensor.addCategoryDevice(d4);
+    d5.address = 55;
+    d5.category = EDeviceCategory::S_SIMPLE_SWITCH;
+    d5.guid = 456;
+    d5.luid = 2;
+    d5.name = "dwa S";
+    sensor.addCategoryDevice(d5);
+    d6.address = 66;
+    d6.category = EDeviceCategory::S_SIMPLE_SWITCH;
+    d6.guid = 654;
+    d6.luid = 1;
+    d6.name = "trzy S";
+    sensor.addCategoryDevice(d6);
+
+    deviceManager->addCategoryDevice(&actor);
+    deviceManager->addCategoryDevice(&sensor);
+
+    Params p0, p1, p2, p3;
+    p1.push_back(111);
+    p2.push_back(111);
+    p2.push_back(222);
+    p3.push_back(231);
+    p3.push_back(222);
+    p3.push_back(111);
+    deviceManager->invokeRemoteFunction(d5, 1, p0);
+    deviceManager->invokeRemoteFunction(d6, 2, p1);
+    deviceManager->invokeRemoteFunction(d4, 1, p2);
+    deviceManager->invokeRemoteFunction(d3, 2, p3);
+    deviceManager->invokeRemoteFunction(d2, 1, p0);
+    
+    return;
+    
+    
     cout << "application is running...." << endl;
     //    cout<<"starting GSOAP..."<<endl;
     CSoapServer server;
