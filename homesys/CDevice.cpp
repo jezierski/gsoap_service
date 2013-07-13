@@ -160,7 +160,7 @@ void CDevice::synchronizeDBdevices() {
     unsigned char size;
     unsigned int index = 0;
     try {
-        do {
+        while (index < devicesDescriptionList.size()) {
             size = getDeviceGroupSize(devicesDescriptionList, devicesDescriptionList[index].guid, category);
             dbDevices = devicesDB->getDevices(devicesDescriptionList[index].guid, (unsigned char) category);
 
@@ -183,7 +183,7 @@ void CDevice::synchronizeDBdevices() {
                 }
             }
             index += size;
-        } while (index < devicesDescriptionList.size());
+        } 
     } catch (string e) {
         log->error("Cannot synchronize devices list: " + e);
     }
