@@ -25,10 +25,10 @@ public:
     
     template<typename type>
     type &get(){
-        cout<<"a: "<<a<<endl;
+//        cout<<"a: "<<a<<endl;
         static map<int, type> m;
-        cout<<"m: "<<m.size()<<endl;
-        cout<<"init: "<<init<<endl;
+//        cout<<"m: "<<m.size()<<endl;
+//        cout<<"init: "<<init<<endl;
         return m[a];
     }
     

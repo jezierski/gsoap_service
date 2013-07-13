@@ -10,12 +10,23 @@
 CDevice::CDevice() {
     devicesDB = CDevicesConfig::getInstance();
     log = CLog::getInstance();
+
+    initActionMap();
 }
 
 //CDevice::CDevice(const CDevice& orig) {
 //}
 
 CDevice::~CDevice() {
+}
+
+void CDevice::initActionMap() {
+    addAction(this, ACTION_RESET_CATEGORY, &CDevice::reset);
+    addAction(this, ACTION_SEARCH_DEVICES, &CDevice::search);
+    addAction(this, ACTION_CHECK_AVAILABILITY, &CDevice::check);
+    addAction(this, ACTION_SET_NAME, &CDevice::setName);
+    addAction(this, ACTION_PING, &CDevice::pingLogicalDevice);
+    addAction(this, ACTION_LIST, &CDevice::list);
 }
 
 void CDevice::setDeviceCategory(EDeviceCategory category) {
@@ -160,7 +171,7 @@ void CDevice::synchronizeDBdevices() {
     unsigned char size;
     unsigned int index = 0;
     try {
-        do {
+        while(index < devicesDescriptionList.size()) {
             size = getDeviceGroupSize(devicesDescriptionList, devicesDescriptionList[index].guid, category);
             dbDevices = devicesDB->getDevices(devicesDescriptionList[index].guid, (unsigned char) category);
 
@@ -171,7 +182,7 @@ void CDevice::synchronizeDBdevices() {
                     continue;
                 } else {
                     for (unsigned int i = index; i < (size + index); i++) {
-                        setDeviceName(devicesDescriptionList[i].guid, devicesDescriptionList[i].luid, getDeviceName(devicesDescriptionList[i].guid, devicesDescriptionList[i].luid, category, dbDevices), category, devicesDescriptionList);
+                        setDeviceName(devicesDescriptionList[i], getDeviceName(devicesDescriptionList[i].guid, devicesDescriptionList[i].luid, category, dbDevices), category, devicesDescriptionList);
                         setDeviceAddress(devicesDescriptionList[i].guid, devicesDescriptionList[i].luid, category, devicesDescriptionList[i].address, dbDevices);
                     }
                     devicesDB->updateDevicesGroup(dbDevices);
@@ -183,21 +194,14 @@ void CDevice::synchronizeDBdevices() {
                 }
             }
             index += size;
-        } while (index < devicesDescriptionList.size());
+        }
     } catch (string e) {
         log->error("Cannot synchronize devices list: " + e);
     }
 
 }
 
-void CDevice::setDeviceName(unsigned int guid, unsigned char luid, string name, EDeviceCategory category, Devices &devicesList) {
-    for (SDeviceDescription &device : devicesList) {
-        if (device.guid == guid && device.luid == luid && device.category == category) {
-            device.name = name;
-            return;
-        }
-    }
-}
+
 
 unsigned char CDevice::getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList) {
     for (SDeviceDescription &device : devicesList) {
@@ -290,49 +294,110 @@ bool CDevice::ping(unsigned char address) {
     return false;
 }
 
-void CDevice::setDeviceName(unsigned char address, string name, EDeviceCategory category) {
-   
-    for (auto &dev : devicesDescriptionList) {
-        if (dev.address == address && dev.category == category) {
-            dev.name = name;
-           
-            try {
-                devicesDB->setDeviceName(dev);
-            } catch (string e) {
-                log->error("Cannot save device's name in database: " + e);
-            }
-        }
-    }
-}
+//void CDevice::setDeviceName(unsigned char address, string name, EDeviceCategory category) {
+//
+//    for (auto &dev : devicesDescriptionList) {
+//        if (dev.address == address && dev.category == category) {
+//            dev.name = name;
+//
+//            try {
+//                devicesDB->setDeviceName(dev);
+//            } catch (string e) {
+//                log->error("Cannot save device's name in database: " + e);
+//            }
+//        }
+//    }
+//}
 
-void CDevice::listAddresses() {
-    cout << "addresses list:" << endl;
-    for (auto &dev : devicesDescriptionList) {
-        cout << "device adr: " << (int) dev.address << ", name: " << dev.name << endl;
-    }
-    cout << "\nGUIDs list:" << endl;
-    for (auto &guid : GUIDs) {
-        cout << "guid: " << (int) guid.first << ", dev nmb: " << (int) guid.second << endl;
-    }
-}
-
-Devices CDevice::getLogicalDevies(){
-    return devicesDescriptionList;
-}
-
-void CDevice::executeFunction(SDeviceDescription device, Command command, Params params) {
-    if (functionsMap.find(command) == functionsMap.end()) {
-        log->warning("No function [" + to_string(command) + "] to invoke");
-        return;
-    }
-    for(SDeviceDescription dev : getLogicalDevies()){
-        if (dev == device){
-            cout<<"device found"<<endl;
-            (functionsMap[command])(device, params);
+void CDevice::setDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList) {
+    for (SDeviceDescription &device : devicesList) {
+        if (device.guid == description.guid && device.luid == description.luid && device.category == category) {
+            device.name = name;
             return;
         }
     }
-    log->warning("No device " + to_string(device)+ " found");
-   
+    log->error("Cannot set name, no device found");
+}
 
+void CDevice::listAddresses() {
+    if (devicesDescriptionList.size() > 0) {
+        log->info("List of devices in category " + to_string(category) + ":");
+        for (auto &dev : devicesDescriptionList) {
+            log->info(to_string(dev));
+        }
+    }else{
+        log->info("No devices in category " + to_string(category) + ":");
+    }
+//    cout << "\nGUIDs list:" << endl;
+//    for (auto &guid : GUIDs) {
+//        cout << "guid: " << (int) guid.first << ", dev nmb: " << (int) guid.second << endl;
+//    }
+}
+
+Devices CDevice::getLogicalDevies() {
+    return devicesDescriptionList;
+}
+
+
+void CDevice::executeAction(SDeviceDescription device, Command command, Blob params) {
+    if (actionsMap.find(command) == actionsMap.end()) {
+        log->warning("No function [" + to_string((int) command) + "] to invoke");
+        return;
+    }
+    if (command < GLOBAL_FUNCTION_LIMIT){
+        executeGlobalAction(command, params);
+        return;
+    }
+    for (SDeviceDescription dev : getLogicalDevies()) {
+        if (dev == device) {
+            cout << "device found" << endl;
+            (actionsMap[command])(device, params);
+            return;
+        }
+    }
+    log->error("Device " + to_string(device) + " not found");
+
+
+}
+
+
+void CDevice::executeGlobalAction(Command command, Blob params){
+        SDeviceDescription empty; 
+        actionsMap[command](empty, params);
+}
+
+void CDevice::reset(SDeviceDescription dev, Blob params) {
+    log->info("Reset device addresses in category " + to_string(category));
+    resetAddresses();
+}
+
+void CDevice::search(SDeviceDescription dev, Blob params) {
+    log->info("Start searching devices in category " + to_string(category));
+    pollGUID();
+    getGUIDs();
+    assignAddress();
+    listAddresses();
+}
+
+void CDevice::check(SDeviceDescription dev, Blob params) {
+    log->info("Check devices availability in category " + to_string(category));
+    checkDevicesAvailability();
+}
+
+void CDevice::setName(SDeviceDescription dev, Blob params) {
+    string name = params[BLOB_DEVICE_NAME].get<string>();
+    log->info("Set new name >> " + name + " << for device "+ to_string(dev));
+    setDeviceName(dev, name, category, devicesDescriptionList);
+}
+
+void CDevice::pingLogicalDevice(SDeviceDescription dev, Blob params) {
+    if (ping(dev.address)){
+        log->info("PING device "+ to_string(dev) + " OK");
+    }else{
+        log->error("PING device "+ to_string(dev) + " FAILED");
+    }
+}
+
+void CDevice::list(SDeviceDescription dev, Blob params){
+    listAddresses();
 }

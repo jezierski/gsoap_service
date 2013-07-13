@@ -40,7 +40,7 @@ CDatabase::CDatabase() {
     if (database.instance == NULL)
         log->put("Database handle is NULL (" + database.name + "). ", CLog::WARNING);
     else
-        log->success("Using " + database.name + ": " + database.path);
+        log->info("Using " + database.name + ": " + database.path);
 
 
 }

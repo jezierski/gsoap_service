@@ -274,13 +274,13 @@ int CSerCom::sendBuffer(CBuffer &buffer) {
 
     unsigned char *tempBuf = new unsigned char[len];
 
-    cout << "++++++sending buffer: "; //@TODO remove it
+//    cout << "++++++sending buffer: "; //@TODO remove it
     for (size_t i = 0; i < len; i++) {
         tempBuf[i] = buffer.getBuffer()[i];
-        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "] | ";
-//        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "]("<<tempBuf[i]<<") | ";
+//        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "] | ";
+////        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "]("<<tempBuf[i]<<") | ";
     }
-    cout << endl;
+//    cout << endl;
 
     sendBuffer(tempBuf, len);
     delete[] tempBuf;

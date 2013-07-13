@@ -25,21 +25,23 @@ void CCanSimpleSwitchActor::initActionMap() {
 //    actionMap[CMD_ACTION_TEST] = &CCanSimpleSwitchActor::actionTest;
 //    actionMap[CMD_SET_SWITCH] = &CCanSimpleSwitchActor::setSwitch;
     
-    addFunction(this, CMD_ACTION_TEST, &CCanSimpleSwitchActor::actionTest);
-    addFunction(this, CMD_SET_SWITCH, &CCanSimpleSwitchActor::setSwitch);
+    addAction(this, CMD_ACTION_TEST, &CCanSimpleSwitchActor::actionTest);
+    addAction(this, CMD_SET_SWITCH, &CCanSimpleSwitchActor::setSwitch);
 }
 
-void CCanSimpleSwitchActor::actionTest(SDeviceDescription device, Params params) {
+void CCanSimpleSwitchActor::actionTest(SDeviceDescription device, Blob params) {
     cout << "action Test ACTOR "<<to_string(device)<<" (";
-    for (unsigned int i = 0; i < params.size(); i++)
-        cout << (int) params[i] << " ";
+    Params par = params["params"].get<Params>();
+    for (unsigned int i = 0; i < par.size(); i++)
+        cout << (int) par[i] << " ";
     cout << endl;
 }
 
-void CCanSimpleSwitchActor::setSwitch(SDeviceDescription device, Params params) {
+void CCanSimpleSwitchActor::setSwitch(SDeviceDescription device, Blob params) {
     cout << "action setSwitch ACTOR "<<to_string(device)<<" (";
-    for (unsigned int i = 0; i < params.size(); i++)
-        cout << (int) params[i] << " ";
+    Params par = params["params"].get<Params>();
+    for (unsigned int i = 0; i < par.size(); i++)
+        cout << (int) par[i] << " ";
     cout << endl;
 }
 

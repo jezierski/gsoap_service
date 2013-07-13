@@ -29,6 +29,7 @@
 
 
 enum class EDeviceCategory{
+    ALL = ID_MULTICAST,
     MASTER = ID_MASTER,
     A_SIMPLE_SWITCH = ID_A_SIMPLE_SWITCH,
     S_SIMPLE_SWITCH = ID_S_SIMPLE_SWITCH,

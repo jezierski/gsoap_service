@@ -26,17 +26,18 @@ public:
 
     void addCategoryDevice(CDevice *device);
     //void searchLogicalDevices();
-    CDevice *getLogicalDevice(SDeviceDescription deviceDescription);
-    //void resetDeviceAddresses();
+    
+//    void resetDeviceAddresses();
     //void assignAddresses();
     
 
-    void invokeRemoteFunction(SDeviceDescription, Command, Params);
+    void invokeRemoteAction(SDeviceDescription, Command, Blob);
   
  
    
 
 private:
+    CDevice *getDevice(SDeviceDescription deviceDescription);
     list<CDevice*>categoryDevices;
     CLog *log;
 };

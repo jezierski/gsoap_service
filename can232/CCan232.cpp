@@ -207,7 +207,7 @@ unsigned char CCan232::checkCRC(CBuffer& buffer) {
     for (size_t i = 0; i < buffer.getLength(); i++)
         crc += buffer[i];
 
-    cout << "crc: " << (int) crc << endl;
+//    cout << "crc: " << (int) crc << endl;
     return (0 == crc);
 }
 
@@ -217,7 +217,7 @@ CBuffer CCan232::getFrame() {
     unsigned char rbyte;
 
     rbyte = receiveByte();
-    cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
+//    cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
     if (rbyte != CMD_SEND) {
         return buf;
     }
@@ -226,7 +226,7 @@ CBuffer CCan232::getFrame() {
     tout.SetMilliSec(1000);
     while (!tout.IsTimeOut()) {
         buf << (unsigned char) receiveByte();
-        cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
+//        cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
         if (isFrameComplete(buf)) {
             buf.setReady();
             return buf;

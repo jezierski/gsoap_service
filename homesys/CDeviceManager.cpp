@@ -26,24 +26,31 @@ void CDeviceManager::addCategoryDevice(CDevice *device) {
 //    
 //}
 
-CDevice *CDeviceManager::getLogicalDevice(SDeviceDescription deviceDescription) {
+CDevice *CDeviceManager::getDevice(SDeviceDescription deviceDescription) {
     for (CDevice* catDevice : categoryDevices) {
         if (catDevice->getDeviceCategory() == deviceDescription.category) {
-            for (auto &logicalDevice : catDevice->getLogicalDevies()) {
-                if (logicalDevice == deviceDescription)
-                    return catDevice;
-            }
+            //for (auto &logicalDevice : catDevice->getLogicalDevies()) {
+            //   if (logicalDevice == deviceDescription)
+            return catDevice;
+            //}
         }
 
     }
-    log->error("No device found " + to_string(deviceDescription));
+    log->error("Device " + to_string(deviceDescription) + " not found");
     return NULL;
 }
 
-void CDeviceManager::invokeRemoteFunction(SDeviceDescription device, Command command, Params params) {
-    CDevice *categoryDevice = getLogicalDevice (device);
-    if (categoryDevice != NULL){
-        categoryDevice->executeFunction(device, command, params);
+void CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command command, Blob params) {
+    if (device.category == EDeviceCategory::ALL) {
+        for (CDevice* catDevice : categoryDevices) {
+            catDevice->executeAction(device, command, params);
+        }
+    } else {
+        CDevice *categoryDevice = getDevice(device);
+        if (categoryDevice != NULL) {
+            categoryDevice->executeAction(device, command, params);
+        }
     }
-    
+
 }
+

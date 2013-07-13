@@ -11,6 +11,7 @@
 #include "../tools/CDevicesConfig.h"
 #include "../tools/CDatabase.h"
 #include "CDeviceManager.h"
+#include "../tools/CLog.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ private:
     
     CConfiguration *configuration;
     CDevicesConfig *devicesConfig;
+    CLog *log;
     
 };
 #endif
