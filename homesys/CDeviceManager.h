@@ -34,6 +34,7 @@ public:
     void invokeRemoteAction(SDeviceDescription, Command, Blob);
   
  
+    void initialize();
    
 
 private:

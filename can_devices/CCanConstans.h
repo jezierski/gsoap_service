@@ -13,19 +13,18 @@
 #define OFFSET_DATA  2
 #define OFFSET_SRC_ADDR  2
 
-#define ID_MULTICAST    1
-#define ID_MASTER       2
-#define ID_A_SIMPLE_SWITCH       3
-#define ID_S_SIMPLE_SWITCH       4
+#define ID_MULTICAST    0xff
+#define ID_MASTER       200
+#define ID_A_SIMPLE_SWITCH       1
+#define ID_S_SIMPLE_SWITCH       100
 #define ID_OTHER       5
 
 #define CMD_ACK   1
 #define CMD_RESET_ADDRESS   2
 #define CMD_SET_ADDRESS   3
 #define CMD_POLL_GUID   4
-#define CMD_GET_STATUS   5
-#define CMD_SET_STATUS   6
-#define CMD_PING    7
+#define CMD_PING    5
+#define CMD_SET_PIN     10
 
 
 enum class EDeviceCategory{

@@ -278,7 +278,7 @@ int CSerCom::sendBuffer(CBuffer &buffer) {
     for (size_t i = 0; i < len; i++) {
         tempBuf[i] = buffer.getBuffer()[i];
 //        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "] | ";
-////        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "]("<<tempBuf[i]<<") | ";
+//        cout << (int) tempBuf[i] << "[0x" << hex << (int) tempBuf[i] << dec << "]("<<tempBuf[i]<<") | ";
     }
 //    cout << endl;
 

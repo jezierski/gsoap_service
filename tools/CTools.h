@@ -22,10 +22,16 @@ inline std::string to_string(const T& t, bool hex = false) {
 }
 
 template<class T>
-inline T fromString(const std::string& s) {
-    std::istringstream stream(s);
+inline T fromString(const std::string& s, bool hex = false) {
     T t;
-    stream >> t;
+    if (hex) {
+        std::stringstream ss;
+        ss << std::hex << s;
+        ss >> t;
+    } else {
+        std::istringstream stream(s);
+        stream >> t;
+    }
     return t;
 }
 
@@ -64,8 +70,6 @@ inline string to_string(SDeviceDescription device) {
     string output = "[GUID: " + to_string((unsigned int) device.guid) + "\tLUID: " + to_string((unsigned int) device.luid) + "\tADR: " + to_string((unsigned int) device.address) + "\tCAT: " + to_string(device.category) + "\tNAME: " + device.name + "]";
     return output;
 }
-
-
 
 class CTools {
 public:

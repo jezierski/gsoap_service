@@ -66,6 +66,7 @@ void CCan232::setSpeed(string baudRate) {
 }
 
 void CCan232::setAcceptedMask(unsigned char maskId, unsigned int mask) {
+    log->info("Set mask " + to_string((int)maskId) + ": 0x" + to_string(mask, 1));
     CBuffer buffer;
     buffer << "M";
     buffer << (unsigned char) maskId;
@@ -74,6 +75,7 @@ void CCan232::setAcceptedMask(unsigned char maskId, unsigned int mask) {
 }
 
 void CCan232::setAcceptedFilters(unsigned char filterId, unsigned int filter) {
+    log->info("Set filter " + to_string((int)filterId) + ": 0x" + to_string(filter, 1));
     CBuffer buffer;
     buffer << "F";
     buffer << (unsigned char) filterId;

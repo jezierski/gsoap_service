@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation>
+	<condition>
+		<sensor guid="1" luid="1" cat="1" param="1" comp="equal" val="a0"/>
+	</condition>
+	<condition>
+		<time comp="less" val="3600"/>
+	</condition>
+	<condition>
+		<sensor guid="2" luid="1" cat="2" param="2" comp="more" val="ff00"/>
+	</condition>
+	<action>
+		<actor guid="3" luid="1" cat="100" param="1" val="abcd"/>
+	</action>
+</operation>
+<operation>
+	<condition>
+		<sensor guid="4" luid="2" cat="3" param="1" comp="equal" val="10"/>
+	</condition>
+	<action>
+		<actor guid="5" luid="1" cat="101" param="2" val="01"/>
+	</action>
+</operation>
+<operation>
+	<condition>
+		<sensor guid="4" luid="2" cat="3" param="1" comp="equal" val="10"/>
+	</condition>
+	<action>
+		<actor guid="5" luid="1" cat="101" param="2" val="01"/>
+	</action>
+</operation>

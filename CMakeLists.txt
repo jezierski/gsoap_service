@@ -18,6 +18,7 @@ homesys/homesys.cpp homesys/CSoapServer.cpp
 raspberry/CGPIOClass.cpp
 homesys/CDevice.cpp
 homesys/CDeviceManager.cpp
+homesys/COperation.cpp
         
 #can232:
 can232/CCan232.cpp

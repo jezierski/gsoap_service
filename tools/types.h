@@ -15,13 +15,27 @@
 
 using namespace std;
 
-typedef struct{
+
+
+typedef struct DeviceDescriptor {
     unsigned int guid;
     unsigned char luid;
     EDeviceCategory category;
     unsigned char address;
     string name;
-} SDeviceDescription ;
+
+    bool operator<(const DeviceDescriptor & n) const {
+        if (this->guid == n.guid) {
+            if (static_cast<int> (this->category) == static_cast<int> (n.category)) {
+                return this->luid < n.luid;
+            }else{
+                return static_cast<int> (this->category) < static_cast<int> (n.category);
+            }
+        } else {
+            return this->guid < n.guid;
+        }
+    }
+} SDeviceDescription;
 
 typedef vector<SDeviceDescription> Devices;
 

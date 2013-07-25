@@ -59,6 +59,7 @@ void CDatabase::close(sqlite3 *database) {
 }
 
 vector<vector<string> > CDatabase::query(string query) {
+//    log->put("DB query: " + query, CLog::DEBUG_INFO);
     sqlite3_stmt *statement;
     vector<vector<string> > results;
 

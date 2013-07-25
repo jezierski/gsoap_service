@@ -25,14 +25,18 @@ void CDeviceManager::addCategoryDevice(CDevice *device) {
 //void CDeviceManager::searchLogicalDevices(){
 //    
 //}
+void CDeviceManager::initialize(){
+    SDeviceDescription empty;
+    Blob null;
+    empty.category = EDeviceCategory::ALL;
+    invokeRemoteAction(empty, ACTION_RESET_CATEGORY, null);
+    invokeRemoteAction(empty, ACTION_SEARCH_DEVICES, null);
+}
 
 CDevice *CDeviceManager::getDevice(SDeviceDescription deviceDescription) {
     for (CDevice* catDevice : categoryDevices) {
         if (catDevice->getDeviceCategory() == deviceDescription.category) {
-            //for (auto &logicalDevice : catDevice->getLogicalDevies()) {
-            //   if (logicalDevice == deviceDescription)
             return catDevice;
-            //}
         }
 
     }

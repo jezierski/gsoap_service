@@ -231,6 +231,30 @@ homesys/CDeviceManager.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.s
 .PHONY : homesys/CDeviceManager.cpp.s
 
+homesys/COperation.o: homesys/COperation.cpp.o
+.PHONY : homesys/COperation.o
+
+# target to build an object file
+homesys/COperation.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/COperation.cpp.o
+.PHONY : homesys/COperation.cpp.o
+
+homesys/COperation.i: homesys/COperation.cpp.i
+.PHONY : homesys/COperation.i
+
+# target to preprocess a source file
+homesys/COperation.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/COperation.cpp.i
+.PHONY : homesys/COperation.cpp.i
+
+homesys/COperation.s: homesys/COperation.cpp.s
+.PHONY : homesys/COperation.s
+
+# target to generate assembly for a file
+homesys/COperation.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/COperation.cpp.s
+.PHONY : homesys/COperation.cpp.s
+
 homesys/CSoapServer.o: homesys/CSoapServer.cpp.o
 .PHONY : homesys/CSoapServer.o
 
@@ -615,6 +639,9 @@ help:
 	@echo "... homesys/CDeviceManager.o"
 	@echo "... homesys/CDeviceManager.i"
 	@echo "... homesys/CDeviceManager.s"
+	@echo "... homesys/COperation.o"
+	@echo "... homesys/COperation.i"
+	@echo "... homesys/COperation.s"
 	@echo "... homesys/CSoapServer.o"
 	@echo "... homesys/CSoapServer.i"
 	@echo "... homesys/CSoapServer.s"

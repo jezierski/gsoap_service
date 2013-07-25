@@ -13,10 +13,9 @@
 #include "../tools/CLog.h"
 #include "CCanConstans.h"
 
+#define CATEGORY        EDeviceCategory::A_SIMPLE_SWITCH
 
-#define CMD_ACTION_TEST 10
-#define CMD_SET_SWITCH 11
-
+#define ACTION_SET_OUTPUT       10
 
 
 using namespace std;
@@ -32,9 +31,10 @@ public:
 //    void executeAction(SDeviceDescription, Command, Params);
   
 private:
-    void actionTest(SDeviceDescription device, Blob params);
-    void setSwitch(SDeviceDescription device, Blob params);
+    void setOutput(SDeviceDescription device, Blob params);
     void initActionMap();
+    
+    
     
     CLog *log;
 };

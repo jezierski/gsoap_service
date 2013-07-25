@@ -12,6 +12,10 @@
 #include "../tools/CDatabase.h"
 #include "CDeviceManager.h"
 #include "../tools/CLog.h"
+#include "../can_devices/CCanSimpleSwitchActor.h"
+#include "../can_devices/CCanSimpleSwitchSensor.h"
+#include "CDeviceManager.h"
+#include "COperation.h"
 
 using namespace std;
 

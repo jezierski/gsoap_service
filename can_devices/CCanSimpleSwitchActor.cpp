@@ -9,7 +9,7 @@
 
 CCanSimpleSwitchActor::CCanSimpleSwitchActor() {
     //    setDeviceCategory(EDeviceCategory::A_SIMPLE_SWITCH);
-    setDeviceCategory(EDeviceCategory::A_SIMPLE_SWITCH);
+    setDeviceCategory(CATEGORY);
     initActionMap();
 
     log = CLog::getInstance();
@@ -22,26 +22,28 @@ CCanSimpleSwitchActor::~CCanSimpleSwitchActor() {
 }
 
 void CCanSimpleSwitchActor::initActionMap() {
-//    actionMap[CMD_ACTION_TEST] = &CCanSimpleSwitchActor::actionTest;
-//    actionMap[CMD_SET_SWITCH] = &CCanSimpleSwitchActor::setSwitch;
-    
-    addAction(this, CMD_ACTION_TEST, &CCanSimpleSwitchActor::actionTest);
-    addAction(this, CMD_SET_SWITCH, &CCanSimpleSwitchActor::setSwitch);
+    addAction(this, ACTION_SET_OUTPUT, &CCanSimpleSwitchActor::setOutput);
 }
 
-void CCanSimpleSwitchActor::actionTest(SDeviceDescription device, Blob params) {
-    cout << "action Test ACTOR "<<to_string(device)<<" (";
-    Params par = params["params"].get<Params>();
-    for (unsigned int i = 0; i < par.size(); i++)
-        cout << (int) par[i] << " ";
-    cout << endl;
+void CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
+    cout << "action setOutput " << to_string(device) << " (";
+    Params par = params[BLOB_ACTION_PARAMETER].get<Params>();
+
+    if (par.size() != 1) {
+        log->error("Action [setOutput] incorrect params");
+        return;
+    }
+
+    CCanBuffer buffer;
+
+    buffer.insertCommand(CMD_SET_PIN);
+    buffer.insertId((unsigned char) getDeviceCategory());
+    buffer << (unsigned char) getAddress(device);
+    buffer << (unsigned char) par[0];
+    buffer.buildBuffer();
+    getProtocol()->sendCanFrame(buffer);
+   
 }
 
-void CCanSimpleSwitchActor::setSwitch(SDeviceDescription device, Blob params) {
-    cout << "action setSwitch ACTOR "<<to_string(device)<<" (";
-    Params par = params["params"].get<Params>();
-    for (unsigned int i = 0; i < par.size(); i++)
-        cout << (int) par[i] << " ";
-    cout << endl;
-}
+
 

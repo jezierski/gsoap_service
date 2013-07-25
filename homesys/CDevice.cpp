@@ -150,7 +150,7 @@ void CDevice::checkDevicesAvailability() {
     vector<unsigned char>unvlbAddresses;
 
     for (auto &device : devicesDescriptionList) {
-        if (!ping(device.address)) {
+        if (!ping(device)) {
             cout << "device to remove address: " << (int) device.address << endl;
             unvlbAddresses.push_back(device.address);
         }
@@ -171,7 +171,7 @@ void CDevice::synchronizeDBdevices() {
     unsigned char size;
     unsigned int index = 0;
     try {
-        while(index < devicesDescriptionList.size()) {
+        while (index < devicesDescriptionList.size()) {
             size = getDeviceGroupSize(devicesDescriptionList, devicesDescriptionList[index].guid, category);
             dbDevices = devicesDB->getDevices(devicesDescriptionList[index].guid, (unsigned char) category);
 
@@ -182,7 +182,7 @@ void CDevice::synchronizeDBdevices() {
                     continue;
                 } else {
                     for (unsigned int i = index; i < (size + index); i++) {
-                        setDeviceName(devicesDescriptionList[i], getDeviceName(devicesDescriptionList[i].guid, devicesDescriptionList[i].luid, category, dbDevices), category, devicesDescriptionList);
+                        synchronizeDeviceName(devicesDescriptionList[i], getDeviceName(devicesDescriptionList[i].guid, devicesDescriptionList[i].luid, category, dbDevices), category, devicesDescriptionList);
                         setDeviceAddress(devicesDescriptionList[i].guid, devicesDescriptionList[i].luid, category, devicesDescriptionList[i].address, dbDevices);
                     }
                     devicesDB->updateDevicesGroup(dbDevices);
@@ -200,8 +200,6 @@ void CDevice::synchronizeDBdevices() {
     }
 
 }
-
-
 
 unsigned char CDevice::getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList) {
     for (SDeviceDescription &device : devicesList) {
@@ -277,7 +275,20 @@ void CDevice::removeDevice(unsigned char address) {
     }
 }
 
-bool CDevice::ping(unsigned char address) {
+unsigned char CDevice::getAddress(SDeviceDescription device){
+    for (SDeviceDescription dev : devicesDescriptionList){
+        if (dev == device){
+            return dev.address;
+        }
+    }
+    log->error("No address found for device " + to_string(device));
+    return 0;
+}
+
+
+bool CDevice::ping(SDeviceDescription device) {
+    unsigned char address = getAddress(device);
+    cout<<"ADR: "<<(int)address<<", CAT: "<<(int)category<<endl;
     CCanBuffer buffer;
     buffer.insertId((unsigned char) category);
     buffer.insertCommand(CMD_PING);
@@ -294,22 +305,22 @@ bool CDevice::ping(unsigned char address) {
     return false;
 }
 
-//void CDevice::setDeviceName(unsigned char address, string name, EDeviceCategory category) {
-//
-//    for (auto &dev : devicesDescriptionList) {
-//        if (dev.address == address && dev.category == category) {
-//            dev.name = name;
-//
-//            try {
-//                devicesDB->setDeviceName(dev);
-//            } catch (string e) {
-//                log->error("Cannot save device's name in database: " + e);
-//            }
-//        }
-//    }
-//}
+void CDevice::setDeviceName(SDeviceDescription description, string name) {
 
-void CDevice::setDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList) {
+
+    description.name = name;
+
+    try {
+        devicesDB->setDeviceName(description);
+    } catch (string e) {
+        log->error("Cannot save device's name in database: " + e);
+        return;
+    }
+    synchronizeDeviceName(description, name, category, devicesDescriptionList);
+
+}
+
+void CDevice::synchronizeDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList) {
     for (SDeviceDescription &device : devicesList) {
         if (device.guid == description.guid && device.luid == description.luid && device.category == category) {
             device.name = name;
@@ -325,26 +336,21 @@ void CDevice::listAddresses() {
         for (auto &dev : devicesDescriptionList) {
             log->info(to_string(dev));
         }
-    }else{
-        log->info("No devices in category " + to_string(category) + ":");
+    } else {
+        log->info("No devices in category " + to_string(category));
     }
-//    cout << "\nGUIDs list:" << endl;
-//    for (auto &guid : GUIDs) {
-//        cout << "guid: " << (int) guid.first << ", dev nmb: " << (int) guid.second << endl;
-//    }
 }
 
 Devices CDevice::getLogicalDevies() {
     return devicesDescriptionList;
 }
 
-
 void CDevice::executeAction(SDeviceDescription device, Command command, Blob params) {
     if (actionsMap.find(command) == actionsMap.end()) {
         log->warning("No function [" + to_string((int) command) + "] to invoke");
         return;
     }
-    if (command < GLOBAL_FUNCTION_LIMIT){
+    if (command < GLOBAL_FUNCTION_LIMIT) {
         executeGlobalAction(command, params);
         return;
     }
@@ -360,10 +366,9 @@ void CDevice::executeAction(SDeviceDescription device, Command command, Blob par
 
 }
 
-
-void CDevice::executeGlobalAction(Command command, Blob params){
-        SDeviceDescription empty; 
-        actionsMap[command](empty, params);
+void CDevice::executeGlobalAction(Command command, Blob params) {
+    SDeviceDescription empty;
+    actionsMap[command](empty, params);
 }
 
 void CDevice::reset(SDeviceDescription dev, Blob params) {
@@ -386,18 +391,22 @@ void CDevice::check(SDeviceDescription dev, Blob params) {
 
 void CDevice::setName(SDeviceDescription dev, Blob params) {
     string name = params[BLOB_DEVICE_NAME].get<string>();
-    log->info("Set new name >> " + name + " << for device "+ to_string(dev));
-    setDeviceName(dev, name, category, devicesDescriptionList);
+    log->info("Set new name >> " + name + " << for device " + to_string(dev));
+    setDeviceName(dev, name);
 }
 
 void CDevice::pingLogicalDevice(SDeviceDescription dev, Blob params) {
-    if (ping(dev.address)){
-        log->info("PING device "+ to_string(dev) + " OK");
-    }else{
-        log->error("PING device "+ to_string(dev) + " FAILED");
+    if (ping(dev)) {
+        log->info("PING device " + to_string(dev) + " OK");
+    } else {
+        log->error("PING device " + to_string(dev) + " FAILED");
     }
 }
 
-void CDevice::list(SDeviceDescription dev, Blob params){
+void CDevice::list(SDeviceDescription dev, Blob params) {
     listAddresses();
+}
+
+CCan232 *CDevice::getProtocol(){
+    return canbusProtocol;
 }

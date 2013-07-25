@@ -41,24 +41,7 @@ public:
     EDeviceCategory getDeviceCategory();
 
     void setCommunicationProtocol(CCan232 *protocol);
-    unsigned char getNewAddress();
-    void removeAddress(unsigned char address);
-
-    bool ping(unsigned char address);
-
-
-    //    void addNewDevice(unsigned char address);
-    void resetAddresses();
-    void pollGUID();
-    void getGUIDs();
-    void sendPollACK(unsigned int guid);
-    void assignAddress();
-//    void setDeviceName(unsigned char address, string name, EDeviceCategory category);
-
-
-
-    void listAddresses();
-    void checkDevicesAvailability(); //@TODO move to private
+    
     Devices getLogicalDevies();
 
     void executeAction(SDeviceDescription, Command, Blob);
@@ -75,9 +58,9 @@ public:
     map<Command, Delegate> actionsMap;
    
     
-    void addCategoryDevice(SDeviceDescription dev){//@TODO remove it
-        devicesDescriptionList.push_back(dev);
-    }
+//    void addCategoryDevice(SDeviceDescription dev){//@TODO remove it
+//        devicesDescriptionList.push_back(dev);
+//    }
     
     
    
@@ -89,18 +72,42 @@ public:
     void pingLogicalDevice(SDeviceDescription dev, Blob params);
     void list(SDeviceDescription, Blob);
     
+    CCan232 *getProtocol();
+    unsigned char getAddress(SDeviceDescription device);
 private:
+    unsigned char getNewAddress();
+    void removeAddress(unsigned char address);
+
+    bool ping(SDeviceDescription);
+
+
+    //    void addNewDevice(unsigned char address);
+    void resetAddresses();
+    void pollGUID();
+    void getGUIDs();
+    void sendPollACK(unsigned int guid);
+    void assignAddress();
+//    void setDeviceName(unsigned char address, string name, EDeviceCategory category);
+
+
+
+    void listAddresses();
+    void checkDevicesAvailability(); //@TODO move to private
+    
     void insertDevice(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address);
     void removeDevice(unsigned char address);
     void synchronizeDBdevices();
     void sortDevicesList(Devices &devices);
     unsigned char getDeviceGroupSize(Devices devicesList, unsigned int guid, EDeviceCategory category);
-    void setDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList);
+    void synchronizeDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList);
+    void setDeviceName(SDeviceDescription description, string name);
     string getDeviceName(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     unsigned char getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     void setDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address, Devices &devicesList);
 
     void initActionMap();
+    
+    
     
     Devices devicesDescriptionList;
     EDeviceCategory category;
