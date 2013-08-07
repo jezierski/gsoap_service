@@ -15,8 +15,9 @@
 
 #define CATEGORY        EDeviceCategory::A_SIMPLE_SWITCH
 
-#define ACTION_SET_OUTPUT       10
+#define ACTION_SET_OUTPUT       101
 
+#define CMD_SET_PIN     101
 
 using namespace std;
 

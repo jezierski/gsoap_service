@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jezierski/public_html/soap_server
+CMAKE_SOURCE_DIR = /home/jezierski/public_html/homesys
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jezierski/public_html/soap_server
+CMAKE_BINARY_DIR = /home/jezierski/public_html/homesys
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jezierski/public_html/soap_server/CMakeFiles /home/jezierski/public_html/soap_server/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jezierski/public_html/homesys/CMakeFiles /home/jezierski/public_html/homesys/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jezierski/public_html/soap_server/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jezierski/public_html/homesys/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -183,6 +183,30 @@ can_devices/CCanSimpleSwitchSensor.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.s
 .PHONY : can_devices/CCanSimpleSwitchSensor.cpp.s
 
+homesys/CActionTranslator.o: homesys/CActionTranslator.cpp.o
+.PHONY : homesys/CActionTranslator.o
+
+# target to build an object file
+homesys/CActionTranslator.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.o
+.PHONY : homesys/CActionTranslator.cpp.o
+
+homesys/CActionTranslator.i: homesys/CActionTranslator.cpp.i
+.PHONY : homesys/CActionTranslator.i
+
+# target to preprocess a source file
+homesys/CActionTranslator.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.i
+.PHONY : homesys/CActionTranslator.cpp.i
+
+homesys/CActionTranslator.s: homesys/CActionTranslator.cpp.s
+.PHONY : homesys/CActionTranslator.s
+
+# target to generate assembly for a file
+homesys/CActionTranslator.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.s
+.PHONY : homesys/CActionTranslator.cpp.s
+
 homesys/CDevice.o: homesys/CDevice.cpp.o
 .PHONY : homesys/CDevice.o
 
@@ -278,6 +302,30 @@ homesys/CSoapServer.s: homesys/CSoapServer.cpp.s
 homesys/CSoapServer.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.s
 .PHONY : homesys/CSoapServer.cpp.s
+
+homesys/CTimer.o: homesys/CTimer.cpp.o
+.PHONY : homesys/CTimer.o
+
+# target to build an object file
+homesys/CTimer.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CTimer.cpp.o
+.PHONY : homesys/CTimer.cpp.o
+
+homesys/CTimer.i: homesys/CTimer.cpp.i
+.PHONY : homesys/CTimer.i
+
+# target to preprocess a source file
+homesys/CTimer.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CTimer.cpp.i
+.PHONY : homesys/CTimer.cpp.i
+
+homesys/CTimer.s: homesys/CTimer.cpp.s
+.PHONY : homesys/CTimer.s
+
+# target to generate assembly for a file
+homesys/CTimer.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CTimer.cpp.s
+.PHONY : homesys/CTimer.cpp.s
 
 homesys/homesys.o: homesys/homesys.cpp.o
 .PHONY : homesys/homesys.o
@@ -633,6 +681,9 @@ help:
 	@echo "... can_devices/CCanSimpleSwitchSensor.o"
 	@echo "... can_devices/CCanSimpleSwitchSensor.i"
 	@echo "... can_devices/CCanSimpleSwitchSensor.s"
+	@echo "... homesys/CActionTranslator.o"
+	@echo "... homesys/CActionTranslator.i"
+	@echo "... homesys/CActionTranslator.s"
 	@echo "... homesys/CDevice.o"
 	@echo "... homesys/CDevice.i"
 	@echo "... homesys/CDevice.s"
@@ -645,6 +696,9 @@ help:
 	@echo "... homesys/CSoapServer.o"
 	@echo "... homesys/CSoapServer.i"
 	@echo "... homesys/CSoapServer.s"
+	@echo "... homesys/CTimer.o"
+	@echo "... homesys/CTimer.i"
+	@echo "... homesys/CTimer.s"
 	@echo "... homesys/homesys.o"
 	@echo "... homesys/homesys.i"
 	@echo "... homesys/homesys.s"

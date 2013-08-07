@@ -19,6 +19,8 @@ raspberry/CGPIOClass.cpp
 homesys/CDevice.cpp
 homesys/CDeviceManager.cpp
 homesys/COperation.cpp
+homesys/CActionTranslator.cpp
+homesys/CTimer.cpp
         
 #can232:
 can232/CCan232.cpp

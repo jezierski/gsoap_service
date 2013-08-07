@@ -11,52 +11,72 @@
 CCanBuffer::CCanBuffer() {
 }
 
-CCanBuffer::CCanBuffer(const CCanBuffer& orig) {
-}
+//CCanBuffer::CCanBuffer(const CCanBuffer& orig) {
+//}
 
 CCanBuffer::~CCanBuffer() {
 }
 
-
-void CCanBuffer::insertId(unsigned int id){
+void CCanBuffer::insertId(unsigned int id) {
     this->id = id;
 }
 
-unsigned int CCanBuffer::frameId(){
+unsigned int CCanBuffer::frameId() {
     return id;
 }
 
-void CCanBuffer::insertCommand(unsigned char cmd){
+void CCanBuffer::insertCommand(unsigned char cmd) {
     command = cmd;
 }
 
-unsigned char CCanBuffer::frameCommand(){
+void CCanBuffer::insertDestinationAddress(unsigned char adr) {
+    destAddress = adr;
+}
+
+unsigned char CCanBuffer::frameCommand() {
     return this->operator [](OFFSET_CMD);
 }
 
-unsigned char CCanBuffer::sourceId(){
+unsigned char CCanBuffer::sourceId() {
     return this->operator [](OFFSET_CAT_ID);
 }
 
-unsigned char CCanBuffer::sourceAddress(){
+unsigned char CCanBuffer::sourceAddress() {
     return this->operator [](OFFSET_SRC_ADDR);
 }
 
-void CCanBuffer::buildBuffer(){
+unsigned char CCanBuffer::getSensorCommand() {
+    return this->operator [](OFFSET_SENSOR_RESPONSE_COMMAND);
+}
+
+vector<unsigned char> CCanBuffer::getSensorParams() {
+    vector<unsigned char> params;
+    params.insert(params.begin(), this->getBuffer().begin() + OFFSET_SENSOR_RESPONSE_DATA, this->getBuffer().end());
+    return params;
+}
+
+void CCanBuffer::buildBuffer() {
     CCanBuffer buf;
     buf << (unsigned char) ID_MASTER;
     buf << (unsigned char) command;
-    for (size_t i = 0; (i < this->getLength()) && (i < 6); i++){
-        buf << (unsigned char) this->operator [](i);
+    if (destAddress) {
+        buf << (unsigned char) destAddress;
+        for (size_t i = 0; (i < this->getLength()) && (i < 5); i++) {
+            buf << (unsigned char) this->operator [](i);
+        }
+    } else {
+
+        for (size_t i = 0; (i < this->getLength()) && (i < 6); i++) {
+            buf << (unsigned char) this->operator [](i);
+        }
     }
-    
     this->clear();
-    for (size_t i = 0; i < buf.getLength(); i++){
+    for (size_t i = 0; i < buf.getLength(); i++) {
         this->operator <<((unsigned char) buf[i]);
     }
 }
 
-unsigned int CCanBuffer::getGUID(){
+unsigned int CCanBuffer::getGUID() {
     unsigned int guid;
     guid = ((this->operator [](OFFSET_DATA + 0) << 24) & 0xff000000);
     guid |= ((this->operator [](OFFSET_DATA + 1) << 16) & 0x00ff0000);
@@ -65,6 +85,6 @@ unsigned int CCanBuffer::getGUID(){
     return guid;
 }
 
-unsigned char CCanBuffer::getNmbDevices(){
+unsigned char CCanBuffer::getNmbDevices() {
     return this->operator [](OFFSET_DATA + 4);
 }

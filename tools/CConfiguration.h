@@ -138,7 +138,7 @@ public:
 
 private:
     CConfiguration();
-    CConfiguration(const CConfiguration& orig);
+//    CConfiguration(const CConfiguration& orig);
     static CConfiguration *instance;
     CDatabase *database;
     string ver;

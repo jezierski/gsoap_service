@@ -9,6 +9,8 @@
 #define	CDEVICE_H
 
 #include <map>
+#include <vector>
+
 #include "../tools/CDevicesConfig.h"
 #include "../can_devices/CCanConstans.h"
 #include "../can232/CCan232.h"
@@ -17,6 +19,7 @@
 #include "../tools/CLog.h"
 #include "../tools/types.h"
 #include "../tools/FastDelegate.h"
+#include "../tools/Signal.h"
 
 
 #define BLOB_ACTION_PARAMETER        "param"
@@ -26,54 +29,65 @@
 #define ACTION_SEARCH_DEVICES           2
 #define ACTION_CHECK_AVAILABILITY       3
 #define ACTION_LIST                     4
-#define ACTION_SET_NAME                 6
-#define ACTION_PING                     7
+#define ACTION_RESET_ALL_STATUS         5
+#define ACTION_READ_NEW_STATUS          6
+#define ACTION_SET_NAME                 11
+#define ACTION_PING                     12
 
-#define GLOBAL_FUNCTION_LIMIT           5
+#define GLOBAL_ACTION_LIMIT           10
+
+using namespace Gallant;
+
 
 class CDevice {
 public:
     CDevice();
     //    CDevice(const CDevice& orig);
     virtual ~CDevice();
+    Signal3<SDeviceDescription, Command, Params> sensorEvent;
+    
 
     void setDeviceCategory(EDeviceCategory category);
     EDeviceCategory getDeviceCategory();
 
     void setCommunicationProtocol(CCan232 *protocol);
-    
+
     Devices getLogicalDevies();
 
     void executeAction(SDeviceDescription, Command, Blob);
     void executeGlobalAction(Command, Blob);
 
     template<typename T>
-    void addAction(T *object, Command command, void(T::*function)(SDeviceDescription, Blob)){
+    void addAction(T *object, Command command, void(T::*function)(SDeviceDescription, Blob)) {
         Delegate delegateFunction;
         delegateFunction.bind(object, function);
         actionsMap[command] = delegateFunction;
     }
-    
+
     typedef fastdelegate::FastDelegate2<SDeviceDescription, Blob> Delegate;
     map<Command, Delegate> actionsMap;
-   
-    
-//    void addCategoryDevice(SDeviceDescription dev){//@TODO remove it
-//        devicesDescriptionList.push_back(dev);
-//    }
-    
-    
-   
-    
+
+
+
+
+
     void reset(SDeviceDescription dev, Blob params);
     void search(SDeviceDescription dev, Blob params);
     void check(SDeviceDescription dev, Blob params);
     void setName(SDeviceDescription dev, Blob params);
     void pingLogicalDevice(SDeviceDescription dev, Blob params);
-    void list(SDeviceDescription, Blob);
-    
+    void list(SDeviceDescription dev, Blob params);
+    void resetStatuses(SDeviceDescription dev, Blob params);
+    void checkNewStatuses(SDeviceDescription dev, Blob params);
+
     CCan232 *getProtocol();
     unsigned char getAddress(SDeviceDescription device);
+
+    
+
+   
+
+
 private:
     unsigned char getNewAddress();
     void removeAddress(unsigned char address);
@@ -81,19 +95,24 @@ private:
     bool ping(SDeviceDescription);
 
 
-    //    void addNewDevice(unsigned char address);
     void resetAddresses();
-    void pollGUID();
-    void getGUIDs();
-    void sendPollACK(unsigned int guid);
+    void findGUIDs();
+//    void pollGUID();
+//    void getGUIDs();
+//    void sendPollACK(unsigned int guid);
     void assignAddress();
-//    void setDeviceName(unsigned char address, string name, EDeviceCategory category);
+
+    void resetAllDevicesStatus();
+    void checkNewDevicesStatus();
+//    void requestNewDevicesStatus();
+//    void getNewDevicesStatus();
+    void sendACK(SDeviceDescription device);
 
 
 
     void listAddresses();
-    void checkDevicesAvailability(); //@TODO move to private
-    
+    void checkDevicesAvailability();
+
     void insertDevice(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address);
     void removeDevice(unsigned char address);
     void synchronizeDBdevices();
@@ -103,12 +122,20 @@ private:
     void setDeviceName(SDeviceDescription description, string name);
     string getDeviceName(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     unsigned char getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
+    SDeviceDescription getDeviceWithAddress(unsigned char address);
     void setDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address, Devices &devicesList);
 
     void initActionMap();
-    
-    
-    
+
+    bool isSensorDevice() {
+        return (static_cast<unsigned char> (category) >= 100) && (static_cast<unsigned char> (category) < 200);
+    }
+
+    bool isActorDevice() {
+        return (static_cast<unsigned char> (category) < 100);
+    }
+
+
     Devices devicesDescriptionList;
     EDeviceCategory category;
     CCan232 *canbusProtocol;

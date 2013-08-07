@@ -8,6 +8,7 @@
 #include <climits>
 #include <string>
 #include <algorithm>
+#include <time.h>
 #include "types.h"
 
 template <class T>
@@ -69,6 +70,15 @@ inline string to_string(EDeviceCategory category) {
 inline string to_string(SDeviceDescription device) {
     string output = "[GUID: " + to_string((unsigned int) device.guid) + "\tLUID: " + to_string((unsigned int) device.luid) + "\tADR: " + to_string((unsigned int) device.address) + "\tCAT: " + to_string(device.category) + "\tNAME: " + device.name + "]";
     return output;
+}
+
+inline long long getCurrentDayTime() {
+    time_t rawtime;
+    struct tm * timeinfo;
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    long long secs = timeinfo->tm_hour * 3600 + timeinfo->tm_min * 60 + timeinfo->tm_sec;
+    return secs;
 }
 
 class CTools {

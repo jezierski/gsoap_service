@@ -14,8 +14,8 @@
 #include "CCanConstans.h"
 
 
-#define CMD_ACTION_TEST 10
-#define CMD_READ_SENSOR 11
+#define ACTION_READ_SENSOR_STATUS 101
+#define CMD_READ_SENSOR 101
 
 using namespace std;
 class CCanSimpleSwitchSensor : public CDevice{
@@ -29,8 +29,7 @@ public:
 //    void executeAction(SDeviceDescription, Command, Params);
     
 private:
-    void actionTest(SDeviceDescription device, Blob params);
-    void setSwitch(SDeviceDescription device, Blob params);
+    void getSwitchStatus(SDeviceDescription device, Blob params);
     void initActionMap();
     
     CLog *log;

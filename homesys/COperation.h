@@ -23,6 +23,8 @@ enum class ECondition {
     Equal = 1,
             Less = 2,
             More = 3,
+            LessOrEqual = 4,
+            MoreOrEqual = 5
 };
 
 typedef struct {
@@ -41,7 +43,7 @@ typedef struct {
 
 typedef struct {
     ECondition condition;
-    time_t time;
+    long long time;
 } STimeCondition;
 
 typedef struct {
@@ -57,6 +59,7 @@ public:
     virtual ~COperation();
 
     void loadOperations();
+    list<SOperation> getOperations();
 private:
 
     string readFile(string fileName);
@@ -118,6 +121,7 @@ private:
     void parseParams(string value, STimeCondition&);
     
     void parseParams(string, Params&);
+//    void parseParams(string, long long&);
     void addOperation(SOperation operation);
     void clearOperation(SOperation &operation);
     CLog *log;

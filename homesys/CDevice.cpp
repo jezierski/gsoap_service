@@ -27,6 +27,8 @@ void CDevice::initActionMap() {
     addAction(this, ACTION_SET_NAME, &CDevice::setName);
     addAction(this, ACTION_PING, &CDevice::pingLogicalDevice);
     addAction(this, ACTION_LIST, &CDevice::list);
+    addAction(this, ACTION_RESET_ALL_STATUS, &CDevice::resetStatuses);
+    addAction(this, ACTION_READ_NEW_STATUS, &CDevice::checkNewStatuses);
 }
 
 void CDevice::setDeviceCategory(EDeviceCategory category) {
@@ -65,47 +67,65 @@ void CDevice::resetAddresses() {
         buffer.insertId((unsigned char) category);
         buffer.insertCommand(CMD_RESET_ADDRESS);
         buffer.buildBuffer();
-        canbusProtocol->sendCanFrame(buffer);
+        canbusProtocol->send(buffer);
     } catch (string e) {
         log->error("Cannot reset addresses: " + e);
     }
 }
 
-void CDevice::pollGUID() {
+void CDevice::findGUIDs() {
     CCanBuffer buffer;
+    GUIDs.clear();
     buffer.insertId((unsigned char) category);
     buffer.insertCommand(CMD_POLL_GUID);
     buffer.buildBuffer();
-    canbusProtocol->sendCanFrame(buffer);
-}
-
-void CDevice::getGUIDs() {
-    GUIDs.clear();
-    CCanBuffer buffer;
-    CTimeOut tout;
-    tout.SetMilliSec(5000);
-    while (!tout.IsTimeOut()) {
-        buffer = canbusProtocol->getCanFrame();
-        if (CMD_POLL_GUID == buffer.frameCommand()) {
-            GUIDs[buffer.getGUID()] = buffer.getNmbDevices();
-            cout << "> received new GUID: " << hex << (int) buffer.getGUID() << dec << ", nmb devs: " << (int) buffer.getNmbDevices() << endl;
-            sendPollACK(buffer.getGUID());
-            tout.SetMilliSec(5000);
-        }
+    CanBuffers guids;
+    guids = canbusProtocol->broadcastRequest<unsigned int>(buffer, &CCanBuffer::getGUID);
+    for (CCanBuffer buf : guids) {
+        GUIDs[buf.getGUID()] = buf.getNmbDevices();
+        cout << "> received new GUID: " << hex << (int) buf.getGUID() << dec << ", nmb devs: " << (int) buf.getNmbDevices() << endl;//@TODO remove
     }
 }
 
-void CDevice::sendPollACK(unsigned int guid) {
-    CCanBuffer buffer;
-    buffer.insertCommand(CMD_ACK);
-    buffer.insertId((unsigned char) category);
-    buffer << (unsigned char) (guid >> 24);
-    buffer << (unsigned char) (guid >> 16);
-    buffer << (unsigned char) (guid >> 8);
-    buffer << (unsigned char) (guid >> 0);
-    buffer.buildBuffer();
-    canbusProtocol->sendCanFrame(buffer);
-}
+//void CDevice::pollGUID() {
+//    CCanBuffer buffer;
+//    buffer.insertId((unsigned char) category);
+//    buffer.insertCommand(CMD_POLL_GUID);
+//    buffer.buildBuffer();
+//    canbusProtocol->sendCanFrame(buffer);
+//}
+
+//void CDevice::getGUIDs() {
+//    GUIDs.clear();
+//    CCanBuffer buffer;
+//    CTimeOut tout;
+//    tout.SetMilliSec(200);
+//    while (!tout.IsTimeOut()) {
+//        buffer = canbusProtocol->getCanFrame();
+//        cout<<"getCanFrame: ";
+//        buffer.printBuffer();
+//        cout<<endl;
+//        
+//        if (CMD_POLL_GUID == buffer.frameCommand() && static_cast<unsigned int> (category) == buffer.sourceId()) {
+//            GUIDs[buffer.getGUID()] = buffer.getNmbDevices();
+//            cout << "> received new GUID: " << hex << (int) buffer.getGUID() << dec << ", nmb devs: " << (int) buffer.getNmbDevices() << endl;
+//            sendPollACK(buffer.getGUID());
+//            tout.SetMilliSec(200);
+//        }
+//    }
+//}
+
+//void CDevice::sendPollACK(unsigned int guid) {
+//    CCanBuffer buffer;
+//    buffer.insertCommand(CMD_ACK);
+//    buffer.insertId((unsigned char) category);
+//    buffer << (unsigned char) (guid >> 24);
+//    buffer << (unsigned char) (guid >> 16);
+//    buffer << (unsigned char) (guid >> 8);
+//    buffer << (unsigned char) (guid >> 0);
+//    buffer.buildBuffer();
+//    canbusProtocol->sendCanFrame(buffer);
+//}
 
 void CDevice::assignAddress() {
     CTimeOut tout;
@@ -115,9 +135,9 @@ void CDevice::assignAddress() {
 
     for (auto &guid : GUIDs) {
         for (size_t cnt = 0; cnt < guid.second; cnt++) {
-            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl;
+            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl;     //@TODO remove
             address = getNewAddress();
-            cout << "new address: " << (int) address << endl;
+            cout << "new address: " << (int) address << endl;           //@TODO remove
 
             buffer.clear();
             buffer.insertCommand(CMD_SET_ADDRESS);
@@ -129,16 +149,12 @@ void CDevice::assignAddress() {
             buffer << (unsigned char) address;
             buffer << (unsigned char) cnt;
             buffer.buildBuffer();
-            canbusProtocol->sendCanFrame(buffer);
+            buffer = canbusProtocol->request(buffer);
             insertDevice(guid.first, cnt, category, address);
-            tout.SetMilliSec(500);
-            while (!tout.IsTimeOut()) {
-                buffer = canbusProtocol->getCanFrame();
-                if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()) {
-                    cout << "ACK from device CAT: " << (int) buffer[0] << ", ADR: " << (int) buffer[2] << endl;
-                    break;
-                }
+            if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()) {
+                cout << "ACK from device CAT: " << (int) buffer[0] << ", ADR: " << (int) buffer[2] << endl; //@TODO remove
             }
+
         }
     }
 
@@ -174,7 +190,7 @@ void CDevice::synchronizeDBdevices() {
         while (index < devicesDescriptionList.size()) {
             size = getDeviceGroupSize(devicesDescriptionList, devicesDescriptionList[index].guid, category);
             dbDevices = devicesDB->getDevices(devicesDescriptionList[index].guid, (unsigned char) category);
-
+           
             if (dbDevices.size() > 0) {
                 if (size != dbDevices.size()) {
                     log->error("Different devices recognized with GUID: " + to_string(devicesDescriptionList[index].guid));
@@ -189,7 +205,7 @@ void CDevice::synchronizeDBdevices() {
                 }
 
             } else {
-                for (unsigned int i = index; i < size; i++) {
+                for (unsigned int i = index; i < (index + size); i++) {
                     devicesDB->addDevice(devicesDescriptionList[i]);
                 }
             }
@@ -209,6 +225,16 @@ unsigned char CDevice::getDeviceAddress(unsigned int guid, unsigned char luid, E
     }
 
     return 0;
+}
+
+SDeviceDescription CDevice::getDeviceWithAddress(unsigned char address) {
+    for (SDeviceDescription device : devicesDescriptionList) {
+        if (device.address == address)
+            return device;
+    }
+    SDeviceDescription dev;
+    return dev;
+
 }
 
 void CDevice::setDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address, Devices &devicesList) {
@@ -275,9 +301,9 @@ void CDevice::removeDevice(unsigned char address) {
     }
 }
 
-unsigned char CDevice::getAddress(SDeviceDescription device){
-    for (SDeviceDescription dev : devicesDescriptionList){
-        if (dev == device){
+unsigned char CDevice::getAddress(SDeviceDescription device) {
+    for (SDeviceDescription dev : devicesDescriptionList) {
+        if (dev == device) {
             return dev.address;
         }
     }
@@ -285,22 +311,17 @@ unsigned char CDevice::getAddress(SDeviceDescription device){
     return 0;
 }
 
-
 bool CDevice::ping(SDeviceDescription device) {
     unsigned char address = getAddress(device);
-    cout<<"ADR: "<<(int)address<<", CAT: "<<(int)category<<endl;
+    cout << "ADR: " << (int) address << ", CAT: " << (int) category << endl;
     CCanBuffer buffer;
     buffer.insertId((unsigned char) category);
     buffer.insertCommand(CMD_PING);
     buffer << (unsigned char) address;
     buffer.buildBuffer();
-    canbusProtocol->sendCanFrame(buffer);
-    CTimeOut tout;
-    tout.SetMilliSec(500);
-    while (!tout.IsTimeOut()) {
-        buffer = canbusProtocol->getCanFrame();
-        if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress())
-            return true;
+    buffer = canbusProtocol->request(buffer);
+    if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()){
+        return true;
     }
     return false;
 }
@@ -345,18 +366,80 @@ Devices CDevice::getLogicalDevies() {
     return devicesDescriptionList;
 }
 
+void CDevice::resetAllDevicesStatus() {
+    CCanBuffer buffer;
+    buffer.insertId((unsigned char) category);
+    buffer.insertCommand(CMD_RESET_ALL_STAT);
+    buffer.buildBuffer();
+    canbusProtocol->send(buffer);
+}
+
+void CDevice::checkNewDevicesStatus(){
+    if (isSensorDevice()) {
+        CCanBuffer buffer;
+        CanBuffers stats;
+        buffer.insertId((unsigned char) category);
+        buffer.insertCommand(CMD_REQ_NEW_STAT);
+        buffer.buildBuffer();
+        stats = canbusProtocol->broadcastRequest<unsigned char>(buffer, &CCanBuffer::sourceAddress);
+        for (CCanBuffer buf : stats){
+            if (CMD_REQ_NEW_STAT == buf.frameCommand()) {
+                sensorEvent(getDeviceWithAddress(buf.sourceAddress()), buf.getSensorCommand(), buf.getSensorParams());
+            }
+        }
+    }
+}
+
+//void CDevice::requestNewDevicesStatus() {
+//    if (isSensorDevice()) {
+//        CCanBuffer buffer;
+//        buffer.insertId((unsigned char) category);
+//        buffer.insertCommand(CMD_REQ_NEW_STAT);
+//        buffer.buildBuffer();
+//        canbusProtocol->send(buffer);
+//    }
+//}
+//
+//void CDevice::getNewDevicesStatus() {
+//    if (isSensorDevice()) {
+//        CCanBuffer buffer;
+//        CTimeOut tout;
+//        tout.SetMilliSec(200);
+//        while (!tout.IsTimeOut()) {
+//            buffer = canbusProtocol->getCanFrame();
+//            if (CMD_REQ_NEW_STAT == buffer.frameCommand()) {
+//                log->put("REC BUFFER IN CAT " + to_string((int) category) + ": ", CLog::LOW_LEVEL_DEBUG);
+//                buffer.printBuffer();
+//                sendACK(getDeviceWithAddress(buffer.sourceAddress()));
+//                tout.SetMilliSec(200);
+//            }
+//        }
+//    }
+//}
+
+void CDevice::sendACK(SDeviceDescription device) {
+    log->put("Send ACK to: " + to_string(device));
+    CCanBuffer buffer;
+    buffer.insertCommand(CMD_ACK);
+    buffer.insertId((unsigned char) category);
+    buffer.insertDestinationAddress(device.address);
+    buffer.buildBuffer();
+    buffer.printBuffer();
+    canbusProtocol->send(buffer);
+}
+
 void CDevice::executeAction(SDeviceDescription device, Command command, Blob params) {
     if (actionsMap.find(command) == actionsMap.end()) {
         log->warning("No function [" + to_string((int) command) + "] to invoke");
         return;
     }
-    if (command < GLOBAL_FUNCTION_LIMIT) {
+    if (command < GLOBAL_ACTION_LIMIT) {
         executeGlobalAction(command, params);
         return;
     }
     for (SDeviceDescription dev : getLogicalDevies()) {
         if (dev == device) {
-            cout << "device found" << endl;
+//            cout << "device found" << endl;
             (actionsMap[command])(device, params);
             return;
         }
@@ -378,8 +461,9 @@ void CDevice::reset(SDeviceDescription dev, Blob params) {
 
 void CDevice::search(SDeviceDescription dev, Blob params) {
     log->info("Start searching devices in category " + to_string(category));
-    pollGUID();
-    getGUIDs();
+    findGUIDs();
+//        pollGUID();
+//        getGUIDs();
     assignAddress();
     listAddresses();
 }
@@ -407,6 +491,14 @@ void CDevice::list(SDeviceDescription dev, Blob params) {
     listAddresses();
 }
 
-CCan232 *CDevice::getProtocol(){
+void CDevice::resetStatuses(SDeviceDescription dev, Blob params) {
+    resetAllDevicesStatus();
+}
+
+void CDevice::checkNewStatuses(SDeviceDescription dev, Blob params) {
+    checkNewDevicesStatus();
+}
+
+CCan232 *CDevice::getProtocol() {
     return canbusProtocol;
 }

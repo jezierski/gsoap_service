@@ -12,17 +12,18 @@
 #include <string>
 #include <vector>
 #include "CBlob.h"
+#include "CCanBuffer.h"
 
 using namespace std;
 
 
 
 typedef struct DeviceDescriptor {
-    unsigned int guid;
-    unsigned char luid;
-    EDeviceCategory category;
-    unsigned char address;
-    string name;
+    unsigned int guid = 0;
+    unsigned char luid = 0;
+    EDeviceCategory category = EDeviceCategory::OTHER;
+    unsigned char address = 0;
+    string name = "";
 
     bool operator<(const DeviceDescriptor & n) const {
         if (this->guid == n.guid) {
@@ -37,13 +38,21 @@ typedef struct DeviceDescriptor {
     }
 } SDeviceDescription;
 
+
+
 typedef vector<SDeviceDescription> Devices;
 
 typedef map<string, CBlob> Blob;
 
 typedef vector<unsigned char> Params;
 
+typedef vector<CCanBuffer> CanBuffers;
+
 typedef unsigned char Command;
+
+typedef map<unsigned char, Params>  DeviceParams;
+
+typedef map<SDeviceDescription, DeviceParams> DeviceState;
 
 #endif	/* TYPES_H */
 

@@ -10,8 +10,8 @@ CConfiguration::CConfiguration() {
 
 
 
-CConfiguration::CConfiguration(const CConfiguration& orig) {
-}
+//CConfiguration::CConfiguration(const CConfiguration& orig) {
+//}
 
 CConfiguration::~CConfiguration() {
 }

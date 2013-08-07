@@ -10,6 +10,13 @@ CApplication::~CApplication() {
 
 }
 
+void CApplication::assignSlots(){
+    for (CDevice *device : deviceManager->getDevices()){
+            device->sensorEvent.Connect(actionTranslator, &CActionTranslator::updateDeviceState);
+    }
+    timer->timerEvent.Connect(actionTranslator, &CActionTranslator::updateTimerStack);
+}
+
 void CApplication::run() {
 
     log->info("Server starting...");
@@ -30,19 +37,30 @@ void CApplication::run() {
     CCanSimpleSwitchSensor sensorSwitch;
     sensorSwitch.setCommunicationProtocol(can232device);
 
-    CDeviceManager * deviceManager = new CDeviceManager();
+    deviceManager = new CDeviceManager();
     deviceManager->addCategoryDevice(&actorSwitch);
     deviceManager->addCategoryDevice(&sensorSwitch);
 
 
-    COperation op;
-    op.loadOperations();
-
+    timer = new CTimer();
+    
+    actionTranslator = new CActionTranslator();
+    actionTranslator->assignDeviceManager(deviceManager);
+    actionTranslator->assignTimer(timer);
+    actionTranslator->loadOperations();
+    
     deviceManager->initialize();
+    Blob b;
 
+    new thread(&CDeviceManager::runInThreadGlobalRemoteAction, deviceManager, ACTION_READ_NEW_STATUS, Blob());
+    new thread(&CActionTranslator::translateActions, actionTranslator);
+    new thread(&CTimer::run, timer);
+    assignSlots();
+
+    
+    string x = "";
     SDeviceDescription global;
     global.category = EDeviceCategory::ALL;
-    string x = "";
     Blob null;
     while (1) {
         cout << "\r\n?? ";
@@ -73,6 +91,14 @@ void CApplication::run() {
             deviceManager->invokeRemoteAction(s, ACTION_RESET_CATEGORY, null);
         }
 
+        if (x == "resstat") {
+            deviceManager->invokeRemoteAction(global, ACTION_RESET_ALL_STATUS, null);
+        }
+        
+        if (x == "newstat") {
+            deviceManager->invokeRemoteAction(global, ACTION_READ_NEW_STATUS, null);
+        }
+        
         if (x == "list") {
             SDeviceDescription s;
             cout << "cat (0-all, 1-a, 2-b)? ";
@@ -207,8 +233,24 @@ void CApplication::run() {
 
         }
 
+        if (x == "sensor") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::S_SIMPLE_SWITCH;
+
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            deviceManager->invokeRemoteAction(s, ACTION_READ_SENSOR_STATUS, null);
+
+        }
+        
         x = "";
-        //sleep(1);
+        msleep(100);
     }
 }
 

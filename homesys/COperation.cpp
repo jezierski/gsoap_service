@@ -80,14 +80,14 @@ void COperation::loadOperations() {
 //                    cout << "param[" << i << "]: " << (int) (con.params[i]) << endl;
 //                }
 //            }
-//            
+//
 //            for (STimeCondition con : op.timeConditions) {
 //                cout << "===>TIME CONDITIONS:" << endl;
 //                cout << "condi: " << (int) (con.condition) << endl;
 //                cout << "value: " << (long long) (con.time) << endl;
-//                
+//
 //            }
-//            
+//
 //            cout << "===>ACTION:" << endl;
 //            cout << "param: " << (int) (op.action.command) << endl;
 //            cout << "guid : " << (int) (op.action.device.guid) << endl;
@@ -137,7 +137,7 @@ void COperation::parseTimeAttribute(string attributeName, string value, STimeCon
 }
 
 void COperation::nodeOperation(const xml_node<>* node, SOperation &operation) {
-//    cout << "nodeOperation, params:" << endl;
+    //    cout << "nodeOperation, params:" << endl;
 
     xml_node<> *childnode;
 
@@ -150,7 +150,7 @@ void COperation::nodeOperation(const xml_node<>* node, SOperation &operation) {
 }
 
 void COperation::nodeCondition(const xml_node<>* node, SOperation &operation) {
-//    cout << "nodeCondition, params:" << endl;
+    //    cout << "nodeCondition, params:" << endl;
 
     xml_node<> *childnode;
 
@@ -163,7 +163,7 @@ void COperation::nodeCondition(const xml_node<>* node, SOperation &operation) {
 }
 
 void COperation::nodeAction(const xml_node<>* node, SOperation &operation) {
-//    cout << "nodeAction, params:" << endl;
+    //    cout << "nodeAction, params:" << endl;
     xml_node<> *childnode;
 
     childnode = node->first_node();
@@ -174,19 +174,19 @@ void COperation::nodeAction(const xml_node<>* node, SOperation &operation) {
 }
 
 void COperation::nodeSensor(const xml_node<>* node, SOperation &operation) {
-//    cout << "nodeSensor, params:" << endl;
+    //    cout << "nodeSensor, params:" << endl;
     operation.deviceConditions.push_back(parseSensor(node));
 
 }
 
 void COperation::nodeActor(const xml_node<>* node, SOperation &operation) {
-//    cout << "nodeActor, params:" << endl;
+    //    cout << "nodeActor, params:" << endl;
     operation.action = parseActor(node);
 
 }
 
 void COperation::nodeTime(const xml_node<>* node, SOperation &operation) {
-//    cout << "nodeTime, params:" << endl;
+    //    cout << "nodeTime, params:" << endl;
     operation.timeConditions.push_back(parseTime(node));
 }
 
@@ -226,7 +226,7 @@ SDeviceCondition COperation::parseSensor(const xml_node<>* node) {
     int attributes = 0;
     for (xml_attribute<> *attr = node->first_attribute();
             attr; attr = attr->next_attribute()) {
-//        cout << "atr name: " << attr->name() << ", val: " << attr->value() << endl;
+        //        cout << "atr name: " << attr->name() << ", val: " << attr->value() << endl;
         attributes++;
         parseSensorAttribute(string(attr->name()), string(attr->value()), condition);
     }
@@ -252,7 +252,7 @@ STimeCondition COperation::parseTime(const xml_node<>* node) {
     int attributes = 0;
     for (xml_attribute<> *attr = node->first_attribute();
             attr; attr = attr->next_attribute()) {
-//        cout << "atr name: " << attr->name() << ", val: " << attr->value() << endl;
+        //        cout << "atr name: " << attr->name() << ", val: " << attr->value() << endl;
         attributes++;
         parseTimeAttribute(string(attr->name()), string(attr->value()), timeCondition);
     }
@@ -267,7 +267,7 @@ SAction COperation::parseActor(const xml_node<>* node) {
     int attributes = 0;
     for (xml_attribute<> *attr = node->first_attribute();
             attr; attr = attr->next_attribute()) {
-//        cout << "atr name: " << attr->name() << ", val: " << attr->value() << endl;
+        //        cout << "atr name: " << attr->name() << ", val: " << attr->value() << endl;
         attributes++;
         parseActorAttribute(string(attr->name()), string(attr->value()), action);
     }
@@ -282,17 +282,17 @@ void COperation::parseGUID(string value, SDeviceCondition& condition) {
     if (guid != 0) {
         condition.device.guid = guid;
     } else {
-        throw string("sensor GUID cannot be null");
+        throw string("Sensor GUID cannot be null");
     }
 }
 
 void COperation::parseLUID(string value, SDeviceCondition& condition) {
     unsigned int luid = fromString<unsigned int>(value);
-    if (luid != 0) {
-        condition.device.luid = static_cast<unsigned char> (luid);
-    } else {
-        throw string("sensor LUID cannot be null");
-    }
+    //if (luid != 0) {
+    condition.device.luid = static_cast<unsigned char> (luid);
+    // } else {
+    //     throw string("sensor LUID cannot be null");
+    // }
 }
 
 void COperation::parseCategory(string value, SDeviceCondition& condition) {
@@ -300,7 +300,7 @@ void COperation::parseCategory(string value, SDeviceCondition& condition) {
     if (cat != 0) {
         condition.device.category = static_cast<EDeviceCategory> (cat);
     } else {
-        throw string("sensor CATEGORY cannot be null");
+        throw string("Sensor CATEGORY cannot be null");
     }
 }
 
@@ -309,7 +309,7 @@ void COperation::parseCommand(string value, SDeviceCondition& condition) {
     if (param != 0) {
         condition.command = static_cast<Command> (param);
     } else {
-        throw string("sensor PARAMETER cannot be null");
+        throw string("Sensor PARAMETER cannot be null");
     }
 }
 
@@ -320,6 +320,10 @@ void COperation::parseCondition(string value, SDeviceCondition& condition) {
         condition.condition = ECondition::Less;
     } else if (value == "more") {
         condition.condition = ECondition::More;
+    } else if (value == "lessequal") {
+        condition.condition = ECondition::LessOrEqual;
+    } else if (value == "moreequal") {
+        condition.condition = ECondition::MoreOrEqual;
     } else {
         throw string("sensor CONDITION unknown");
     }
@@ -331,6 +335,17 @@ void COperation::parseParams(string value, SDeviceCondition& condition) {
     condition.params = params;
 }
 
+//void COperation::parseParams(string value, long long& time){
+//    int len = input.length();
+//    if (len % 2 || len > 10) {
+//        throw string("VALUE wrong format");
+//    }
+//    long long nmb = fromString<long long>(input, 1);
+//    for (int i = len / 2; i > 0; i--) {
+//        params.push_back((nmb >> (8 * (i - 1))) & 0xff);
+//    }
+//}
+
 void COperation::parseCondition(string value, STimeCondition& condition) {
     if (value == "equal") {
         condition.condition = ECondition::Equal;
@@ -338,17 +353,21 @@ void COperation::parseCondition(string value, STimeCondition& condition) {
         condition.condition = ECondition::Less;
     } else if (value == "more") {
         condition.condition = ECondition::More;
+    } else if (value == "lessequal") {
+        condition.condition = ECondition::LessOrEqual;
+    } else if (value == "moreequal") {
+        condition.condition = ECondition::MoreOrEqual;
     } else {
         throw string("time CONDITION unknown");
     }
 }
 
 void COperation::parseParams(string value, STimeCondition& condition) {
-    time_t param = fromString<time_t>(value);
+    long long param = fromString<long long>(value);
     if (param != 0) {
         condition.time = param;
     } else {
-        throw string("time VALUEx cannot be null");
+        throw string("Time VALUE cannot be null");
     }
 }
 
@@ -357,17 +376,17 @@ void COperation::parseGUID(string value, SAction& action) {
     if (guid != 0) {
         action.device.guid = guid;
     } else {
-        throw string("actor GUID cannot be null");
+        throw string("Actor GUID cannot be null");
     }
 }
 
 void COperation::parseLUID(string value, SAction& action) {
     unsigned int luid = fromString<unsigned int>(value);
-    if (luid != 0) {
+    //if (luid != 0) {
         action.device.luid = static_cast<unsigned char> (luid);
-    } else {
-        throw string("actor LUID cannot be null");
-    }
+    //} else {
+   //     throw string("actor LUID cannot be null");
+   // }
 }
 
 void COperation::parseCategory(string value, SAction& action) {
@@ -375,7 +394,7 @@ void COperation::parseCategory(string value, SAction& action) {
     if (cat != 0) {
         action.device.category = static_cast<EDeviceCategory> (cat);
     } else {
-        throw string("actor CATEGORY cannot be null");
+        throw string("Actor CATEGORY cannot be null");
     }
 }
 
@@ -384,7 +403,7 @@ void COperation::parseCommand(string value, SAction& action) {
     if (param != 0) {
         action.command = static_cast<Command> (param);
     } else {
-        throw string("actor PARAMETER cannot be null");
+        throw string("Actor PARAMETER cannot be null");
     }
 }
 
@@ -406,4 +425,8 @@ void COperation::clearOperation(SOperation &operation) {
     operation.action.params.clear();
     operation.deviceConditions.clear();
     operation.timeConditions.clear();
+}
+
+list<SOperation> COperation::getOperations() {
+    return operations;
 }

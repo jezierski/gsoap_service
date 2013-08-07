@@ -6,10 +6,10 @@
  */
 
 #include "CCan232.h"
-#include "../tools/CTimeOut.h"
+
 
 CCan232::CCan232() {
-    
+
     config = CConfiguration::getInstance();
     log = CLog::getInstance();
 }
@@ -66,7 +66,7 @@ void CCan232::setSpeed(string baudRate) {
 }
 
 void CCan232::setAcceptedMask(unsigned char maskId, unsigned int mask) {
-    log->info("Set mask " + to_string((int)maskId) + ": 0x" + to_string(mask, 1));
+    log->info("Set mask " + to_string((int) maskId) + ": 0x" + to_string(mask, 1));
     CBuffer buffer;
     buffer << "M";
     buffer << (unsigned char) maskId;
@@ -75,7 +75,7 @@ void CCan232::setAcceptedMask(unsigned char maskId, unsigned int mask) {
 }
 
 void CCan232::setAcceptedFilters(unsigned char filterId, unsigned int filter) {
-    log->info("Set filter " + to_string((int)filterId) + ": 0x" + to_string(filter, 1));
+    log->info("Set filter " + to_string((int) filterId) + ": 0x" + to_string(filter, 1));
     CBuffer buffer;
     buffer << "F";
     buffer << (unsigned char) filterId;
@@ -86,7 +86,7 @@ void CCan232::setAcceptedFilters(unsigned char filterId, unsigned int filter) {
 bool CCan232::handshake() {
     CBuffer buffer;
     CTimeOut tout;
-    tout.SetMilliSec(1000);
+    tout.SetMilliSec(200);
     unsigned char rb;
     while (!tout.IsTimeOut()) {
         try {
@@ -171,8 +171,32 @@ bool CCan232::initCan232Device() {
     return true;
 }
 
+void CCan232::send(CCanBuffer &frame) {
+    lock_guard<mutex> lock(barrier);
+    sendCanFrame(frame);
+}
+
+CCanBuffer CCan232::request(CCanBuffer &frame) {
+    lock_guard<mutex> lock(barrier);
+    sendCanFrame(frame);
+    CCanBuffer buffer;
+    CTimeOut tout;
+    tout.SetMilliSec(200);
+    while (!tout.IsTimeOut()) {
+        buffer = getCanFrame();
+        if (buffer.isReady()) {
+            return buffer;
+        }
+    }
+    log->warning("Requesting CAN frame timeout (200ms)");
+    buffer.clear();
+    return buffer;
+}
+
+
+
 void CCan232::sendCanFrame(CCanBuffer &frame) {
-//    msleep(10);
+    //    msleep(10);
     CBuffer buf;
     buf << (unsigned char) HEADER;
     buf << (unsigned char) (frame.getLength() + 8);
@@ -182,6 +206,7 @@ void CCan232::sendCanFrame(CCanBuffer &frame) {
     buf << frame;
     buf << (unsigned char) getCRC(buf);
     buf << (unsigned char) CR;
+   
     try {
         sendBuffer(buf);
         buf = getFrame();
@@ -209,7 +234,7 @@ unsigned char CCan232::checkCRC(CBuffer& buffer) {
     for (size_t i = 0; i < buffer.getLength(); i++)
         crc += buffer[i];
 
-//    cout << "crc: " << (int) crc << endl;
+    //    cout << "crc: " << (int) crc << endl;
     return (0 == crc);
 }
 
@@ -219,16 +244,16 @@ CBuffer CCan232::getFrame() {
     unsigned char rbyte;
 
     rbyte = receiveByte();
-//    cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
+    //    cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
     if (rbyte != CMD_SEND) {
         return buf;
     }
 
     buf << (unsigned char) rbyte;
-    tout.SetMilliSec(1000);
+    tout.SetMilliSec(200);
     while (!tout.IsTimeOut()) {
         buf << (unsigned char) receiveByte();
-//        cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
+        //        cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
         if (isFrameComplete(buf)) {
             buf.setReady();
             return buf;
@@ -249,8 +274,9 @@ CCanBuffer CCan232::getCanFrame() {
         sendBuffer(buf);
         buf = getFrame();
         if (buf.isReady()) {
-            if (!buf.isNoData()){
+            if (!buf.isNoData()) {
                 canBuffer = createCanBuffer(buf);
+                canBuffer.setReady();
             }
         }
 

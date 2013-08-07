@@ -26,7 +26,7 @@ void CCanSimpleSwitchActor::initActionMap() {
 }
 
 void CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
-    cout << "action setOutput " << to_string(device) << " (";
+//    cout << "action setOutput " << to_string(device) <<endl;
     Params par = params[BLOB_ACTION_PARAMETER].get<Params>();
 
     if (par.size() != 1) {
@@ -41,7 +41,7 @@ void CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
     buffer << (unsigned char) getAddress(device);
     buffer << (unsigned char) par[0];
     buffer.buildBuffer();
-    getProtocol()->sendCanFrame(buffer);
+    getProtocol()->send(buffer);
    
 }
 

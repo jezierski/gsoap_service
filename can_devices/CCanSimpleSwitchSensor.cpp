@@ -24,23 +24,19 @@ void CCanSimpleSwitchSensor::initActionMap() {
 //    actionMap[CMD_ACTION_TEST] = &CCanSimpleSwitchSensor::actionTest;
 //    actionMap[CMD_READ_SENSOR] = &CCanSimpleSwitchSensor::setSwitch;
     
-    addAction(this, CMD_ACTION_TEST, &CCanSimpleSwitchSensor::actionTest);
-    addAction(this, CMD_READ_SENSOR, &CCanSimpleSwitchSensor::setSwitch);
+    addAction(this, ACTION_READ_SENSOR_STATUS, &CCanSimpleSwitchSensor::getSwitchStatus);
 }
 
-void CCanSimpleSwitchSensor::actionTest(SDeviceDescription device, Blob params) {
-    cout << "action Test SENSOR "<<to_string(device)<<" (";
-    Params par = params["params"].get<Params>();
-    for (unsigned int i = 0; i < par.size(); i++)
-        cout << (int) par[i] << " ";
-    cout << endl;
-}
+void CCanSimpleSwitchSensor::getSwitchStatus(SDeviceDescription device, Blob params) {
+    cout << "action getSensorSwitch SENSOR "<<to_string(device)<<endl;
+    CCanBuffer buffer;
 
-void CCanSimpleSwitchSensor::setSwitch(SDeviceDescription device, Blob params) {
-    cout << "action setSwitch SENSOR "<<to_string(device)<<" (";
-    Params par = params["params"].get<Params>();
-    for (unsigned int i = 0; i < par.size(); i++)
-        cout << (int) par[i] << " ";
-    cout << endl;
+    buffer.insertCommand(CMD_READ_SENSOR);
+    buffer.insertId((unsigned char) getDeviceCategory());
+    buffer << (unsigned char) getAddress(device);
+    buffer.buildBuffer();
+    buffer = getProtocol()->request(buffer);
+    log->put("received sensor status: ");
+    buffer.printBuffer();
 }
 

@@ -13,6 +13,9 @@
 #define OFFSET_DATA  2
 #define OFFSET_SRC_ADDR  2
 
+#define OFFSET_SENSOR_RESPONSE_COMMAND  3
+#define OFFSET_SENSOR_RESPONSE_DATA  4
+
 #define ID_MULTICAST    0xff
 #define ID_MASTER       200
 #define ID_A_SIMPLE_SWITCH       1
@@ -24,7 +27,9 @@
 #define CMD_SET_ADDRESS   3
 #define CMD_POLL_GUID   4
 #define CMD_PING    5
-#define CMD_SET_PIN     10
+#define CMD_RESET_ALL_STAT        6
+#define CMD_REQ_NEW_STAT        7
+
 
 
 enum class EDeviceCategory{

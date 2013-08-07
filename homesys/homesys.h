@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <map>
+#include <thread>
 
 #include "../webservice/homesys.nsmap"
 #include "CSoapServer.h"
@@ -15,7 +16,8 @@
 #include "../can_devices/CCanSimpleSwitchActor.h"
 #include "../can_devices/CCanSimpleSwitchSensor.h"
 #include "CDeviceManager.h"
-#include "COperation.h"
+#include "CActionTranslator.h"
+#include "CTimer.h"
 
 using namespace std;
 
@@ -28,9 +30,13 @@ public:
     
 private:
     void dbConfig();
+    void assignSlots();
     
     CConfiguration *configuration;
     CDevicesConfig *devicesConfig;
+    CActionTranslator *actionTranslator;
+    CDeviceManager *deviceManager;
+    CTimer *timer;
     CLog *log;
     
 };

@@ -25,12 +25,14 @@ void CDeviceManager::addCategoryDevice(CDevice *device) {
 //void CDeviceManager::searchLogicalDevices(){
 //    
 //}
-void CDeviceManager::initialize(){
+
+void CDeviceManager::initialize() {
     SDeviceDescription empty;
     Blob null;
     empty.category = EDeviceCategory::ALL;
     invokeRemoteAction(empty, ACTION_RESET_CATEGORY, null);
     invokeRemoteAction(empty, ACTION_SEARCH_DEVICES, null);
+    invokeRemoteAction(empty, ACTION_RESET_ALL_STATUS, null);
 }
 
 CDevice *CDeviceManager::getDevice(SDeviceDescription deviceDescription) {
@@ -58,3 +60,31 @@ void CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command comma
 
 }
 
+void CDeviceManager::invokeGlobalRemoteAction(Command command, Blob params) {
+    SDeviceDescription device;
+    device.category = EDeviceCategory::ALL;
+    for (CDevice* catDevice : categoryDevices) {
+        catDevice->executeAction(device, command, params);
+    }
+
+}
+
+
+void CDeviceManager::runInThreadRemoteAction(SDeviceDescription device, Command command, Blob params) {
+    while (1) {
+        invokeRemoteAction(device, command, params);
+//        msleep(10);
+    }
+}
+
+void CDeviceManager::runInThreadGlobalRemoteAction(Command command, Blob params) {
+
+    while (1) {
+        invokeGlobalRemoteAction(command, params);
+        msleep(100);
+    }
+}
+
+list<CDevice*> CDeviceManager::getDevices(){
+    return categoryDevices;
+}

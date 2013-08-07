@@ -32,10 +32,13 @@ public:
     
 
     void invokeRemoteAction(SDeviceDescription, Command, Blob);
-  
+    void invokeGlobalRemoteAction(Command, Blob);
+    void runInThreadRemoteAction(SDeviceDescription device, Command command, Blob params);
+    void runInThreadGlobalRemoteAction(Command command, Blob params);
  
     void initialize();
    
+    list<CDevice*> getDevices();
 
 private:
     CDevice *getDevice(SDeviceDescription deviceDescription);
