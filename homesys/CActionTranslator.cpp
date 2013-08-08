@@ -193,7 +193,7 @@ void CActionTranslator::translateActions() {
 
     while (1) {
         DeviceState deviceState;
-        long long timerSet;
+//        long long timerSet = 0;
         if (deviceStateStack.size()) {
             //            cout<<"\n\n\n#########  STACK SIZE: "<<deviceStateStack.size()<<endl;
             deviceState = popDeviceState();
@@ -215,7 +215,7 @@ void CActionTranslator::translateActions() {
             }
         }
         if (timerStack.size()) {
-            timerSet = popTimerSet();
+            popTimerSet();
 
             for (SOperation operation : operations->getOperations()) {
                 if (isOperationForTimer(operation)) {

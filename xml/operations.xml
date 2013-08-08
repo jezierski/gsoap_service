@@ -66,7 +66,7 @@
 </operation>
 <operation>
 	<condition>
-		<time comp="moreequal" val="75600"/>
+		<time comp="lessequal" val="75600"/>
 	</condition>	
 	<condition>
 		<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="00"/>

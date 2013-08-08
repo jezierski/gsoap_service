@@ -14,43 +14,12 @@
 #include "../tools/rapidxml.hpp"
 #include "../tools/types.h"
 #include "../tools/CLog.h"
-
+#include "../tools/CTools.h"
 
 using namespace std;
 using namespace rapidxml;
 
-enum class ECondition {
-    Equal = 1,
-            Less = 2,
-            More = 3,
-            LessOrEqual = 4,
-            MoreOrEqual = 5
-};
 
-typedef struct {
-    SDeviceDescription device;
-    Command command;
-    Params params;
-    bool status;
-} SAction;
-
-typedef struct {
-    SDeviceDescription device;
-    Command command;
-    ECondition condition;
-    Params params;
-} SDeviceCondition;
-
-typedef struct {
-    ECondition condition;
-    long long time;
-} STimeCondition;
-
-typedef struct {
-    list<SDeviceCondition>deviceConditions;
-    list<STimeCondition>timeConditions;
-    SAction action;
-} SOperation;
 
 class COperation {
 public:

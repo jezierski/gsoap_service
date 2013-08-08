@@ -37,6 +37,7 @@ private:
     CActionTranslator *actionTranslator;
     CDeviceManager *deviceManager;
     CTimer *timer;
+    CCan232 * can232device;
     CLog *log;
     
 };

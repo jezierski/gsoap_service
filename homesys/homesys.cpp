@@ -1,4 +1,8 @@
+#include <stdlib.h>
+
 #include "homesys.h"
+
+#include "CActionsChain.h"
 
 CApplication::CApplication() {
     configuration = CConfiguration::getInstance();
@@ -10,9 +14,9 @@ CApplication::~CApplication() {
 
 }
 
-void CApplication::assignSlots(){
-    for (CDevice *device : deviceManager->getDevices()){
-            device->sensorEvent.Connect(actionTranslator, &CActionTranslator::updateDeviceState);
+void CApplication::assignSlots() {
+    for (CDevice *device : deviceManager->getDevices()) {
+        device->sensorEvent.Connect(actionTranslator, &CActionTranslator::updateDeviceState);
     }
     timer->timerEvent.Connect(actionTranslator, &CActionTranslator::updateTimerStack);
 }
@@ -24,40 +28,38 @@ void CApplication::run() {
     CSoapServer server;
     //    server.start();
 
-
-
-
-    CCan232 *can232device = new CCan232();
-    can232device->initCan232Device();
-
-
     CCanSimpleSwitchActor actorSwitch;
-    actorSwitch.setCommunicationProtocol(can232device);
-
     CCanSimpleSwitchSensor sensorSwitch;
-    sensorSwitch.setCommunicationProtocol(can232device);
 
-    deviceManager = new CDeviceManager();
-    deviceManager->addCategoryDevice(&actorSwitch);
-    deviceManager->addCategoryDevice(&sensorSwitch);
+    try {
+        can232device = new CCan232();
+        can232device->initCan232Device();
+        actorSwitch.setCommunicationProtocol(can232device);
+        sensorSwitch.setCommunicationProtocol(can232device);
 
+        deviceManager = new CDeviceManager();
+        deviceManager->addCategoryDevice(&actorSwitch);
+        deviceManager->addCategoryDevice(&sensorSwitch);
 
-    timer = new CTimer();
-    
-    actionTranslator = new CActionTranslator();
-    actionTranslator->assignDeviceManager(deviceManager);
-    actionTranslator->assignTimer(timer);
-    actionTranslator->loadOperations();
-    
-    deviceManager->initialize();
-    Blob b;
+        timer = new CTimer();
+
+        actionTranslator = new CActionTranslator();
+        actionTranslator->assignDeviceManager(deviceManager);
+        actionTranslator->assignTimer(timer);
+        actionTranslator->loadOperations();
+
+        deviceManager->initialize();
+    } catch (string err) {
+        log->error("Starting system failed: " + err);
+        exit(0);
+    }
 
     new thread(&CDeviceManager::runInThreadGlobalRemoteAction, deviceManager, ACTION_READ_NEW_STATUS, Blob());
     new thread(&CActionTranslator::translateActions, actionTranslator);
     new thread(&CTimer::run, timer);
     assignSlots();
 
-    
+
     string x = "";
     SDeviceDescription global;
     global.category = EDeviceCategory::ALL;
@@ -94,11 +96,27 @@ void CApplication::run() {
         if (x == "resstat") {
             deviceManager->invokeRemoteAction(global, ACTION_RESET_ALL_STATUS, null);
         }
-        
+
         if (x == "newstat") {
             deviceManager->invokeRemoteAction(global, ACTION_READ_NEW_STATUS, null);
         }
-        
+
+        if (x == "trans") {
+            try {
+                actionTranslator->loadOperations();
+            } catch (string e) {
+                cout << e << endl;
+            }
+        }
+
+        if (x == "chain") {
+            try {
+                deviceManager->loadActionsChain();
+            } catch (string e) {
+                cout << e << endl;
+            }
+        }
+
         if (x == "list") {
             SDeviceDescription s;
             cout << "cat (0-all, 1-a, 2-b)? ";
@@ -248,7 +266,7 @@ void CApplication::run() {
             deviceManager->invokeRemoteAction(s, ACTION_READ_SENSOR_STATUS, null);
 
         }
-        
+
         x = "";
         msleep(100);
     }

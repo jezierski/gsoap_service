@@ -207,6 +207,30 @@ homesys/CActionTranslator.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.s
 .PHONY : homesys/CActionTranslator.cpp.s
 
+homesys/CActionsChain.o: homesys/CActionsChain.cpp.o
+.PHONY : homesys/CActionsChain.o
+
+# target to build an object file
+homesys/CActionsChain.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionsChain.cpp.o
+.PHONY : homesys/CActionsChain.cpp.o
+
+homesys/CActionsChain.i: homesys/CActionsChain.cpp.i
+.PHONY : homesys/CActionsChain.i
+
+# target to preprocess a source file
+homesys/CActionsChain.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionsChain.cpp.i
+.PHONY : homesys/CActionsChain.cpp.i
+
+homesys/CActionsChain.s: homesys/CActionsChain.cpp.s
+.PHONY : homesys/CActionsChain.s
+
+# target to generate assembly for a file
+homesys/CActionsChain.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionsChain.cpp.s
+.PHONY : homesys/CActionsChain.cpp.s
+
 homesys/CDevice.o: homesys/CDevice.cpp.o
 .PHONY : homesys/CDevice.o
 
@@ -684,6 +708,9 @@ help:
 	@echo "... homesys/CActionTranslator.o"
 	@echo "... homesys/CActionTranslator.i"
 	@echo "... homesys/CActionTranslator.s"
+	@echo "... homesys/CActionsChain.o"
+	@echo "... homesys/CActionsChain.i"
+	@echo "... homesys/CActionsChain.s"
 	@echo "... homesys/CDevice.o"
 	@echo "... homesys/CDevice.i"
 	@echo "... homesys/CDevice.s"

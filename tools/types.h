@@ -11,6 +11,7 @@
 #include "../can_devices/CCanConstans.h"
 #include <string>
 #include <vector>
+#include <list>
 #include "CBlob.h"
 #include "CCanBuffer.h"
 
@@ -54,5 +55,41 @@ typedef map<unsigned char, Params>  DeviceParams;
 
 typedef map<SDeviceDescription, DeviceParams> DeviceState;
 
+typedef struct {
+    SDeviceDescription device;
+    Command command;
+    Params params;
+} SAction;
+
+typedef struct{
+    SAction action;
+    SAction reaction;
+} SChain;
+
+enum class ECondition {
+    Equal = 1,
+            Less = 2,
+            More = 3,
+            LessOrEqual = 4,
+            MoreOrEqual = 5
+};
+
+typedef struct {
+    SDeviceDescription device;
+    Command command;
+    ECondition condition;
+    Params params;
+} SDeviceCondition;
+
+typedef struct {
+    ECondition condition;
+    long long time;
+} STimeCondition;
+
+typedef struct {
+    list<SDeviceCondition>deviceConditions;
+    list<STimeCondition>timeConditions;
+    SAction action;
+} SOperation;
 #endif	/* TYPES_H */
 

@@ -9,6 +9,8 @@
 
 CDeviceManager::CDeviceManager() {
     log = CLog::getInstance();
+    actionChain = new CActionsChain();
+    loadActionsChain();
 
 }
 
@@ -25,6 +27,10 @@ void CDeviceManager::addCategoryDevice(CDevice *device) {
 //void CDeviceManager::searchLogicalDevices(){
 //    
 //}
+
+void CDeviceManager::loadActionsChain(){
+    actionChain->loadActionsChain();
+}
 
 void CDeviceManager::initialize() {
     SDeviceDescription empty;
@@ -52,12 +58,26 @@ void CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command comma
             catDevice->executeAction(device, command, params);
         }
     } else {
-        CDevice *categoryDevice = getDevice(device);
-        if (categoryDevice != NULL) {
-            categoryDevice->executeAction(device, command, params);
-        }
-    }
+        SAction action = convertToAction( device,  command,  params);
+        do {
+            CDevice *categoryDevice = getDevice(device);
+            if (categoryDevice != NULL) {
+                categoryDevice->executeAction(action);
+            }
+        } while (actionChain->isChainExist(action));
 
+    }
+}
+
+
+SAction CDeviceManager::convertToAction(SDeviceDescription device, Command command, Blob blob){
+    SAction action;
+    action.device = device;
+    action.command = command;
+    Params params = blob[BLOB_ACTION_PARAMETER].get<Params>();
+    action.params = params;
+    return action;
+    
 }
 
 void CDeviceManager::invokeGlobalRemoteAction(Command command, Blob params) {
@@ -69,11 +89,10 @@ void CDeviceManager::invokeGlobalRemoteAction(Command command, Blob params) {
 
 }
 
-
 void CDeviceManager::runInThreadRemoteAction(SDeviceDescription device, Command command, Blob params) {
     while (1) {
         invokeRemoteAction(device, command, params);
-//        msleep(10);
+        //        msleep(10);
     }
 }
 
@@ -85,6 +104,6 @@ void CDeviceManager::runInThreadGlobalRemoteAction(Command command, Blob params)
     }
 }
 
-list<CDevice*> CDeviceManager::getDevices(){
+list<CDevice*> CDeviceManager::getDevices() {
     return categoryDevices;
 }

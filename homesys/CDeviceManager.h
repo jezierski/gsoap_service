@@ -13,6 +13,7 @@
 #include "CDevice.h"
 #include "../tools/CLog.h"
 #include "../tools/types.h"
+#include "CActionsChain.h"
 
 using namespace std;
 
@@ -37,12 +38,16 @@ public:
     void runInThreadGlobalRemoteAction(Command command, Blob params);
  
     void initialize();
+    
+    void loadActionsChain();
    
     list<CDevice*> getDevices();
 
 private:
+    SAction convertToAction(SDeviceDescription device, Command command, Blob blob);
     CDevice *getDevice(SDeviceDescription deviceDescription);
     list<CDevice*>categoryDevices;
+    CActionsChain *actionChain;
     CLog *log;
 };
 

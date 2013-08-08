@@ -6,7 +6,7 @@
  */
 
 #include "COperation.h"
-#include "../tools/CTools.h"
+
 
 COperation::COperation() {
     log = CLog::getInstance();
@@ -44,6 +44,7 @@ string COperation::readFile(string filename) {
 }
 
 void COperation::loadOperations() {
+    log->info("Loading operations...");
     string text = readFile("../xml/operations.xml");
 
 
@@ -102,10 +103,13 @@ void COperation::loadOperations() {
     } catch (parse_error e) {
         log->error("XML parser error: " + string(e.what()));
         operations.clear();
+        return;
     } catch (string e) {
         log->error("XML document wrong format: " + e);
         operations.clear();
+        return;
     }
+    log->success("Loading operations success");
 }
 
 void COperation::parseNode(string nodeName, const xml_node<>* node, SOperation &operation) {

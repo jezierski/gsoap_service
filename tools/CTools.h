@@ -81,6 +81,7 @@ inline long long getCurrentDayTime() {
     return secs;
 }
 
+
 class CTools {
 public:
     CTools();

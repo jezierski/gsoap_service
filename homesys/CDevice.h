@@ -55,6 +55,7 @@ public:
     Devices getLogicalDevies();
 
     void executeAction(SDeviceDescription, Command, Blob);
+    void executeAction(SAction action);
     void executeGlobalAction(Command, Blob);
 
     template<typename T>
@@ -124,7 +125,8 @@ private:
     unsigned char getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     SDeviceDescription getDeviceWithAddress(unsigned char address);
     void setDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address, Devices &devicesList);
-
+    
+    
     void initActionMap();
 
     bool isSensorDevice() {
