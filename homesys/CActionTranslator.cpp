@@ -43,6 +43,7 @@ void CActionTranslator::updateDeviceState(SDeviceDescription device, Command com
     DeviceState state;
     state[device][command] = params;
     deviceStateStack.push_back(state);
+    log->info("New device state: " + to_string(device) + ", COM: " + to_string((int)command) + ", PARAMS: " + to_string(params));
 
 
     //@TODO remove below
@@ -167,9 +168,7 @@ bool CActionTranslator::timeCondition(SOperation &operation) {
 
 void CActionTranslator::makeAction(SOperation &operation) {
     //    cout << ">>>>>>>>> MAKE ACTION <<<<<<<<<<<<<<<[" << endl;
-    Blob blob;
-    blob[BLOB_ACTION_PARAMETER].put<Params>(operation.action.params);
-    deviceManager->invokeRemoteAction(operation.action.device, operation.action.command, blob);
+    deviceManager->invokeRemoteAction(operation.action.device, operation.action.command, operation.action.params);
 
 }
 
@@ -206,6 +205,7 @@ void CActionTranslator::translateActions() {
             //            cout<<"POP dev comm: "<<(int)iit->first<<endl;
             //            
             //            cout << "\n\n======>>>>>> translate Actions LOOP" << endl;
+            
             for (SOperation operation : operations->getOperations()) {
                 if (isOperationForDeviceCondition(operation, deviceState)) {
                     if (deviceCondition(operation) && timeCondition(operation)) {

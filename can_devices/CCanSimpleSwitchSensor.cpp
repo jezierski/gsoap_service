@@ -28,7 +28,7 @@ void CCanSimpleSwitchSensor::initActionMap() {
 }
 
 void CCanSimpleSwitchSensor::getSwitchStatus(SDeviceDescription device, Blob params) {
-    cout << "action getSensorSwitch SENSOR "<<to_string(device)<<endl;
+//    cout << "action getSensorSwitch SENSOR "<<to_string(device)<<endl;
     CCanBuffer buffer;
 
     buffer.insertCommand(CMD_READ_SENSOR);
@@ -36,7 +36,6 @@ void CCanSimpleSwitchSensor::getSwitchStatus(SDeviceDescription device, Blob par
     buffer << (unsigned char) getAddress(device);
     buffer.buildBuffer();
     buffer = getProtocol()->request(buffer);
-    log->put("received sensor status: ");
-    buffer.printBuffer();
+    log->info("Device " + to_string(device) + " STATUS: " + to_string((int)buffer[2]));
 }
 

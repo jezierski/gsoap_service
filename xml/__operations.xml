@@ -79,20 +79,3 @@
 		<actor guid="1375465836" luid="0" cat="1" param="101" val="00"/>
 	</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465699" luid="00" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
-	</action>
-</operation>
-<operation>
-	<condition>
-		<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
-	</action>
-</operation>
-

@@ -58,7 +58,7 @@ typedef map<SDeviceDescription, DeviceParams> DeviceState;
 typedef struct {
     SDeviceDescription device;
     Command command;
-    Params params;
+    Blob params;
 } SAction;
 
 typedef struct{

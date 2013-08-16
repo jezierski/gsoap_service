@@ -122,10 +122,12 @@ bool CActionsChain::isChainExist(SAction& action) {
     return false;
 }
 
-bool CActionsChain::compareParams(Params param1, Params param2) {
-    if (param1.size() == param2.size()) {
-        for (size_t i = 0; i < param1.size(); i++) {
-            if (param1[i] != param2[i]) {
+bool CActionsChain::compareParams(Blob param1, Blob param2) {
+    Params p1 = param1[BLOB_ACTION_PARAMETER].get<Params>();
+    Params p2 = param2[BLOB_ACTION_PARAMETER].get<Params>();
+    if (p1.size() == p2.size()) {
+        for (size_t i = 0; i < p1.size(); i++) {
+            if (p1[i] != p2[i]) {
                 return false;
             }
         }
@@ -268,7 +270,9 @@ void CActionsChain::parseCommand(string value, SAction& action) {
 void CActionsChain::parseParams(string value, SAction& action) {
     Params params;
     parseParams(value, params);
-    action.params = params;
+    Blob b;
+    b[BLOB_ACTION_PARAMETER].put<Params>(params);
+    action.params = b;
 }
 
 void CActionsChain::parseParams(string input, Params &params) {

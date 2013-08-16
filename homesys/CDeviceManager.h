@@ -44,7 +44,7 @@ public:
     list<CDevice*> getDevices();
 
 private:
-    SAction convertToAction(SDeviceDescription device, Command command, Blob blob);
+    SAction convertToSAction(SDeviceDescription device, Command command, Blob blob);
     CDevice *getDevice(SDeviceDescription deviceDescription);
     list<CDevice*>categoryDevices;
     CActionsChain *actionChain;

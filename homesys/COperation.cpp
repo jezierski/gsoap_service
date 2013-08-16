@@ -6,6 +6,7 @@
  */
 
 #include "COperation.h"
+#include "CDevice.h"
 
 
 COperation::COperation() {
@@ -414,7 +415,9 @@ void COperation::parseCommand(string value, SAction& action) {
 void COperation::parseParams(string value, SAction& action) {
     Params params;
     parseParams(value, params);
-    action.params = params;
+    Blob b;
+    b[BLOB_ACTION_PARAMETER].put<Params>(params);
+    action.params = b;
 }
 
 void COperation::addOperation(SOperation operation) {

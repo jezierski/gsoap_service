@@ -58,7 +58,7 @@ void CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command comma
             catDevice->executeAction(device, command, params);
         }
     } else {
-        SAction action = convertToAction( device,  command,  params);
+        SAction action = convertToSAction( device,  command,  params);
         do {
             CDevice *categoryDevice = getDevice(device);
             if (categoryDevice != NULL) {
@@ -70,12 +70,11 @@ void CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command comma
 }
 
 
-SAction CDeviceManager::convertToAction(SDeviceDescription device, Command command, Blob blob){
+SAction CDeviceManager::convertToSAction(SDeviceDescription device, Command command, Blob blob){
     SAction action;
     action.device = device;
     action.command = command;
-    Params params = blob[BLOB_ACTION_PARAMETER].get<Params>();
-    action.params = params;
+    action.params = blob;
     return action;
     
 }

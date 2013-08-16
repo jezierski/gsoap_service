@@ -68,7 +68,18 @@ inline string to_string(EDeviceCategory category) {
 }
 
 inline string to_string(SDeviceDescription device) {
-    string output = "[GUID: " + to_string((unsigned int) device.guid) + "\tLUID: " + to_string((unsigned int) device.luid) + "\tADR: " + to_string((unsigned int) device.address) + "\tCAT: " + to_string(device.category) + "\tNAME: " + device.name + "]";
+    string output = "[GUID: " + to_string((unsigned int) device.guid) + "\tLUID: " + to_string((unsigned int) device.luid) + "\t\tCAT: " + to_string(device.category) + "\tNAME: " + device.name + "]";
+    return output;
+}
+
+inline string to_string(Params params) {
+    string output = "";
+    for (unsigned char param : params){
+        output += to_string((int)param, true) + " ";
+    }
+    if (output.length() > 1){
+        output = output.substr(0, output.length() - 1);
+    }
     return output;
 }
 

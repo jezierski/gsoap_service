@@ -67,6 +67,21 @@ void CApplication::run() {
     while (1) {
         cout << "\r\n?? ";
         cin >> x;
+        if (x == "help") {
+            cout<<"db\t - write default settings to DataBase"<<endl;
+            cout<<"reset\t - reset devices addresses"<<endl;
+            cout<<"search\t - search devices without address"<<endl;
+            cout<<"resstat\t - reset sensors statuses"<<endl;
+            cout<<"newstat\t - check sensors new statuses"<<endl;
+            cout<<"trans\t - load operations"<<endl;
+            cout<<"chain\t - load chain actions"<<endl;
+            cout<<"list\t - print devices list"<<endl;
+            cout<<"ping\t - ping device"<<endl;
+            cout<<"check\t - check device availability"<<endl;
+            cout<<"name\t - set device name"<<endl;
+            cout<<"set\t - set actor status"<<endl;
+            cout<<"sensor\t - read sensor status"<<endl;
+        }
         if (x == "db") {
             try { //@TODO objac trykaczem funkcje inicjalizacyjne
                 dbConfig();
@@ -77,7 +92,7 @@ void CApplication::run() {
         }
         if (x == "reset") {
             SDeviceDescription s;
-            cout << "cat (0-all, 1-a, 2-b)? ";
+            cout << "cat (0-all, 1-actor, 2-sensor)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -119,7 +134,7 @@ void CApplication::run() {
 
         if (x == "list") {
             SDeviceDescription s;
-            cout << "cat (0-all, 1-a, 2-b)? ";
+            cout << "cat (0-all, 1-actor, 2-sensor)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -136,7 +151,7 @@ void CApplication::run() {
         }
 
         if (x == "search") {
-            cout << "cat (0-all, 1-a, 2-b)? ";
+            cout << "cat (0-all, 1-actor, 2-sensor)? ";
             int c;
             SDeviceDescription s;
             cin >> c;
@@ -164,7 +179,7 @@ void CApplication::run() {
             cout << "luid ? ";
             unsigned int l;
             cin >> l;
-            cout << "cat (1-a, 2-b)? ";
+            cout << "cat (1-actor, 2-sensor)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -181,7 +196,7 @@ void CApplication::run() {
         }
 
         if (x == "check") {
-            cout << "cat (0-all, 1-a, 2-b)? ";
+            cout << "cat (0-all, 1-actor, 2-sensor)? ";
             int c;
             SDeviceDescription s;
             cin >> c;
@@ -207,7 +222,7 @@ void CApplication::run() {
             cout << "luid ? ";
             unsigned int l;
             cin >> l;
-            cout << "cat (1-a, 2-b)? ";
+            cout << "cat (1-actor, 2-sensor)? ";
             int c;
             cin >> c;
             switch (c) {

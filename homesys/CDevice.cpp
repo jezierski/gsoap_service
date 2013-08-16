@@ -451,9 +451,7 @@ void CDevice::executeAction(SDeviceDescription device, Command command, Blob par
 
 
 void CDevice::executeAction(SAction action){
-    Blob blob;
-    blob[BLOB_ACTION_PARAMETER].put<Params>(action.params);
-    executeAction(action.device, action.command, blob);
+    executeAction(action.device, action.command, action.params);
 }
 
 void CDevice::executeGlobalAction(Command command, Blob params) {

@@ -73,7 +73,7 @@ private:
     void addChain(SChain chain);
     void clearChain(SChain &chain);
     
-    bool compareParams(Params, Params);
+    bool compareParams(Blob, Blob);
     
     CLog *log;
     
