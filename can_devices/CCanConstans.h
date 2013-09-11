@@ -19,6 +19,7 @@
 #define ID_MULTICAST    0xff
 #define ID_MASTER       200
 #define ID_A_SIMPLE_SWITCH       1
+#define ID_A_RGB_DRIVER          2
 #define ID_S_SIMPLE_SWITCH       100
 #define ID_OTHER       5
 
@@ -31,13 +32,13 @@
 #define CMD_REQ_NEW_STAT        7
 
 
-
-enum class EDeviceCategory{
+enum class EDeviceCategory {
     ALL = ID_MULTICAST,
-    MASTER = ID_MASTER,
-    A_SIMPLE_SWITCH = ID_A_SIMPLE_SWITCH,
-    S_SIMPLE_SWITCH = ID_S_SIMPLE_SWITCH,
-    OTHER = ID_OTHER,
+            MASTER = ID_MASTER,
+            A_SIMPLE_SWITCH = ID_A_SIMPLE_SWITCH,
+            S_SIMPLE_SWITCH = ID_S_SIMPLE_SWITCH,
+            A_RGB_DRIVER = ID_A_RGB_DRIVER,
+            OTHER = ID_OTHER,
 };
 
 #endif	/* CCANCONSTANS_H */

@@ -15,6 +15,7 @@
 #include "../tools/CLog.h"
 #include "../can_devices/CCanSimpleSwitchActor.h"
 #include "../can_devices/CCanSimpleSwitchSensor.h"
+#include "../can_devices/CCanRGBActor.h"
 #include "CDeviceManager.h"
 #include "CActionTranslator.h"
 #include "CTimer.h"

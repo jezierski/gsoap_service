@@ -41,6 +41,7 @@ tools/CBlob.cpp
 #can_devices:
 can_devices/CCanSimpleSwitchActor.cpp
 can_devices/CCanSimpleSwitchSensor.cpp
+can_devices/CCanRGBActor.cpp
         
 
 #webservice:

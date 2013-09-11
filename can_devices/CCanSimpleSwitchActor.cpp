@@ -9,7 +9,7 @@
 
 CCanSimpleSwitchActor::CCanSimpleSwitchActor() {
     //    setDeviceCategory(EDeviceCategory::A_SIMPLE_SWITCH);
-    setDeviceCategory(CATEGORY);
+    setDeviceCategory(category);
     initActionMap();
 
     log = CLog::getInstance();

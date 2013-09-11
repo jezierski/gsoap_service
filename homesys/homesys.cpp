@@ -30,16 +30,19 @@ void CApplication::run() {
 
     CCanSimpleSwitchActor actorSwitch;
     CCanSimpleSwitchSensor sensorSwitch;
+    CCanRGBActor rgbDriver;
 
     try {
         can232device = new CCan232();
         can232device->initCan232Device();
         actorSwitch.setCommunicationProtocol(can232device);
         sensorSwitch.setCommunicationProtocol(can232device);
+        rgbDriver.setCommunicationProtocol(can232device);
 
         deviceManager = new CDeviceManager();
         deviceManager->addCategoryDevice(&actorSwitch);
         deviceManager->addCategoryDevice(&sensorSwitch);
+        deviceManager->addCategoryDevice(&rgbDriver);
 
         timer = new CTimer();
 
@@ -68,19 +71,25 @@ void CApplication::run() {
         cout << "\r\n?? ";
         cin >> x;
         if (x == "help") {
-            cout<<"db\t - write default settings to DataBase"<<endl;
-            cout<<"reset\t - reset devices addresses"<<endl;
-            cout<<"search\t - search devices without address"<<endl;
-            cout<<"resstat\t - reset sensors statuses"<<endl;
-            cout<<"newstat\t - check sensors new statuses"<<endl;
-            cout<<"trans\t - load operations"<<endl;
-            cout<<"chain\t - load chain actions"<<endl;
-            cout<<"list\t - print devices list"<<endl;
-            cout<<"ping\t - ping device"<<endl;
-            cout<<"check\t - check device availability"<<endl;
-            cout<<"name\t - set device name"<<endl;
-            cout<<"set\t - set actor status"<<endl;
-            cout<<"sensor\t - read sensor status"<<endl;
+            cout << "db\t - write default settings to DataBase" << endl;
+            cout << "reset\t - reset devices addresses" << endl;
+            cout << "search\t - search devices without address" << endl;
+            cout << "resstat\t - reset sensors statuses" << endl;
+            cout << "newstat\t - check sensors new statuses" << endl;
+            cout << "trans\t - load operations" << endl;
+            cout << "chain\t - load chain actions" << endl;
+            cout << "list\t - print devices list" << endl;
+            cout << "ping\t - ping device" << endl;
+            cout << "check\t - check device availability" << endl;
+            cout << "name\t - set device name" << endl;
+            cout << "set\t - set actor status" << endl;
+            cout << "sensor\t - read sensor status" << endl;
+            cout << "rgbmode\t - set RGB mode" << endl;
+            cout << "rgbspeed\t - set RGB speed" << endl;
+            cout << "rgbr\t - set RGB red" << endl;
+            cout << "rgbg\t - set RGB green" << endl;
+            cout << "rgbb\t - set RGB blue" << endl;
+            cout << "rgball\t - set RGB all" << endl;
         }
         if (x == "db") {
             try { //@TODO objac trykaczem funkcje inicjalizacyjne
@@ -179,7 +188,7 @@ void CApplication::run() {
             cout << "luid ? ";
             unsigned int l;
             cin >> l;
-            cout << "cat (1-actor, 2-sensor)? ";
+            cout << "cat (1-actor, 2-sensor, 3-rgb)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -188,6 +197,9 @@ void CApplication::run() {
                     break;
                 case 2:
                     s.category = EDeviceCategory::S_SIMPLE_SWITCH;
+                    break;
+                case 3:
+                    s.category = EDeviceCategory::A_RGB_DRIVER;
                     break;
             }
             s.guid = g;
@@ -263,6 +275,144 @@ void CApplication::run() {
             Blob b;
             b[BLOB_ACTION_PARAMETER].put<Params>(par);
             deviceManager->invokeRemoteAction(s, ACTION_SET_OUTPUT, b);
+
+        }
+
+        if (x == "rgbr") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_RGB_DRIVER;
+
+            cout << "value ? (0-0xfff)";
+            unsigned int n;
+            cin >> n;
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_RGB_CHANNEL].put<unsigned int>(n);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_RED, b);
+
+        }
+        
+        if (x == "rgbg") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_RGB_DRIVER;
+
+            cout << "value ? (0-0xfff)";
+            unsigned int n;
+            cin >> n;
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_RGB_CHANNEL].put<unsigned int>(n);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_GREEN, b);
+
+        }
+        
+        if (x == "rgbb") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_RGB_DRIVER;
+
+            cout << "value ? (0-0xfff)";
+            unsigned int n;
+            cin >> n;
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_RGB_CHANNEL].put<unsigned int>(n);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_BLUE, b);
+
+        }
+        
+        if (x == "rgball") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_RGB_DRIVER;
+
+            cout << "R value ? (0-0xfff)";
+            vector<unsigned int> values;
+            unsigned int n;
+            cin >> n;
+            values.push_back(n);
+            cout << "G value ? (0-0xfff)";
+            cin >> n;
+            values.push_back(n);
+            cout << "B value ? (0-0xfff)";
+            cin >> n;
+            values.push_back(n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_RGB_ALL].put<vector<unsigned int>>(values);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_ALL, b);
+
+        }
+
+        if (x == "rgbmode") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_RGB_DRIVER;
+
+            cout << "value ? (0-OFF, 1-ALL_AUTO, 2-CHAIN_AUTO, 3-RND, 4-SIMPLE)";
+            int n;
+            cin >> n;
+            Params par;
+            par.push_back((unsigned char) n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_ACTION_PARAMETER].put<Params>(par);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_MODE, b);
+
+        }
+
+        if (x == "rgbspeed") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_RGB_DRIVER;
+
+            cout << "value ? (0-2)";
+            int n;
+            cin >> n;
+            Params par;
+            par.push_back((unsigned char) n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_ACTION_PARAMETER].put<Params>(par);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_SPEED, b);
 
         }
 
