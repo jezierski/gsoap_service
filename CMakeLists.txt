@@ -22,6 +22,7 @@ homesys/COperation.cpp
 homesys/CActionTranslator.cpp
 homesys/CTimer.cpp
 homesys/CActionsChain.cpp
+homesys/CActionManager.cpp
         
 #can232:
 can232/CCan232.cpp

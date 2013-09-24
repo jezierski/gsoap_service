@@ -25,14 +25,15 @@ void CApplication::run() {
 
     log->info("Server starting...");
     //    cout<<"starting GSOAP..."<<endl;
-    CSoapServer server;
-    //    server.start();
+    
+    //        server.start();
 
     CCanSimpleSwitchActor actorSwitch;
     CCanSimpleSwitchSensor sensorSwitch;
     CCanRGBActor rgbDriver;
 
     try {
+        soapServer = new CSoapServer();
         can232device = new CCan232();
         can232device->initCan232Device();
         actorSwitch.setCommunicationProtocol(can232device);
@@ -44,19 +45,26 @@ void CApplication::run() {
         deviceManager->addCategoryDevice(&sensorSwitch);
         deviceManager->addCategoryDevice(&rgbDriver);
 
+        actionManager = new CActionManager();
+        actionManager->assignDeviceManager(deviceManager);
+        
         timer = new CTimer();
 
         actionTranslator = new CActionTranslator();
-        actionTranslator->assignDeviceManager(deviceManager);
+        actionTranslator->assignActionManager(actionManager);
         actionTranslator->assignTimer(timer);
         actionTranslator->loadOperations();
+        
+        
 
         deviceManager->initialize();
+        new thread(&CSoapServer::start, soapServer);
     } catch (string err) {
         log->error("Starting system failed: " + err);
         exit(0);
     }
 
+    new thread(&CActionManager::runActionManager, actionManager);
     new thread(&CDeviceManager::runInThreadGlobalRemoteAction, deviceManager, ACTION_READ_NEW_STATUS, Blob());
     new thread(&CActionTranslator::translateActions, actionTranslator);
     new thread(&CTimer::run, timer);
@@ -298,7 +306,7 @@ void CApplication::run() {
             deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_RED, b);
 
         }
-        
+
         if (x == "rgbg") {
             SDeviceDescription s;
             cout << "guid ? ";
@@ -319,7 +327,7 @@ void CApplication::run() {
             deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_GREEN, b);
 
         }
-        
+
         if (x == "rgbb") {
             SDeviceDescription s;
             cout << "guid ? ";
@@ -340,7 +348,7 @@ void CApplication::run() {
             deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_BLUE, b);
 
         }
-        
+
         if (x == "rgball") {
             SDeviceDescription s;
             cout << "guid ? ";
@@ -365,7 +373,7 @@ void CApplication::run() {
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_RGB_ALL].put<vector<unsigned int>>(values);
+            b[BLOB_RGB_ALL].put < vector<unsigned int >> (values);
             deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_ALL, b);
 
         }

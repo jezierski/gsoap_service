@@ -168,14 +168,13 @@ bool CActionTranslator::timeCondition(SOperation &operation) {
 
 void CActionTranslator::makeAction(SOperation &operation) {
     //    cout << ">>>>>>>>> MAKE ACTION <<<<<<<<<<<<<<<[" << endl;
-    deviceManager->invokeRemoteAction(operation.action.device, operation.action.command, operation.action.params);
+    actionManager->addOperation(operation);
 
 }
 
 DeviceState CActionTranslator::popDeviceState() {
     lock_guard<mutex> lock1(deviceMutex);
     DeviceState dev = deviceStateStack.front();
-    ;
     deviceStateStack.pop_front();
     return dev;
 }
@@ -248,8 +247,8 @@ bool CActionTranslator::isOperationForTimer(SOperation &operation) {
     return (operation.timeConditions.size() > 0);
 }
 
-void CActionTranslator::assignDeviceManager(CDeviceManager* deviceManager) {
-    this->deviceManager = deviceManager;
+void CActionTranslator::assignActionManager(CActionManager* actionManager) {
+    this->actionManager = actionManager;
 }
 
 void CActionTranslator::assignTimer(CTimer* timer) {

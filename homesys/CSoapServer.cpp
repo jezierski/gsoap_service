@@ -19,44 +19,40 @@ CSoapServer::~CSoapServer() {
 int CSoapServer::getCurrentTime(string& currentTime) {
     time_t rawtime;
     time(&rawtime);
-    string strTime(ctime (&rawtime));
+    string strTime(ctime(&rawtime));
     currentTime = strTime;
     return SOAP_OK;
 }
 
-int CSoapServer::getValue(string id, string &result){
+int CSoapServer::getValue(string id, string &result) {
     result = "Text etnered: " + id;
     return SOAP_OK;
 }
-
-int CSoapServer::switchPort(string pinNo, string &result){
-//    if (pinNo != "4"){
-//        result = "Bad pin number";
-//        return SOAP_OK;
-//    }
-        
+//zrobic tablice funkcji ktore zamieniaja w zaleznosci od komendy (lub nawet kategorii) odpowiednie parametry na BLOB -> mapy lub mapy map z funkcjami konwertujacymi zmienne
+int CSoapServer::switchPort(string pinNo, string &result) {
     static int portState = 0;
     CGPIOClass gpio(pinNo);
     gpio.export_gpio();
     gpio.setdir_gpio("out");
-    if (portState){
+    if (portState) {
         portState = 0;
         gpio.setval_gpio("0");
         result = "OK_0";
-        std::cout<<"port "<<pinNo<<" OFF"<<std::endl;
-    }else{
+        std::cout << "port " << pinNo << " OFF" << std::endl;
+    } else {
         portState = 1;
         gpio.setval_gpio("1");
         result = "OK_1";
-        std::cout<<"port "<<pinNo<<" ON"<<std::endl;
+        std::cout << "port " << pinNo << " ON" << std::endl;
     }
     gpio.unexport_gpio();
-    
+
     return SOAP_OK;
 }
 
 void CSoapServer::start() {
     int error = run(1234);
-    cout << "start server error code: " << error << endl;
+    if (error != SOAP_OK)
+        throw string("Starting SOAP server failed");
 }
 

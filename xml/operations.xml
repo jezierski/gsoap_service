@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- below operations are for tests-->
 <operation>
 	<condition>
 		<sensor guid="1375465699" luid="00" cat="100" param="101" comp="equal" val="00"/>
@@ -93,6 +94,55 @@
 	</condition>
 	<action>
 		<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
+	</action>
+</operation>
+<!-- below operations are regular-->
+<operation>
+	<condition>
+		<sensor guid="1379795960" luid="0" cat="100" param="101" comp="equal" val="00"/>
+	</condition>
+	<action>
+		<actor guid="1379795960" luid="0" cat="1" param="101" val="00"/>
+	</action>
+</operation>
+<operation>
+	<condition>
+		<sensor guid="1379795960" luid="0" cat="100" param="101" comp="equal" val="01"/>
+	</condition>
+	<action>
+		<actor guid="1379795960" luid="0" cat="1" param="101" val="01"/>
+	</action>
+</operation>
+<operation>
+	<condition>
+		<sensor guid="1379795960" luid="1" cat="100" param="101" comp="equal" val="00"/>
+	</condition>
+	<action>
+		<actor guid="1379795960" luid="1" cat="1" param="101" val="00"/>
+	</action>
+</operation>
+<operation>
+	<condition>
+		<sensor guid="1379795960" luid="1" cat="100" param="101" comp="equal" val="01"/>
+	</condition>
+	<action>
+		<actor guid="1379795960" luid="1" cat="1" param="101" val="01"/>
+	</action>
+</operation>
+<operation>
+	<condition>
+		<sensor guid="1379795960" luid="2" cat="100" param="101" comp="equal" val="00"/>
+	</condition>
+	<action>
+		<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
+	</action>
+</operation>
+<operation>
+	<condition>
+		<sensor guid="1379795960" luid="2" cat="100" param="101" comp="equal" val="01"/>
+	</condition>
+	<action>
+		<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
 	</action>
 </operation>
 

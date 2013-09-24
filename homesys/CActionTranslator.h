@@ -15,8 +15,8 @@
 #include "../tools/CLog.h"
 #include "../tools/types.h"
 #include "../tools/CTools.h"
-#include "CDeviceManager.h"
 #include "CTimer.h"
+#include "CActionManager.h"
 
 using namespace std;
 class CActionTranslator {
@@ -30,7 +30,7 @@ public:
     
     void translateActions();
     
-    void assignDeviceManager(CDeviceManager *deviceManager);
+    void assignActionManager(CActionManager *actionManager);
     void assignTimer(CTimer *timer);
     
     void loadOperations();
@@ -61,7 +61,7 @@ private:
     mutex timerMutex;
     CLog *log;
     COperation *operations;
-    CDeviceManager *deviceManager;
+    CActionManager *actionManager;
     CTimer *timer;
 };
 
