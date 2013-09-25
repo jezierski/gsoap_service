@@ -56,6 +56,20 @@
 </message>
 
 
+<!-- makeRemoteAction -->
+<message name="makeRemoteActionRequest">
+    <part name="guid" type="xsd:integer"/>
+    <part name="luid" type="xsd:integer"/>
+    <part name="category" type="xsd:integer"/>
+    <part name="command" type="xsd:integer"/>
+    <part name="params" type="xsd:integer"/>
+</message>
+
+<message name="makeRemoteActionResponse">
+    <part name="result" type="xsd:integer"/>
+</message>
+
+
 <portType name="homesysPortType">
  <operation name="getCurrentTime">
   <documentation>Service definition of function ns__getCurrentTime</documentation>
@@ -71,6 +85,11 @@
   <documentation>Service definition of function ns__getValue</documentation>
   <input message="tns:switchPortRequest"/>
   <output message="tns:switchPortResponse"/>
+ </operation>
+ <operation name="makeRemoteAction">
+  <documentation>Service definition of function ns__makeRemoteAction</documentation>
+  <input message="tns:makeRemoteActionRequest"/>
+  <output message="tns:makeRemoteActionResponse"/>
  </operation>
 
 </portType>
@@ -96,6 +115,15 @@
   </output>
  </operation>
  <operation name="switchPort">
+  <SOAP:operation style="rpc" soapAction=""/>
+  <input>
+     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </input>
+  <output>
+     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </output>
+ </operation>
+ <operation name="makeRemoteAction">
   <SOAP:operation style="rpc" soapAction=""/>
   <input>
      <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

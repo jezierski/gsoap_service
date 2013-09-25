@@ -615,6 +615,30 @@ tools/CLog.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CLog.cpp.s
 .PHONY : tools/CLog.cpp.s
 
+tools/CParamsConverter.o: tools/CParamsConverter.cpp.o
+.PHONY : tools/CParamsConverter.o
+
+# target to build an object file
+tools/CParamsConverter.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CParamsConverter.cpp.o
+.PHONY : tools/CParamsConverter.cpp.o
+
+tools/CParamsConverter.i: tools/CParamsConverter.cpp.i
+.PHONY : tools/CParamsConverter.i
+
+# target to preprocess a source file
+tools/CParamsConverter.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CParamsConverter.cpp.i
+.PHONY : tools/CParamsConverter.cpp.i
+
+tools/CParamsConverter.s: tools/CParamsConverter.cpp.s
+.PHONY : tools/CParamsConverter.s
+
+# target to generate assembly for a file
+tools/CParamsConverter.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CParamsConverter.cpp.s
+.PHONY : tools/CParamsConverter.cpp.s
+
 tools/CSerCom.o: tools/CSerCom.cpp.o
 .PHONY : tools/CSerCom.o
 
@@ -807,6 +831,9 @@ help:
 	@echo "... tools/CLog.o"
 	@echo "... tools/CLog.i"
 	@echo "... tools/CLog.s"
+	@echo "... tools/CParamsConverter.o"
+	@echo "... tools/CParamsConverter.i"
+	@echo "... tools/CParamsConverter.s"
 	@echo "... tools/CSerCom.o"
 	@echo "... tools/CSerCom.i"
 	@echo "... tools/CSerCom.s"

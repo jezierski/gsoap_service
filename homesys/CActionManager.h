@@ -26,15 +26,15 @@ public:
 //    CActionManager(const CActionManager& orig);
     virtual ~CActionManager();
     
-    void addOperation(SOperation operation);
-    void makeOperation();
+    void addAction(SAction action);
+    void makeAction();
     void runActionManager();
     
     void assignDeviceManager(CDeviceManager *deviceManager);
 private:
     CDeviceManager *deviceManager;
-    mutex operationLock;
-    list<SOperation> operationsList;
+    mutex actionLock;
+    list<SAction> actionList;
 };
 
 #endif	/* CACTIONMANAGER_H */

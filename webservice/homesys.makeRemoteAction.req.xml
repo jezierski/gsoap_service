@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:ns1="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl">
+ <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <ns1:makeRemoteAction>
+   <guid>0</guid>
+   <luid>0</luid>
+   <category>0</category>
+   <command>0</command>
+   <params>0</params>
+  </ns1:makeRemoteAction>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -14,7 +14,8 @@ set (BINARY build/homesys)
 set (SOURCES 
 
 #homesys:
-homesys/homesys.cpp homesys/CSoapServer.cpp
+homesys/homesys.cpp 
+homesys/CSoapServer.cpp
 raspberry/CGPIOClass.cpp
 homesys/CDevice.cpp
 homesys/CDeviceManager.cpp
@@ -38,6 +39,7 @@ tools/CDevicesConfig.cpp
 tools/CDatabase.cpp
 tools/CLog.cpp
 tools/CBlob.cpp
+tools/CParamsConverter.cpp
 
 #can_devices:
 can_devices/CCanSimpleSwitchActor.cpp

@@ -168,7 +168,7 @@ bool CActionTranslator::timeCondition(SOperation &operation) {
 
 void CActionTranslator::makeAction(SOperation &operation) {
     //    cout << ">>>>>>>>> MAKE ACTION <<<<<<<<<<<<<<<[" << endl;
-    actionManager->addOperation(operation);
+    actionManager->addAction(operation.action);
 
 }
 

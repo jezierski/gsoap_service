@@ -22,10 +22,7 @@
 #include "../tools/Signal.h"
 
 
-#define BLOB_ACTION_PARAMETER        "param"
-#define BLOB_DEVICE_NAME             "name"
-#define BLOB_RGB_CHANNEL             "rgb_ch"
-#define BLOB_RGB_ALL                 "rgb_all"
+
 
 #define ACTION_RESET_CATEGORY           1
 #define ACTION_SEARCH_DEVICES           2

@@ -8,12 +8,18 @@
 #include "CSoapServer.h"
 
 CSoapServer::CSoapServer() {
+    log = CLog::getInstance();
+    converter = CParamsConverter::getInstance();
 }
 
-CSoapServer::CSoapServer(const CSoapServer& orig) {
-}
+//CSoapServer::CSoapServer(const CSoapServer& orig) {
+//}
 
 CSoapServer::~CSoapServer() {
+}
+
+void CSoapServer::assignActionManager(CActionManager* actionManager) {
+    this->actionManager = actionManager;
 }
 
 int CSoapServer::getCurrentTime(string& currentTime) {
@@ -29,6 +35,7 @@ int CSoapServer::getValue(string id, string &result) {
     return SOAP_OK;
 }
 //zrobic tablice funkcji ktore zamieniaja w zaleznosci od komendy (lub nawet kategorii) odpowiednie parametry na BLOB -> mapy lub mapy map z funkcjami konwertujacymi zmienne
+
 int CSoapServer::switchPort(string pinNo, string &result) {
     static int portState = 0;
     CGPIOClass gpio(pinNo);
@@ -50,9 +57,25 @@ int CSoapServer::switchPort(string pinNo, string &result) {
     return SOAP_OK;
 }
 
+int CSoapServer::makeRemoteAction(LONG64 guid, LONG64 luid, LONG64 category, LONG64 command, LONG64 params, LONG64 &result) {
+    result = 0;
+    SAction action;
+    action.command = command;
+    action.params = converter->use(category, command, params);
+    action.device.category = static_cast<EDeviceCategory>(category);
+    action.device.guid = guid;
+    action.device.luid = luid;
+    actionManager->addAction(action);
+    cout << "makeRemoteAction, guid: " << guid << ", luid: " << luid << ", cat: " << category << ", comm: " << command << endl;
+    return 0;
+}
+
 void CSoapServer::start() {
-    int error = run(1234);
-    if (error != SOAP_OK)
-        throw string("Starting SOAP server failed");
+    int error;
+    while (1) {
+        error = run(1234);
+        if (error != SOAP_OK)
+            log->error("SOAP server error code: " + to_string(error));
+    }
 }
 

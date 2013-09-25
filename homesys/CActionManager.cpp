@@ -16,30 +16,28 @@ CActionManager::CActionManager() {
 CActionManager::~CActionManager() {
 }
 
-void CActionManager::addOperation(SOperation operation){
-    lock_guard<mutex> lock(operationLock);
-    operationsList.push_back(operation);
+void CActionManager::addAction(SAction action) {
+    lock_guard<mutex> lock(actionLock);
+    actionList.push_back(action);
 }
 
-void CActionManager::makeOperation(){
-    lock_guard<mutex> lock(operationLock);
-    SOperation operation = operationsList.front();
-    operationsList.pop_front();
-    deviceManager->invokeRemoteAction(operation.action.device, operation.action.command, operation.action.params);
+void CActionManager::makeAction() {
+    lock_guard<mutex> lock(actionLock);
+    SAction action = actionList.front();
+    deviceManager->invokeRemoteAction(action.device, action.command, action.params);
+    actionList.pop_front();
 }
-
 
 void CActionManager::assignDeviceManager(CDeviceManager* deviceManager) {
     this->deviceManager = deviceManager;
 }
 
-
-void CActionManager::runActionManager(){
-    while(1){
-        if (operationsList.size()){
-            makeOperation();
+void CActionManager::runActionManager() {
+    while (1) {
+        if (actionList.size()) {
+            makeAction();
         }
-        
+
         msleep(10);
     }
 }

@@ -15,6 +15,13 @@
 #include "CBlob.h"
 #include "CCanBuffer.h"
 
+
+#define BLOB_ACTION_PARAMETER        "param"
+#define BLOB_DEVICE_NAME             "name"
+#define BLOB_RGB_CHANNEL             "rgb_ch"
+#define BLOB_RGB_ALL                 "rgb_all"
+
+
 using namespace std;
 
 
@@ -91,5 +98,7 @@ typedef struct {
     list<STimeCondition>timeConditions;
     SAction action;
 } SOperation;
+
+
 #endif	/* TYPES_H */
 
