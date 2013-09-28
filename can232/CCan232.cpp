@@ -171,9 +171,9 @@ bool CCan232::initCan232Device() {
     return true;
 }
 
-void CCan232::send(CCanBuffer &frame) {
+bool CCan232::send(CCanBuffer &frame) {
     lock_guard<mutex> lock(barrier);
-    sendCanFrame(frame);
+    return sendCanFrame(frame);
 }
 
 CCanBuffer CCan232::request(CCanBuffer &frame) {
@@ -195,7 +195,7 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
 
 
 
-void CCan232::sendCanFrame(CCanBuffer &frame) {
+bool CCan232::sendCanFrame(CCanBuffer &frame) {
     //    msleep(10);
     CBuffer buf;
     buf << (unsigned char) HEADER;
@@ -213,12 +213,16 @@ void CCan232::sendCanFrame(CCanBuffer &frame) {
         if (buf.isReady()) {
             if (buf.getErrorCode()) {
                 log->error("Sending can frame error code: " + to_string((int) buf.getErrorCode()));
+                return false;
             }
         }
 
     } catch (string e) {
         log->error("Sending CAN frame failed: " + to_string(e));
+        return false;
     }
+    
+    return true;
 }
 
 unsigned char CCan232::getCRC(CBuffer& buffer) {

@@ -18,8 +18,8 @@ CSoapServer::CSoapServer() {
 CSoapServer::~CSoapServer() {
 }
 
-void CSoapServer::assignActionManager(CActionManager* actionManager) {
-    this->actionManager = actionManager;
+void CSoapServer::assignDeviceManager(CDeviceManager* deviceManager) {
+    this->deviceManager = deviceManager;
 }
 
 int CSoapServer::getCurrentTime(string& currentTime) {
@@ -34,7 +34,6 @@ int CSoapServer::getValue(string id, string &result) {
     result = "Text etnered: " + id;
     return SOAP_OK;
 }
-//zrobic tablice funkcji ktore zamieniaja w zaleznosci od komendy (lub nawet kategorii) odpowiednie parametry na BLOB -> mapy lub mapy map z funkcjami konwertujacymi zmienne
 
 int CSoapServer::switchPort(string pinNo, string &result) {
     static int portState = 0;
@@ -57,18 +56,21 @@ int CSoapServer::switchPort(string pinNo, string &result) {
     return SOAP_OK;
 }
 
-int CSoapServer::makeRemoteAction(LONG64 guid, LONG64 luid, LONG64 category, LONG64 command, LONG64 params, LONG64 &result) {
-    result = 0;
+int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, string &result) {
     SAction action;
     action.command = command;
-    action.params = converter->use(category, command, params);
-    action.device.category = static_cast<EDeviceCategory>(category);
-    action.device.guid = guid;
-    action.device.luid = luid;
-    actionManager->addAction(action);
-    cout << "makeRemoteAction, guid: " << guid << ", luid: " << luid << ", cat: " << category << ", comm: " << command << endl;
+    action.params = converter->use(device->category, command, params);
+    action.device.category = static_cast<EDeviceCategory>(device->category);
+    action.device.guid = device->GUID;
+    action.device.luid = device->LUID;
+    Blob b = deviceManager->invokeRemoteAction(action.device, action.command, action.params);
+    result = b[BLOB_TXT_RESPONSE].get<string>();
+//    actionManager->addAction(action);
+//    delete device;
+    cout << "makeRemoteAction, guid: " << device->GUID << ", luid: " << device->LUID << ", cat: " << device->category << ", comm: " << command << endl;
     return 0;
 }
+
 
 void CSoapServer::start() {
     int error;

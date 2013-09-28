@@ -53,32 +53,32 @@ public:
 
     Devices getLogicalDevies();
 
-    void executeAction(SDeviceDescription, Command, Blob);
-    void executeAction(SAction action);
-    void executeGlobalAction(Command, Blob);
+    Blob executeAction(SDeviceDescription, Command, Blob);
+    Blob executeAction(SAction action);
+    Blob executeGlobalAction(Command, Blob);
 
     template<typename T>
-    void addAction(T *object, Command command, void(T::*function)(SDeviceDescription, Blob)) {
+    void addAction(T *object, Command command, Blob(T::*function)(SDeviceDescription, Blob)) {
         Delegate delegateFunction;
         delegateFunction.bind(object, function);
         actionsMap[command] = delegateFunction;
     }
 
-    typedef fastdelegate::FastDelegate2<SDeviceDescription, Blob> Delegate;
+    typedef fastdelegate::FastDelegate2<SDeviceDescription, Blob, Blob> Delegate;
     map<Command, Delegate> actionsMap;
 
 
 
 
 
-    void reset(SDeviceDescription dev, Blob params);
-    void search(SDeviceDescription dev, Blob params);
-    void check(SDeviceDescription dev, Blob params);
-    void setName(SDeviceDescription dev, Blob params);
-    void pingLogicalDevice(SDeviceDescription dev, Blob params);
-    void list(SDeviceDescription dev, Blob params);
-    void resetStatuses(SDeviceDescription dev, Blob params);
-    void checkNewStatuses(SDeviceDescription dev, Blob params);
+    Blob reset(SDeviceDescription dev, Blob params);
+    Blob search(SDeviceDescription dev, Blob params);
+    Blob check(SDeviceDescription dev, Blob params);
+    Blob setName(SDeviceDescription dev, Blob params);
+    Blob pingLogicalDevice(SDeviceDescription dev, Blob params);
+    Blob list(SDeviceDescription dev, Blob params);
+    Blob resetStatuses(SDeviceDescription dev, Blob params);
+    Blob checkNewStatuses(SDeviceDescription dev, Blob params);
 
     CCan232 *getProtocol();
     unsigned char getAddress(SDeviceDescription device);
@@ -95,14 +95,14 @@ private:
     bool ping(SDeviceDescription);
 
 
-    void resetAddresses();
+    bool resetAddresses();
     void findGUIDs();
 //    void pollGUID();
 //    void getGUIDs();
 //    void sendPollACK(unsigned int guid);
     void assignAddress();
 
-    void resetAllDevicesStatus();
+    bool resetAllDevicesStatus();
     void checkNewDevicesStatus();
 //    void requestNewDevicesStatus();
 //    void getNewDevicesStatus();
@@ -110,16 +110,16 @@ private:
 
 
 
-    void listAddresses();
-    void checkDevicesAvailability();
+    Blob listAddresses();
+    Blob checkDevicesAvailability();
 
     void insertDevice(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address);
     void removeDevice(unsigned char address);
     void synchronizeDBdevices();
     void sortDevicesList(Devices &devices);
     unsigned char getDeviceGroupSize(Devices devicesList, unsigned int guid, EDeviceCategory category);
-    void synchronizeDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList);
-    void setDeviceName(SDeviceDescription description, string name);
+    Blob synchronizeDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList);
+    Blob setDeviceName(SDeviceDescription description, string name);
     string getDeviceName(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     unsigned char getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     SDeviceDescription getDeviceWithAddress(unsigned char address);

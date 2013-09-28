@@ -276,7 +276,7 @@ int homesysProxy::switchPort(const char *endpoint, const char *soap_action, std:
 	return soap_closesock(soap);
 }
 
-int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action, LONG64 guid, LONG64 luid, LONG64 category, LONG64 command, LONG64 params, LONG64 &result)
+int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, LONG64 command, LONG64 params, std::string &result)
 {	struct soap *soap = this;
 	struct ns1__makeRemoteAction soap_tmp_ns1__makeRemoteAction;
 	struct ns1__makeRemoteActionResponse *soap_tmp_ns1__makeRemoteActionResponse;
@@ -287,9 +287,7 @@ int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action
 	if (!soap_action)
 		soap_action = "";
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
-	soap_tmp_ns1__makeRemoteAction.guid = guid;
-	soap_tmp_ns1__makeRemoteAction.luid = luid;
-	soap_tmp_ns1__makeRemoteAction.category = category;
+	soap_tmp_ns1__makeRemoteAction.device = device;
 	soap_tmp_ns1__makeRemoteAction.command = command;
 	soap_tmp_ns1__makeRemoteAction.params = params;
 	soap_begin(soap);
@@ -319,7 +317,7 @@ int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action
 		return soap_closesock(soap);
 	if (!&result)
 		return soap_closesock(soap);
-	soap_default_xsd__integer(soap, &result);
+	soap_default_std__string(soap, &result);
 	if (soap_begin_recv(soap)
 	 || soap_envelope_begin_in(soap)
 	 || soap_recv_header(soap)

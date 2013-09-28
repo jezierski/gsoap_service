@@ -25,7 +25,7 @@ void CApplication::run() {
 
     log->info("Server starting...");
     //    cout<<"starting GSOAP..."<<endl;
-    
+
     //        server.start();
 
     CCanSimpleSwitchActor actorSwitch;
@@ -45,28 +45,25 @@ void CApplication::run() {
         deviceManager->addCategoryDevice(&sensorSwitch);
         deviceManager->addCategoryDevice(&rgbDriver);
 
-        actionManager = new CActionManager();
-        actionManager->assignDeviceManager(deviceManager);
-        
+
         timer = new CTimer();
 
         actionTranslator = new CActionTranslator();
-        actionTranslator->assignActionManager(actionManager);
+        actionTranslator->assignDeviceManager(deviceManager);
         actionTranslator->assignTimer(timer);
         actionTranslator->loadOperations();
-        
-        
+
+
 
         deviceManager->initialize();
-        
-        soapServer->assignActionManager(actionManager);
+
+        soapServer->assignDeviceManager(deviceManager);
         new thread(&CSoapServer::start, soapServer);
     } catch (string err) {
         log->error("Starting system failed: " + err);
         exit(0);
     }
 
-    new thread(&CActionManager::runActionManager, actionManager);
     new thread(&CDeviceManager::runInThreadGlobalRemoteAction, deviceManager, ACTION_READ_NEW_STATUS, Blob());
     new thread(&CActionTranslator::translateActions, actionTranslator);
     new thread(&CTimer::run, timer);
@@ -153,7 +150,7 @@ void CApplication::run() {
 
         if (x == "list") {
             SDeviceDescription s;
-            cout << "cat (0-all, 1-actor, 2-sensor)? ";
+            cout << "cat (0-all, 1-actor, 2-sensor, 3-RGB)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -162,6 +159,9 @@ void CApplication::run() {
                     break;
                 case 2:
                     s.category = EDeviceCategory::S_SIMPLE_SWITCH;
+                    break;
+                case 3:
+                    s.category = EDeviceCategory::A_RGB_DRIVER;
                     break;
                 default:
                     s = global;
@@ -244,7 +244,7 @@ void CApplication::run() {
             cout << "luid ? ";
             unsigned int l;
             cin >> l;
-            cout << "cat (1-actor, 2-sensor)? ";
+            cout << "cat (1-actor, 2-sensor, 3-RGB)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -253,6 +253,8 @@ void CApplication::run() {
                     break;
                 case 2:
                     s.category = EDeviceCategory::S_SIMPLE_SWITCH;
+                case 3:
+                    s.category = EDeviceCategory::A_RGB_DRIVER;
                     break;
             }
             cout << "name ? ";

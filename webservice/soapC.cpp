@@ -15,7 +15,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2013-09-25 17:52:17 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2013-09-28 17:40:48 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -241,6 +241,8 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_unsignedLONG64(soap, NULL, NULL, "xsd:unsignedLong");
 	case SOAP_TYPE_std__string:
 		return soap_in_std__string(soap, NULL, NULL, "xsd:string");
+	case SOAP_TYPE_ns1__SDeviceDescription:
+		return soap_in_ns1__SDeviceDescription(soap, NULL, NULL, "ns1:SDeviceDescription");
 	case SOAP_TYPE_xsd__hexBinary:
 		return soap_in_xsd__hexBinary(soap, NULL, NULL, "xsd:hexBinary");
 	case SOAP_TYPE_xsd__base64Binary:
@@ -263,6 +265,8 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_ns1__getCurrentTime(soap, NULL, NULL, "ns1:getCurrentTime");
 	case SOAP_TYPE_ns1__getCurrentTimeResponse:
 		return soap_in_ns1__getCurrentTimeResponse(soap, NULL, NULL, "ns1:getCurrentTimeResponse");
+	case SOAP_TYPE_PointerTons1__SDeviceDescription:
+		return soap_in_PointerTons1__SDeviceDescription(soap, NULL, NULL, "ns1:SDeviceDescription");
 	case SOAP_TYPE_xsd__token:
 	{	char **s;
 		s = soap_in_xsd__token(soap, NULL, NULL, "xsd:token");
@@ -342,6 +346,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "xsd:string"))
 		{	*type = SOAP_TYPE_std__string;
 			return soap_in_std__string(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:SDeviceDescription"))
+		{	*type = SOAP_TYPE_ns1__SDeviceDescription;
+			return soap_in_ns1__SDeviceDescription(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "xsd:hexBinary"))
 		{	*type = SOAP_TYPE_xsd__hexBinary;
@@ -713,6 +721,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_unsignedLONG64(soap, tag, id, (const ULONG64 *)ptr, "xsd:unsignedLong");
 	case SOAP_TYPE_std__string:
 		return soap_out_std__string(soap, tag, id, (const std::string *)ptr, "xsd:string");
+	case SOAP_TYPE_ns1__SDeviceDescription:
+		return ((ns1__SDeviceDescription *)ptr)->soap_out(soap, tag, id, "ns1:SDeviceDescription");
 	case SOAP_TYPE_xsd__hexBinary:
 		return ((xsd__hexBinary *)ptr)->soap_out(soap, tag, id, "xsd:hexBinary");
 	case SOAP_TYPE_xsd__base64Binary:
@@ -735,6 +745,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_ns1__getCurrentTime(soap, tag, id, (const struct ns1__getCurrentTime *)ptr, "ns1:getCurrentTime");
 	case SOAP_TYPE_ns1__getCurrentTimeResponse:
 		return soap_out_ns1__getCurrentTimeResponse(soap, tag, id, (const struct ns1__getCurrentTimeResponse *)ptr, "ns1:getCurrentTimeResponse");
+	case SOAP_TYPE_PointerTons1__SDeviceDescription:
+		return soap_out_PointerTons1__SDeviceDescription(soap, tag, id, (ns1__SDeviceDescription *const*)ptr, "ns1:SDeviceDescription");
 	case SOAP_TYPE__SOAP_ENC__actor:
 		return soap_out_string(soap, "SOAP-ENC:actor", id, (char*const*)&ptr, NULL);
 	case SOAP_TYPE_xsd__token:
@@ -793,6 +805,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_std__string:
 		soap_serialize_std__string(soap, (const std::string *)ptr);
 		break;
+	case SOAP_TYPE_ns1__SDeviceDescription:
+		((ns1__SDeviceDescription *)ptr)->soap_serialize(soap);
+		break;
 	case SOAP_TYPE_xsd__hexBinary:
 		((xsd__hexBinary *)ptr)->soap_serialize(soap);
 		break;
@@ -825,6 +840,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_ns1__getCurrentTimeResponse:
 		soap_serialize_ns1__getCurrentTimeResponse(soap, (const struct ns1__getCurrentTimeResponse *)ptr);
+		break;
+	case SOAP_TYPE_PointerTons1__SDeviceDescription:
+		soap_serialize_PointerTons1__SDeviceDescription(soap, (ns1__SDeviceDescription *const*)ptr);
 		break;
 	case SOAP_TYPE__SOAP_ENC__actor:
 		soap_serialize_string(soap, (char*const*)&ptr);
@@ -898,6 +916,8 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 		return (void*)soap_instantiate_xsd__base64Binary(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_xsd__hexBinary:
 		return (void*)soap_instantiate_xsd__hexBinary(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__SDeviceDescription:
+		return (void*)soap_instantiate_ns1__SDeviceDescription(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_std__string:
 		return (void*)soap_instantiate_std__string(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__getCurrentTimeResponse:
@@ -960,6 +980,12 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 			SOAP_DELETE((xsd__hexBinary*)p->ptr);
 		else
 			SOAP_DELETE_ARRAY((xsd__hexBinary*)p->ptr);
+		break;
+	case SOAP_TYPE_ns1__SDeviceDescription:
+		if (p->size < 0)
+			SOAP_DELETE((ns1__SDeviceDescription*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((ns1__SDeviceDescription*)p->ptr);
 		break;
 	case SOAP_TYPE_std__string:
 		if (p->size < 0)
@@ -1950,6 +1976,161 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_std__string(struct soap *soap, int st, int 
 	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
 	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying std::string %p -> %p\n", q, p));
 	*(std::string*)p = *(std::string*)q;
+}
+
+void ns1__SDeviceDescription::soap_default(struct soap *soap)
+{
+	this->soap = soap;
+	soap_default_xsd__integer(soap, &this->ns1__SDeviceDescription::GUID);
+	soap_default_xsd__integer(soap, &this->ns1__SDeviceDescription::LUID);
+	soap_default_xsd__integer(soap, &this->ns1__SDeviceDescription::category);
+	/* transient soap skipped */
+}
+
+void ns1__SDeviceDescription::soap_serialize(struct soap *soap) const
+{
+	(void)soap; /* appease -Wall -Werror */
+	/* transient soap skipped */
+}
+
+int ns1__SDeviceDescription::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
+{
+	return soap_out_ns1__SDeviceDescription(soap, tag, id, this, type);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__SDeviceDescription(struct soap *soap, const char *tag, int id, const ns1__SDeviceDescription *a, const char *type)
+{
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__SDeviceDescription), type))
+		return soap->error;
+	if (soap_out_xsd__integer(soap, "GUID", -1, &(a->ns1__SDeviceDescription::GUID), ""))
+		return soap->error;
+	if (soap_out_xsd__integer(soap, "LUID", -1, &(a->ns1__SDeviceDescription::LUID), ""))
+		return soap->error;
+	if (soap_out_xsd__integer(soap, "category", -1, &(a->ns1__SDeviceDescription::category), ""))
+		return soap->error;
+	/* transient soap skipped */
+	return soap_element_end_out(soap, tag);
+}
+
+void *ns1__SDeviceDescription::soap_in(struct soap *soap, const char *tag, const char *type)
+{	return soap_in_ns1__SDeviceDescription(soap, tag, this, type);
+}
+
+SOAP_FMAC3 ns1__SDeviceDescription * SOAP_FMAC4 soap_in_ns1__SDeviceDescription(struct soap *soap, const char *tag, ns1__SDeviceDescription *a, const char *type)
+{
+	(void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_in(soap, tag, 0, NULL))
+		return NULL;
+	a = (ns1__SDeviceDescription *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__SDeviceDescription, sizeof(ns1__SDeviceDescription), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	if (soap->alloced)
+	{	a->soap_default(soap);
+		if (soap->clist->type != SOAP_TYPE_ns1__SDeviceDescription)
+		{	soap_revert(soap);
+			*soap->id = '\0';
+			return (ns1__SDeviceDescription *)a->soap_in(soap, tag, type);
+		}
+	}
+	size_t soap_flag_GUID1 = 1;
+	size_t soap_flag_LUID1 = 1;
+	size_t soap_flag_category1 = 1;
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GUID1 && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_xsd__integer(soap, "GUID", &(a->ns1__SDeviceDescription::GUID), "xsd:integer"))
+				{	soap_flag_GUID1--;
+					continue;
+				}
+			if (soap_flag_LUID1 && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_xsd__integer(soap, "LUID", &(a->ns1__SDeviceDescription::LUID), "xsd:integer"))
+				{	soap_flag_LUID1--;
+					continue;
+				}
+			if (soap_flag_category1 && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_xsd__integer(soap, "category", &(a->ns1__SDeviceDescription::category), "xsd:integer"))
+				{	soap_flag_category1--;
+					continue;
+				}
+			/* transient soap skipped */
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (ns1__SDeviceDescription *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__SDeviceDescription, 0, sizeof(ns1__SDeviceDescription), 0, soap_copy_ns1__SDeviceDescription);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_GUID1 > 0 || soap_flag_LUID1 > 0 || soap_flag_category1 > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+int ns1__SDeviceDescription::soap_put(struct soap *soap, const char *tag, const  char *type) const
+{
+	register int id = soap_embed(soap, (void*)this, NULL, 0, tag, SOAP_TYPE_ns1__SDeviceDescription);
+	if (this->soap_out(soap, tag?tag:"ns1:SDeviceDescription", id, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+void *ns1__SDeviceDescription::soap_get(struct soap *soap, const char *tag, const char *type)
+{
+	return soap_get_ns1__SDeviceDescription(soap, this, tag, type);
+}
+
+SOAP_FMAC3 ns1__SDeviceDescription * SOAP_FMAC4 soap_get_ns1__SDeviceDescription(struct soap *soap, ns1__SDeviceDescription *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns1__SDeviceDescription(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 ns1__SDeviceDescription * SOAP_FMAC2 soap_instantiate_ns1__SDeviceDescription(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__SDeviceDescription(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__SDeviceDescription, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(ns1__SDeviceDescription);
+		if (size)
+			*size = sizeof(ns1__SDeviceDescription);
+		((ns1__SDeviceDescription*)cp->ptr)->soap = soap;
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW(ns1__SDeviceDescription[n]);
+		if (!cp->ptr)
+		{	soap->error = SOAP_EOM;
+			return NULL;
+		}
+		if (size)
+			*size = n * sizeof(ns1__SDeviceDescription);
+		for (int i = 0; i < n; i++)
+			((ns1__SDeviceDescription*)cp->ptr)[i].soap = soap;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	return (ns1__SDeviceDescription*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__SDeviceDescription(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying ns1__SDeviceDescription %p -> %p\n", q, p));
+	*(ns1__SDeviceDescription*)p = *(ns1__SDeviceDescription*)q;
 }
 
 void xsd__hexBinary::soap_default(struct soap *soap)
@@ -2956,9 +3137,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Header(struct soap *soap, int st,
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__makeRemoteAction(struct soap *soap, struct ns1__makeRemoteAction *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_xsd__integer(soap, &a->guid);
-	soap_default_xsd__integer(soap, &a->luid);
-	soap_default_xsd__integer(soap, &a->category);
+	a->device = NULL;
 	soap_default_xsd__integer(soap, &a->command);
 	soap_default_xsd__integer(soap, &a->params);
 }
@@ -2966,6 +3145,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__makeRemoteAction(struct soap *soap,
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__makeRemoteAction(struct soap *soap, const struct ns1__makeRemoteAction *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTons1__SDeviceDescription(soap, &a->device);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__makeRemoteAction(struct soap *soap, const char *tag, int id, const struct ns1__makeRemoteAction *a, const char *type)
@@ -2973,11 +3153,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__makeRemoteAction(struct soap *soap, cons
 	(void)soap; (void)tag; (void)id; (void)type;
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__makeRemoteAction), type))
 		return soap->error;
-	if (soap_out_xsd__integer(soap, "guid", -1, &a->guid, ""))
-		return soap->error;
-	if (soap_out_xsd__integer(soap, "luid", -1, &a->luid, ""))
-		return soap->error;
-	if (soap_out_xsd__integer(soap, "category", -1, &a->category, ""))
+	if (soap_out_PointerTons1__SDeviceDescription(soap, "device", -1, &a->device, ""))
 		return soap->error;
 	if (soap_out_xsd__integer(soap, "command", -1, &a->command, ""))
 		return soap->error;
@@ -2988,9 +3164,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__makeRemoteAction(struct soap *soap, cons
 
 SOAP_FMAC3 struct ns1__makeRemoteAction * SOAP_FMAC4 soap_in_ns1__makeRemoteAction(struct soap *soap, const char *tag, struct ns1__makeRemoteAction *a, const char *type)
 {
-	size_t soap_flag_guid = 1;
-	size_t soap_flag_luid = 1;
-	size_t soap_flag_category = 1;
+	size_t soap_flag_device = 1;
 	size_t soap_flag_command = 1;
 	size_t soap_flag_params = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
@@ -3003,19 +3177,9 @@ SOAP_FMAC3 struct ns1__makeRemoteAction * SOAP_FMAC4 soap_in_ns1__makeRemoteActi
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_guid && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_xsd__integer(soap, "guid", &a->guid, "xsd:integer"))
-				{	soap_flag_guid--;
-					continue;
-				}
-			if (soap_flag_luid && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_xsd__integer(soap, "luid", &a->luid, "xsd:integer"))
-				{	soap_flag_luid--;
-					continue;
-				}
-			if (soap_flag_category && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_xsd__integer(soap, "category", &a->category, "xsd:integer"))
-				{	soap_flag_category--;
+			if (soap_flag_device && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTons1__SDeviceDescription(soap, "device", &a->device, "ns1:SDeviceDescription"))
+				{	soap_flag_device--;
 					continue;
 				}
 			if (soap_flag_command && soap->error == SOAP_TAG_MISMATCH)
@@ -3043,7 +3207,7 @@ SOAP_FMAC3 struct ns1__makeRemoteAction * SOAP_FMAC4 soap_in_ns1__makeRemoteActi
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_guid > 0 || soap_flag_luid > 0 || soap_flag_category > 0 || soap_flag_command > 0 || soap_flag_params > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_command > 0 || soap_flag_params > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
@@ -3101,12 +3265,13 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__makeRemoteAction(struct soap *soap, in
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__makeRemoteActionResponse(struct soap *soap, struct ns1__makeRemoteActionResponse *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_xsd__integer(soap, &a->result);
+	soap_default_std__string(soap, &a->result);
 }
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__makeRemoteActionResponse(struct soap *soap, const struct ns1__makeRemoteActionResponse *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_std__string(soap, &a->result);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__makeRemoteActionResponse(struct soap *soap, const char *tag, int id, const struct ns1__makeRemoteActionResponse *a, const char *type)
@@ -3114,7 +3279,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__makeRemoteActionResponse(struct soap *so
 	(void)soap; (void)tag; (void)id; (void)type;
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__makeRemoteActionResponse), type))
 		return soap->error;
-	if (soap_out_xsd__integer(soap, "result", -1, &a->result, ""))
+	if (soap_out_std__string(soap, "result", -1, &a->result, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
@@ -3124,7 +3289,7 @@ SOAP_FMAC3 struct ns1__makeRemoteActionResponse * SOAP_FMAC4 soap_in_ns1__makeRe
 	size_t soap_flag_result = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
-	a = (struct ns1__makeRemoteActionResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__makeRemoteActionResponse, sizeof(struct ns1__makeRemoteActionResponse), 0, NULL, NULL, NULL);
+	a = (struct ns1__makeRemoteActionResponse *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__makeRemoteActionResponse, sizeof(struct ns1__makeRemoteActionResponse), soap->type, soap->arrayType);
 	if (!a)
 		return NULL;
 	soap_default_ns1__makeRemoteActionResponse(soap, a);
@@ -3132,8 +3297,8 @@ SOAP_FMAC3 struct ns1__makeRemoteActionResponse * SOAP_FMAC4 soap_in_ns1__makeRe
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_result && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_xsd__integer(soap, "result", &a->result, "xsd:integer"))
+			if (soap_flag_result && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_std__string(soap, "result", &a->result, "xsd:string"))
 				{	soap_flag_result--;
 					continue;
 				}
@@ -3148,7 +3313,7 @@ SOAP_FMAC3 struct ns1__makeRemoteActionResponse * SOAP_FMAC4 soap_in_ns1__makeRe
 			return NULL;
 	}
 	else
-	{	a = (struct ns1__makeRemoteActionResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__makeRemoteActionResponse, 0, sizeof(struct ns1__makeRemoteActionResponse), 0, NULL);
+	{	a = (struct ns1__makeRemoteActionResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__makeRemoteActionResponse, 0, sizeof(struct ns1__makeRemoteActionResponse), 0, soap_copy_ns1__makeRemoteActionResponse);
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
@@ -4017,6 +4182,61 @@ SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Code(
 }
 
 #endif
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons1__SDeviceDescription(struct soap *soap, ns1__SDeviceDescription *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE_ns1__SDeviceDescription))
+		(*a)->soap_serialize(soap);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons1__SDeviceDescription(struct soap *soap, const char *tag, int id, ns1__SDeviceDescription *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_ns1__SDeviceDescription);
+	if (id < 0)
+		return soap->error;
+	return (*a)->soap_out(soap, tag, id, type);
+}
+
+SOAP_FMAC3 ns1__SDeviceDescription ** SOAP_FMAC4 soap_in_PointerTons1__SDeviceDescription(struct soap *soap, const char *tag, ns1__SDeviceDescription **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (ns1__SDeviceDescription **)soap_malloc(soap, sizeof(ns1__SDeviceDescription *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = (ns1__SDeviceDescription *)soap_instantiate_ns1__SDeviceDescription(soap, -1, soap->type, soap->arrayType, NULL)))
+			return NULL;
+		(*a)->soap_default(soap);
+		if (!(*a)->soap_in(soap, tag, NULL))
+			return NULL;
+	}
+	else
+	{	ns1__SDeviceDescription ** p = (ns1__SDeviceDescription **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_ns1__SDeviceDescription, sizeof(ns1__SDeviceDescription), 0);
+		a = p;
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons1__SDeviceDescription(struct soap *soap, ns1__SDeviceDescription *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTons1__SDeviceDescription);
+	if (soap_out_PointerTons1__SDeviceDescription(soap, tag?tag:"ns1:SDeviceDescription", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 ns1__SDeviceDescription ** SOAP_FMAC4 soap_get_PointerTons1__SDeviceDescription(struct soap *soap, ns1__SDeviceDescription **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTons1__SDeviceDescription(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_xsd__token(struct soap *soap, const char *tag, int id, char *const*a, const char *type)
 {

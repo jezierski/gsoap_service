@@ -247,8 +247,8 @@ void COperation::parseParams(string input, Params &params) {
         throw string("VALUE wrong format");
     }
     long long nmb = fromString<long long>(input, 1);
-    for (int i = len / 2; i > 0; i--) {
-        params.push_back((nmb >> (8 * (i - 1))) & 0xff);
+    for (int i = 0; i < len / 2; i++) {
+        params.push_back((nmb >> (8 * i)) & 0xff);
     }
 }
 

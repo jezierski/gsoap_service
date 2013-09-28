@@ -29,7 +29,7 @@ public:
 //    void executeAction(SDeviceDescription, Command, Params);
     
 private:
-    void getSwitchStatus(SDeviceDescription device, Blob params);
+    Blob getSwitchStatus(SDeviceDescription device, Blob params);
     void initActionMap();
     
     CLog *log;

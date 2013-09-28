@@ -49,7 +49,7 @@ public:
 
     bool initCan232Device();
 
-    void send(CCanBuffer &frame);
+    bool send(CCanBuffer &frame);
     CCanBuffer request(CCanBuffer &frame);
 
     template <class ret>
@@ -98,7 +98,7 @@ private:
 
 
     CCanBuffer getCanFrame();
-    void sendCanFrame(CCanBuffer &frame);
+    bool sendCanFrame(CCanBuffer &frame);
     unsigned char getCRC(CBuffer &buffer);
     unsigned char checkCRC(CBuffer& buffer);
     bool isFrameComplete(CBuffer &frame);\

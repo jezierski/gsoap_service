@@ -25,13 +25,17 @@ void CCanSimpleSwitchActor::initActionMap() {
     addAction(this, ACTION_SET_OUTPUT, &CCanSimpleSwitchActor::setOutput);
 }
 
-void CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
+Blob CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
 //    cout << "action setOutput " << to_string(device) <<endl;
     Params par = params[BLOB_ACTION_PARAMETER].get<Params>();
-
-    if (par.size() != 1) {
-        log->error("Action [setOutput] incorrect params");
-        return;
+    string response;
+    Blob b;
+    
+    if (par.size() == 0) {
+        response = "SimpleSwitchActor->setOutput->Incorrect params";
+        log->error(response);
+        b[BLOB_TXT_RESPONSE].put<string>(response);
+        return b;
     }
 
     CCanBuffer buffer;
@@ -41,7 +45,10 @@ void CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
     buffer << (unsigned char) getAddress(device);
     buffer << (unsigned char) par[0];
     buffer.buildBuffer();
-    getProtocol()->send(buffer);
+    response = (getProtocol()->send(buffer)) ? "OK" : "SimpleSwitchActor->setOutput->Sending CAN frame failed";
+    
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
    
 }
 

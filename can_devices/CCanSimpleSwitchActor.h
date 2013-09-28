@@ -32,7 +32,7 @@ public:
     //    void executeAction(SDeviceDescription, Command, Params);
 
 private:
-    void setOutput(SDeviceDescription device, Blob params);
+    Blob setOutput(SDeviceDescription device, Blob params);
     void initActionMap();
 
 

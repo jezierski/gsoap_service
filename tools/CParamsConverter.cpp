@@ -55,12 +55,13 @@ Blob CParamsConverter::allRGBvaluesSet(long long params) {
 Blob CParamsConverter::use(int category, int command, long long params) {
     if (convertionsMap.find(category) != convertionsMap.end()) {
         if (convertionsMap[category].find(command) != convertionsMap[category].end()) {
-            (this->*convertionsMap[category][command])(params);
+            return (this->*convertionsMap[category][command])(params);
         }
     }
     Params p;
     for (int i = 8; i > 0; i--) {
-        p.push_back((params >> (8 * (i - 1))) & 0xff);
+        p.push_back(params & 0xff);
+        params >>= 8;
     }
     Blob b;
     b[BLOB_ACTION_PARAMETER].put<Params>(p);

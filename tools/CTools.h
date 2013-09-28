@@ -94,6 +94,14 @@ inline long long getCurrentDayTime() {
     return secs;
 }
 
+inline long long paramsToLL(Params params){
+    long long param = 0;
+    for (size_t i = params.size(); i > 0; i--) {
+        param |= params[i - 1];
+        param <<= 8;
+    }
+    return param;
+}
 
 class CTools {
 public:

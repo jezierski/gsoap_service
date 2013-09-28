@@ -207,30 +207,6 @@ can_devices/CCanSimpleSwitchSensor.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.s
 .PHONY : can_devices/CCanSimpleSwitchSensor.cpp.s
 
-homesys/CActionManager.o: homesys/CActionManager.cpp.o
-.PHONY : homesys/CActionManager.o
-
-# target to build an object file
-homesys/CActionManager.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionManager.cpp.o
-.PHONY : homesys/CActionManager.cpp.o
-
-homesys/CActionManager.i: homesys/CActionManager.cpp.i
-.PHONY : homesys/CActionManager.i
-
-# target to preprocess a source file
-homesys/CActionManager.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionManager.cpp.i
-.PHONY : homesys/CActionManager.cpp.i
-
-homesys/CActionManager.s: homesys/CActionManager.cpp.s
-.PHONY : homesys/CActionManager.s
-
-# target to generate assembly for a file
-homesys/CActionManager.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionManager.cpp.s
-.PHONY : homesys/CActionManager.cpp.s
-
 homesys/CActionTranslator.o: homesys/CActionTranslator.cpp.o
 .PHONY : homesys/CActionTranslator.o
 
@@ -780,9 +756,6 @@ help:
 	@echo "... can_devices/CCanSimpleSwitchSensor.o"
 	@echo "... can_devices/CCanSimpleSwitchSensor.i"
 	@echo "... can_devices/CCanSimpleSwitchSensor.s"
-	@echo "... homesys/CActionManager.o"
-	@echo "... homesys/CActionManager.i"
-	@echo "... homesys/CActionManager.s"
 	@echo "... homesys/CActionTranslator.o"
 	@echo "... homesys/CActionTranslator.i"
 	@echo "... homesys/CActionTranslator.s"

@@ -21,21 +21,29 @@ CCanSimpleSwitchSensor::~CCanSimpleSwitchSensor() {
 }
 
 void CCanSimpleSwitchSensor::initActionMap() {
-//    actionMap[CMD_ACTION_TEST] = &CCanSimpleSwitchSensor::actionTest;
-//    actionMap[CMD_READ_SENSOR] = &CCanSimpleSwitchSensor::setSwitch;
-    
+    //    actionMap[CMD_ACTION_TEST] = &CCanSimpleSwitchSensor::actionTest;
+    //    actionMap[CMD_READ_SENSOR] = &CCanSimpleSwitchSensor::setSwitch;
+
     addAction(this, ACTION_READ_SENSOR_STATUS, &CCanSimpleSwitchSensor::getSwitchStatus);
 }
 
-void CCanSimpleSwitchSensor::getSwitchStatus(SDeviceDescription device, Blob params) {
-//    cout << "action getSensorSwitch SENSOR "<<to_string(device)<<endl;
+Blob CCanSimpleSwitchSensor::getSwitchStatus(SDeviceDescription device, Blob params) {
+    //    cout << "action getSensorSwitch SENSOR "<<to_string(device)<<endl;
     CCanBuffer buffer;
-
+    Blob b;
+    string response;
     buffer.insertCommand(CMD_READ_SENSOR);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
     buffer.buildBuffer();
     buffer = getProtocol()->request(buffer);
-    log->info("Device " + to_string(device) + " STATUS: " + to_string((int)buffer[2]));
+    if (buffer.getLength() > 0) {
+        response = (buffer[2] > 0) ? "1" : "0";
+        log->info("Device " + to_string(device) + " STATUS: " + to_string((int) buffer[2]));
+    }else{
+        response = "SimpleSwitchSensor->getSwitchStatus->Receiving CAN frame failed";
+    }
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
 }
 

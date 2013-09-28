@@ -39,12 +39,12 @@ public:
     //    CCanRGBActor(const CCanRGBActor& orig);
     virtual ~CCanRGBActor();
 private:
-    void setMode(SDeviceDescription device, Blob params);
-    void setSpeed(SDeviceDescription device, Blob params);
-    void setRed(SDeviceDescription device, Blob params);
-    void setGreen(SDeviceDescription device, Blob params);
-    void setBlue(SDeviceDescription device, Blob params);
-    void setRGB(SDeviceDescription device, Blob params);
+    Blob setMode(SDeviceDescription device, Blob params);
+    Blob setSpeed(SDeviceDescription device, Blob params);
+    Blob setRed(SDeviceDescription device, Blob params);
+    Blob setGreen(SDeviceDescription device, Blob params);
+    Blob setBlue(SDeviceDescription device, Blob params);
+    Blob setRGB(SDeviceDescription device, Blob params);
     void initActionMap();
 
 

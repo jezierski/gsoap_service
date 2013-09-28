@@ -14,6 +14,7 @@
 #include "../tools/CLog.h"
 #include "../tools/types.h"
 #include "CActionsChain.h"
+#include <mutex>
 
 using namespace std;
 
@@ -32,8 +33,8 @@ public:
     //void assignAddresses();
     
 
-    void invokeRemoteAction(SDeviceDescription, Command, Blob);
-    void invokeGlobalRemoteAction(Command, Blob);
+    Blob invokeRemoteAction(SDeviceDescription, Command, Blob);
+    Blob invokeGlobalRemoteAction(Command, Blob);
     void runInThreadRemoteAction(SDeviceDescription device, Command command, Blob params);
     void runInThreadGlobalRemoteAction(Command command, Blob params);
  
@@ -49,6 +50,7 @@ private:
     list<CDevice*>categoryDevices;
     CActionsChain *actionChain;
     CLog *log;
+    mutex action;
 };
 
 #endif	/* CDEVICEMANAGER_H */

@@ -315,7 +315,7 @@ static int serve_ns1__makeRemoteAction(homesysService *soap)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = soap->makeRemoteAction(soap_tmp_ns1__makeRemoteAction.guid, soap_tmp_ns1__makeRemoteAction.luid, soap_tmp_ns1__makeRemoteAction.category, soap_tmp_ns1__makeRemoteAction.command, soap_tmp_ns1__makeRemoteAction.params, soap_tmp_ns1__makeRemoteActionResponse.result);
+	soap->error = soap->makeRemoteAction(soap_tmp_ns1__makeRemoteAction.device, soap_tmp_ns1__makeRemoteAction.command, soap_tmp_ns1__makeRemoteAction.params, soap_tmp_ns1__makeRemoteActionResponse.result);
 	if (soap->error)
 		return soap->error;
 	soap_serializeheader(soap);

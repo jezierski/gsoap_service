@@ -59,7 +59,7 @@ unsigned char CDevice::getNewAddress() {
     return address;
 }
 
-void CDevice::resetAddresses() {
+bool CDevice::resetAddresses() {
     try {
         devicesDB->clearAddresses();
         devicesDescriptionList.clear();
@@ -70,7 +70,9 @@ void CDevice::resetAddresses() {
         canbusProtocol->send(buffer);
     } catch (string e) {
         log->error("Cannot reset addresses: " + e);
+        return false;
     }
+    return true;
 }
 
 void CDevice::findGUIDs() {
@@ -83,7 +85,7 @@ void CDevice::findGUIDs() {
     guids = canbusProtocol->broadcastRequest<unsigned int>(buffer, &CCanBuffer::getGUID);
     for (CCanBuffer buf : guids) {
         GUIDs[buf.getGUID()] = buf.getNmbDevices();
-        cout << "> received new GUID: " << hex << (int) buf.getGUID() << dec << ", nmb devs: " << (int) buf.getNmbDevices() << endl;//@TODO remove
+        cout << "> received new GUID: " << hex << (int) buf.getGUID() << dec << ", nmb devs: " << (int) buf.getNmbDevices() << endl; //@TODO remove
     }
 }
 
@@ -135,9 +137,9 @@ void CDevice::assignAddress() {
 
     for (auto &guid : GUIDs) {
         for (size_t cnt = 0; cnt < guid.second; cnt++) {
-            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl;     //@TODO remove
+            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl; //@TODO remove
             address = getNewAddress();
-            cout << "new address: " << (int) address << endl;           //@TODO remove
+            cout << "new address: " << (int) address << endl; //@TODO remove
 
             buffer.clear();
             buffer.insertCommand(CMD_SET_ADDRESS);
@@ -162,12 +164,12 @@ void CDevice::assignAddress() {
     synchronizeDBdevices();
 }
 
-void CDevice::checkDevicesAvailability() {
+Blob CDevice::checkDevicesAvailability() {
     vector<unsigned char>unvlbAddresses;
-
+    Blob b;
+    string response = "";
     for (auto &device : devicesDescriptionList) {
         if (!ping(device)) {
-            cout << "device to remove address: " << (int) device.address << endl;
             unvlbAddresses.push_back(device.address);
         }
     }
@@ -176,9 +178,14 @@ void CDevice::checkDevicesAvailability() {
         try {
             devicesDB->clearDeviceAddress((unsigned char) category, adr);
         } catch (string e) {
-            log->error("Cannot clear device's address in database: " + e);
+            response += "Cannot clear device's address in database: " + e + "\n";
+            log->error(response);
         }
     }
+    if (response == "")
+        response = "OK";
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
 }
 
 void CDevice::synchronizeDBdevices() {
@@ -190,7 +197,7 @@ void CDevice::synchronizeDBdevices() {
         while (index < devicesDescriptionList.size()) {
             size = getDeviceGroupSize(devicesDescriptionList, devicesDescriptionList[index].guid, category);
             dbDevices = devicesDB->getDevices(devicesDescriptionList[index].guid, (unsigned char) category);
-           
+
             if (dbDevices.size() > 0) {
                 if (size != dbDevices.size()) {
                     log->error("Different devices recognized with GUID: " + to_string(devicesDescriptionList[index].guid));
@@ -320,38 +327,47 @@ bool CDevice::ping(SDeviceDescription device) {
     buffer << (unsigned char) address;
     buffer.buildBuffer();
     buffer = canbusProtocol->request(buffer);
-    if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()){
+    if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()) {
         return true;
     }
     return false;
 }
 
-void CDevice::setDeviceName(SDeviceDescription description, string name) {
+Blob CDevice::setDeviceName(SDeviceDescription description, string name) {
 
-
+    Blob b;
+    string response = "OK";
     description.name = name;
 
     try {
         devicesDB->setDeviceName(description);
     } catch (string e) {
-        log->error("Cannot save device's name in database: " + e);
-        return;
+        response = "Cannot save device's name in database: " + e;
+        log->error(response);
+        b[BLOB_TXT_RESPONSE].put<string>(response);
+        return b;
     }
-    synchronizeDeviceName(description, name, category, devicesDescriptionList);
-
+    b = synchronizeDeviceName(description, name, category, devicesDescriptionList);
+    return b;
 }
 
-void CDevice::synchronizeDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList) {
+Blob CDevice::synchronizeDeviceName(SDeviceDescription description, string name, EDeviceCategory category, Devices &devicesList) {
+    Blob b;
+    string response = "OK";
     for (SDeviceDescription &device : devicesList) {
         if (device.guid == description.guid && device.luid == description.luid && device.category == category) {
             device.name = name;
-            return;
+            b[BLOB_TXT_RESPONSE].put<string>(response);
+            return b;
         }
     }
-    log->error("Cannot set name, no device found");
+    response = "Cannot set name, no device found";
+    log->error(response);
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
 }
 
-void CDevice::listAddresses() {
+Blob CDevice::listAddresses() {
     if (devicesDescriptionList.size() > 0) {
         log->info("List of devices in category " + to_string(category) + ":");
         for (auto &dev : devicesDescriptionList) {
@@ -360,21 +376,24 @@ void CDevice::listAddresses() {
     } else {
         log->info("No devices in category " + to_string(category));
     }
+    Blob b;
+    b[BLOB_DEVICES_LIST].put<Devices>(devicesDescriptionList);
+    return b;
 }
 
 Devices CDevice::getLogicalDevies() {
     return devicesDescriptionList;
 }
 
-void CDevice::resetAllDevicesStatus() {
+bool CDevice::resetAllDevicesStatus() {
     CCanBuffer buffer;
     buffer.insertId((unsigned char) category);
     buffer.insertCommand(CMD_RESET_ALL_STAT);
     buffer.buildBuffer();
-    canbusProtocol->send(buffer);
+    return canbusProtocol->send(buffer);
 }
 
-void CDevice::checkNewDevicesStatus(){
+void CDevice::checkNewDevicesStatus() {
     if (isSensorDevice()) {
         CCanBuffer buffer;
         CanBuffers stats;
@@ -382,7 +401,7 @@ void CDevice::checkNewDevicesStatus(){
         buffer.insertCommand(CMD_REQ_NEW_STAT);
         buffer.buildBuffer();
         stats = canbusProtocol->broadcastRequest<unsigned char>(buffer, &CCanBuffer::sourceAddress);
-        for (CCanBuffer buf : stats){
+        for (CCanBuffer buf : stats) {
             if (CMD_REQ_NEW_STAT == buf.frameCommand()) {
                 sensorEvent(getDeviceWithAddress(buf.sourceAddress()), buf.getSensorCommand(), buf.getSensorParams());
             }
@@ -428,80 +447,98 @@ void CDevice::sendACK(SDeviceDescription device) {
     canbusProtocol->send(buffer);
 }
 
-void CDevice::executeAction(SDeviceDescription device, Command command, Blob params) {
+Blob CDevice::executeAction(SDeviceDescription device, Command command, Blob params) {
+    Blob b;
+    string response;
     if (actionsMap.find(command) == actionsMap.end()) {
-        log->warning("No function [" + to_string((int) command) + "] to invoke");
-        return;
+        response = "No function [" + to_string((int) command) + "] to invoke";
+        log->warning(response);
+        b[BLOB_TXT_RESPONSE].put<string>(response);
+        return b;
     }
     if (command < GLOBAL_ACTION_LIMIT) {
-        executeGlobalAction(command, params);
-        return;
+        return executeGlobalAction(command, params);
     }
     for (SDeviceDescription dev : getLogicalDevies()) {
         if (dev == device) {
-//            cout << "device found" << endl;
-            (actionsMap[command])(device, params);
-            return;
+            //            cout << "device found" << endl;
+            return (actionsMap[command])(device, params);
         }
     }
-    log->error("Device " + to_string(device) + " not found");
-
+    response = "Device " + to_string(device) + " not found";
+    log->error(response);
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
 
 }
 
-
-void CDevice::executeAction(SAction action){
-    executeAction(action.device, action.command, action.params);
+Blob CDevice::executeAction(SAction action) {
+    return executeAction(action.device, action.command, action.params);
 }
 
-void CDevice::executeGlobalAction(Command command, Blob params) {
+Blob CDevice::executeGlobalAction(Command command, Blob params) {
     SDeviceDescription empty;
-    actionsMap[command](empty, params);
+    return actionsMap[command](empty, params);
 }
 
-void CDevice::reset(SDeviceDescription dev, Blob params) {
+Blob CDevice::reset(SDeviceDescription dev, Blob params) {
     log->info("Reset device addresses in category " + to_string(category));
-    resetAddresses();
+    Blob b;
+    string response;
+    response = (resetAddresses()) ? "OK" : "Reset devices failed";
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
 }
 
-void CDevice::search(SDeviceDescription dev, Blob params) {
+Blob CDevice::search(SDeviceDescription dev, Blob params) {
     log->info("Start searching devices in category " + to_string(category));
     findGUIDs();
-//        pollGUID();
-//        getGUIDs();
     assignAddress();
-    listAddresses();
+    return listAddresses();
 }
 
-void CDevice::check(SDeviceDescription dev, Blob params) {
+Blob CDevice::check(SDeviceDescription dev, Blob params) {
     log->info("Check devices availability in category " + to_string(category));
-    checkDevicesAvailability();
+    return checkDevicesAvailability();
 }
 
-void CDevice::setName(SDeviceDescription dev, Blob params) {
+Blob CDevice::setName(SDeviceDescription dev, Blob params) {
+    Blob b;
     string name = params[BLOB_DEVICE_NAME].get<string>();
     log->info("Set new name >> " + name + " << for device " + to_string(dev));
     setDeviceName(dev, name);
+    return b;
 }
 
-void CDevice::pingLogicalDevice(SDeviceDescription dev, Blob params) {
+Blob CDevice::pingLogicalDevice(SDeviceDescription dev, Blob params) {
+    Blob b;
+    string response = "OK";
     if (ping(dev)) {
         log->info("PING device " + to_string(dev) + " OK");
     } else {
-        log->error("PING device " + to_string(dev) + " FAILED");
+        response = "PING device " + to_string(dev) + " FAILED";
+        log->error(response);
     }
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
 }
 
-void CDevice::list(SDeviceDescription dev, Blob params) {
-    listAddresses();
+Blob CDevice::list(SDeviceDescription dev, Blob params) {
+    return listAddresses();
 }
 
-void CDevice::resetStatuses(SDeviceDescription dev, Blob params) {
-    resetAllDevicesStatus();
+Blob CDevice::resetStatuses(SDeviceDescription dev, Blob params) {
+    Blob b;
+    string response;
+    response = (resetAllDevicesStatus()) ? "OK" : "Reset device's [ "+ to_string(dev.category)+" ] statuses failed";
+    b[BLOB_TXT_RESPONSE].put<string>(response);
+    return b;
 }
 
-void CDevice::checkNewStatuses(SDeviceDescription dev, Blob params) {
+Blob CDevice::checkNewStatuses(SDeviceDescription dev, Blob params) {
     checkNewDevicesStatus();
+    Blob b;
+    return b;
 }
 
 CCan232 *CDevice::getProtocol() {

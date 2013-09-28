@@ -28,7 +28,7 @@ void CDeviceManager::addCategoryDevice(CDevice *device) {
 //    
 //}
 
-void CDeviceManager::loadActionsChain(){
+void CDeviceManager::loadActionsChain() {
     actionChain->loadActionsChain();
 }
 
@@ -52,40 +52,46 @@ CDevice *CDeviceManager::getDevice(SDeviceDescription deviceDescription) {
     return NULL;
 }
 
-void CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command command, Blob params) {
+Blob CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command command, Blob params) {
+    lock_guard<mutex> lock(action);
+    Blob returnVal;
     if (device.category == EDeviceCategory::ALL) {
         for (CDevice* catDevice : categoryDevices) {
-            catDevice->executeAction(device, command, params);
+            returnVal = catDevice->executeAction(device, command, params);
         }
     } else {
-        SAction action = convertToSAction( device,  command,  params);
-        do {
-            CDevice *categoryDevice = getDevice(device);
+        SAction action = convertToSAction(device, command, params);
+        CDevice *categoryDevice = getDevice(device);
+        returnVal = categoryDevice->executeAction(action);
+        while (actionChain->isChainExist(action)) {
+            categoryDevice = getDevice(device);
             if (categoryDevice != NULL) {
                 categoryDevice->executeAction(action);
             }
-        } while (actionChain->isChainExist(action));
-
+        }
     }
+
+    return returnVal;
 }
 
-
-SAction CDeviceManager::convertToSAction(SDeviceDescription device, Command command, Blob blob){
+SAction CDeviceManager::convertToSAction(SDeviceDescription device, Command command, Blob blob) {
     SAction action;
     action.device = device;
     action.command = command;
     action.params = blob;
     return action;
-    
+
 }
 
-void CDeviceManager::invokeGlobalRemoteAction(Command command, Blob params) {
+Blob CDeviceManager::invokeGlobalRemoteAction(Command command, Blob params) {
     SDeviceDescription device;
+    Blob returnVal;
     device.category = EDeviceCategory::ALL;
     for (CDevice* catDevice : categoryDevices) {
         catDevice->executeAction(device, command, params);
     }
 
+    return returnVal;
 }
 
 void CDeviceManager::runInThreadRemoteAction(SDeviceDescription device, Command command, Blob params) {

@@ -123,17 +123,9 @@ bool CActionsChain::isChainExist(SAction& action) {
 }
 
 bool CActionsChain::compareParams(Blob param1, Blob param2) {
-    Params p1 = param1[BLOB_ACTION_PARAMETER].get<Params>();
-    Params p2 = param2[BLOB_ACTION_PARAMETER].get<Params>();
-    if (p1.size() == p2.size()) {
-        for (size_t i = 0; i < p1.size(); i++) {
-            if (p1[i] != p2[i]) {
-                return false;
-            }
-        }
-        return true;
-    } else
-        return false;
+    long long  p1 = paramsToLL(param1[BLOB_ACTION_PARAMETER].get<Params>());
+    long long  p2 = paramsToLL(param2[BLOB_ACTION_PARAMETER].get<Params>());
+    return p1 == p2;
 }
 
 void CActionsChain::parseNode(string nodeName, const xml_node<>* node, SChain &chain) {

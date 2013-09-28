@@ -19,7 +19,6 @@
 #include "CDeviceManager.h"
 #include "CActionTranslator.h"
 #include "CTimer.h"
-#include "CActionManager.h"
 
 using namespace std;
 
@@ -38,7 +37,6 @@ private:
     CDevicesConfig *devicesConfig;
     CActionTranslator *actionTranslator;
     CDeviceManager *deviceManager;
-    CActionManager *actionManager;
     CTimer *timer;
     CCan232 * can232device;
     CLog *log;

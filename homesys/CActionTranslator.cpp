@@ -43,7 +43,7 @@ void CActionTranslator::updateDeviceState(SDeviceDescription device, Command com
     DeviceState state;
     state[device][command] = params;
     deviceStateStack.push_back(state);
-    log->info("New device state: " + to_string(device) + ", COM: " + to_string((int)command) + ", PARAMS: " + to_string(params));
+    log->info("New device state: " + to_string(device) + ", COM: " + to_string((int) command) + ", PARAMS: " + to_string(params));
 
 
     //@TODO remove below
@@ -125,37 +125,32 @@ bool CActionTranslator::compareTime(STimeCondition condition) {
 
 bool CActionTranslator::compareParams(ECondition condition, Params params1, Params params2) {
     //    cout << "device params size: " << params1.size() << ", xml params size: " << params2.size() << endl;
-    if ((params1.size() != params2.size()) || params1.size() == 0)
+    if (params1.size() == 0)
         return false;
 
+    long long param1 = paramsToLL(params1);
+    long long param2 = paramsToLL(params2);
+   
     //    cout << "device param[0]: " << (int) params1[0] << ", xml param[0]: " << (int) params2[0] << endl;
-    bool result = true;
     switch (condition) {
         case ECondition::Equal:
             //            cout << "check EQUAL" << endl;
-            for (size_t i = 0; (i < params1.size()) && result; i++) {
-                result = result && (params1[i] == params2[i]);
-            }
-            break;
+            return param1 == param2;
         case ECondition::Less:
             //            cout << "check LESS" << endl;
-            result = (params1[0] < params2[0]);
-            break;
+            return param1 < param2;
         case ECondition::More:
             //            cout << "check MORE" << endl;
-            result = (params1[0] > params2[0]);
-            break;
+            return param1 > param2;
         case ECondition::LessOrEqual:
             //            cout << "check LESS or EQUAL" << endl;
-            result = (params1[0] <= params2[0]);
-            break;
+            return param1 <= param2;
         case ECondition::MoreOrEqual:
             //            cout << "check MORE or EQUAL" << endl;
-            result = (params1[0] >= params2[0]);
-            break;
+            return param1 <= param2;
     }
     //    cout << "result: " << (bool)result << endl;
-    return result;
+    return false;
 }
 
 bool CActionTranslator::timeCondition(SOperation &operation) {
@@ -168,7 +163,7 @@ bool CActionTranslator::timeCondition(SOperation &operation) {
 
 void CActionTranslator::makeAction(SOperation &operation) {
     //    cout << ">>>>>>>>> MAKE ACTION <<<<<<<<<<<<<<<[" << endl;
-    actionManager->addAction(operation.action);
+    deviceManager->invokeRemoteAction(operation.action.device, operation.action.command, operation.action.params);
 
 }
 
@@ -191,7 +186,7 @@ void CActionTranslator::translateActions() {
 
     while (1) {
         DeviceState deviceState;
-//        long long timerSet = 0;
+        //        long long timerSet = 0;
         if (deviceStateStack.size()) {
             //            cout<<"\n\n\n#########  STACK SIZE: "<<deviceStateStack.size()<<endl;
             deviceState = popDeviceState();
@@ -204,7 +199,7 @@ void CActionTranslator::translateActions() {
             //            cout<<"POP dev comm: "<<(int)iit->first<<endl;
             //            
             //            cout << "\n\n======>>>>>> translate Actions LOOP" << endl;
-            
+
             for (SOperation operation : operations->getOperations()) {
                 if (isOperationForDeviceCondition(operation, deviceState)) {
                     if (deviceCondition(operation) && timeCondition(operation)) {
@@ -247,8 +242,8 @@ bool CActionTranslator::isOperationForTimer(SOperation &operation) {
     return (operation.timeConditions.size() > 0);
 }
 
-void CActionTranslator::assignActionManager(CActionManager* actionManager) {
-    this->actionManager = actionManager;
+void CActionTranslator::assignDeviceManager(CDeviceManager* deviceManager) {
+    this->deviceManager = deviceManager;
 }
 
 void CActionTranslator::assignTimer(CTimer* timer) {

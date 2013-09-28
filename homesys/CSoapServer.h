@@ -14,7 +14,7 @@
 #include "../tools/CLog.h"
 #include "../tools/CTools.h"
 #include "../tools/CParamsConverter.h"
-#include "CActionManager.h"
+#include "CDeviceManager.h"
 
 
 using namespace std;
@@ -27,19 +27,19 @@ public:
 
     void start();
 
-    void assignActionManager(CActionManager* actionManager);
+    void assignDeviceManager(CDeviceManager* deviceManager);
 
 
     int getCurrentTime(string &time);
     int getValue(string id, string &result);
-    int makeRemoteAction(LONG64 guid, LONG64 luid, LONG64 category, LONG64 command, LONG64 params, LONG64 &result);
+    int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, string &result);
 
     int switchPort(string pinNo, string &result);
 private:
 
     CLog *log;
     CParamsConverter *converter;
-    CActionManager *actionManager;
+    CDeviceManager *deviceManager;
 };
 
 #endif	/* CSOAPSERVER_H */

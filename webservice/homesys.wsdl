@@ -1,145 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="homesys"
- targetNamespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
- xmlns:tns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
- xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
- xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:xsd="http://www.w3.org/2001/XMLSchema"
- xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
- xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
- xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
- xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
- xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
- xmlns="http://schemas.xmlsoap.org/wsdl/">
+             targetNamespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+             xmlns:tns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+             xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+             xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+             xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+             xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
 
-<types>
+    <types>
 
- <schema targetNamespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
-  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-  xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
-  xmlns="http://www.w3.org/2001/XMLSchema"
-  elementFormDefault="unqualified"
-  attributeFormDefault="unqualified">
-  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
- </schema>
+        <schema targetNamespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+         xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+         xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+         xmlns="http://www.w3.org/2001/XMLSchema"
+         elementFormDefault="unqualified"
+         attributeFormDefault="unqualified">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+  
+            <xsd:complexType name="SDeviceDescription">
+                <xsd:all>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="GUID" type="xsd:integer"/>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="LUID" type="xsd:integer"/>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="category" type="xsd:integer"/>
+                </xsd:all>
+            </xsd:complexType>
+        </schema>
 
-</types>
+    </types>
 
-<!-- getCurrentTime -->
-<message name="getCurrentTimeRequest">
-</message>
+    <!-- getCurrentTime -->
+    <message name="getCurrentTimeRequest">
+    </message>
 
-<message name="getCurrentTimeResponse">
- <part name="time" type="xsd:string"/>
-</message>
+    <message name="getCurrentTimeResponse">
+        <part name="time" type="xsd:string"/>
+    </message>
 
-<!-- getValue -->
-<message name="getValueRequest">
- <part name="id" type="xsd:string"/>
-</message>
+    <!-- getValue -->
+    <message name="getValueRequest">
+        <part name="id" type="xsd:string"/>
+    </message>
 
-<message name="getValueResponse">
- <part name="result" type="xsd:string"/>
-</message>
+    <message name="getValueResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
 
-<!-- switchPort -->
-<message name="switchPortRequest">
- <part name="pinNo" type="xsd:string"/>
-</message>
+    <!-- switchPort -->
+    <message name="switchPortRequest">
+        <part name="pinNo" type="xsd:string"/>
+    </message>
 
-<message name="switchPortResponse">
- <part name="result" type="xsd:string"/>
-</message>
-
-
-<!-- makeRemoteAction -->
-<message name="makeRemoteActionRequest">
-    <part name="guid" type="xsd:integer"/>
-    <part name="luid" type="xsd:integer"/>
-    <part name="category" type="xsd:integer"/>
-    <part name="command" type="xsd:integer"/>
-    <part name="params" type="xsd:integer"/>
-</message>
-
-<message name="makeRemoteActionResponse">
-    <part name="result" type="xsd:integer"/>
-</message>
+    <message name="switchPortResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
 
 
-<portType name="homesysPortType">
- <operation name="getCurrentTime">
-  <documentation>Service definition of function ns__getCurrentTime</documentation>
-  <input message="tns:getCurrentTimeRequest"/>
-  <output message="tns:getCurrentTimeResponse"/>
- </operation>
- <operation name="getValue">
-  <documentation>Service definition of function ns__getValue</documentation>
-  <input message="tns:getValueRequest"/>
-  <output message="tns:getValueResponse"/>
- </operation>
- <operation name="switchPort">
-  <documentation>Service definition of function ns__getValue</documentation>
-  <input message="tns:switchPortRequest"/>
-  <output message="tns:switchPortResponse"/>
- </operation>
- <operation name="makeRemoteAction">
-  <documentation>Service definition of function ns__makeRemoteAction</documentation>
-  <input message="tns:makeRemoteActionRequest"/>
-  <output message="tns:makeRemoteActionResponse"/>
- </operation>
+    <!-- makeRemoteAction -->
+    <message name="makeRemoteActionRequest">
+        <part name="device" type="ns:SDeviceDescription"/>
+        <part name="command" type="xsd:integer"/>
+        <part name="params" type="xsd:integer"/>
+    </message>
 
-</portType>
-
-<binding name="homesys" type="tns:homesysPortType">
- <SOAP:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
- <operation name="getCurrentTime">
-  <SOAP:operation style="rpc" soapAction=""/>
-  <input>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </input>
-  <output>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </output>
- </operation>
- <operation name="getValue">
-  <SOAP:operation style="rpc" soapAction=""/>
-  <input>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </input>
-  <output>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </output>
- </operation>
- <operation name="switchPort">
-  <SOAP:operation style="rpc" soapAction=""/>
-  <input>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </input>
-  <output>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </output>
- </operation>
- <operation name="makeRemoteAction">
-  <SOAP:operation style="rpc" soapAction=""/>
-  <input>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </input>
-  <output>
-     <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-  </output>
- </operation>
-</binding>
+    <message name="makeRemoteActionResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
 
 
-<service name="homesys">
- <documentation>gSOAP 2.7.9k generated service definition</documentation>
- <port name="homesys" binding="tns:homesys">
-  <SOAP:address location="http://192.168.1.39:1234"/>
- </port>
-</service>
+    <portType name="homesysPortType">
+        <operation name="getCurrentTime">
+            <documentation>Service definition of function ns__getCurrentTime</documentation>
+            <input message="tns:getCurrentTimeRequest"/>
+            <output message="tns:getCurrentTimeResponse"/>
+        </operation>
+        <operation name="getValue">
+            <documentation>Service definition of function ns__getValue</documentation>
+            <input message="tns:getValueRequest"/>
+            <output message="tns:getValueResponse"/>
+        </operation>
+        <operation name="switchPort">
+            <documentation>Service definition of function ns__getValue</documentation>
+            <input message="tns:switchPortRequest"/>
+            <output message="tns:switchPortResponse"/>
+        </operation>
+        <operation name="makeRemoteAction">
+            <documentation>Service definition of function ns__makeRemoteAction</documentation>
+            <input message="tns:makeRemoteActionRequest"/>
+            <output message="tns:makeRemoteActionResponse"/>
+        </operation>
+
+    </portType>
+
+    <binding name="homesys" type="tns:homesysPortType">
+        <SOAP:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getCurrentTime">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getValue">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="switchPort">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="makeRemoteAction">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+
+
+    <service name="homesys">
+        <documentation>gSOAP 2.7.9k generated service definition</documentation>
+        <port name="homesys" binding="tns:homesys">
+            <SOAP:address location="http://192.168.1.39:1234"/>
+        </port>
+    </service>
 
 </definitions>
