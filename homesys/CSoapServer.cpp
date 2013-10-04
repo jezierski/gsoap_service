@@ -71,6 +71,33 @@ int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 comman
     return 0;
 }
 
+int CSoapServer::getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_1){
+    Blob null;
+    SDeviceDescription inputDevice;
+    inputDevice.category = static_cast<EDeviceCategory>(category);
+    Blob b = deviceManager->invokeRemoteAction(inputDevice, ACTION_LIST, null);
+    Devices devices = b[BLOB_DEVICES_LIST].get<Devices>();
+    vector<ns1__SDeviceDescription*> devicesPointers;
+//    for (int i = 0; i < 2; i++){
+    for (auto device : devices){
+        ns1__SDeviceDescription *dev = new ns1__SDeviceDescription();
+        dev->category = static_cast<LONG64>(device.category);
+        dev->GUID = device.guid;
+        dev->LUID = device.luid;
+        dev->name = device.name;
+        devicesPointers.push_back(dev);
+    }
+    cout<<"category: "<<category<<endl;
+    cout<<"devices cnt: "<<devicesPointers.size()<<endl;
+    struct ns1__getDevicesListResponse str;
+    str.result = new ns1__devicesList();
+    str.result->item = devicesPointers;
+    _param_1 = str;
+//    actionManager->addAction(action);
+//    delete device;
+//    cout << "makeRemoteAction, guid: " << device->GUID << ", luid: " << device->LUID << ", cat: " << device->category << ", comm: " << command << endl;
+    return 0;
+}
 
 void CSoapServer::start() {
     int error;

@@ -6,15 +6,21 @@
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
  xmlns:ns1="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl">
  <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-  <ns1:makeRemoteAction>
-   <device>
-    <GUID>0</GUID>
-    <LUID>0</LUID>
-    <category>0</category>
-    <name></name>
-   </device>
-   <command>0</command>
-   <params>0</params>
-  </ns1:makeRemoteAction>
+  <ns1:getDevicesListResponse>
+   <result>
+    <item>
+     <GUID>0</GUID>
+     <LUID>0</LUID>
+     <category>0</category>
+     <name></name>
+    </item>
+    <item>
+     <GUID>0</GUID>
+     <LUID>0</LUID>
+     <category>0</category>
+     <name></name>
+    </item>
+   </result>
+  </ns1:getDevicesListResponse>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

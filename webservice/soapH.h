@@ -598,7 +598,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_unsignedLONG64(struct soap*, const ULONG64 *,
 SOAP_FMAC3 ULONG64 * SOAP_FMAC4 soap_get_unsignedLONG64(struct soap*, ULONG64 *, const char*, const char*);
 
 #ifndef SOAP_TYPE_std__string
-#define SOAP_TYPE_std__string (53)
+#define SOAP_TYPE_std__string (54)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_std__string(struct soap*, std::string *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_std__string(struct soap*, const std::string *);
@@ -625,6 +625,32 @@ SOAP_FMAC3 std::string * SOAP_FMAC4 soap_get_std__string(struct soap*, std::stri
 
 SOAP_FMAC1 std::string * SOAP_FMAC2 soap_instantiate_std__string(struct soap*, int, const char*, const char*, size_t*);
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_std__string(struct soap*, int, int, void*, size_t, const void*, size_t);
+
+#ifndef SOAP_TYPE_ns1__devicesList
+#define SOAP_TYPE_ns1__devicesList (53)
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__devicesList(struct soap*, const char*, int, const ns1__devicesList *, const char*);
+SOAP_FMAC3 ns1__devicesList * SOAP_FMAC4 soap_in_ns1__devicesList(struct soap*, const char*, ns1__devicesList *, const char*);
+
+#ifndef soap_write_ns1__devicesList
+#define soap_write_ns1__devicesList(soap, data) ( soap_begin_send(soap) || ((data)->soap_serialize(soap), 0) || (data)->soap_put(soap, "ns1:devicesList", NULL) || soap_end_send(soap) )
+#endif
+
+
+#ifndef soap_read_ns1__devicesList
+#define soap_read_ns1__devicesList(soap, data) ( soap_begin_recv(soap) || !soap_get_ns1__devicesList(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 ns1__devicesList * SOAP_FMAC4 soap_get_ns1__devicesList(struct soap*, ns1__devicesList *, const char*, const char*);
+
+#define soap_new_ns1__devicesList(soap, n) soap_instantiate_ns1__devicesList(soap, n, NULL, NULL, NULL)
+
+
+#define soap_delete_ns1__devicesList(soap, p) soap_delete(soap, p)
+
+SOAP_FMAC1 ns1__devicesList * SOAP_FMAC2 soap_instantiate_ns1__devicesList(struct soap*, int, const char*, const char*, size_t*);
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__devicesList(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__SDeviceDescription
 #define SOAP_TYPE_ns1__SDeviceDescription (52)
@@ -731,7 +757,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_xsd__anyType(struct soap*, int, int, void*,
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (75)
+#define SOAP_TYPE_SOAP_ENV__Fault (82)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Fault(struct soap*, struct SOAP_ENV__Fault *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Fault(struct soap*, const struct SOAP_ENV__Fault *);
@@ -764,7 +790,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Fault(struct soap*, int, int, voi
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (74)
+#define SOAP_TYPE_SOAP_ENV__Reason (81)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Reason(struct soap*, struct SOAP_ENV__Reason *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Reason(struct soap*, const struct SOAP_ENV__Reason *);
@@ -797,7 +823,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Reason(struct soap*, int, int, vo
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (71)
+#define SOAP_TYPE_SOAP_ENV__Detail (78)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Detail(struct soap*, struct SOAP_ENV__Detail *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Detail(struct soap*, const struct SOAP_ENV__Detail *);
@@ -830,7 +856,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Detail(struct soap*, int, int, vo
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (69)
+#define SOAP_TYPE_SOAP_ENV__Code (76)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Code(struct soap*, struct SOAP_ENV__Code *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Code(struct soap*, const struct SOAP_ENV__Code *);
@@ -863,7 +889,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Code(struct soap*, int, int, void
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (68)
+#define SOAP_TYPE_SOAP_ENV__Header (75)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Header(struct soap*, struct SOAP_ENV__Header *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Header(struct soap*, const struct SOAP_ENV__Header *);
@@ -893,8 +919,66 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Header(struct soap*, int, int, vo
 
 #endif
 
+#ifndef SOAP_TYPE_ns1__getDevicesList
+#define SOAP_TYPE_ns1__getDevicesList (74)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getDevicesList(struct soap*, struct ns1__getDevicesList *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getDevicesList(struct soap*, const struct ns1__getDevicesList *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__getDevicesList(struct soap*, const char*, int, const struct ns1__getDevicesList *, const char*);
+SOAP_FMAC3 struct ns1__getDevicesList * SOAP_FMAC4 soap_in_ns1__getDevicesList(struct soap*, const char*, struct ns1__getDevicesList *, const char*);
+
+#ifndef soap_write_ns1__getDevicesList
+#define soap_write_ns1__getDevicesList(soap, data) ( soap_begin_send(soap) || (soap_serialize_ns1__getDevicesList(soap, data), 0) || soap_put_ns1__getDevicesList(soap, data, "ns1:getDevicesList", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__getDevicesList(struct soap*, const struct ns1__getDevicesList *, const char*, const char*);
+
+#ifndef soap_read_ns1__getDevicesList
+#define soap_read_ns1__getDevicesList(soap, data) ( soap_begin_recv(soap) || !soap_get_ns1__getDevicesList(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct ns1__getDevicesList * SOAP_FMAC4 soap_get_ns1__getDevicesList(struct soap*, struct ns1__getDevicesList *, const char*, const char*);
+
+#define soap_new_ns1__getDevicesList(soap, n) soap_instantiate_ns1__getDevicesList(soap, n, NULL, NULL, NULL)
+
+
+#define soap_delete_ns1__getDevicesList(soap, p) soap_delete(soap, p)
+
+SOAP_FMAC1 struct ns1__getDevicesList * SOAP_FMAC2 soap_instantiate_ns1__getDevicesList(struct soap*, int, const char*, const char*, size_t*);
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getDevicesList(struct soap*, int, int, void*, size_t, const void*, size_t);
+
+#ifndef SOAP_TYPE_ns1__getDevicesListResponse
+#define SOAP_TYPE_ns1__getDevicesListResponse (70)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getDevicesListResponse(struct soap*, struct ns1__getDevicesListResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getDevicesListResponse(struct soap*, const struct ns1__getDevicesListResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__getDevicesListResponse(struct soap*, const char*, int, const struct ns1__getDevicesListResponse *, const char*);
+SOAP_FMAC3 struct ns1__getDevicesListResponse * SOAP_FMAC4 soap_in_ns1__getDevicesListResponse(struct soap*, const char*, struct ns1__getDevicesListResponse *, const char*);
+
+#ifndef soap_write_ns1__getDevicesListResponse
+#define soap_write_ns1__getDevicesListResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize_ns1__getDevicesListResponse(soap, data), 0) || soap_put_ns1__getDevicesListResponse(soap, data, "ns1:getDevicesListResponse", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__getDevicesListResponse(struct soap*, const struct ns1__getDevicesListResponse *, const char*, const char*);
+
+#ifndef soap_read_ns1__getDevicesListResponse
+#define soap_read_ns1__getDevicesListResponse(soap, data) ( soap_begin_recv(soap) || !soap_get_ns1__getDevicesListResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct ns1__getDevicesListResponse * SOAP_FMAC4 soap_get_ns1__getDevicesListResponse(struct soap*, struct ns1__getDevicesListResponse *, const char*, const char*);
+
+#define soap_new_ns1__getDevicesListResponse(soap, n) soap_instantiate_ns1__getDevicesListResponse(soap, n, NULL, NULL, NULL)
+
+
+#define soap_delete_ns1__getDevicesListResponse(soap, p) soap_delete(soap, p)
+
+SOAP_FMAC1 struct ns1__getDevicesListResponse * SOAP_FMAC2 soap_instantiate_ns1__getDevicesListResponse(struct soap*, int, const char*, const char*, size_t*);
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getDevicesListResponse(struct soap*, int, int, void*, size_t, const void*, size_t);
+
 #ifndef SOAP_TYPE_ns1__makeRemoteAction
-#define SOAP_TYPE_ns1__makeRemoteAction (67)
+#define SOAP_TYPE_ns1__makeRemoteAction (69)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__makeRemoteAction(struct soap*, struct ns1__makeRemoteAction *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__makeRemoteAction(struct soap*, const struct ns1__makeRemoteAction *);
@@ -923,7 +1007,7 @@ SOAP_FMAC1 struct ns1__makeRemoteAction * SOAP_FMAC2 soap_instantiate_ns1__makeR
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__makeRemoteAction(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__makeRemoteActionResponse
-#define SOAP_TYPE_ns1__makeRemoteActionResponse (66)
+#define SOAP_TYPE_ns1__makeRemoteActionResponse (68)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__makeRemoteActionResponse(struct soap*, struct ns1__makeRemoteActionResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__makeRemoteActionResponse(struct soap*, const struct ns1__makeRemoteActionResponse *);
@@ -952,7 +1036,7 @@ SOAP_FMAC1 struct ns1__makeRemoteActionResponse * SOAP_FMAC2 soap_instantiate_ns
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__makeRemoteActionResponse(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__switchPort
-#define SOAP_TYPE_ns1__switchPort (63)
+#define SOAP_TYPE_ns1__switchPort (66)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__switchPort(struct soap*, struct ns1__switchPort *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__switchPort(struct soap*, const struct ns1__switchPort *);
@@ -981,7 +1065,7 @@ SOAP_FMAC1 struct ns1__switchPort * SOAP_FMAC2 soap_instantiate_ns1__switchPort(
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__switchPort(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__switchPortResponse
-#define SOAP_TYPE_ns1__switchPortResponse (62)
+#define SOAP_TYPE_ns1__switchPortResponse (65)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__switchPortResponse(struct soap*, struct ns1__switchPortResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__switchPortResponse(struct soap*, const struct ns1__switchPortResponse *);
@@ -1010,7 +1094,7 @@ SOAP_FMAC1 struct ns1__switchPortResponse * SOAP_FMAC2 soap_instantiate_ns1__swi
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__switchPortResponse(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__getValue
-#define SOAP_TYPE_ns1__getValue (60)
+#define SOAP_TYPE_ns1__getValue (63)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getValue(struct soap*, struct ns1__getValue *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getValue(struct soap*, const struct ns1__getValue *);
@@ -1039,7 +1123,7 @@ SOAP_FMAC1 struct ns1__getValue * SOAP_FMAC2 soap_instantiate_ns1__getValue(stru
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getValue(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__getValueResponse
-#define SOAP_TYPE_ns1__getValueResponse (59)
+#define SOAP_TYPE_ns1__getValueResponse (62)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getValueResponse(struct soap*, struct ns1__getValueResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getValueResponse(struct soap*, const struct ns1__getValueResponse *);
@@ -1068,7 +1152,7 @@ SOAP_FMAC1 struct ns1__getValueResponse * SOAP_FMAC2 soap_instantiate_ns1__getVa
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getValueResponse(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__getCurrentTime
-#define SOAP_TYPE_ns1__getCurrentTime (57)
+#define SOAP_TYPE_ns1__getCurrentTime (60)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getCurrentTime(struct soap*, struct ns1__getCurrentTime *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getCurrentTime(struct soap*, const struct ns1__getCurrentTime *);
@@ -1097,7 +1181,7 @@ SOAP_FMAC1 struct ns1__getCurrentTime * SOAP_FMAC2 soap_instantiate_ns1__getCurr
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getCurrentTime(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns1__getCurrentTimeResponse
-#define SOAP_TYPE_ns1__getCurrentTimeResponse (56)
+#define SOAP_TYPE_ns1__getCurrentTimeResponse (59)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getCurrentTimeResponse(struct soap*, struct ns1__getCurrentTimeResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getCurrentTimeResponse(struct soap*, const struct ns1__getCurrentTimeResponse *);
@@ -1128,7 +1212,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getCurrentTimeResponse(struct soap*, i
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Reason
-#define SOAP_TYPE_PointerToSOAP_ENV__Reason (77)
+#define SOAP_TYPE_PointerToSOAP_ENV__Reason (84)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Reason(struct soap*, struct SOAP_ENV__Reason *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Reason(struct soap*, const char *, int, struct SOAP_ENV__Reason *const*, const char *);
@@ -1151,7 +1235,7 @@ SOAP_FMAC3 struct SOAP_ENV__Reason ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Rea
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Detail
-#define SOAP_TYPE_PointerToSOAP_ENV__Detail (76)
+#define SOAP_TYPE_PointerToSOAP_ENV__Detail (83)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Detail(struct soap*, struct SOAP_ENV__Detail *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Detail(struct soap*, const char *, int, struct SOAP_ENV__Detail *const*, const char *);
@@ -1174,7 +1258,7 @@ SOAP_FMAC3 struct SOAP_ENV__Detail ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Det
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Code
-#define SOAP_TYPE_PointerToSOAP_ENV__Code (70)
+#define SOAP_TYPE_PointerToSOAP_ENV__Code (77)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Code(struct soap*, struct SOAP_ENV__Code *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Code(struct soap*, const char *, int, struct SOAP_ENV__Code *const*, const char *);
@@ -1194,8 +1278,27 @@ SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Code(
 
 #endif
 
+#ifndef SOAP_TYPE_PointerTons1__devicesList
+#define SOAP_TYPE_PointerTons1__devicesList (71)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons1__devicesList(struct soap*, ns1__devicesList *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons1__devicesList(struct soap*, const char *, int, ns1__devicesList *const*, const char *);
+SOAP_FMAC3 ns1__devicesList ** SOAP_FMAC4 soap_in_PointerTons1__devicesList(struct soap*, const char*, ns1__devicesList **, const char*);
+
+#ifndef soap_write_PointerTons1__devicesList
+#define soap_write_PointerTons1__devicesList(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTons1__devicesList(soap, data), 0) || soap_put_PointerTons1__devicesList(soap, data, "ns1:devicesList", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons1__devicesList(struct soap*, ns1__devicesList *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTons1__devicesList
+#define soap_read_PointerTons1__devicesList(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTons1__devicesList(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 ns1__devicesList ** SOAP_FMAC4 soap_get_PointerTons1__devicesList(struct soap*, ns1__devicesList **, const char*, const char*);
+
 #ifndef SOAP_TYPE_PointerTons1__SDeviceDescription
-#define SOAP_TYPE_PointerTons1__SDeviceDescription (64)
+#define SOAP_TYPE_PointerTons1__SDeviceDescription (55)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons1__SDeviceDescription(struct soap*, ns1__SDeviceDescription *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons1__SDeviceDescription(struct soap*, const char *, int, ns1__SDeviceDescription *const*, const char *);
@@ -1665,6 +1768,22 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_string(struct soap*, char *const*, const char
 #endif
 
 SOAP_FMAC3 char ** SOAP_FMAC4 soap_get_string(struct soap*, char **, const char*, const char*);
+
+#ifndef SOAP_TYPE_std__vectorTemplateOfPointerTons1__SDeviceDescription
+#define SOAP_TYPE_std__vectorTemplateOfPointerTons1__SDeviceDescription (56)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_std__vectorTemplateOfPointerTons1__SDeviceDescription(struct soap*, std::vector<ns1__SDeviceDescription * >*);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_std__vectorTemplateOfPointerTons1__SDeviceDescription(struct soap*, const std::vector<ns1__SDeviceDescription * >*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_std__vectorTemplateOfPointerTons1__SDeviceDescription(struct soap*, const char*, int, const std::vector<ns1__SDeviceDescription * >*, const char*);
+SOAP_FMAC3 std::vector<ns1__SDeviceDescription * >* SOAP_FMAC4 soap_in_std__vectorTemplateOfPointerTons1__SDeviceDescription(struct soap*, const char*, std::vector<ns1__SDeviceDescription * >*, const char*);
+
+#define soap_new_std__vectorTemplateOfPointerTons1__SDeviceDescription(soap, n) soap_instantiate_std__vectorTemplateOfPointerTons1__SDeviceDescription(soap, n, NULL, NULL, NULL)
+
+
+#define soap_delete_std__vectorTemplateOfPointerTons1__SDeviceDescription(soap, p) soap_delete(soap, p)
+
+SOAP_FMAC1 std::vector<ns1__SDeviceDescription * > * SOAP_FMAC2 soap_instantiate_std__vectorTemplateOfPointerTons1__SDeviceDescription(struct soap*, int, const char*, const char*, size_t*);
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_std__vectorTemplateOfPointerTons1__SDeviceDescription(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #endif
 

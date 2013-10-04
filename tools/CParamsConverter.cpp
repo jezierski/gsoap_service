@@ -44,8 +44,8 @@ Blob CParamsConverter::singleRGBvalueSet(long long params) {
 Blob CParamsConverter::allRGBvaluesSet(long long params) {
     Blob b;
     vector<unsigned int > rgbVals;
-    rgbVals.push_back(static_cast<unsigned int> ((params >> 32) & 0xfff));
     rgbVals.push_back(static_cast<unsigned int> ((params >> 24) & 0xfff));
+    rgbVals.push_back(static_cast<unsigned int> ((params >> 12) & 0xfff));
     rgbVals.push_back(static_cast<unsigned int> ((params >> 0) & 0xfff));
     b[BLOB_RGB_ALL].put < vector<unsigned int >> (rgbVals);
 

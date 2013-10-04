@@ -166,6 +166,7 @@ static int serve_ns1__getCurrentTime(homesysService*);
 static int serve_ns1__getValue(homesysService*);
 static int serve_ns1__switchPort(homesysService*);
 static int serve_ns1__makeRemoteAction(homesysService*);
+static int serve_ns1__getDevicesList(homesysService*);
 
 int homesysService::dispatch()
 {	soap_peek_element(this);
@@ -177,6 +178,8 @@ int homesysService::dispatch()
 		return serve_ns1__switchPort(this);
 	if (!soap_match_tag(this, this->tag, "ns1:makeRemoteAction"))
 		return serve_ns1__makeRemoteAction(this);
+	if (!soap_match_tag(this, this->tag, "ns1:getDevicesList"))
+		return serve_ns1__getDevicesList(this);
 	return this->error = SOAP_NO_METHOD;
 }
 
@@ -337,6 +340,47 @@ static int serve_ns1__makeRemoteAction(homesysService *soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_ns1__makeRemoteActionResponse(soap, &soap_tmp_ns1__makeRemoteActionResponse, "ns1:makeRemoteActionResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_ns1__getDevicesList(homesysService *soap)
+{	struct ns1__getDevicesList soap_tmp_ns1__getDevicesList;
+	struct ns1__getDevicesListResponse _param_1;
+	soap_default_ns1__getDevicesListResponse(soap, &_param_1);
+	soap_default_ns1__getDevicesList(soap, &soap_tmp_ns1__getDevicesList);
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	if (!soap_get_ns1__getDevicesList(soap, &soap_tmp_ns1__getDevicesList, "ns1:getDevicesList", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = soap->getDevicesList(soap_tmp_ns1__getDevicesList.category, _param_1);
+	if (soap->error)
+		return soap->error;
+	soap_serializeheader(soap);
+	soap_serialize_ns1__getDevicesListResponse(soap, &_param_1);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__getDevicesListResponse(soap, &_param_1, "ns1:getDevicesListResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__getDevicesListResponse(soap, &_param_1, "ns1:getDevicesListResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

@@ -111,6 +111,10 @@ public:
 };
 #endif
 
+#if 0 /* volatile type: do not declare here, declared elsewhere */
+
+#endif
+
 #ifndef SOAP_TYPE_ns1__SDeviceDescription
 #define SOAP_TYPE_ns1__SDeviceDescription (52)
 /* ns1:SDeviceDescription */
@@ -120,6 +124,7 @@ public:
 	LONG64 GUID;	/* required element of type xsd:integer */
 	LONG64 LUID;	/* required element of type xsd:integer */
 	LONG64 category;	/* required element of type xsd:integer */
+	std::string name;	/* required element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
 	virtual int soap_type() const { return 52; } /* = unique id SOAP_TYPE_ns1__SDeviceDescription */
@@ -134,12 +139,29 @@ public:
 };
 #endif
 
-#if 0 /* volatile type: do not declare here, declared elsewhere */
-
+#ifndef SOAP_TYPE_ns1__devicesList
+#define SOAP_TYPE_ns1__devicesList (53)
+/* ns1:devicesList */
+class SOAP_CMAC ns1__devicesList
+{
+public:
+	std::vector<ns1__SDeviceDescription * >item;	/* required element of type ns1:SDeviceDescription */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 53; } /* = unique id SOAP_TYPE_ns1__devicesList */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         ns1__devicesList() { ns1__devicesList::soap_default(NULL); }
+	virtual ~ns1__devicesList() { }
+};
 #endif
 
 #ifndef SOAP_TYPE_ns1__getCurrentTimeResponse
-#define SOAP_TYPE_ns1__getCurrentTimeResponse (56)
+#define SOAP_TYPE_ns1__getCurrentTimeResponse (59)
 /* ns1:getCurrentTimeResponse */
 struct ns1__getCurrentTimeResponse
 {
@@ -149,7 +171,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getCurrentTime
-#define SOAP_TYPE_ns1__getCurrentTime (57)
+#define SOAP_TYPE_ns1__getCurrentTime (60)
 /* ns1:getCurrentTime */
 struct ns1__getCurrentTime
 {
@@ -161,7 +183,7 @@ private:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getValueResponse
-#define SOAP_TYPE_ns1__getValueResponse (59)
+#define SOAP_TYPE_ns1__getValueResponse (62)
 /* ns1:getValueResponse */
 struct ns1__getValueResponse
 {
@@ -171,7 +193,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getValue
-#define SOAP_TYPE_ns1__getValue (60)
+#define SOAP_TYPE_ns1__getValue (63)
 /* ns1:getValue */
 struct ns1__getValue
 {
@@ -181,7 +203,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__switchPortResponse
-#define SOAP_TYPE_ns1__switchPortResponse (62)
+#define SOAP_TYPE_ns1__switchPortResponse (65)
 /* ns1:switchPortResponse */
 struct ns1__switchPortResponse
 {
@@ -191,7 +213,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__switchPort
-#define SOAP_TYPE_ns1__switchPort (63)
+#define SOAP_TYPE_ns1__switchPort (66)
 /* ns1:switchPort */
 struct ns1__switchPort
 {
@@ -201,7 +223,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteActionResponse
-#define SOAP_TYPE_ns1__makeRemoteActionResponse (66)
+#define SOAP_TYPE_ns1__makeRemoteActionResponse (68)
 /* ns1:makeRemoteActionResponse */
 struct ns1__makeRemoteActionResponse
 {
@@ -211,7 +233,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteAction
-#define SOAP_TYPE_ns1__makeRemoteAction (67)
+#define SOAP_TYPE_ns1__makeRemoteAction (69)
 /* ns1:makeRemoteAction */
 struct ns1__makeRemoteAction
 {
@@ -222,10 +244,30 @@ public:
 };
 #endif
 
+#ifndef SOAP_TYPE_ns1__getDevicesListResponse
+#define SOAP_TYPE_ns1__getDevicesListResponse (70)
+/* ns1:getDevicesListResponse */
+struct ns1__getDevicesListResponse
+{
+public:
+	ns1__devicesList *result;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type ns1:devicesList */
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__getDevicesList
+#define SOAP_TYPE_ns1__getDevicesList (74)
+/* ns1:getDevicesList */
+struct ns1__getDevicesList
+{
+public:
+	LONG64 category;	/* required element of type xsd:integer */
+};
+#endif
+
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (68)
+#define SOAP_TYPE_SOAP_ENV__Header (75)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
@@ -241,7 +283,7 @@ private:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (69)
+#define SOAP_TYPE_SOAP_ENV__Code (76)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -256,7 +298,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (71)
+#define SOAP_TYPE_SOAP_ENV__Detail (78)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -272,7 +314,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (74)
+#define SOAP_TYPE_SOAP_ENV__Reason (81)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
@@ -286,7 +328,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (75)
+#define SOAP_TYPE_SOAP_ENV__Fault (82)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {

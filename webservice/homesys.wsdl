@@ -16,14 +16,14 @@
     <types>
 
         <schema targetNamespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
-         xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-         xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-         xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
-         xmlns="http://www.w3.org/2001/XMLSchema"
-         elementFormDefault="unqualified"
-         attributeFormDefault="unqualified">
+                xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+                xmlns="http://www.w3.org/2001/XMLSchema"
+                elementFormDefault="unqualified"
+                attributeFormDefault="unqualified">
             <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
   
             <xsd:complexType name="SDeviceDescription">
@@ -31,7 +31,14 @@
                     <xsd:element minOccurs="1" maxOccurs="1" name="GUID" type="xsd:integer"/>
                     <xsd:element minOccurs="1" maxOccurs="1" name="LUID" type="xsd:integer"/>
                     <xsd:element minOccurs="1" maxOccurs="1" name="category" type="xsd:integer"/>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string"/>
                 </xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="devicesList">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" maxOccurs="unbounded" name="item" type="ns:SDeviceDescription"/>
+                </xsd:sequence>
             </xsd:complexType>
         </schema>
 
@@ -74,6 +81,15 @@
     <message name="makeRemoteActionResponse">
         <part name="result" type="xsd:string"/>
     </message>
+    
+    <!-- getDevicesList -->
+    <message name="getDevicesListRequest">
+        <part name="category" type="xsd:integer"/>
+    </message>
+
+    <message name="getDevicesListResponse">
+        <part name="result" type="ns:devicesList"/>
+    </message>
 
 
     <portType name="homesysPortType">
@@ -96,6 +112,11 @@
             <documentation>Service definition of function ns__makeRemoteAction</documentation>
             <input message="tns:makeRemoteActionRequest"/>
             <output message="tns:makeRemoteActionResponse"/>
+        </operation>
+        <operation name="getDevicesList">
+            <documentation>Service definition of function ns__getDevicesList</documentation>
+            <input message="tns:getDevicesListRequest"/>
+            <output message="tns:getDevicesListResponse"/>
         </operation>
 
     </portType>
@@ -130,6 +151,15 @@
             </output>
         </operation>
         <operation name="makeRemoteAction">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getDevicesList">
             <SOAP:operation style="rpc" soapAction=""/>
             <input>
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

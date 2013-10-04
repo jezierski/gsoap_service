@@ -90,5 +90,10 @@ class SOAP_CMAC homesysService : public soap
 	virtual	int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, std::string &result) SOAP_PURE_VIRTUAL{
             return SOAP_OK;
         }
+
+	/// Web service operation 'getDevicesList' (returns error code or SOAP_OK)
+	virtual	int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_1) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 };
 #endif
