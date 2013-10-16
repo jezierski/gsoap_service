@@ -115,8 +115,74 @@ public:
 
 #endif
 
+#ifndef SOAP_TYPE_ns1__responseType
+#define SOAP_TYPE_ns1__responseType (52)
+/* ns1:responseType */
+class SOAP_CMAC ns1__responseType
+{
+public:
+	std::string result;	/* required element of type xsd:string */
+	class ns1__valuesType *values;	/* required element of type ns1:valuesType */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 52; } /* = unique id SOAP_TYPE_ns1__responseType */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         ns1__responseType() { ns1__responseType::soap_default(NULL); }
+	virtual ~ns1__responseType() { }
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__valuesType
+#define SOAP_TYPE_ns1__valuesType (53)
+/* ns1:valuesType */
+class SOAP_CMAC ns1__valuesType
+{
+public:
+	std::string responseMessage;	/* required element of type xsd:string */
+	class ns1__valueType *values;	/* required element of type ns1:valueType */
+	LONG64 numValues;	/* required element of type xsd:integer */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 53; } /* = unique id SOAP_TYPE_ns1__valuesType */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         ns1__valuesType() { ns1__valuesType::soap_default(NULL); }
+	virtual ~ns1__valuesType() { }
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__valueType
+#define SOAP_TYPE_ns1__valueType (54)
+/* ns1:valueType */
+class SOAP_CMAC ns1__valueType
+{
+public:
+	std::vector<LONG64 >value;	/* required element of type xsd:integer */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 54; } /* = unique id SOAP_TYPE_ns1__valueType */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         ns1__valueType() { ns1__valueType::soap_default(NULL); }
+	virtual ~ns1__valueType() { }
+};
+#endif
+
 #ifndef SOAP_TYPE_ns1__SDeviceDescription
-#define SOAP_TYPE_ns1__SDeviceDescription (52)
+#define SOAP_TYPE_ns1__SDeviceDescription (55)
 /* ns1:SDeviceDescription */
 class SOAP_CMAC ns1__SDeviceDescription
 {
@@ -127,7 +193,7 @@ public:
 	std::string name;	/* required element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 52; } /* = unique id SOAP_TYPE_ns1__SDeviceDescription */
+	virtual int soap_type() const { return 55; } /* = unique id SOAP_TYPE_ns1__SDeviceDescription */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -140,7 +206,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__devicesList
-#define SOAP_TYPE_ns1__devicesList (53)
+#define SOAP_TYPE_ns1__devicesList (56)
 /* ns1:devicesList */
 class SOAP_CMAC ns1__devicesList
 {
@@ -148,7 +214,7 @@ public:
 	std::vector<ns1__SDeviceDescription * >item;	/* required element of type ns1:SDeviceDescription */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 53; } /* = unique id SOAP_TYPE_ns1__devicesList */
+	virtual int soap_type() const { return 56; } /* = unique id SOAP_TYPE_ns1__devicesList */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -161,7 +227,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getCurrentTimeResponse
-#define SOAP_TYPE_ns1__getCurrentTimeResponse (59)
+#define SOAP_TYPE_ns1__getCurrentTimeResponse (65)
 /* ns1:getCurrentTimeResponse */
 struct ns1__getCurrentTimeResponse
 {
@@ -171,7 +237,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getCurrentTime
-#define SOAP_TYPE_ns1__getCurrentTime (60)
+#define SOAP_TYPE_ns1__getCurrentTime (66)
 /* ns1:getCurrentTime */
 struct ns1__getCurrentTime
 {
@@ -183,7 +249,7 @@ private:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getValueResponse
-#define SOAP_TYPE_ns1__getValueResponse (62)
+#define SOAP_TYPE_ns1__getValueResponse (68)
 /* ns1:getValueResponse */
 struct ns1__getValueResponse
 {
@@ -193,7 +259,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getValue
-#define SOAP_TYPE_ns1__getValue (63)
+#define SOAP_TYPE_ns1__getValue (69)
 /* ns1:getValue */
 struct ns1__getValue
 {
@@ -203,7 +269,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__switchPortResponse
-#define SOAP_TYPE_ns1__switchPortResponse (65)
+#define SOAP_TYPE_ns1__switchPortResponse (71)
 /* ns1:switchPortResponse */
 struct ns1__switchPortResponse
 {
@@ -213,7 +279,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__switchPort
-#define SOAP_TYPE_ns1__switchPort (66)
+#define SOAP_TYPE_ns1__switchPort (72)
 /* ns1:switchPort */
 struct ns1__switchPort
 {
@@ -223,17 +289,17 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteActionResponse
-#define SOAP_TYPE_ns1__makeRemoteActionResponse (68)
+#define SOAP_TYPE_ns1__makeRemoteActionResponse (73)
 /* ns1:makeRemoteActionResponse */
 struct ns1__makeRemoteActionResponse
 {
 public:
-	std::string result;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* required element of type xsd:string */
+	ns1__responseType *response;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type ns1:responseType */
 };
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteAction
-#define SOAP_TYPE_ns1__makeRemoteAction (69)
+#define SOAP_TYPE_ns1__makeRemoteAction (77)
 /* ns1:makeRemoteAction */
 struct ns1__makeRemoteAction
 {
@@ -245,7 +311,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getDevicesListResponse
-#define SOAP_TYPE_ns1__getDevicesListResponse (70)
+#define SOAP_TYPE_ns1__getDevicesListResponse (78)
 /* ns1:getDevicesListResponse */
 struct ns1__getDevicesListResponse
 {
@@ -255,7 +321,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getDevicesList
-#define SOAP_TYPE_ns1__getDevicesList (74)
+#define SOAP_TYPE_ns1__getDevicesList (82)
 /* ns1:getDevicesList */
 struct ns1__getDevicesList
 {
@@ -267,7 +333,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (75)
+#define SOAP_TYPE_SOAP_ENV__Header (83)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
@@ -283,7 +349,7 @@ private:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (76)
+#define SOAP_TYPE_SOAP_ENV__Code (84)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -298,7 +364,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (78)
+#define SOAP_TYPE_SOAP_ENV__Detail (86)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -314,7 +380,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (81)
+#define SOAP_TYPE_SOAP_ENV__Reason (89)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
@@ -328,7 +394,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (82)
+#define SOAP_TYPE_SOAP_ENV__Fault (90)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {

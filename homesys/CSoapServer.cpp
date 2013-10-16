@@ -56,7 +56,7 @@ int CSoapServer::switchPort(string pinNo, string &result) {
     return SOAP_OK;
 }
 
-int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, string &result) {
+int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &response) {
     SAction action;
     action.command = command;
     action.params = converter->use(device->category, command, params);
@@ -64,7 +64,18 @@ int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 comman
     action.device.guid = device->GUID;
     action.device.luid = device->LUID;
     Blob b = deviceManager->invokeRemoteAction(action.device, action.command, action.params);
-    result = b[BLOB_TXT_RESPONSE].get<string>();
+    vector<LONG64>values = b[BLOB_RESPONSE_INT_VALUES].get<vector<LONG64>>();
+    
+    struct ns1__makeRemoteActionResponse responseTemp;
+    responseTemp.response = new ns1__responseType();
+    responseTemp.response->result = b[BLOB_TXT_RESPONSE_RESULT].get<string>();
+    responseTemp.response->values = new ns1__valuesType();
+    responseTemp.response->values->responseMessage = b[BLOB_TXT_RESPONSE_MSG].get<string>();
+    responseTemp.response->values->numValues = values.size();
+    responseTemp.response->values->values = new ns1__valueType();
+    responseTemp.response->values->values->value = values;
+    
+    response = responseTemp;
 //    actionManager->addAction(action);
 //    delete device;
     cout << "makeRemoteAction, guid: " << device->GUID << ", luid: " << device->LUID << ", cat: " << device->category << ", comm: " << command << endl;

@@ -20,7 +20,9 @@
 #define BLOB_DEVICE_NAME             "name"
 #define BLOB_RGB_CHANNEL             "rgb_ch"
 #define BLOB_RGB_ALL                 "rgb_all"
-#define BLOB_TXT_RESPONSE           "txt_response"
+#define BLOB_TXT_RESPONSE_RESULT     "txt_response"
+#define BLOB_TXT_RESPONSE_MSG        "txt_message"
+#define BLOB_RESPONSE_INT_VALUES     "vector"
 #define BLOB_DEVICES_LIST           "devices_list"
 
 

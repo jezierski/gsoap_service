@@ -184,7 +184,7 @@ Blob CDevice::checkDevicesAvailability() {
     }
     if (response == "")
         response = "OK";
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 
@@ -344,7 +344,7 @@ Blob CDevice::setDeviceName(SDeviceDescription description, string name) {
     } catch (string e) {
         response = "Cannot save device's name in database: " + e;
         log->error(response);
-        b[BLOB_TXT_RESPONSE].put<string>(response);
+        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
         return b;
     }
     b = synchronizeDeviceName(description, name, category, devicesDescriptionList);
@@ -357,13 +357,13 @@ Blob CDevice::synchronizeDeviceName(SDeviceDescription description, string name,
     for (SDeviceDescription &device : devicesList) {
         if (device.guid == description.guid && device.luid == description.luid && device.category == category) {
             device.name = name;
-            b[BLOB_TXT_RESPONSE].put<string>(response);
+            b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
             return b;
         }
     }
     response = "Cannot set name, no device found";
     log->error(response);
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 
@@ -453,7 +453,7 @@ Blob CDevice::executeAction(SDeviceDescription device, Command command, Blob par
     if (actionsMap.find(command) == actionsMap.end()) {
         response = "No function [" + to_string((int) command) + "] to invoke";
         log->warning(response);
-        b[BLOB_TXT_RESPONSE].put<string>(response);
+        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
         return b;
     }
     if (command < GLOBAL_ACTION_LIMIT) {
@@ -467,7 +467,7 @@ Blob CDevice::executeAction(SDeviceDescription device, Command command, Blob par
     }
     response = "Device " + to_string(device) + " not found";
     log->error(response);
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 
 }
@@ -486,7 +486,7 @@ Blob CDevice::reset(SDeviceDescription dev, Blob params) {
     Blob b;
     string response;
     response = (resetAddresses()) ? "OK" : "Reset devices failed";
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 
@@ -519,7 +519,7 @@ Blob CDevice::pingLogicalDevice(SDeviceDescription dev, Blob params) {
         response = "PING device " + to_string(dev) + " FAILED";
         log->error(response);
     }
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 
@@ -531,7 +531,7 @@ Blob CDevice::resetStatuses(SDeviceDescription dev, Blob params) {
     Blob b;
     string response;
     response = (resetAllDevicesStatus()) ? "OK" : "Reset device's [ "+ to_string(dev.category)+" ] statuses failed";
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 

@@ -34,7 +34,7 @@ Blob CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
     if (par.size() == 0) {
         response = "SimpleSwitchActor->setOutput->Incorrect params";
         log->error(response);
-        b[BLOB_TXT_RESPONSE].put<string>(response);
+        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
         return b;
     }
 
@@ -47,7 +47,7 @@ Blob CCanSimpleSwitchActor::setOutput(SDeviceDescription device, Blob params) {
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "SimpleSwitchActor->setOutput->Sending CAN frame failed";
     
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
    
 }

@@ -97,6 +97,7 @@ void CApplication::run() {
             cout << "rgbg\t - set RGB green" << endl;
             cout << "rgbb\t - set RGB blue" << endl;
             cout << "rgball\t - set RGB all" << endl;
+            cout << "rgbgetspeed\t - get RGB speed" << endl;
         }
         if (x == "db") {
             try { //@TODO objac trykaczem funkcje inicjalizacyjne
@@ -428,6 +429,23 @@ void CApplication::run() {
 
         }
 
+        if (x == "rgbgetspeed") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_RGB_DRIVER;
+
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b = deviceManager->invokeRemoteAction(s, ACTION_GET_SPEED, null);
+            cout <<"response: "<< b[BLOB_TXT_RESPONSE_RESULT].get<string>()<<endl;
+        }
+        
         if (x == "sensor") {
             SDeviceDescription s;
             cout << "guid ? ";

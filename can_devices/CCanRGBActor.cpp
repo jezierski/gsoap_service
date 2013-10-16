@@ -27,6 +27,7 @@ void CCanRGBActor::initActionMap() {
     addAction(this, ACTION_SET_CHANNEL_BLUE, &CCanRGBActor::setBlue);
     addAction(this, ACTION_SET_CHANNEL_GREEN, &CCanRGBActor::setGreen);
     addAction(this, ACTION_SET_CHANNEL_RED, &CCanRGBActor::setRed);
+    addAction(this, ACTION_GET_SPEED, &CCanRGBActor::getSpeed);
 }
 
 Blob CCanRGBActor::setMode(SDeviceDescription device, Blob params) {
@@ -36,7 +37,7 @@ Blob CCanRGBActor::setMode(SDeviceDescription device, Blob params) {
     if (par.size() == 0) {
         response = "RGBActor->setMode->Incorrect params";
         log->error(response);
-        b[BLOB_TXT_RESPONSE].put<string>(response);
+        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
         return b;
     }
     cout << "set mode: " << (int) par[0] << endl;
@@ -49,7 +50,7 @@ Blob CCanRGBActor::setMode(SDeviceDescription device, Blob params) {
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "RGBActor->setMode->Sending CAN frame failed";
 
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
 
     return b;
 
@@ -62,7 +63,7 @@ Blob CCanRGBActor::setSpeed(SDeviceDescription device, Blob params) {
     if (par.size() == 0) {
         response = "RGBActor->setSpeed->Incorrect params";
         log->error(response);
-        b[BLOB_TXT_RESPONSE].put<string>(response);
+        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
         return b;
     }
 
@@ -75,8 +76,31 @@ Blob CCanRGBActor::setSpeed(SDeviceDescription device, Blob params) {
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "RGBActor->setSpeed->Sending CAN frame failed";
 
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
 
+    return b;
+}
+
+Blob CCanRGBActor::getSpeed(SDeviceDescription device, Blob params) {
+    //    cout << "action getSensorSwitch SENSOR "<<to_string(device)<<endl;
+    CCanBuffer buffer;
+    Blob b;
+    string response;
+    vector<long long> values;
+    buffer.insertCommand(CMD_GET_SPEED);
+    buffer.insertId((unsigned char) getDeviceCategory());
+    buffer << (unsigned char) getAddress(device);
+    buffer.buildBuffer();
+    buffer = getProtocol()->request(buffer);
+    if (buffer.getLength() > 0) {
+        response = "OK";
+        values.push_back(buffer[OFFSET_DATA]);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        log->info("Device " + to_string(device) + " SPEED: " + to_string(values[0]) );
+    }else{
+        response = "RGBActor->getSpeed->Receiving CAN frame failed";
+    }
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 
@@ -93,7 +117,7 @@ Blob CCanRGBActor::setRed(SDeviceDescription device, Blob params) {
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "RGBActor->setRed->Sending CAN frame failed";
 
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
 
     return b;
 }
@@ -110,7 +134,7 @@ Blob CCanRGBActor::setGreen(SDeviceDescription device, Blob params) {
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "RGBActor->setGreen->Sending CAN frame failed";
 
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 
@@ -127,7 +151,7 @@ Blob CCanRGBActor::setBlue(SDeviceDescription device, Blob params) {
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "RGBActor->setBlue->Sending CAN frame failed";
 
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 
@@ -138,7 +162,7 @@ Blob CCanRGBActor::setRGB(SDeviceDescription device, Blob params) {
     if (values.size() != 3) {
         response = "SimpleSwitchActor->setRGB->Incorrect params";
         log->error(response);
-        b[BLOB_TXT_RESPONSE].put<string>(response);
+        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
         return b;
     }
 
@@ -154,6 +178,6 @@ Blob CCanRGBActor::setRGB(SDeviceDescription device, Blob params) {
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "RGBActor->setRGB->Sending CAN frame failed";
 
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }

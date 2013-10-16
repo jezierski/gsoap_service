@@ -43,7 +43,7 @@ Blob CCanSimpleSwitchSensor::getSwitchStatus(SDeviceDescription device, Blob par
     }else{
         response = "SimpleSwitchSensor->getSwitchStatus->Receiving CAN frame failed";
     }
-    b[BLOB_TXT_RESPONSE].put<string>(response);
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 

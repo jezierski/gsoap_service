@@ -26,6 +26,27 @@
                 attributeFormDefault="unqualified">
             <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
   
+            <xsd:complexType name="responseType">
+                <xsd:all minOccurs="1" maxOccurs="1">
+                    <xsd:element name="result" type="xsd:string"/>
+                    <xsd:element name="values" type="ns:valuesType"/>
+                </xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="valuesType">
+                <xsd:all minOccurs="1" maxOccurs="1">
+                    <xsd:element name="responseMessage" type="xsd:string"/>
+                    <xsd:element name="values" type="ns:valueType"/>
+                    <xsd:element name="numValues" type="xsd:integer"/>
+                </xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="valueType">
+                <xsd:sequence>
+                    <xsd:element name="value" type="xsd:integer" minOccurs="1" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+                        
             <xsd:complexType name="SDeviceDescription">
                 <xsd:all>
                     <xsd:element minOccurs="1" maxOccurs="1" name="GUID" type="xsd:integer"/>
@@ -79,7 +100,7 @@
     </message>
 
     <message name="makeRemoteActionResponse">
-        <part name="result" type="xsd:string"/>
+        <part name="response" type="ns:responseType"/>
     </message>
     
     <!-- getDevicesList -->

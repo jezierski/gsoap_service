@@ -7,7 +7,17 @@
  xmlns:ns1="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl">
  <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
   <ns1:makeRemoteActionResponse>
-   <result></result>
+   <response>
+    <result></result>
+    <values>
+     <responseMessage></responseMessage>
+     <values>
+      <value>0</value>
+      <value>0</value>
+     </values>
+     <numValues>0</numValues>
+    </values>
+   </response>
   </ns1:makeRemoteActionResponse>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
