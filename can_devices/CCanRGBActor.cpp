@@ -28,6 +28,7 @@ void CCanRGBActor::initActionMap() {
     addAction(this, ACTION_SET_CHANNEL_GREEN, &CCanRGBActor::setGreen);
     addAction(this, ACTION_SET_CHANNEL_RED, &CCanRGBActor::setRed);
     addAction(this, ACTION_GET_SPEED, &CCanRGBActor::getSpeed);
+    addAction(this, ACTION_GET_CHANNEL_RED, &CCanRGBActor::getRed);
 }
 
 Blob CCanRGBActor::setMode(SDeviceDescription device, Blob params) {
@@ -119,6 +120,32 @@ Blob CCanRGBActor::setRed(SDeviceDescription device, Blob params) {
 
     b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
 
+    return b;
+}
+
+Blob CCanRGBActor::getRed(SDeviceDescription device, Blob params) {
+    //    cout << "action getSensorSwitch SENSOR "<<to_string(device)<<endl;
+    CCanBuffer buffer;
+    Blob b;
+    string response;
+    vector<long long> values;
+    buffer.insertCommand(CMD_GET_CHANNEL_RED);
+    buffer.insertId((unsigned char) getDeviceCategory());
+    buffer << (unsigned char) getAddress(device);
+    buffer.buildBuffer();
+    buffer = getProtocol()->request(buffer);
+    if (buffer.getLength() > 0) {
+        response = "OK";
+        long long val = buffer[OFFSET_DATA] & 0x0f;
+        val <<= 8;
+        val |= buffer[OFFSET_DATA + 1];
+        values.push_back(val);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        log->info("Device " + to_string(device) + " CHANNEL_RED: " + to_string(values[0]) );
+    }else{
+        response = "RGBActor->getRed->Receiving CAN frame failed";
+    }
+    b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
 

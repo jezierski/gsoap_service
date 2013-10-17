@@ -59,6 +59,7 @@ private:
     Blob setRGB(SDeviceDescription device, Blob params);
     
     Blob getSpeed(SDeviceDescription device, Blob params);
+    Blob getRed(SDeviceDescription device, Blob params);
     void initActionMap();
 
 
