@@ -19,6 +19,8 @@
 #define BLOB_ACTION_PARAMETER        "param"
 #define BLOB_DEVICE_NAME             "name"
 #define BLOB_RGB_CHANNEL             "rgb_ch"
+#define BLOB_PWM_VALUE             "pwm_val"
+#define BLOB_PWM_CHANGE             "pwm_change"
 #define BLOB_RGB_ALL                 "rgb_all"
 #define BLOB_TXT_RESPONSE_RESULT     "txt_response"
 #define BLOB_TXT_RESPONSE_MSG        "txt_message"

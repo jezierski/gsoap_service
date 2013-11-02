@@ -135,6 +135,30 @@ can232/CCan232.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.s
 .PHONY : can232/CCan232.cpp.s
 
+can_devices/CCanPWMActor.o: can_devices/CCanPWMActor.cpp.o
+.PHONY : can_devices/CCanPWMActor.o
+
+# target to build an object file
+can_devices/CCanPWMActor.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanPWMActor.cpp.o
+.PHONY : can_devices/CCanPWMActor.cpp.o
+
+can_devices/CCanPWMActor.i: can_devices/CCanPWMActor.cpp.i
+.PHONY : can_devices/CCanPWMActor.i
+
+# target to preprocess a source file
+can_devices/CCanPWMActor.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanPWMActor.cpp.i
+.PHONY : can_devices/CCanPWMActor.cpp.i
+
+can_devices/CCanPWMActor.s: can_devices/CCanPWMActor.cpp.s
+.PHONY : can_devices/CCanPWMActor.s
+
+# target to generate assembly for a file
+can_devices/CCanPWMActor.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanPWMActor.cpp.s
+.PHONY : can_devices/CCanPWMActor.cpp.s
+
 can_devices/CCanRGBActor.o: can_devices/CCanRGBActor.cpp.o
 .PHONY : can_devices/CCanRGBActor.o
 
@@ -747,6 +771,9 @@ help:
 	@echo "... can232/CCan232.o"
 	@echo "... can232/CCan232.i"
 	@echo "... can232/CCan232.s"
+	@echo "... can_devices/CCanPWMActor.o"
+	@echo "... can_devices/CCanPWMActor.i"
+	@echo "... can_devices/CCanPWMActor.s"
 	@echo "... can_devices/CCanRGBActor.o"
 	@echo "... can_devices/CCanRGBActor.i"
 	@echo "... can_devices/CCanRGBActor.s"

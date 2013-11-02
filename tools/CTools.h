@@ -60,6 +60,8 @@ inline string to_string(EDeviceCategory category) {
             return "S_SIMPLE_SWITCH";
         case EDeviceCategory::A_RGB_DRIVER:
             return "A_RGB_DRIVER";
+        case EDeviceCategory::A_PWM_DRIVER:
+            return "A_PWM_DRIVER";
         case EDeviceCategory::MASTER:
             return "MASTER";
         case EDeviceCategory::OTHER:

@@ -28,22 +28,25 @@ void CApplication::run() {
 
     //        server.start();
 
-    CCanSimpleSwitchActor actorSwitch;
-    CCanSimpleSwitchSensor sensorSwitch;
-    CCanRGBActor rgbDriver;
+    CCanSimpleSwitchActor *actorSwitch = new CCanSimpleSwitchActor();
+    CCanSimpleSwitchSensor *sensorSwitch = new CCanSimpleSwitchSensor();
+    CCanRGBActor *rgbDriver = new CCanRGBActor();
+    CCanPWMActor *pwmDriver = new CCanPWMActor();
 
     try {
         soapServer = new CSoapServer();
         can232device = new CCan232();
         can232device->initCan232Device();
-        actorSwitch.setCommunicationProtocol(can232device);
-        sensorSwitch.setCommunicationProtocol(can232device);
-        rgbDriver.setCommunicationProtocol(can232device);
-
+        actorSwitch->setCommunicationProtocol(can232device);
+        sensorSwitch->setCommunicationProtocol(can232device);
+        rgbDriver->setCommunicationProtocol(can232device);
+        pwmDriver->setCommunicationProtocol(can232device);
+        
         deviceManager = new CDeviceManager();
-        deviceManager->addCategoryDevice(&actorSwitch);
-        deviceManager->addCategoryDevice(&sensorSwitch);
-        deviceManager->addCategoryDevice(&rgbDriver);
+        deviceManager->addCategoryDevice(actorSwitch);
+        deviceManager->addCategoryDevice(sensorSwitch);
+        deviceManager->addCategoryDevice(rgbDriver);
+        deviceManager->addCategoryDevice(pwmDriver);
 
 
         timer = new CTimer();
@@ -98,6 +101,14 @@ void CApplication::run() {
             cout << "rgbb\t - set RGB blue" << endl;
             cout << "rgball\t - set RGB all" << endl;
             cout << "rgbgetspeed\t - get RGB speed" << endl;
+            cout << "pwm\t - set PWM" << endl;
+            cout << "pwmget\t - get PWM" << endl;
+            cout << "pwmall\t - set all PWM" << endl;
+            cout << "pwmsame\t - set all the same PWM" << endl;
+            cout << "pwmup\t - increase PWM" << endl;
+            cout << "pwmdown\t - decrease PWM" << endl;
+            cout << "pwmupall\t - increase all PWM" << endl;
+            cout << "pwmdownall\t - decrease all PWM" << endl;
         }
         if (x == "db") {
             try { //@TODO objac trykaczem funkcje inicjalizacyjne
@@ -151,7 +162,7 @@ void CApplication::run() {
 
         if (x == "list") {
             SDeviceDescription s;
-            cout << "cat (0-all, 1-actor, 2-sensor, 3-RGB)? ";
+            cout << "cat (0-all, 1-actor, 2-sensor, 3-RGB, 4-PWM)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -163,6 +174,9 @@ void CApplication::run() {
                     break;
                 case 3:
                     s.category = EDeviceCategory::A_RGB_DRIVER;
+                    break;
+                case 4:
+                    s.category = EDeviceCategory::A_PWM_DRIVER;
                     break;
                 default:
                     s = global;
@@ -199,7 +213,7 @@ void CApplication::run() {
             cout << "luid ? ";
             unsigned int l;
             cin >> l;
-            cout << "cat (1-actor, 2-sensor, 3-rgb)? ";
+            cout << "cat (1-actor, 2-sensor, 3-rgb, 4-pwm)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -211,6 +225,9 @@ void CApplication::run() {
                     break;
                 case 3:
                     s.category = EDeviceCategory::A_RGB_DRIVER;
+                    break;
+                case 4:
+                    s.category = EDeviceCategory::A_PWM_DRIVER;
                     break;
             }
             s.guid = g;
@@ -245,7 +262,7 @@ void CApplication::run() {
             cout << "luid ? ";
             unsigned int l;
             cin >> l;
-            cout << "cat (1-actor, 2-sensor, 3-RGB)? ";
+            cout << "cat (1-actor, 2-sensor, 3-RGB, 4-PWM)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -256,6 +273,9 @@ void CApplication::run() {
                     s.category = EDeviceCategory::S_SIMPLE_SWITCH;
                 case 3:
                     s.category = EDeviceCategory::A_RGB_DRIVER;
+                    break;
+                case 4:
+                    s.category = EDeviceCategory::A_PWM_DRIVER;
                     break;
             }
             cout << "name ? ";
@@ -291,7 +311,7 @@ void CApplication::run() {
 
         }
 
-        if (x == "rgbr") {
+        if (x == "pwmget") {
             SDeviceDescription s;
             cout << "guid ? ";
             unsigned int g;
@@ -299,16 +319,229 @@ void CApplication::run() {
             cout << "luid ? ";
             unsigned int l;
             cin >> l;
-            s.category = EDeviceCategory::A_RGB_DRIVER;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
 
-            cout << "value ? (0-0xfff)";
-            unsigned int n;
-            cin >> n;
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_RGB_CHANNEL].put<unsigned int>(n);
-            deviceManager->invokeRemoteAction(s, ACTION_SET_CHANNEL_RED, b);
+            b = deviceManager->invokeRemoteAction(s, ACTION_GET_PWM, null);
+            cout << "response: " << b[BLOB_TXT_RESPONSE_RESULT].get<string>() << endl;
+        }
+        
+         if (x == "pwmdownall") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
+
+            cout << "value ? (0-255)";
+            int n;
+            cin >> n;
+            Params p;
+            p.push_back((unsigned char)n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_PWM_CHANGE].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_PWM_DOWN_ALL, b);
+
+        }
+        
+        if (x == "pwmupall") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
+
+            cout << "value ? (0-255)";
+            int n;
+            cin >> n;
+            Params p;
+            p.push_back((unsigned char)n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_PWM_CHANGE].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_PWM_UP_ALL, b);
+
+        }
+        
+        if (x == "pwmdown") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
+
+            cout << "value ? (0-255)";
+            int n;
+            cin >> n;
+            Params p;
+            p.push_back((unsigned char)n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_PWM_CHANGE].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_PWM_DOWN, b);
+
+        }
+
+        if (x == "pwmup") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
+
+            cout << "value ? (0-255)";
+            int n;
+            cin >> n;
+            Params p;
+            p.push_back((unsigned char)n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_PWM_CHANGE].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_PWM_UP, b);
+
+        }
+
+        if (x == "pwmsame") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
+
+            cout << "value ? (0-255)";
+           int n;
+            cin >> n;
+            Params p;
+            p.push_back((unsigned char)n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_PWM_VALUE].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_PWM_ALL_THE_SAME, b);
+
+        }
+
+
+        if (x == "pwmall") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            unsigned int l;
+            cout << "start luid ? ";
+            cin >> l;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
+
+            int n;
+            Params p;
+            cout << "value of 0? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 1? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 2? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 3? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 4? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_ACTION_PARAMETER].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_PWM_ALL, b);
+            p.clear();
+
+            cout << "start luid ? ";
+            cin >> l;
+            cout << "value of 5? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 6? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 7? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 8? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 9? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            s.luid = (unsigned char) l;
+            Blob b2;
+            b2[BLOB_ACTION_PARAMETER].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_PWM_ALL, b2);
+            p.clear();
+
+            cout << "start luid ? ";
+            cin >> l;
+            cout << "value of 10? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 11? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 12? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            cout << "value of 13? (0-255)";
+            cin >> n;
+            p.push_back((unsigned char)n);
+            s.luid = (unsigned char) l;
+            Blob b3;
+            b3[BLOB_ACTION_PARAMETER].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_PWM_ALL, b3);
+
+        }
+
+        if (x == "pwm") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_PWM_DRIVER;
+
+            cout << "value ? (0-255)";
+            int n;
+            cin >> n;
+            Params p;
+            p.push_back((unsigned char)n);
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            Blob b;
+            b[BLOB_PWM_VALUE].put<Params>(p);
+            deviceManager->invokeRemoteAction(s, ACTION_SET_PWM, b);
 
         }
 
@@ -443,9 +676,9 @@ void CApplication::run() {
             s.luid = (unsigned char) l;
             Blob b;
             b = deviceManager->invokeRemoteAction(s, ACTION_GET_SPEED, null);
-            cout <<"response: "<< b[BLOB_TXT_RESPONSE_RESULT].get<string>()<<endl;
+            cout << "response: " << b[BLOB_TXT_RESPONSE_RESULT].get<string>() << endl;
         }
-        
+
         if (x == "sensor") {
             SDeviceDescription s;
             cout << "guid ? ";

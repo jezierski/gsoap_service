@@ -44,6 +44,8 @@ tools/CParamsConverter.cpp
 can_devices/CCanSimpleSwitchActor.cpp
 can_devices/CCanSimpleSwitchSensor.cpp
 can_devices/CCanRGBActor.cpp
+can_devices/CCanPWMActor.cpp
+
         
 
 #webservice:
