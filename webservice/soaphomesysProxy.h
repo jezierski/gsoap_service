@@ -64,9 +64,13 @@ class SOAP_CMAC homesysProxy : public soap
 	virtual	int getCurrentTime(std::string &time) { return getCurrentTime(NULL, NULL, time); }
 	virtual	int getCurrentTime(const char *endpoint, const char *soap_action, std::string &time);
 
-	/// Web service operation 'getValue' (returns error code or SOAP_OK)
-	virtual	int getValue(std::string id, std::string &result) { return getValue(NULL, NULL, id, result); }
-	virtual	int getValue(const char *endpoint, const char *soap_action, std::string id, std::string &result);
+	/// Web service operation 'getXML' (returns error code or SOAP_OK)
+	virtual	int getXML(std::string id, std::string &result) { return getXML(NULL, NULL, id, result); }
+	virtual	int getXML(const char *endpoint, const char *soap_action, std::string id, std::string &result);
+
+	/// Web service operation 'saveXML' (returns error code or SOAP_OK)
+	virtual	int saveXML(std::string id, std::string body, std::string &result) { return saveXML(NULL, NULL, id, body, result); }
+	virtual	int saveXML(const char *endpoint, const char *soap_action, std::string id, std::string body, std::string &result);
 
 	/// Web service operation 'switchPort' (returns error code or SOAP_OK)
 	virtual	int switchPort(std::string pinNo, std::string &result) { return switchPort(NULL, NULL, pinNo, result); }

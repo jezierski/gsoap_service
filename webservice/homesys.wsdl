@@ -73,12 +73,22 @@
         <part name="time" type="xsd:string"/>
     </message>
 
-    <!-- getValue -->
-    <message name="getValueRequest">
+    <!-- getXML -->
+    <message name="getXMLRequest">
         <part name="id" type="xsd:string"/>
     </message>
 
-    <message name="getValueResponse">
+    <message name="getXMLResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
+    
+     <!-- save XML -->
+    <message name="saveXMLRequest">
+        <part name="id" type="xsd:string"/>
+        <part name="body" type="xsd:string"/>
+    </message>
+
+    <message name="saveXMLResponse">
         <part name="result" type="xsd:string"/>
     </message>
 
@@ -119,10 +129,15 @@
             <input message="tns:getCurrentTimeRequest"/>
             <output message="tns:getCurrentTimeResponse"/>
         </operation>
-        <operation name="getValue">
+        <operation name="getXML">
             <documentation>Service definition of function ns__getValue</documentation>
-            <input message="tns:getValueRequest"/>
-            <output message="tns:getValueResponse"/>
+            <input message="tns:getXMLRequest"/>
+            <output message="tns:getXMLResponse"/>
+        </operation>
+        <operation name="saveXML">
+            <documentation>Service definition of function ns__getValue</documentation>
+            <input message="tns:saveXMLRequest"/>
+            <output message="tns:saveXMLResponse"/>
         </operation>
         <operation name="switchPort">
             <documentation>Service definition of function ns__getValue</documentation>
@@ -153,7 +168,16 @@
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
-        <operation name="getValue">
+        <operation name="getXML">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+         <operation name="saveXML">
             <SOAP:operation style="rpc" soapAction=""/>
             <input>
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

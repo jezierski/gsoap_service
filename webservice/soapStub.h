@@ -248,28 +248,49 @@ private:
 };
 #endif
 
-#ifndef SOAP_TYPE_ns1__getValueResponse
-#define SOAP_TYPE_ns1__getValueResponse (68)
-/* ns1:getValueResponse */
-struct ns1__getValueResponse
+#ifndef SOAP_TYPE_ns1__getXMLResponse
+#define SOAP_TYPE_ns1__getXMLResponse (68)
+/* ns1:getXMLResponse */
+struct ns1__getXMLResponse
 {
 public:
 	std::string result;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* required element of type xsd:string */
 };
 #endif
 
-#ifndef SOAP_TYPE_ns1__getValue
-#define SOAP_TYPE_ns1__getValue (69)
-/* ns1:getValue */
-struct ns1__getValue
+#ifndef SOAP_TYPE_ns1__getXML
+#define SOAP_TYPE_ns1__getXML (69)
+/* ns1:getXML */
+struct ns1__getXML
 {
 public:
 	std::string id;	/* required element of type xsd:string */
 };
 #endif
 
+#ifndef SOAP_TYPE_ns1__saveXMLResponse
+#define SOAP_TYPE_ns1__saveXMLResponse (71)
+/* ns1:saveXMLResponse */
+struct ns1__saveXMLResponse
+{
+public:
+	std::string result;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* required element of type xsd:string */
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__saveXML
+#define SOAP_TYPE_ns1__saveXML (72)
+/* ns1:saveXML */
+struct ns1__saveXML
+{
+public:
+	std::string id;	/* required element of type xsd:string */
+	std::string body;	/* required element of type xsd:string */
+};
+#endif
+
 #ifndef SOAP_TYPE_ns1__switchPortResponse
-#define SOAP_TYPE_ns1__switchPortResponse (71)
+#define SOAP_TYPE_ns1__switchPortResponse (74)
 /* ns1:switchPortResponse */
 struct ns1__switchPortResponse
 {
@@ -279,7 +300,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__switchPort
-#define SOAP_TYPE_ns1__switchPort (72)
+#define SOAP_TYPE_ns1__switchPort (75)
 /* ns1:switchPort */
 struct ns1__switchPort
 {
@@ -289,7 +310,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteActionResponse
-#define SOAP_TYPE_ns1__makeRemoteActionResponse (73)
+#define SOAP_TYPE_ns1__makeRemoteActionResponse (76)
 /* ns1:makeRemoteActionResponse */
 struct ns1__makeRemoteActionResponse
 {
@@ -299,7 +320,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteAction
-#define SOAP_TYPE_ns1__makeRemoteAction (77)
+#define SOAP_TYPE_ns1__makeRemoteAction (80)
 /* ns1:makeRemoteAction */
 struct ns1__makeRemoteAction
 {
@@ -311,7 +332,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getDevicesListResponse
-#define SOAP_TYPE_ns1__getDevicesListResponse (78)
+#define SOAP_TYPE_ns1__getDevicesListResponse (81)
 /* ns1:getDevicesListResponse */
 struct ns1__getDevicesListResponse
 {
@@ -321,7 +342,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getDevicesList
-#define SOAP_TYPE_ns1__getDevicesList (82)
+#define SOAP_TYPE_ns1__getDevicesList (85)
 /* ns1:getDevicesList */
 struct ns1__getDevicesList
 {
@@ -333,7 +354,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (83)
+#define SOAP_TYPE_SOAP_ENV__Header (86)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
@@ -349,7 +370,7 @@ private:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (84)
+#define SOAP_TYPE_SOAP_ENV__Code (87)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -364,7 +385,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (86)
+#define SOAP_TYPE_SOAP_ENV__Detail (89)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -380,7 +401,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (89)
+#define SOAP_TYPE_SOAP_ENV__Reason (92)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
@@ -394,7 +415,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (90)
+#define SOAP_TYPE_SOAP_ENV__Fault (93)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {

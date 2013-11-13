@@ -19,6 +19,7 @@ void CApplication::assignSlots() {
         device->sensorEvent.Connect(actionTranslator, &CActionTranslator::updateDeviceState);
     }
     timer->timerEvent.Connect(actionTranslator, &CActionTranslator::updateTimerStack);
+    soapServer->operationLoad.Connect(actionTranslator, &CActionTranslator::loadOperations);
 }
 
 void CApplication::run() {

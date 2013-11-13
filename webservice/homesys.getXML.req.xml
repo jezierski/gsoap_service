@@ -6,8 +6,8 @@
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
  xmlns:ns1="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl">
  <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-  <ns1:getValue>
+  <ns1:getXML>
    <id></id>
-  </ns1:getValue>
+  </ns1:getXML>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

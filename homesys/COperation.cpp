@@ -61,7 +61,13 @@ void COperation::loadOperations() {
 
         operations.clear();
         SOperation operation;
+        if (not string(node->name()).compare("operations_list")){
+            node = node->first_node();
+        }else{
+            throw string("operation XML file wrong format");
+        }
         while (node != NULL) {
+            
             parseNode(node->name(), node, operation);
             addOperation(operation);
             clearOperation(operation);

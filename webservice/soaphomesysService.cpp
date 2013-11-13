@@ -163,7 +163,8 @@ int homesysService::serve()
 }
 
 static int serve_ns1__getCurrentTime(homesysService*);
-static int serve_ns1__getValue(homesysService*);
+static int serve_ns1__getXML(homesysService*);
+static int serve_ns1__saveXML(homesysService*);
 static int serve_ns1__switchPort(homesysService*);
 static int serve_ns1__makeRemoteAction(homesysService*);
 static int serve_ns1__getDevicesList(homesysService*);
@@ -172,8 +173,10 @@ int homesysService::dispatch()
 {	soap_peek_element(this);
 	if (!soap_match_tag(this, this->tag, "ns1:getCurrentTime"))
 		return serve_ns1__getCurrentTime(this);
-	if (!soap_match_tag(this, this->tag, "ns1:getValue"))
-		return serve_ns1__getValue(this);
+	if (!soap_match_tag(this, this->tag, "ns1:getXML"))
+		return serve_ns1__getXML(this);
+	if (!soap_match_tag(this, this->tag, "ns1:saveXML"))
+		return serve_ns1__saveXML(this);
 	if (!soap_match_tag(this, this->tag, "ns1:switchPort"))
 		return serve_ns1__switchPort(this);
 	if (!soap_match_tag(this, this->tag, "ns1:makeRemoteAction"))
@@ -224,30 +227,30 @@ static int serve_ns1__getCurrentTime(homesysService *soap)
 	return soap_closesock(soap);
 }
 
-static int serve_ns1__getValue(homesysService *soap)
-{	struct ns1__getValue soap_tmp_ns1__getValue;
-	struct ns1__getValueResponse soap_tmp_ns1__getValueResponse;
-	soap_default_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse);
-	soap_default_ns1__getValue(soap, &soap_tmp_ns1__getValue);
+static int serve_ns1__getXML(homesysService *soap)
+{	struct ns1__getXML soap_tmp_ns1__getXML;
+	struct ns1__getXMLResponse soap_tmp_ns1__getXMLResponse;
+	soap_default_ns1__getXMLResponse(soap, &soap_tmp_ns1__getXMLResponse);
+	soap_default_ns1__getXML(soap, &soap_tmp_ns1__getXML);
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
-	if (!soap_get_ns1__getValue(soap, &soap_tmp_ns1__getValue, "ns1:getValue", NULL))
+	if (!soap_get_ns1__getXML(soap, &soap_tmp_ns1__getXML, "ns1:getXML", NULL))
 		return soap->error;
 	if (soap_body_end_in(soap)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = soap->getValue(soap_tmp_ns1__getValue.id, soap_tmp_ns1__getValueResponse.result);
+	soap->error = soap->getXML(soap_tmp_ns1__getXML.id, soap_tmp_ns1__getXMLResponse.result);
 	if (soap->error)
 		return soap->error;
 	soap_serializeheader(soap);
-	soap_serialize_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse);
+	soap_serialize_ns1__getXMLResponse(soap, &soap_tmp_ns1__getXMLResponse);
 	if (soap_begin_count(soap))
 		return soap->error;
 	if (soap->mode & SOAP_IO_LENGTH)
 	{	if (soap_envelope_begin_out(soap)
 		 || soap_putheader(soap)
 		 || soap_body_begin_out(soap)
-		 || soap_put_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse, "ns1:getValueResponse", NULL)
+		 || soap_put_ns1__getXMLResponse(soap, &soap_tmp_ns1__getXMLResponse, "ns1:getXMLResponse", NULL)
 		 || soap_body_end_out(soap)
 		 || soap_envelope_end_out(soap))
 			 return soap->error;
@@ -257,7 +260,48 @@ static int serve_ns1__getValue(homesysService *soap)
 	 || soap_envelope_begin_out(soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
-	 || soap_put_ns1__getValueResponse(soap, &soap_tmp_ns1__getValueResponse, "ns1:getValueResponse", NULL)
+	 || soap_put_ns1__getXMLResponse(soap, &soap_tmp_ns1__getXMLResponse, "ns1:getXMLResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_ns1__saveXML(homesysService *soap)
+{	struct ns1__saveXML soap_tmp_ns1__saveXML;
+	struct ns1__saveXMLResponse soap_tmp_ns1__saveXMLResponse;
+	soap_default_ns1__saveXMLResponse(soap, &soap_tmp_ns1__saveXMLResponse);
+	soap_default_ns1__saveXML(soap, &soap_tmp_ns1__saveXML);
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	if (!soap_get_ns1__saveXML(soap, &soap_tmp_ns1__saveXML, "ns1:saveXML", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = soap->saveXML(soap_tmp_ns1__saveXML.id, soap_tmp_ns1__saveXML.body, soap_tmp_ns1__saveXMLResponse.result);
+	if (soap->error)
+		return soap->error;
+	soap_serializeheader(soap);
+	soap_serialize_ns1__saveXMLResponse(soap, &soap_tmp_ns1__saveXMLResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__saveXMLResponse(soap, &soap_tmp_ns1__saveXMLResponse, "ns1:saveXMLResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__saveXMLResponse(soap, &soap_tmp_ns1__saveXMLResponse, "ns1:saveXMLResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

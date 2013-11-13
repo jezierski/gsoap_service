@@ -15,6 +15,7 @@
 #include "../tools/CTools.h"
 #include "../tools/CParamsConverter.h"
 #include "CDeviceManager.h"
+#include <fstream>
 
 
 using namespace std;
@@ -31,13 +32,17 @@ public:
 
 
     int getCurrentTime(string &time);
-    int getValue(string id, string &result);
+    int getXML(string id, string &result);
+    int saveXML(std::string id, std::string body, std::string &result);
     int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_1);
     int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_1);
     
     int switchPort(string pinNo, string &result);
+    
+    Signal0<void> operationLoad;
 private:
 
+    string readFile(string filename);
     CLog *log;
     CParamsConverter *converter;
     CDeviceManager *deviceManager;

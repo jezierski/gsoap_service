@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- below actions are for tests-->
+<action_chains>
 <chain>
 	<action>
 		<actor guid="1375465699" luid="0" cat="1" param="101" val="01"/>
@@ -67,3 +68,4 @@
 		<actor guid="1379795960" luid="4" cat="1" param="101" val="01"/>
 	</reaction>
 </chain>
+</action_chains>

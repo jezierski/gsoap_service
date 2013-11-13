@@ -1,149 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- below operations are for tests-->
-<operation>
-	<condition>
-		<sensor guid="1375465699" luid="00" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1375465699" luid="0" cat="1" param="101" val="01"/>
-	</action>
+<operations_list>
+<operation name="operation2">
+<condition>
+<sensor guid="2222" luid="2" cat="123" param="101" comp="equal" val="00"/>
+</condition>
+<condition>
+<time comp="less" val="86340"/>
+</condition>
+<condition>
+<sensor guid="1379795960" luid="1" cat="100" param="5" comp="equal" val="05"/>
+</condition>
+<action>
+<actor guid="1378918046" luid="1" cat="2" param="106" val="05"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="01"/>
-	</condition>
-	<action>
-		<actor guid="1375465699" luid="0" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation3C">
+<condition>
+<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<condition>
+<sensor guid="2222222" luid="6" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<condition>
+<sensor guid="33333333" luid="7" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1375465699" luid="0" cat="1" param="101" val="00"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1375465699" luid="1" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation4">
+<condition>
+<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1375465699" luid="1" cat="1" param="101" val="01"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="01"/>
-	</condition>
-	<action>
-		<actor guid="1375465699" luid="1" cat="1" param="101" val="01"/>
-	</action>
+<operation name="operation5">
+<condition>
+<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<condition>
+<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1375465836" luid="3" cat="1" param="101" val="01"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<condition>
-		<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1375465836" luid="3" cat="1" param="101" val="01"/>
-	</action>
+<operation name="operation6">
+<condition>
+<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<condition>
+<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1375465836" luid="3" cat="1" param="101" val="00"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="01"/>
-	</condition>
-	<condition>
-		<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="01"/>
-	</condition>
-	<action>
-		<actor guid="1375465836" luid="3" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation7">
+<condition>
+<time comp="moreequal" val="75600"/>
+</condition>
+<condition>
+<time comp="less" val="75605"/>
+</condition>
+<action>
+<actor guid="1375465836" luid="0" cat="1" param="101" val="01"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<time comp="moreequal" val="75600"/>
-	</condition>
-	<condition>
-		<time comp="less" val="75605"/>
-	</condition>
-	<action>
-		<actor guid="1375465836" luid="0" cat="1" param="101" val="01"/>
-	</action>
+<operation name="operation8">
+<condition>
+<time comp="lessequal" val="75600"/>
+</condition>
+<condition>
+<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<condition>
+<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1375465836" luid="0" cat="1" param="101" val="00"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<time comp="lessequal" val="75600"/>
-	</condition>	
-	<condition>
-		<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<condition>
-		<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-
-	<action>
-		<actor guid="1375465836" luid="0" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation9">
+<condition>
+<sensor guid="1375465699" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465699" luid="00" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
-	</action>
+<operation name="operation10">
+<condition>
+<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1375465836" luid="1" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation11">
+<condition>
+<sensor guid="1379795960" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1379795960" luid="0" cat="1" param="101" val="00"/>
+</action>
 </operation>
-<!-- below operations are regular-->
-<operation>
-	<condition>
-		<sensor guid="1379795960" luid="0" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1379795960" luid="0" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation12">
+<condition>
+<sensor guid="1379795960" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1379795960" luid="0" cat="1" param="101" val="01"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1379795960" luid="0" cat="100" param="101" comp="equal" val="01"/>
-	</condition>
-	<action>
-		<actor guid="1379795960" luid="0" cat="1" param="101" val="01"/>
-	</action>
+<operation name="operation13">
+<condition>
+<sensor guid="1379795960" luid="1" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1379795960" luid="1" cat="1" param="101" val="00"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1379795960" luid="1" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1379795960" luid="1" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation14">
+<condition>
+<sensor guid="1379795960" luid="1" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1379795960" luid="1" cat="1" param="101" val="01"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1379795960" luid="1" cat="100" param="101" comp="equal" val="01"/>
-	</condition>
-	<action>
-		<actor guid="1379795960" luid="1" cat="1" param="101" val="01"/>
-	</action>
+<operation name="operation15">
+<condition>
+<sensor guid="1379795960" luid="2" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1379795960" luid="2" cat="100" param="101" comp="equal" val="00"/>
-	</condition>
-	<action>
-		<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
-	</action>
+<operation name="operation16">
+<condition>
+<sensor guid="1379795960" luid="2" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
+</action>
 </operation>
-<operation>
-	<condition>
-		<sensor guid="1379795960" luid="2" cat="100" param="101" comp="equal" val="01"/>
-	</condition>
-	<action>
-		<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
-	</action>
-</operation>
-
-
+</operations_list>

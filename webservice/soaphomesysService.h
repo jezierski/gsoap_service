@@ -76,8 +76,13 @@ class SOAP_CMAC homesysService : public soap
             return SOAP_OK;
         }
 
-	/// Web service operation 'getValue' (returns error code or SOAP_OK)
-	virtual	int getValue(std::string id, std::string &result) SOAP_PURE_VIRTUAL{
+	/// Web service operation 'getXML' (returns error code or SOAP_OK)
+	virtual	int getXML(std::string id, std::string &result) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
+
+	/// Web service operation 'saveXML' (returns error code or SOAP_OK)
+	virtual	int saveXML(std::string id, std::string body, std::string &result) SOAP_PURE_VIRTUAL{
             return SOAP_OK;
         }
 

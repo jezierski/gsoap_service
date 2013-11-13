@@ -58,6 +58,12 @@ void CActionsChain::loadActionsChain() {
 
         chains.clear();
         SChain chain;
+        
+        if (not string(node->name()).compare("action_chains")) {
+            node = node->first_node();
+        } else {
+            throw string("action_chain XML file wrong format");
+        }
         while (node != NULL) {
             parseNode(node->name(), node, chain);
             addChain(chain);
@@ -118,13 +124,13 @@ bool CActionsChain::isChainExist(SAction& action) {
         }
 
     }
-    
+
     return false;
 }
 
 bool CActionsChain::compareParams(Blob param1, Blob param2) {
-    long long  p1 = paramsToLL(param1[BLOB_ACTION_PARAMETER].get<Params>());
-    long long  p2 = paramsToLL(param2[BLOB_ACTION_PARAMETER].get<Params>());
+    long long p1 = paramsToLL(param1[BLOB_ACTION_PARAMETER].get<Params>());
+    long long p2 = paramsToLL(param2[BLOB_ACTION_PARAMETER].get<Params>());
     return p1 == p2;
 }
 
