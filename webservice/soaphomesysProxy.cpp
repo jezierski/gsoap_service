@@ -103,63 +103,6 @@ char *homesysProxy::soap_sprint_fault(char *buf, size_t len)
 }
 #endif
 
-int homesysProxy::getCurrentTime(const char *endpoint, const char *soap_action, std::string &time)
-{	struct soap *soap = this;
-	struct ns1__getCurrentTime soap_tmp_ns1__getCurrentTime;
-	struct ns1__getCurrentTimeResponse *soap_tmp_ns1__getCurrentTimeResponse;
-	if (endpoint)
-		soap_endpoint = endpoint;
-	if (!soap_endpoint)
-		soap_endpoint = "http://192.168.1.39:1234";
-	if (!soap_action)
-		soap_action = "";
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
-	soap_begin(soap);
-	soap_serializeheader(soap);
-	soap_serialize_ns1__getCurrentTime(soap, &soap_tmp_ns1__getCurrentTime);
-	if (soap_begin_count(soap))
-		return soap->error;
-	if (soap->mode & SOAP_IO_LENGTH)
-	{	if (soap_envelope_begin_out(soap)
-		 || soap_putheader(soap)
-		 || soap_body_begin_out(soap)
-		 || soap_put_ns1__getCurrentTime(soap, &soap_tmp_ns1__getCurrentTime, "ns1:getCurrentTime", NULL)
-		 || soap_body_end_out(soap)
-		 || soap_envelope_end_out(soap))
-			 return soap->error;
-	}
-	if (soap_end_count(soap))
-		return soap->error;
-	if (soap_connect(soap, soap_endpoint, soap_action)
-	 || soap_envelope_begin_out(soap)
-	 || soap_putheader(soap)
-	 || soap_body_begin_out(soap)
-	 || soap_put_ns1__getCurrentTime(soap, &soap_tmp_ns1__getCurrentTime, "ns1:getCurrentTime", NULL)
-	 || soap_body_end_out(soap)
-	 || soap_envelope_end_out(soap)
-	 || soap_end_send(soap))
-		return soap_closesock(soap);
-	if (!&time)
-		return soap_closesock(soap);
-	soap_default_std__string(soap, &time);
-	if (soap_begin_recv(soap)
-	 || soap_envelope_begin_in(soap)
-	 || soap_recv_header(soap)
-	 || soap_body_begin_in(soap))
-		return soap_closesock(soap);
-	if (soap_recv_fault(soap, 1))
-		return soap->error;
-	soap_tmp_ns1__getCurrentTimeResponse = soap_get_ns1__getCurrentTimeResponse(soap, NULL, "", "");
-	if (soap->error)
-		return soap_recv_fault(soap, 0);
-	if (soap_body_end_in(soap)
-	 || soap_envelope_end_in(soap)
-	 || soap_end_recv(soap))
-		return soap_closesock(soap);
-	time = soap_tmp_ns1__getCurrentTimeResponse->time;
-	return soap_closesock(soap);
-}
-
 int homesysProxy::getXML(const char *endpoint, const char *soap_action, std::string id, std::string &result)
 {	struct soap *soap = this;
 	struct ns1__getXML soap_tmp_ns1__getXML;
@@ -215,6 +158,65 @@ int homesysProxy::getXML(const char *endpoint, const char *soap_action, std::str
 	 || soap_end_recv(soap))
 		return soap_closesock(soap);
 	result = soap_tmp_ns1__getXMLResponse->result;
+	return soap_closesock(soap);
+}
+
+int homesysProxy::setDeviceName(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, std::string name, std::string &response)
+{	struct soap *soap = this;
+	struct ns1__setDeviceName soap_tmp_ns1__setDeviceName;
+	struct ns1__setDeviceNameResponse *soap_tmp_ns1__setDeviceNameResponse;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (!soap_endpoint)
+		soap_endpoint = "http://192.168.1.39:1234";
+	if (!soap_action)
+		soap_action = "";
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap_tmp_ns1__setDeviceName.device = device;
+	soap_tmp_ns1__setDeviceName.name = name;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize_ns1__setDeviceName(soap, &soap_tmp_ns1__setDeviceName);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__setDeviceName(soap, &soap_tmp_ns1__setDeviceName, "ns1:setDeviceName", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__setDeviceName(soap, &soap_tmp_ns1__setDeviceName, "ns1:setDeviceName", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&response)
+		return soap_closesock(soap);
+	soap_default_std__string(soap, &response);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	if (soap_recv_fault(soap, 1))
+		return soap->error;
+	soap_tmp_ns1__setDeviceNameResponse = soap_get_ns1__setDeviceNameResponse(soap, NULL, "", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	response = soap_tmp_ns1__setDeviceNameResponse->response;
 	return soap_closesock(soap);
 }
 

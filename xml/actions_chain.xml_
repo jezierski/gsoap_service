@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- below actions are for tests-->
+<action_chains>
+<chain>
+	<action>
+		<actor guid="1375465699" luid="0" cat="1" param="101" val="01"/>
+	</action>
+	<reaction>
+		<actor guid="1375465699" luid="1" cat="1" param="101" val="00"/>
+	</reaction>
+
+</chain>
+<chain>
+	<action>
+		<actor guid="1375465836" luid="3" cat="1" param="101" val="01"/>
+	</action>
+	<reaction>
+		<actor guid="1375465836" luid="0" cat="1" param="101" val="01"/>
+	</reaction>
+
+</chain>
+<!-- below actions are working-->
+<chain>
+	<action>
+		<actor guid="1379795960" luid="0" cat="1" param="101" val="00"/>
+	</action>
+	<reaction>
+		<actor guid="1379795960" luid="2" cat="1" param="101" val="00"/>
+	</reaction>
+</chain>
+<chain>
+	<action>
+		<actor guid="1379795960" luid="0" cat="1" param="101" val="01"/>
+	</action>
+	<reaction>
+		<actor guid="1379795960" luid="2" cat="1" param="101" val="01"/>
+	</reaction>
+</chain>
+<chain>
+	<action>
+		<actor guid="1379795960" luid="1" cat="1" param="101" val="00"/>
+	</action>
+	<reaction>
+		<actor guid="1379795960" luid="3" cat="1" param="101" val="00"/>
+	</reaction>
+</chain>
+<chain>
+	<action>
+		<actor guid="1379795960" luid="1" cat="1" param="101" val="01"/>
+	</action>
+	<reaction>
+		<actor guid="1379795960" luid="3" cat="1" param="101" val="01"/>
+	</reaction>
+</chain>
+<chain>
+	<action>
+		<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
+	</action>
+	<reaction>
+		<actor guid="1379795960" luid="4" cat="1" param="101" val="00"/>
+	</reaction>
+</chain>
+<chain>
+	<action>
+		<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
+	</action>
+	<reaction>
+		<actor guid="1379795960" luid="4" cat="1" param="101" val="01"/>
+	</reaction>
+</chain>
+</action_chains>

@@ -506,7 +506,7 @@ Blob CDevice::setName(SDeviceDescription dev, Blob params) {
     Blob b;
     string name = params[BLOB_DEVICE_NAME].get<string>();
     log->info("Set new name >> " + name + " << for device " + to_string(dev));
-    setDeviceName(dev, name);
+    b = setDeviceName(dev, name);
     return b;
 }
 

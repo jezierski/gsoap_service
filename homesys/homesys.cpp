@@ -2,7 +2,6 @@
 
 #include "homesys.h"
 
-#include "CActionsChain.h"
 
 CApplication::CApplication() {
     configuration = CConfiguration::getInstance();

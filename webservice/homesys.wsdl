@@ -65,14 +65,6 @@
 
     </types>
 
-    <!-- getCurrentTime -->
-    <message name="getCurrentTimeRequest">
-    </message>
-
-    <message name="getCurrentTimeResponse">
-        <part name="time" type="xsd:string"/>
-    </message>
-
     <!-- getXML -->
     <message name="getXMLRequest">
         <part name="id" type="xsd:string"/>
@@ -82,7 +74,7 @@
         <part name="result" type="xsd:string"/>
     </message>
     
-     <!-- save XML -->
+    <!-- save XML -->
     <message name="saveXMLRequest">
         <part name="id" type="xsd:string"/>
         <part name="body" type="xsd:string"/>
@@ -102,6 +94,16 @@
     </message>
 
 
+    <!-- setDeviceName -->
+    <message name="setDeviceNameRequest">
+        <part name="device" type="ns:SDeviceDescription"/>
+        <part name="name" type="xsd:string"/>
+    </message>
+
+    <message name="setDeviceNameResponse">
+        <part name="response" type="xsd:string"/>
+    </message>
+    
     <!-- makeRemoteAction -->
     <message name="makeRemoteActionRequest">
         <part name="device" type="ns:SDeviceDescription"/>
@@ -124,33 +126,27 @@
 
 
     <portType name="homesysPortType">
-        <operation name="getCurrentTime">
-            <documentation>Service definition of function ns__getCurrentTime</documentation>
-            <input message="tns:getCurrentTimeRequest"/>
-            <output message="tns:getCurrentTimeResponse"/>
-        </operation>
         <operation name="getXML">
-            <documentation>Service definition of function ns__getValue</documentation>
             <input message="tns:getXMLRequest"/>
             <output message="tns:getXMLResponse"/>
         </operation>
+        <operation name="setDeviceName">
+            <input message="tns:setDeviceNameRequest"/>
+            <output message="tns:setDeviceNameResponse"/>
+        </operation>
         <operation name="saveXML">
-            <documentation>Service definition of function ns__getValue</documentation>
             <input message="tns:saveXMLRequest"/>
             <output message="tns:saveXMLResponse"/>
         </operation>
         <operation name="switchPort">
-            <documentation>Service definition of function ns__getValue</documentation>
             <input message="tns:switchPortRequest"/>
             <output message="tns:switchPortResponse"/>
         </operation>
         <operation name="makeRemoteAction">
-            <documentation>Service definition of function ns__makeRemoteAction</documentation>
             <input message="tns:makeRemoteActionRequest"/>
             <output message="tns:makeRemoteActionResponse"/>
         </operation>
         <operation name="getDevicesList">
-            <documentation>Service definition of function ns__getDevicesList</documentation>
             <input message="tns:getDevicesListRequest"/>
             <output message="tns:getDevicesListResponse"/>
         </operation>
@@ -159,15 +155,7 @@
 
     <binding name="homesys" type="tns:homesysPortType">
         <SOAP:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="getCurrentTime">
-            <SOAP:operation style="rpc" soapAction=""/>
-            <input>
-                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </output>
-        </operation>
+       
         <operation name="getXML">
             <SOAP:operation style="rpc" soapAction=""/>
             <input>
@@ -177,7 +165,16 @@
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
-         <operation name="saveXML">
+        <operation name="setDeviceName">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="saveXML">
             <SOAP:operation style="rpc" soapAction=""/>
             <input>
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

@@ -31,7 +31,7 @@ public:
     void assignDeviceManager(CDeviceManager* deviceManager);
 
 
-    int getCurrentTime(string &time);
+    int setDeviceName(ns1__SDeviceDescription *device, std::string name, std::string &response);
     int getXML(string id, string &result);
     int saveXML(std::string id, std::string body, std::string &result);
     int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_1);

@@ -43,14 +43,6 @@ string CSoapServer::readFile(string filename) {
     return text;
 }
 
-int CSoapServer::getCurrentTime(string& currentTime) {
-    time_t rawtime;
-    time(&rawtime);
-    string strTime(ctime(&rawtime));
-    currentTime = strTime;
-    return SOAP_OK;
-}
-
 int CSoapServer::getXML(string id, string &result) {
     string fileName = "";
 
@@ -101,7 +93,11 @@ int CSoapServer::saveXML(std::string id, std::string body, std::string &result) 
             f << body;
             f.close();
             result = "OK";
-            operationLoad();
+            if (!id.compare("operations")) {
+                operationLoad();
+            } else if (!id.compare("chains")) {
+                deviceManager->loadActionsChain();
+            }
         } else {
             result = "No file " + fileName + " found";
         }
@@ -131,6 +127,21 @@ int CSoapServer::switchPort(string pinNo, string & result) {
     }
     gpio.unexport_gpio();
 
+    return SOAP_OK;
+}
+
+int CSoapServer::setDeviceName(ns1__SDeviceDescription *device, std::string name, std::string &response) {
+    SDeviceDescription s;
+    s.category = static_cast<EDeviceCategory> (device->category);
+
+    s.guid = device->GUID;
+    s.luid = device->LUID;
+    Blob b;
+    b[BLOB_DEVICE_NAME].put<string>(name);
+    Blob resp = deviceManager->invokeRemoteAction(s, ACTION_SET_NAME, b);
+
+
+    response = resp[BLOB_TXT_RESPONSE_RESULT].get <string> ();
     return SOAP_OK;
 }
 

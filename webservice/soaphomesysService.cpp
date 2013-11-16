@@ -162,8 +162,8 @@ int homesysService::serve()
 	return SOAP_OK;
 }
 
-static int serve_ns1__getCurrentTime(homesysService*);
 static int serve_ns1__getXML(homesysService*);
+static int serve_ns1__setDeviceName(homesysService*);
 static int serve_ns1__saveXML(homesysService*);
 static int serve_ns1__switchPort(homesysService*);
 static int serve_ns1__makeRemoteAction(homesysService*);
@@ -171,10 +171,10 @@ static int serve_ns1__getDevicesList(homesysService*);
 
 int homesysService::dispatch()
 {	soap_peek_element(this);
-	if (!soap_match_tag(this, this->tag, "ns1:getCurrentTime"))
-		return serve_ns1__getCurrentTime(this);
 	if (!soap_match_tag(this, this->tag, "ns1:getXML"))
 		return serve_ns1__getXML(this);
+	if (!soap_match_tag(this, this->tag, "ns1:setDeviceName"))
+		return serve_ns1__setDeviceName(this);
 	if (!soap_match_tag(this, this->tag, "ns1:saveXML"))
 		return serve_ns1__saveXML(this);
 	if (!soap_match_tag(this, this->tag, "ns1:switchPort"))
@@ -184,47 +184,6 @@ int homesysService::dispatch()
 	if (!soap_match_tag(this, this->tag, "ns1:getDevicesList"))
 		return serve_ns1__getDevicesList(this);
 	return this->error = SOAP_NO_METHOD;
-}
-
-static int serve_ns1__getCurrentTime(homesysService *soap)
-{	struct ns1__getCurrentTime soap_tmp_ns1__getCurrentTime;
-	struct ns1__getCurrentTimeResponse soap_tmp_ns1__getCurrentTimeResponse;
-	soap_default_ns1__getCurrentTimeResponse(soap, &soap_tmp_ns1__getCurrentTimeResponse);
-	soap_default_ns1__getCurrentTime(soap, &soap_tmp_ns1__getCurrentTime);
-	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
-	if (!soap_get_ns1__getCurrentTime(soap, &soap_tmp_ns1__getCurrentTime, "ns1:getCurrentTime", NULL))
-		return soap->error;
-	if (soap_body_end_in(soap)
-	 || soap_envelope_end_in(soap)
-	 || soap_end_recv(soap))
-		return soap->error;
-	soap->error = soap->getCurrentTime(soap_tmp_ns1__getCurrentTimeResponse.time);
-	if (soap->error)
-		return soap->error;
-	soap_serializeheader(soap);
-	soap_serialize_ns1__getCurrentTimeResponse(soap, &soap_tmp_ns1__getCurrentTimeResponse);
-	if (soap_begin_count(soap))
-		return soap->error;
-	if (soap->mode & SOAP_IO_LENGTH)
-	{	if (soap_envelope_begin_out(soap)
-		 || soap_putheader(soap)
-		 || soap_body_begin_out(soap)
-		 || soap_put_ns1__getCurrentTimeResponse(soap, &soap_tmp_ns1__getCurrentTimeResponse, "ns1:getCurrentTimeResponse", NULL)
-		 || soap_body_end_out(soap)
-		 || soap_envelope_end_out(soap))
-			 return soap->error;
-	};
-	if (soap_end_count(soap)
-	 || soap_response(soap, SOAP_OK)
-	 || soap_envelope_begin_out(soap)
-	 || soap_putheader(soap)
-	 || soap_body_begin_out(soap)
-	 || soap_put_ns1__getCurrentTimeResponse(soap, &soap_tmp_ns1__getCurrentTimeResponse, "ns1:getCurrentTimeResponse", NULL)
-	 || soap_body_end_out(soap)
-	 || soap_envelope_end_out(soap)
-	 || soap_end_send(soap))
-		return soap->error;
-	return soap_closesock(soap);
 }
 
 static int serve_ns1__getXML(homesysService *soap)
@@ -261,6 +220,47 @@ static int serve_ns1__getXML(homesysService *soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_ns1__getXMLResponse(soap, &soap_tmp_ns1__getXMLResponse, "ns1:getXMLResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_ns1__setDeviceName(homesysService *soap)
+{	struct ns1__setDeviceName soap_tmp_ns1__setDeviceName;
+	struct ns1__setDeviceNameResponse soap_tmp_ns1__setDeviceNameResponse;
+	soap_default_ns1__setDeviceNameResponse(soap, &soap_tmp_ns1__setDeviceNameResponse);
+	soap_default_ns1__setDeviceName(soap, &soap_tmp_ns1__setDeviceName);
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	if (!soap_get_ns1__setDeviceName(soap, &soap_tmp_ns1__setDeviceName, "ns1:setDeviceName", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = soap->setDeviceName(soap_tmp_ns1__setDeviceName.device, soap_tmp_ns1__setDeviceName.name, soap_tmp_ns1__setDeviceNameResponse.response);
+	if (soap->error)
+		return soap->error;
+	soap_serializeheader(soap);
+	soap_serialize_ns1__setDeviceNameResponse(soap, &soap_tmp_ns1__setDeviceNameResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__setDeviceNameResponse(soap, &soap_tmp_ns1__setDeviceNameResponse, "ns1:setDeviceNameResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__setDeviceNameResponse(soap, &soap_tmp_ns1__setDeviceNameResponse, "ns1:setDeviceNameResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

@@ -226,30 +226,8 @@ public:
 };
 #endif
 
-#ifndef SOAP_TYPE_ns1__getCurrentTimeResponse
-#define SOAP_TYPE_ns1__getCurrentTimeResponse (65)
-/* ns1:getCurrentTimeResponse */
-struct ns1__getCurrentTimeResponse
-{
-public:
-	std::string time;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* required element of type xsd:string */
-};
-#endif
-
-#ifndef SOAP_TYPE_ns1__getCurrentTime
-#define SOAP_TYPE_ns1__getCurrentTime (66)
-/* ns1:getCurrentTime */
-struct ns1__getCurrentTime
-{
-#ifdef WITH_NOEMPTYSTRUCT
-private:
-	char dummy;	/* dummy member to enable compilation */
-#endif
-};
-#endif
-
 #ifndef SOAP_TYPE_ns1__getXMLResponse
-#define SOAP_TYPE_ns1__getXMLResponse (68)
+#define SOAP_TYPE_ns1__getXMLResponse (65)
 /* ns1:getXMLResponse */
 struct ns1__getXMLResponse
 {
@@ -259,12 +237,33 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getXML
-#define SOAP_TYPE_ns1__getXML (69)
+#define SOAP_TYPE_ns1__getXML (66)
 /* ns1:getXML */
 struct ns1__getXML
 {
 public:
 	std::string id;	/* required element of type xsd:string */
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__setDeviceNameResponse
+#define SOAP_TYPE_ns1__setDeviceNameResponse (68)
+/* ns1:setDeviceNameResponse */
+struct ns1__setDeviceNameResponse
+{
+public:
+	std::string response;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* required element of type xsd:string */
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__setDeviceName
+#define SOAP_TYPE_ns1__setDeviceName (69)
+/* ns1:setDeviceName */
+struct ns1__setDeviceName
+{
+public:
+	ns1__SDeviceDescription *device;	/* optional element of type ns1:SDeviceDescription */
+	std::string name;	/* required element of type xsd:string */
 };
 #endif
 

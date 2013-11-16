@@ -15,7 +15,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2013-11-13 08:08:25 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2013-11-16 08:18:29 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -273,14 +273,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_ns1__saveXML(soap, NULL, NULL, "ns1:saveXML");
 	case SOAP_TYPE_ns1__saveXMLResponse:
 		return soap_in_ns1__saveXMLResponse(soap, NULL, NULL, "ns1:saveXMLResponse");
+	case SOAP_TYPE_ns1__setDeviceName:
+		return soap_in_ns1__setDeviceName(soap, NULL, NULL, "ns1:setDeviceName");
+	case SOAP_TYPE_ns1__setDeviceNameResponse:
+		return soap_in_ns1__setDeviceNameResponse(soap, NULL, NULL, "ns1:setDeviceNameResponse");
 	case SOAP_TYPE_ns1__getXML:
 		return soap_in_ns1__getXML(soap, NULL, NULL, "ns1:getXML");
 	case SOAP_TYPE_ns1__getXMLResponse:
 		return soap_in_ns1__getXMLResponse(soap, NULL, NULL, "ns1:getXMLResponse");
-	case SOAP_TYPE_ns1__getCurrentTime:
-		return soap_in_ns1__getCurrentTime(soap, NULL, NULL, "ns1:getCurrentTime");
-	case SOAP_TYPE_ns1__getCurrentTimeResponse:
-		return soap_in_ns1__getCurrentTimeResponse(soap, NULL, NULL, "ns1:getCurrentTimeResponse");
 	case SOAP_TYPE_PointerTons1__devicesList:
 		return soap_in_PointerTons1__devicesList(soap, NULL, NULL, "ns1:devicesList");
 	case SOAP_TYPE_PointerTons1__responseType:
@@ -535,6 +535,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		{	*type = SOAP_TYPE_ns1__saveXMLResponse;
 			return soap_in_ns1__saveXMLResponse(soap, NULL, NULL, NULL);
 		}
+		if (!soap_match_tag(soap, t, "ns1:setDeviceName"))
+		{	*type = SOAP_TYPE_ns1__setDeviceName;
+			return soap_in_ns1__setDeviceName(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:setDeviceNameResponse"))
+		{	*type = SOAP_TYPE_ns1__setDeviceNameResponse;
+			return soap_in_ns1__setDeviceNameResponse(soap, NULL, NULL, NULL);
+		}
 		if (!soap_match_tag(soap, t, "ns1:getXML"))
 		{	*type = SOAP_TYPE_ns1__getXML;
 			return soap_in_ns1__getXML(soap, NULL, NULL, NULL);
@@ -542,14 +550,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "ns1:getXMLResponse"))
 		{	*type = SOAP_TYPE_ns1__getXMLResponse;
 			return soap_in_ns1__getXMLResponse(soap, NULL, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "ns1:getCurrentTime"))
-		{	*type = SOAP_TYPE_ns1__getCurrentTime;
-			return soap_in_ns1__getCurrentTime(soap, NULL, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "ns1:getCurrentTimeResponse"))
-		{	*type = SOAP_TYPE_ns1__getCurrentTimeResponse;
-			return soap_in_ns1__getCurrentTimeResponse(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "xsd:token"))
 		{	char **s;
@@ -809,14 +809,14 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_ns1__saveXML(soap, tag, id, (const struct ns1__saveXML *)ptr, "ns1:saveXML");
 	case SOAP_TYPE_ns1__saveXMLResponse:
 		return soap_out_ns1__saveXMLResponse(soap, tag, id, (const struct ns1__saveXMLResponse *)ptr, "ns1:saveXMLResponse");
+	case SOAP_TYPE_ns1__setDeviceName:
+		return soap_out_ns1__setDeviceName(soap, tag, id, (const struct ns1__setDeviceName *)ptr, "ns1:setDeviceName");
+	case SOAP_TYPE_ns1__setDeviceNameResponse:
+		return soap_out_ns1__setDeviceNameResponse(soap, tag, id, (const struct ns1__setDeviceNameResponse *)ptr, "ns1:setDeviceNameResponse");
 	case SOAP_TYPE_ns1__getXML:
 		return soap_out_ns1__getXML(soap, tag, id, (const struct ns1__getXML *)ptr, "ns1:getXML");
 	case SOAP_TYPE_ns1__getXMLResponse:
 		return soap_out_ns1__getXMLResponse(soap, tag, id, (const struct ns1__getXMLResponse *)ptr, "ns1:getXMLResponse");
-	case SOAP_TYPE_ns1__getCurrentTime:
-		return soap_out_ns1__getCurrentTime(soap, tag, id, (const struct ns1__getCurrentTime *)ptr, "ns1:getCurrentTime");
-	case SOAP_TYPE_ns1__getCurrentTimeResponse:
-		return soap_out_ns1__getCurrentTimeResponse(soap, tag, id, (const struct ns1__getCurrentTimeResponse *)ptr, "ns1:getCurrentTimeResponse");
 	case SOAP_TYPE_PointerTons1__devicesList:
 		return soap_out_PointerTons1__devicesList(soap, tag, id, (ns1__devicesList *const*)ptr, "ns1:devicesList");
 	case SOAP_TYPE_PointerTons1__responseType:
@@ -933,17 +933,17 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_ns1__saveXMLResponse:
 		soap_serialize_ns1__saveXMLResponse(soap, (const struct ns1__saveXMLResponse *)ptr);
 		break;
+	case SOAP_TYPE_ns1__setDeviceName:
+		soap_serialize_ns1__setDeviceName(soap, (const struct ns1__setDeviceName *)ptr);
+		break;
+	case SOAP_TYPE_ns1__setDeviceNameResponse:
+		soap_serialize_ns1__setDeviceNameResponse(soap, (const struct ns1__setDeviceNameResponse *)ptr);
+		break;
 	case SOAP_TYPE_ns1__getXML:
 		soap_serialize_ns1__getXML(soap, (const struct ns1__getXML *)ptr);
 		break;
 	case SOAP_TYPE_ns1__getXMLResponse:
 		soap_serialize_ns1__getXMLResponse(soap, (const struct ns1__getXMLResponse *)ptr);
-		break;
-	case SOAP_TYPE_ns1__getCurrentTime:
-		soap_serialize_ns1__getCurrentTime(soap, (const struct ns1__getCurrentTime *)ptr);
-		break;
-	case SOAP_TYPE_ns1__getCurrentTimeResponse:
-		soap_serialize_ns1__getCurrentTimeResponse(soap, (const struct ns1__getCurrentTimeResponse *)ptr);
 		break;
 	case SOAP_TYPE_PointerTons1__devicesList:
 		soap_serialize_PointerTons1__devicesList(soap, (ns1__devicesList *const*)ptr);
@@ -1044,14 +1044,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 		return (void*)soap_instantiate_ns1__SDeviceDescription(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__devicesList:
 		return (void*)soap_instantiate_ns1__devicesList(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns1__getCurrentTimeResponse:
-		return (void*)soap_instantiate_ns1__getCurrentTimeResponse(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns1__getCurrentTime:
-		return (void*)soap_instantiate_ns1__getCurrentTime(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__getXMLResponse:
 		return (void*)soap_instantiate_ns1__getXMLResponse(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__getXML:
 		return (void*)soap_instantiate_ns1__getXML(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__setDeviceNameResponse:
+		return (void*)soap_instantiate_ns1__setDeviceNameResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__setDeviceName:
+		return (void*)soap_instantiate_ns1__setDeviceName(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__saveXMLResponse:
 		return (void*)soap_instantiate_ns1__saveXMLResponse(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__saveXML:
@@ -1153,18 +1153,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 		else
 			SOAP_DELETE_ARRAY((ns1__devicesList*)p->ptr);
 		break;
-	case SOAP_TYPE_ns1__getCurrentTimeResponse:
-		if (p->size < 0)
-			SOAP_DELETE((struct ns1__getCurrentTimeResponse*)p->ptr);
-		else
-			SOAP_DELETE_ARRAY((struct ns1__getCurrentTimeResponse*)p->ptr);
-		break;
-	case SOAP_TYPE_ns1__getCurrentTime:
-		if (p->size < 0)
-			SOAP_DELETE((struct ns1__getCurrentTime*)p->ptr);
-		else
-			SOAP_DELETE_ARRAY((struct ns1__getCurrentTime*)p->ptr);
-		break;
 	case SOAP_TYPE_ns1__getXMLResponse:
 		if (p->size < 0)
 			SOAP_DELETE((struct ns1__getXMLResponse*)p->ptr);
@@ -1176,6 +1164,18 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 			SOAP_DELETE((struct ns1__getXML*)p->ptr);
 		else
 			SOAP_DELETE_ARRAY((struct ns1__getXML*)p->ptr);
+		break;
+	case SOAP_TYPE_ns1__setDeviceNameResponse:
+		if (p->size < 0)
+			SOAP_DELETE((struct ns1__setDeviceNameResponse*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((struct ns1__setDeviceNameResponse*)p->ptr);
+		break;
+	case SOAP_TYPE_ns1__setDeviceName:
+		if (p->size < 0)
+			SOAP_DELETE((struct ns1__setDeviceName*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((struct ns1__setDeviceName*)p->ptr);
 		break;
 	case SOAP_TYPE_ns1__saveXMLResponse:
 		if (p->size < 0)
@@ -4830,6 +4830,236 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__saveXMLResponse(struct soap *soap, int
 	*(struct ns1__saveXMLResponse*)p = *(struct ns1__saveXMLResponse*)q;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__setDeviceName(struct soap *soap, struct ns1__setDeviceName *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->device = NULL;
+	soap_default_std__string(soap, &a->name);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__setDeviceName(struct soap *soap, const struct ns1__setDeviceName *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTons1__SDeviceDescription(soap, &a->device);
+	soap_serialize_std__string(soap, &a->name);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__setDeviceName(struct soap *soap, const char *tag, int id, const struct ns1__setDeviceName *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__setDeviceName), type))
+		return soap->error;
+	if (soap_out_PointerTons1__SDeviceDescription(soap, "device", -1, &a->device, ""))
+		return soap->error;
+	if (soap_out_std__string(soap, "name", -1, &a->name, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct ns1__setDeviceName * SOAP_FMAC4 soap_in_ns1__setDeviceName(struct soap *soap, const char *tag, struct ns1__setDeviceName *a, const char *type)
+{
+	size_t soap_flag_device = 1;
+	size_t soap_flag_name = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct ns1__setDeviceName *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__setDeviceName, sizeof(struct ns1__setDeviceName), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_ns1__setDeviceName(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_device && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTons1__SDeviceDescription(soap, "device", &a->device, "ns1:SDeviceDescription"))
+				{	soap_flag_device--;
+					continue;
+				}
+			if (soap_flag_name && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_std__string(soap, "name", &a->name, "xsd:string"))
+				{	soap_flag_name--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct ns1__setDeviceName *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__setDeviceName, 0, sizeof(struct ns1__setDeviceName), 0, soap_copy_ns1__setDeviceName);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_name > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__setDeviceName(struct soap *soap, const struct ns1__setDeviceName *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__setDeviceName);
+	if (soap_out_ns1__setDeviceName(soap, tag?tag:"ns1:setDeviceName", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct ns1__setDeviceName * SOAP_FMAC4 soap_get_ns1__setDeviceName(struct soap *soap, struct ns1__setDeviceName *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns1__setDeviceName(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct ns1__setDeviceName * SOAP_FMAC2 soap_instantiate_ns1__setDeviceName(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__setDeviceName(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__setDeviceName, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__setDeviceName);
+		if (size)
+			*size = sizeof(struct ns1__setDeviceName);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__setDeviceName[n]);
+		if (!cp->ptr)
+		{	soap->error = SOAP_EOM;
+			return NULL;
+		}
+		if (size)
+			*size = n * sizeof(struct ns1__setDeviceName);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	return (struct ns1__setDeviceName*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__setDeviceName(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__setDeviceName %p -> %p\n", q, p));
+	*(struct ns1__setDeviceName*)p = *(struct ns1__setDeviceName*)q;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__setDeviceNameResponse(struct soap *soap, struct ns1__setDeviceNameResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_std__string(soap, &a->response);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__setDeviceNameResponse(struct soap *soap, const struct ns1__setDeviceNameResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_std__string(soap, &a->response);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__setDeviceNameResponse(struct soap *soap, const char *tag, int id, const struct ns1__setDeviceNameResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__setDeviceNameResponse), type))
+		return soap->error;
+	if (soap_out_std__string(soap, "response", -1, &a->response, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct ns1__setDeviceNameResponse * SOAP_FMAC4 soap_in_ns1__setDeviceNameResponse(struct soap *soap, const char *tag, struct ns1__setDeviceNameResponse *a, const char *type)
+{
+	size_t soap_flag_response = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct ns1__setDeviceNameResponse *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__setDeviceNameResponse, sizeof(struct ns1__setDeviceNameResponse), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_ns1__setDeviceNameResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_response && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_std__string(soap, "response", &a->response, "xsd:string"))
+				{	soap_flag_response--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct ns1__setDeviceNameResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__setDeviceNameResponse, 0, sizeof(struct ns1__setDeviceNameResponse), 0, soap_copy_ns1__setDeviceNameResponse);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_response > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__setDeviceNameResponse(struct soap *soap, const struct ns1__setDeviceNameResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__setDeviceNameResponse);
+	if (soap_out_ns1__setDeviceNameResponse(soap, tag?tag:"ns1:setDeviceNameResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct ns1__setDeviceNameResponse * SOAP_FMAC4 soap_get_ns1__setDeviceNameResponse(struct soap *soap, struct ns1__setDeviceNameResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns1__setDeviceNameResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct ns1__setDeviceNameResponse * SOAP_FMAC2 soap_instantiate_ns1__setDeviceNameResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__setDeviceNameResponse(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__setDeviceNameResponse, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__setDeviceNameResponse);
+		if (size)
+			*size = sizeof(struct ns1__setDeviceNameResponse);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__setDeviceNameResponse[n]);
+		if (!cp->ptr)
+		{	soap->error = SOAP_EOM;
+			return NULL;
+		}
+		if (size)
+			*size = n * sizeof(struct ns1__setDeviceNameResponse);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	return (struct ns1__setDeviceNameResponse*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__setDeviceNameResponse(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__setDeviceNameResponse %p -> %p\n", q, p));
+	*(struct ns1__setDeviceNameResponse*)p = *(struct ns1__setDeviceNameResponse*)q;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getXML(struct soap *soap, struct ns1__getXML *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -5048,212 +5278,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getXMLResponse(struct soap *soap, int 
 	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
 	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__getXMLResponse %p -> %p\n", q, p));
 	*(struct ns1__getXMLResponse*)p = *(struct ns1__getXMLResponse*)q;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getCurrentTime(struct soap *soap, struct ns1__getCurrentTime *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getCurrentTime(struct soap *soap, const struct ns1__getCurrentTime *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__getCurrentTime(struct soap *soap, const char *tag, int id, const struct ns1__getCurrentTime *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__getCurrentTime), type))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-SOAP_FMAC3 struct ns1__getCurrentTime * SOAP_FMAC4 soap_in_ns1__getCurrentTime(struct soap *soap, const char *tag, struct ns1__getCurrentTime *a, const char *type)
-{
-	if (soap_element_begin_in(soap, tag, 0, type))
-		return NULL;
-	a = (struct ns1__getCurrentTime *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__getCurrentTime, sizeof(struct ns1__getCurrentTime), 0, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default_ns1__getCurrentTime(soap, a);
-	if (soap->body && !*soap->href)
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	else
-	{	a = (struct ns1__getCurrentTime *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__getCurrentTime, 0, sizeof(struct ns1__getCurrentTime), 0, NULL);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__getCurrentTime(struct soap *soap, const struct ns1__getCurrentTime *a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__getCurrentTime);
-	if (soap_out_ns1__getCurrentTime(soap, tag?tag:"ns1:getCurrentTime", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct ns1__getCurrentTime * SOAP_FMAC4 soap_get_ns1__getCurrentTime(struct soap *soap, struct ns1__getCurrentTime *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_ns1__getCurrentTime(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC1 struct ns1__getCurrentTime * SOAP_FMAC2 soap_instantiate_ns1__getCurrentTime(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__getCurrentTime(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
-	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__getCurrentTime, n, soap_fdelete);
-	if (!cp)
-		return NULL;
-	if (n < 0)
-	{	cp->ptr = (void*)SOAP_NEW(struct ns1__getCurrentTime);
-		if (size)
-			*size = sizeof(struct ns1__getCurrentTime);
-	}
-	else
-	{	cp->ptr = (void*)SOAP_NEW(struct ns1__getCurrentTime[n]);
-		if (!cp->ptr)
-		{	soap->error = SOAP_EOM;
-			return NULL;
-		}
-		if (size)
-			*size = n * sizeof(struct ns1__getCurrentTime);
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
-	return (struct ns1__getCurrentTime*)cp->ptr;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getCurrentTime(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
-{
-	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__getCurrentTime %p -> %p\n", q, p));
-	*(struct ns1__getCurrentTime*)p = *(struct ns1__getCurrentTime*)q;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getCurrentTimeResponse(struct soap *soap, struct ns1__getCurrentTimeResponse *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_std__string(soap, &a->time);
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__getCurrentTimeResponse(struct soap *soap, const struct ns1__getCurrentTimeResponse *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_serialize_std__string(soap, &a->time);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__getCurrentTimeResponse(struct soap *soap, const char *tag, int id, const struct ns1__getCurrentTimeResponse *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__getCurrentTimeResponse), type))
-		return soap->error;
-	if (soap_out_std__string(soap, "time", -1, &a->time, ""))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-SOAP_FMAC3 struct ns1__getCurrentTimeResponse * SOAP_FMAC4 soap_in_ns1__getCurrentTimeResponse(struct soap *soap, const char *tag, struct ns1__getCurrentTimeResponse *a, const char *type)
-{
-	size_t soap_flag_time = 1;
-	if (soap_element_begin_in(soap, tag, 0, type))
-		return NULL;
-	a = (struct ns1__getCurrentTimeResponse *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__getCurrentTimeResponse, sizeof(struct ns1__getCurrentTimeResponse), soap->type, soap->arrayType);
-	if (!a)
-		return NULL;
-	soap_default_ns1__getCurrentTimeResponse(soap, a);
-	if (soap->body && !*soap->href)
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_time && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-				if (soap_in_std__string(soap, "time", &a->time, "xsd:string"))
-				{	soap_flag_time--;
-					continue;
-				}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	else
-	{	a = (struct ns1__getCurrentTimeResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__getCurrentTimeResponse, 0, sizeof(struct ns1__getCurrentTimeResponse), 0, soap_copy_ns1__getCurrentTimeResponse);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0))
-	{	soap->error = SOAP_OCCURS;
-		return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__getCurrentTimeResponse(struct soap *soap, const struct ns1__getCurrentTimeResponse *a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__getCurrentTimeResponse);
-	if (soap_out_ns1__getCurrentTimeResponse(soap, tag?tag:"ns1:getCurrentTimeResponse", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct ns1__getCurrentTimeResponse * SOAP_FMAC4 soap_get_ns1__getCurrentTimeResponse(struct soap *soap, struct ns1__getCurrentTimeResponse *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_ns1__getCurrentTimeResponse(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC1 struct ns1__getCurrentTimeResponse * SOAP_FMAC2 soap_instantiate_ns1__getCurrentTimeResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__getCurrentTimeResponse(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
-	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__getCurrentTimeResponse, n, soap_fdelete);
-	if (!cp)
-		return NULL;
-	if (n < 0)
-	{	cp->ptr = (void*)SOAP_NEW(struct ns1__getCurrentTimeResponse);
-		if (size)
-			*size = sizeof(struct ns1__getCurrentTimeResponse);
-	}
-	else
-	{	cp->ptr = (void*)SOAP_NEW(struct ns1__getCurrentTimeResponse[n]);
-		if (!cp->ptr)
-		{	soap->error = SOAP_EOM;
-			return NULL;
-		}
-		if (size)
-			*size = n * sizeof(struct ns1__getCurrentTimeResponse);
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
-	return (struct ns1__getCurrentTimeResponse*)cp->ptr;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__getCurrentTimeResponse(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
-{
-	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__getCurrentTimeResponse %p -> %p\n", q, p));
-	*(struct ns1__getCurrentTimeResponse*)p = *(struct ns1__getCurrentTimeResponse*)q;
 }
 
 #ifndef WITH_NOGLOBAL
