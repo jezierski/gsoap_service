@@ -6,7 +6,7 @@
       <command id="101" name="set output"/>
       </setters>
       <getters>
-      <command id="5" name="PING"/>
+      <command id="12" name="PING"/>
       </getters>
       
     </category>
@@ -20,7 +20,7 @@
         <command id="107" name="set speed"/>
       </setters>
       <getters>
-        <command id="5" name="PING"/>
+        <command id="12" name="PING"/>
         <command id="108" name="get RED channel"/>
         <command id="109" name="get GREEN channel"/>
         <command id="110" name="get BLUE channel"/>
@@ -40,7 +40,7 @@
         <command id="121" name="set the same PWM for all devices"/>
       </setters>
       <getters>
-        <command id="5" name="PING"/>
+        <command id="12" name="PING"/>
         <command id="115" name="get PWM value"/>
       </getters>
     </category>
@@ -50,7 +50,7 @@
       <setters>
   </setters>
       <getters>
-        <command id="5" name="PING"/>
+        <command id="12" name="PING"/>
         <command id="101" name="sensor status"/>
       </getters>
     </category>

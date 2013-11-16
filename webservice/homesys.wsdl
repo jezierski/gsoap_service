@@ -65,6 +65,15 @@
 
     </types>
 
+
+
+    <!-- searchNewDevices -->
+    <message name="searchNewDevicesRequest">
+    </message>
+
+    <message name="searchNewDevicesResponse">
+    </message>
+    
     <!-- getXML -->
     <message name="getXMLRequest">
         <part name="id" type="xsd:string"/>
@@ -130,6 +139,10 @@
             <input message="tns:getXMLRequest"/>
             <output message="tns:getXMLResponse"/>
         </operation>
+        <operation name="searchNewDevices">
+            <input message="tns:searchNewDevicesRequest"/>
+            <output message="tns:searchNewDevicesResponse"/>
+        </operation>
         <operation name="setDeviceName">
             <input message="tns:setDeviceNameRequest"/>
             <output message="tns:setDeviceNameResponse"/>
@@ -157,6 +170,15 @@
         <SOAP:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
        
         <operation name="getXML">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="searchNewDevices">
             <SOAP:operation style="rpc" soapAction=""/>
             <input>
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

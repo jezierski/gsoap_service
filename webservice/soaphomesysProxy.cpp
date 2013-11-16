@@ -161,6 +161,61 @@ int homesysProxy::getXML(const char *endpoint, const char *soap_action, std::str
 	return soap_closesock(soap);
 }
 
+int homesysProxy::searchNewDevices(const char *endpoint, const char *soap_action, struct ns1__searchNewDevicesResponse &_param_1)
+{	struct soap *soap = this;
+	struct ns1__searchNewDevices soap_tmp_ns1__searchNewDevices;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (!soap_endpoint)
+		soap_endpoint = "http://192.168.1.39:1234";
+	if (!soap_action)
+		soap_action = "";
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize_ns1__searchNewDevices(soap, &soap_tmp_ns1__searchNewDevices);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__searchNewDevices(soap, &soap_tmp_ns1__searchNewDevices, "ns1:searchNewDevices", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__searchNewDevices(soap, &soap_tmp_ns1__searchNewDevices, "ns1:searchNewDevices", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_1)
+		return soap_closesock(soap);
+	soap_default_ns1__searchNewDevicesResponse(soap, &_param_1);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	if (soap_recv_fault(soap, 1))
+		return soap->error;
+	soap_get_ns1__searchNewDevicesResponse(soap, &_param_1, "", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
 int homesysProxy::setDeviceName(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, std::string name, std::string &response)
 {	struct soap *soap = this;
 	struct ns1__setDeviceName soap_tmp_ns1__setDeviceName;
@@ -337,7 +392,7 @@ int homesysProxy::switchPort(const char *endpoint, const char *soap_action, std:
 	return soap_closesock(soap);
 }
 
-int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_1)
+int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_2)
 {	struct soap *soap = this;
 	struct ns1__makeRemoteAction soap_tmp_ns1__makeRemoteAction;
 	if (endpoint)
@@ -375,9 +430,9 @@ int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))
 		return soap_closesock(soap);
-	if (!&_param_1)
+	if (!&_param_2)
 		return soap_closesock(soap);
-	soap_default_ns1__makeRemoteActionResponse(soap, &_param_1);
+	soap_default_ns1__makeRemoteActionResponse(soap, &_param_2);
 	if (soap_begin_recv(soap)
 	 || soap_envelope_begin_in(soap)
 	 || soap_recv_header(soap)
@@ -385,7 +440,7 @@ int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action
 		return soap_closesock(soap);
 	if (soap_recv_fault(soap, 1))
 		return soap->error;
-	soap_get_ns1__makeRemoteActionResponse(soap, &_param_1, "", "");
+	soap_get_ns1__makeRemoteActionResponse(soap, &_param_2, "", "");
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -395,7 +450,7 @@ int homesysProxy::makeRemoteAction(const char *endpoint, const char *soap_action
 	return soap_closesock(soap);
 }
 
-int homesysProxy::getDevicesList(const char *endpoint, const char *soap_action, LONG64 category, struct ns1__getDevicesListResponse &_param_2)
+int homesysProxy::getDevicesList(const char *endpoint, const char *soap_action, LONG64 category, struct ns1__getDevicesListResponse &_param_3)
 {	struct soap *soap = this;
 	struct ns1__getDevicesList soap_tmp_ns1__getDevicesList;
 	if (endpoint)
@@ -431,9 +486,9 @@ int homesysProxy::getDevicesList(const char *endpoint, const char *soap_action, 
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))
 		return soap_closesock(soap);
-	if (!&_param_2)
+	if (!&_param_3)
 		return soap_closesock(soap);
-	soap_default_ns1__getDevicesListResponse(soap, &_param_2);
+	soap_default_ns1__getDevicesListResponse(soap, &_param_3);
 	if (soap_begin_recv(soap)
 	 || soap_envelope_begin_in(soap)
 	 || soap_recv_header(soap)
@@ -441,7 +496,7 @@ int homesysProxy::getDevicesList(const char *endpoint, const char *soap_action, 
 		return soap_closesock(soap);
 	if (soap_recv_fault(soap, 1))
 		return soap->error;
-	soap_get_ns1__getDevicesListResponse(soap, &_param_2, "", "");
+	soap_get_ns1__getDevicesListResponse(soap, &_param_3, "", "");
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)

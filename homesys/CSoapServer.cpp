@@ -145,6 +145,15 @@ int CSoapServer::setDeviceName(ns1__SDeviceDescription *device, std::string name
     return SOAP_OK;
 }
 
+int CSoapServer::searchNewDevices(struct ns1__searchNewDevicesResponse &_param_1){
+    SDeviceDescription empty;
+    Blob null;
+    empty.category = EDeviceCategory::ALL;
+    deviceManager->invokeRemoteAction(empty, ACTION_SEARCH_DEVICES, null);
+    deviceManager->invokeRemoteAction(empty, ACTION_RESET_ALL_STATUS, null);
+    return SOAP_OK;
+}
+
 int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse & response) {
     SAction action;
     action.command = command;

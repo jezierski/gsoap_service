@@ -64,6 +64,10 @@ class SOAP_CMAC homesysProxy : public soap
 	virtual	int getXML(std::string id, std::string &result) { return getXML(NULL, NULL, id, result); }
 	virtual	int getXML(const char *endpoint, const char *soap_action, std::string id, std::string &result);
 
+	/// Web service operation 'searchNewDevices' (returns error code or SOAP_OK)
+	virtual	int searchNewDevices(struct ns1__searchNewDevicesResponse &_param_1) { return searchNewDevices(NULL, NULL, _param_1); }
+	virtual	int searchNewDevices(const char *endpoint, const char *soap_action, struct ns1__searchNewDevicesResponse &_param_1);
+
 	/// Web service operation 'setDeviceName' (returns error code or SOAP_OK)
 	virtual	int setDeviceName(ns1__SDeviceDescription *device, std::string name, std::string &response) { return setDeviceName(NULL, NULL, device, name, response); }
 	virtual	int setDeviceName(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, std::string name, std::string &response);
@@ -77,11 +81,11 @@ class SOAP_CMAC homesysProxy : public soap
 	virtual	int switchPort(const char *endpoint, const char *soap_action, std::string pinNo, std::string &result);
 
 	/// Web service operation 'makeRemoteAction' (returns error code or SOAP_OK)
-	virtual	int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_1) { return makeRemoteAction(NULL, NULL, device, command, params, _param_1); }
-	virtual	int makeRemoteAction(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_1);
+	virtual	int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_2) { return makeRemoteAction(NULL, NULL, device, command, params, _param_2); }
+	virtual	int makeRemoteAction(const char *endpoint, const char *soap_action, ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_2);
 
 	/// Web service operation 'getDevicesList' (returns error code or SOAP_OK)
-	virtual	int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_2) { return getDevicesList(NULL, NULL, category, _param_2); }
-	virtual	int getDevicesList(const char *endpoint, const char *soap_action, LONG64 category, struct ns1__getDevicesListResponse &_param_2);
+	virtual	int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_3) { return getDevicesList(NULL, NULL, category, _param_3); }
+	virtual	int getDevicesList(const char *endpoint, const char *soap_action, LONG64 category, struct ns1__getDevicesListResponse &_param_3);
 };
 #endif

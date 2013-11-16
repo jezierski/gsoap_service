@@ -246,8 +246,32 @@ public:
 };
 #endif
 
+#ifndef SOAP_TYPE_ns1__searchNewDevicesResponse
+#define SOAP_TYPE_ns1__searchNewDevicesResponse (67)
+/* ns1:searchNewDevicesResponse */
+struct ns1__searchNewDevicesResponse
+{
+#ifdef WITH_NOEMPTYSTRUCT
+private:
+	char dummy;	/* dummy member to enable compilation */
+#endif
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__searchNewDevices
+#define SOAP_TYPE_ns1__searchNewDevices (70)
+/* ns1:searchNewDevices */
+struct ns1__searchNewDevices
+{
+#ifdef WITH_NOEMPTYSTRUCT
+private:
+	char dummy;	/* dummy member to enable compilation */
+#endif
+};
+#endif
+
 #ifndef SOAP_TYPE_ns1__setDeviceNameResponse
-#define SOAP_TYPE_ns1__setDeviceNameResponse (68)
+#define SOAP_TYPE_ns1__setDeviceNameResponse (72)
 /* ns1:setDeviceNameResponse */
 struct ns1__setDeviceNameResponse
 {
@@ -257,7 +281,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__setDeviceName
-#define SOAP_TYPE_ns1__setDeviceName (69)
+#define SOAP_TYPE_ns1__setDeviceName (73)
 /* ns1:setDeviceName */
 struct ns1__setDeviceName
 {
@@ -268,7 +292,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__saveXMLResponse
-#define SOAP_TYPE_ns1__saveXMLResponse (71)
+#define SOAP_TYPE_ns1__saveXMLResponse (75)
 /* ns1:saveXMLResponse */
 struct ns1__saveXMLResponse
 {
@@ -278,7 +302,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__saveXML
-#define SOAP_TYPE_ns1__saveXML (72)
+#define SOAP_TYPE_ns1__saveXML (76)
 /* ns1:saveXML */
 struct ns1__saveXML
 {
@@ -289,7 +313,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__switchPortResponse
-#define SOAP_TYPE_ns1__switchPortResponse (74)
+#define SOAP_TYPE_ns1__switchPortResponse (78)
 /* ns1:switchPortResponse */
 struct ns1__switchPortResponse
 {
@@ -299,7 +323,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__switchPort
-#define SOAP_TYPE_ns1__switchPort (75)
+#define SOAP_TYPE_ns1__switchPort (79)
 /* ns1:switchPort */
 struct ns1__switchPort
 {
@@ -309,7 +333,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteActionResponse
-#define SOAP_TYPE_ns1__makeRemoteActionResponse (76)
+#define SOAP_TYPE_ns1__makeRemoteActionResponse (80)
 /* ns1:makeRemoteActionResponse */
 struct ns1__makeRemoteActionResponse
 {
@@ -319,7 +343,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__makeRemoteAction
-#define SOAP_TYPE_ns1__makeRemoteAction (80)
+#define SOAP_TYPE_ns1__makeRemoteAction (84)
 /* ns1:makeRemoteAction */
 struct ns1__makeRemoteAction
 {
@@ -331,7 +355,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getDevicesListResponse
-#define SOAP_TYPE_ns1__getDevicesListResponse (81)
+#define SOAP_TYPE_ns1__getDevicesListResponse (85)
 /* ns1:getDevicesListResponse */
 struct ns1__getDevicesListResponse
 {
@@ -341,7 +365,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns1__getDevicesList
-#define SOAP_TYPE_ns1__getDevicesList (85)
+#define SOAP_TYPE_ns1__getDevicesList (89)
 /* ns1:getDevicesList */
 struct ns1__getDevicesList
 {
@@ -353,7 +377,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (86)
+#define SOAP_TYPE_SOAP_ENV__Header (90)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
@@ -369,7 +393,7 @@ private:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (87)
+#define SOAP_TYPE_SOAP_ENV__Code (91)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -384,7 +408,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (89)
+#define SOAP_TYPE_SOAP_ENV__Detail (93)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -400,7 +424,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (92)
+#define SOAP_TYPE_SOAP_ENV__Reason (96)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
@@ -414,7 +438,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (93)
+#define SOAP_TYPE_SOAP_ENV__Fault (97)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {
