@@ -74,7 +74,7 @@ int CLog::put(string str, logType level) {
         seconds = end.tv_sec;
         useconds = end.tv_usec;
         mtime = ((seconds) * 1000 + useconds / 1000.0) + 0.5;
-        cout << mtime - appStartTime << "ms \t";
+        cout << "[" << convertTime(getCurrentTime(), "%F %T")<<"."<<useconds / 1000<<"]["<<mtime - appStartTime << "ms] \t";
     }
 
     cout << str << NC << endl;

@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <time.h>
 #include "types.h"
+#include <sys/time.h>
 
 template <class T>
 inline std::string to_string(const T& t, bool hex = false) {
@@ -105,6 +106,28 @@ inline long long paramsToLL(Params params){
     return param;
 }
 
+inline string convertTime(long long rawTimeMillis, string format) {
+    time_t timeDate = (time_t) (rawTimeMillis / 1000);
+
+    struct tm * dateinfo;
+    char buffer [60];
+
+    dateinfo = localtime(&timeDate);
+
+    strftime(buffer, 60, format.c_str(), dateinfo);
+
+    string strtime(buffer);
+    //cout << strtime << endl;
+    return strtime;
+}
+
+inline long long getCurrentTime() {
+    struct timeval time;
+    gettimeofday(&time, NULL);
+    return (unsigned long long) time.tv_sec * 1000 + time.tv_usec / 1000;
+}
+
+
 class CTools {
 public:
     CTools();
@@ -113,6 +136,8 @@ public:
 private:
 
 };
+
+
 
 #endif	/* CTOOLS_H */
 

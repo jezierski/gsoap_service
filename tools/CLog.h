@@ -7,6 +7,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "CTools.h"
 #define put_line(str, level)    put(__FILE__ + string(":") + to_string(__LINE__) + string("->") + string(str), level)
 #define           NC "\033[0m"
 #define  HOME_CURSOR "\E[0;0H"

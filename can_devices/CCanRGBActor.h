@@ -60,6 +60,10 @@ private:
     
     Blob getSpeed(SDeviceDescription device, Blob params);
     Blob getRed(SDeviceDescription device, Blob params);
+    Blob getGreen(SDeviceDescription device, Blob params);
+    Blob getBlue(SDeviceDescription device, Blob params);
+    Blob getRGB(SDeviceDescription device, Blob params);
+    Blob getMode(SDeviceDescription device, Blob params);
     void initActionMap();
 
 
