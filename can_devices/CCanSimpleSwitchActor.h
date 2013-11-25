@@ -16,8 +16,10 @@
 
 
 #define ACTION_SET_OUTPUT       101
+#define ACTION_GET_OUTPUT       102
 
 #define CMD_SET_PIN     101
+#define CMD_READ_ACTOR     102
 
 using namespace std;
 
@@ -33,6 +35,7 @@ public:
 
 private:
     Blob setOutput(SDeviceDescription device, Blob params);
+    Blob getActorStatus(SDeviceDescription device, Blob params);
     void initActionMap();
 
 

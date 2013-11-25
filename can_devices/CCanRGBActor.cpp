@@ -28,10 +28,11 @@ void CCanRGBActor::initActionMap() {
     addAction(this, ACTION_SET_CHANNEL_GREEN, &CCanRGBActor::setGreen);
     addAction(this, ACTION_SET_CHANNEL_RED, &CCanRGBActor::setRed);
     addAction(this, ACTION_GET_SPEED, &CCanRGBActor::getSpeed);
+    addAction(this, ACTION_GET_MODE, &CCanRGBActor::getMode);
     addAction(this, ACTION_GET_CHANNEL_RED, &CCanRGBActor::getRed);
-    addAction(this, ACTION_GET_CHANNEL_RED, &CCanRGBActor::getGreen);
-    addAction(this, ACTION_GET_CHANNEL_RED, &CCanRGBActor::getBlue);
-    addAction(this, ACTION_GET_CHANNEL_RED, &CCanRGBActor::getMode);
+    addAction(this, ACTION_GET_CHANNEL_GREEN, &CCanRGBActor::getGreen);
+    addAction(this, ACTION_GET_CHANNEL_BLUE, &CCanRGBActor::getBlue);
+    addAction(this, ACTION_GET_CHANNEL_ALL, &CCanRGBActor::getRGB);
 }
 
 Blob CCanRGBActor::setMode(SDeviceDescription device, Blob params) {
@@ -317,7 +318,7 @@ Blob CCanRGBActor::getRGB(SDeviceDescription device, Blob params) {
         values.push_back(val);  //BLUE
         
         b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
-        log->info("Device " + to_string(device) + " CHANNEL_ALL: " + to_string(values[0]) );
+        log->info("Device " + to_string(device) + " CHANNEL_ALL R: " + to_string(values[0]) + ", G: " +  to_string(values[1]) + ", B: " +to_string(values[2]));
     }else{
         response = "RGBActor->getRGB->Receiving CAN frame failed";
     }

@@ -93,6 +93,7 @@ void CApplication::run() {
             cout << "check\t - check device availability" << endl;
             cout << "name\t - set device name" << endl;
             cout << "set\t - set actor status" << endl;
+            cout << "get\t - get actor status" << endl;
             cout << "sensor\t - read sensor status" << endl;
             cout << "rgbmode\t - set RGB mode" << endl;
             cout << "rgbspeed\t - set RGB speed" << endl;
@@ -692,6 +693,22 @@ void CApplication::run() {
             s.guid = g;
             s.luid = (unsigned char) l;
             deviceManager->invokeRemoteAction(s, ACTION_READ_SENSOR_STATUS, null);
+
+        }
+        
+         if (x == "get") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            s.category = EDeviceCategory::A_SIMPLE_SWITCH;
+
+            s.guid = g;
+            s.luid = (unsigned char) l;
+            deviceManager->invokeRemoteAction(s, ACTION_GET_OUTPUT, null);
 
         }
 
