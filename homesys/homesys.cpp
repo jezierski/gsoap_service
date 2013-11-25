@@ -342,12 +342,12 @@ void CApplication::run() {
             cout << "value ? (0-255)";
             int n;
             cin >> n;
-            Params p;
-            p.push_back((unsigned char)n);
+            unsigned char p;
+            p=(unsigned char)n;
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_PWM_CHANGE].put<Params>(p);
+            b[BLOB_PWM_CHANGE].put<unsigned char>(p);
             deviceManager->invokeRemoteAction(s, ACTION_PWM_DOWN_ALL, b);
 
         }
@@ -365,12 +365,12 @@ void CApplication::run() {
             cout << "value ? (0-255)";
             int n;
             cin >> n;
-            Params p;
-            p.push_back((unsigned char)n);
+            unsigned char p;
+            p=(unsigned char)n;
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_PWM_CHANGE].put<Params>(p);
+            b[BLOB_PWM_CHANGE].put<unsigned char>(p);
             deviceManager->invokeRemoteAction(s, ACTION_PWM_UP_ALL, b);
 
         }
@@ -388,12 +388,12 @@ void CApplication::run() {
             cout << "value ? (0-255)";
             int n;
             cin >> n;
-            Params p;
-            p.push_back((unsigned char)n);
+            unsigned char p;
+            p=(unsigned char)n;
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_PWM_CHANGE].put<Params>(p);
+            b[BLOB_PWM_CHANGE].put<unsigned char>(p);
             deviceManager->invokeRemoteAction(s, ACTION_PWM_DOWN, b);
 
         }
@@ -411,12 +411,12 @@ void CApplication::run() {
             cout << "value ? (0-255)";
             int n;
             cin >> n;
-            Params p;
-            p.push_back((unsigned char)n);
+            unsigned char p;
+            p=(unsigned char)n;
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_PWM_CHANGE].put<Params>(p);
+            b[BLOB_PWM_CHANGE].put<unsigned char>(p);
             deviceManager->invokeRemoteAction(s, ACTION_PWM_UP, b);
 
         }
@@ -434,12 +434,12 @@ void CApplication::run() {
             cout << "value ? (0-255)";
            int n;
             cin >> n;
-            Params p;
-            p.push_back((unsigned char)n);
+            unsigned char p;
+            p=(unsigned char)n;
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_PWM_VALUE].put<Params>(p);
+            b[BLOB_PWM_VALUE].put<unsigned char>(p);
             deviceManager->invokeRemoteAction(s, ACTION_SET_PWM_ALL_THE_SAME, b);
 
         }
@@ -536,12 +536,12 @@ void CApplication::run() {
             cout << "value ? (0-255)";
             int n;
             cin >> n;
-            Params p;
-            p.push_back((unsigned char)n);
+            unsigned char p;
+            p = (unsigned char)n;
             s.guid = g;
             s.luid = (unsigned char) l;
             Blob b;
-            b[BLOB_PWM_VALUE].put<Params>(p);
+            b[BLOB_PWM_VALUE].put<unsigned char>(p);
             deviceManager->invokeRemoteAction(s, ACTION_SET_PWM, b);
 
         }

@@ -32,21 +32,15 @@ void CCanPWMActor::initActionMap() {
 }
 
 Blob CCanPWMActor::setPWM(SDeviceDescription device, Blob params) {
-    Params value = params[BLOB_PWM_VALUE].get<Params>();
+    unsigned char value = params[BLOB_PWM_VALUE].get<unsigned char>();
     Blob b;
     string response;
     CCanBuffer buffer;
 
-    if (value.size() == 0) {
-        response = "PWMActor->setPWM->Incorrect params";
-        log->error(response);
-        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
-        return b;
-    }
     buffer.insertCommand(CMD_SET_PWM);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
-    buffer << (unsigned char) (value[0]);
+    buffer << (unsigned char) (value);
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "PWMActor->setPWM->Sending CAN frame failed";
 
@@ -79,20 +73,15 @@ Blob CCanPWMActor::getPWM(SDeviceDescription device, Blob params) {
 }
 
 Blob CCanPWMActor::increasePWM(SDeviceDescription device, Blob params) {
-    Params value = params[BLOB_PWM_CHANGE].get<Params>();
+    unsigned char value = params[BLOB_PWM_CHANGE].get<unsigned char>();
     Blob b;
     string response;
     CCanBuffer buffer;
-    if (value.size() == 0) {
-        response = "PWMActor->increasePWM->Incorrect params";
-        log->error(response);
-        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
-        return b;
-    }
+   
     buffer.insertCommand(CMD_PWM_UP);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
-    buffer << (unsigned char) (value[0]);
+    buffer << (unsigned char) (value);
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "PWMActor->increasePWM->Sending CAN frame failed";
 
@@ -102,20 +91,15 @@ Blob CCanPWMActor::increasePWM(SDeviceDescription device, Blob params) {
 }
 
 Blob CCanPWMActor::decreasePWM(SDeviceDescription device, Blob params) {
-    Params value = params[BLOB_PWM_CHANGE].get<Params>();
+    unsigned char value = params[BLOB_PWM_CHANGE].get<unsigned char>();
     Blob b;
     string response;
     CCanBuffer buffer;
-    if (value.size() == 0) {
-        response = "PWMActor->decreasePWM->Incorrect params";
-        log->error(response);
-        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
-        return b;
-    }
+ 
     buffer.insertCommand(CMD_PWM_DOWN);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
-    buffer << (unsigned char) (value[0]);
+    buffer << (unsigned char) (value);
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "PWMActor->decreasePWM->Sending CAN frame failed";
 
@@ -150,20 +134,15 @@ Blob CCanPWMActor::setAllPWM(SDeviceDescription device, Blob params) {
 }
 
 Blob CCanPWMActor::setAllTheSamePWM(SDeviceDescription device, Blob params) {
-    Params value = params[BLOB_PWM_VALUE].get<Params>();
+    unsigned char value = params[BLOB_PWM_VALUE].get<unsigned char>();
     Blob b;
     string response;
     CCanBuffer buffer;
-    if (value.size() == 0) {
-        response = "PWMActor->setAllTheSamePWM->Incorrect params";
-        log->error(response);
-        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
-        return b;
-    }
+   
     buffer.insertCommand(CMD_SET_PWM_ALL_THE_SAME);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
-    buffer << (unsigned char) (value[0]);
+    buffer << (unsigned char) (value);
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "PWMActor->setAllTheSamePWM->Sending CAN frame failed";
 
@@ -173,20 +152,15 @@ Blob CCanPWMActor::setAllTheSamePWM(SDeviceDescription device, Blob params) {
 }
 
 Blob CCanPWMActor::increaseAllPWM(SDeviceDescription device, Blob params) {
-    Params value = params[BLOB_PWM_CHANGE].get<Params>();
+    unsigned char value = params[BLOB_PWM_CHANGE].get<unsigned char>();
     Blob b;
     string response;
     CCanBuffer buffer;
-    if (value.size() == 0) {
-        response = "PWMActor->increaseAllPWM->Incorrect params";
-        log->error(response);
-        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
-        return b;
-    }
+   
     buffer.insertCommand(CMD_PWM_UP_ALL);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
-    buffer << (unsigned char) (value[0]);
+    buffer << (unsigned char) (value);
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "PWMActor->increaseAllPWM->Sending CAN frame failed";
 
@@ -196,20 +170,15 @@ Blob CCanPWMActor::increaseAllPWM(SDeviceDescription device, Blob params) {
 }
 
 Blob CCanPWMActor::decreaseAllPWM(SDeviceDescription device, Blob params) {
-    Params value = params[BLOB_PWM_CHANGE].get<Params>();
+    unsigned char value = params[BLOB_PWM_CHANGE].get<unsigned char>();
     Blob b;
     string response;
     CCanBuffer buffer;
-    if (value.size() == 0) {
-        response = "PWMActor->decreaseAllPWM->Incorrect params";
-        log->error(response);
-        b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
-        return b;
-    }
+  
     buffer.insertCommand(CMD_PWM_DOWN_ALL);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
-    buffer << (unsigned char) (value[0]);
+    buffer << (unsigned char) (value);
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "PWMActor->decreaseAllPWM->Sending CAN frame failed";
 

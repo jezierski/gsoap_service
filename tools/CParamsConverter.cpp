@@ -32,6 +32,12 @@ void CParamsConverter::initConvertionsMap() {
     convertionsMap[static_cast<int> (EDeviceCategory::A_RGB_DRIVER)][ACTION_SET_CHANNEL_GREEN] = &CParamsConverter::singleRGBvalueSet;
     convertionsMap[static_cast<int> (EDeviceCategory::A_RGB_DRIVER)][ACTION_SET_CHANNEL_BLUE] = &CParamsConverter::singleRGBvalueSet;
     convertionsMap[static_cast<int> (EDeviceCategory::A_RGB_DRIVER)][ACTION_SET_CHANNEL_ALL] = &CParamsConverter::allRGBvaluesSet;
+    convertionsMap[static_cast<int> (EDeviceCategory::A_PWM_DRIVER)][ACTION_SET_PWM] = &CParamsConverter::setPWM;
+    convertionsMap[static_cast<int> (EDeviceCategory::A_PWM_DRIVER)][ACTION_SET_PWM_ALL_THE_SAME] = &CParamsConverter::setPWM;
+    convertionsMap[static_cast<int> (EDeviceCategory::A_PWM_DRIVER)][ACTION_PWM_UP] = &CParamsConverter::changePWM;
+    convertionsMap[static_cast<int> (EDeviceCategory::A_PWM_DRIVER)][ACTION_PWM_DOWN] = &CParamsConverter::changePWM;
+    convertionsMap[static_cast<int> (EDeviceCategory::A_PWM_DRIVER)][ACTION_PWM_UP_ALL] = &CParamsConverter::changePWM;
+    convertionsMap[static_cast<int> (EDeviceCategory::A_PWM_DRIVER)][ACTION_PWM_DOWN_ALL] = &CParamsConverter::changePWM;
 }
 
 Blob CParamsConverter::singleRGBvalueSet(long long params) {
@@ -49,6 +55,21 @@ Blob CParamsConverter::allRGBvaluesSet(long long params) {
     rgbVals.push_back(static_cast<unsigned int> ((params >> 0) & 0xfff));
     b[BLOB_RGB_ALL].put < vector<unsigned int >> (rgbVals);
 
+    return b;
+}
+
+Blob CParamsConverter::setPWM(long long params) {
+    Blob b;
+    unsigned char param = static_cast<unsigned char>(params);
+    b[BLOB_PWM_VALUE].put<unsigned char>(param);
+    return b;
+}
+
+
+Blob CParamsConverter::changePWM(long long params) {
+    Blob b;
+    unsigned char param = static_cast<unsigned char>(params);
+    b[BLOB_PWM_CHANGE].put<unsigned char>(param);
     return b;
 }
 

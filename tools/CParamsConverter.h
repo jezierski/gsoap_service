@@ -12,6 +12,7 @@
 #include "types.h"
 #include "../can_devices/CCanConstans.h"
 #include "../can_devices/CCanRGBActor.h"
+#include "../can_devices/CCanPWMActor.h"
 #include <map>
 
 using namespace std;
@@ -39,7 +40,9 @@ private:
 
     Blob singleRGBvalueSet(long long params);
     Blob allRGBvaluesSet(long long params);
-
+    Blob setPWM(long long params);
+    Blob changePWM(long long params);
+    
     static CParamsConverter *instance;
 };
 
