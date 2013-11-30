@@ -218,10 +218,7 @@ Blob CCanRGBActor::getMode(SDeviceDescription device, Blob params) {
     buffer = getProtocol()->request(buffer);
     if (buffer.getLength() > 0) {
         response = "OK";
-        long long val = buffer[OFFSET_DATA] & 0x0f;
-        val <<= 8;
-        val |= buffer[OFFSET_DATA + 1];
-        values.push_back(val);
+        values.push_back(buffer[OFFSET_DATA]);
         b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
         log->info("Device " + to_string(device) + " MODE: " + to_string(values[0]) );
     }else{

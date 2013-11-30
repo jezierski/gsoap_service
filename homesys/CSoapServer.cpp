@@ -145,7 +145,7 @@ int CSoapServer::setDeviceName(ns1__SDeviceDescription *device, std::string name
     return SOAP_OK;
 }
 
-int CSoapServer::searchNewDevices(struct ns1__searchNewDevicesResponse &_param_1){
+int CSoapServer::searchNewDevices(struct ns1__searchNewDevicesResponse &_param_1) {
     SDeviceDescription empty;
     Blob null;
     empty.category = EDeviceCategory::ALL;
@@ -176,7 +176,12 @@ int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 comman
     response = responseTemp;
     //    actionManager->addAction(action);
     //    delete device;
-    cout << "makeRemoteAction, guid: " << device->GUID << ", luid: " << device->LUID << ", cat: " << device->category << ", comm: " << command << endl;
+    cout << "makeRemoteAction, guid: " << device->GUID << ", luid: " << device->LUID << ", cat: " << device->category << ", comm: " << command << ", params[" << params << "]: ";
+    for (int i = 8; i > 0; i--) {
+        cout << (int) ((params >> ((i - 1) * 8)) & 0xff) << " ";
+    }
+
+    cout << endl;
 
     return 0;
 }
