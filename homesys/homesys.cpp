@@ -24,10 +24,46 @@ void CApplication::assignSlots() {
 void CApplication::run() {
 
     log->info("Server starting...");
-    //    cout<<"starting GSOAP..."<<endl;
+    
+    
+    
+    
+    can232device = new CCan232();
+        can232device->initCan232Device();
+        
+        
+    CDevice *device = new CDevice();
+    device->setCommunicationProtocol(can232device);
+    
+//    device->initBootWrite(0xf00010);
+//    CCanBuffer buf;
+//    int i = 1;
+//    while(i < 2){
+//        buf.clear();
+//        buf << (unsigned char)(i++);
+//        buf << (unsigned char)(i++);
+//        buf << (unsigned char)(i++);
+//        buf << (unsigned char)(i++);
+//        buf << (unsigned char)(i++);
+//        buf << (unsigned char)(i++);
+//        buf << (unsigned char)(i++);
+//        buf << (unsigned char)(i++);
+//        device->writeProgramData(buf);
+//    }
+//    device->resetDevice();
+    
 
-    //        server.start();
 
+    device->initBootRead(0xf00000);
+    device->readProgramData();
+    device->readProgramData();
+    device->readProgramData();
+//     device->readProgramData(0x808);
+    
+    return;
+    
+    
+    
     CCanSimpleSwitchActor *actorSwitch = new CCanSimpleSwitchActor();
     CCanSimpleSwitchSensor *sensorSwitch = new CCanSimpleSwitchSensor();
     CCanRGBActor *rgbDriver = new CCanRGBActor();

@@ -86,9 +86,15 @@ public:
     
 
    
-
-
+ void initBootWrite(unsigned int address);
+ void initBootRead(unsigned int address);
+    void writeProgramData(CCanBuffer data);
+    CCanBuffer readProgramData();
+    void exitBootMode();
+    void resetDevice();
 private:
+   
+    
     unsigned char getNewAddress();
     void removeAddress(unsigned char address);
 

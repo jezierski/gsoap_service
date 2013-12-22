@@ -43,6 +43,82 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
     canbusProtocol = protocol;
 }
 
+void CDevice::initBootWrite(unsigned int address) {
+    cout << "INIT BOOT WRITE ADR: " << (int) address << endl; //@TODO remove it
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_CMD);
+    buffer.insertFlashAddress(address);
+    buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Writing boot init failed");
+    }
+}
+
+void CDevice::initBootRead(unsigned int address) {
+    cout << "INIT BOOT READ ADR: " << (int) address << endl; //@TODO remove it
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_CMD);
+    buffer.insertFlashAddress(address);
+    buffer.insertBootControlBits(BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Reading boot init failed");
+    }
+}
+
+void CDevice::writeProgramData(CCanBuffer data) {
+    cout << "WRITE DATA: " << endl; //@TODO remove it
+    data.printBuffer(); //@TODO remove it
+
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_DATA);
+    buffer << data;
+    buffer = canbusProtocol->request(buffer);
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Writing program data failed");
+    }
+}
+
+CCanBuffer CDevice::readProgramData() {
+    cout << "READ ADR: " << endl; //@TODO remove it
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_GET_DATA);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+    cout << "received buffer: " << endl; //@TODO remove it
+    buffer.printBuffer(); //@TODO remove it
+    return buffer;
+}
+
+void CDevice::exitBootMode() {
+    log->put("Exiting BOOT mode");
+    initBootRead(EEPROM_DATA_OFFSET + EEPROM_DATA_SIZE - 8);
+    CCanBuffer buffer = readProgramData();
+    CCanBuffer data;
+    for (size_t i = 0; i < buffer.getLength() - 1; i++) {
+        data << (unsigned char) buffer[i];
+    }
+    data << (unsigned char) 0;
+
+    initBootWrite(EEPROM_DATA_OFFSET + EEPROM_DATA_SIZE - 8);
+    writeProgramData(data);
+    resetDevice();
+}
+
+void CDevice::resetDevice() {
+    cout << "RESET" << endl; //@TODO remove it
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_RESET);
+    buffer.buildBootBuffer();
+    canbusProtocol->send(buffer);
+}
+
 unsigned char CDevice::getNewAddress() {
     unsigned char address = 0;
     bool ok;
@@ -530,7 +606,7 @@ Blob CDevice::list(SDeviceDescription dev, Blob params) {
 Blob CDevice::resetStatuses(SDeviceDescription dev, Blob params) {
     Blob b;
     string response;
-    response = (resetAllDevicesStatus()) ? "OK" : "Reset device's [ "+ to_string(dev.category)+" ] statuses failed";
+    response = (resetAllDevicesStatus()) ? "OK" : "Reset device's [ " + to_string(dev.category) + " ] statuses failed";
     b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }

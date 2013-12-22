@@ -19,6 +19,9 @@ public:
     void insertId(unsigned int id);
     void insertCommand(unsigned char cmd);
     void insertDestinationAddress(unsigned char adr);
+    void insertFlashAddress(unsigned int address);
+    void insertBootCommand(unsigned char command);
+    void insertBootControlBits(unsigned char bits);
     unsigned int frameId();
     unsigned char frameCommand();
     unsigned char sourceId();
@@ -31,7 +34,13 @@ public:
     vector<unsigned char> getSensorParams();
     
     void buildBuffer();
+    void buildBootBuffer();
+    
 private:
+    unsigned int flashAddress = 0;
+    unsigned char bootCommand = 0;
+    unsigned char bootControlBits = 0;
+    
     unsigned int id = 0;
     unsigned char command;
     unsigned char destAddress = 0;

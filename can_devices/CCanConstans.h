@@ -8,6 +8,24 @@
 #ifndef CCANCONSTANS_H
 #define	CCANCONSTANS_H
 
+#define BOOT_PUT_CMD                    0
+#define BOOT_PUT_DATA                   1
+#define BOOT_GET_DATA                   3
+
+#define BOOT_WRITE_UNLOCK               1
+#define BOOT_ERASE_ONLY                 2
+#define BOOT_AUTO_ERASE                 4
+#define BOOT_AUTO_INC                   8
+#define BOOT_SEND_ACK                   16
+
+#define BOOT_CMD_RESET                  1
+#define BOOT_CMD_INIT_CHK               2
+#define BOOT_CMD_CHK_RUN                3
+
+#define EEPROM_DATA_OFFSET              0xf00000                //@TODO move to config
+#define EEPROM_DATA_SIZE                1024                    //@TODO move to config
+
+#define BOOT_COMMAND_ACK                0x88            
 #define OFFSET_CAT_ID   0
 #define OFFSET_CMD  1
 #define OFFSET_DATA  2

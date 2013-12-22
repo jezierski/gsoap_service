@@ -29,6 +29,18 @@ void CCanBuffer::insertCommand(unsigned char cmd) {
     command = cmd;
 }
 
+void CCanBuffer::insertFlashAddress(unsigned int address) {
+    this->flashAddress = address & 0xffffff;
+}
+
+void CCanBuffer::insertBootCommand(unsigned char command) {
+    this->bootCommand = command & 0x03;
+}
+
+void CCanBuffer::insertBootControlBits(unsigned char bits) {
+    this->bootControlBits = bits & 0x1f;
+}
+
 void CCanBuffer::insertDestinationAddress(unsigned char adr) {
     destAddress = adr;
 }
@@ -75,6 +87,25 @@ void CCanBuffer::buildBuffer() {
         this->operator <<((unsigned char) buf[i]);
     }
 }
+
+void CCanBuffer::buildBootBuffer() {
+    CCanBuffer buf;
+    buf << (unsigned char) ((flashAddress >> 0) & 0xff);
+    buf << (unsigned char) ((flashAddress >> 8) & 0xff);
+    buf << (unsigned char) ((flashAddress >> 16) & 0xff);
+    buf << (unsigned char) 0;
+    buf << (unsigned char) bootControlBits;
+    buf << (unsigned char) bootCommand;
+    buf << (unsigned char) 0;
+    buf << (unsigned char) 0;
+    
+    this->clear();
+    for (size_t i = 0; i < buf.getLength(); i++) {
+        this->operator <<((unsigned char) buf[i]);
+    }
+    bootControlBits = bootCommand = flashAddress = 0;
+}
+
 
 unsigned int CCanBuffer::getGUID() {
     unsigned int guid;
