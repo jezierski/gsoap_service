@@ -39,6 +39,8 @@ tools/CDatabase.cpp
 tools/CLog.cpp
 tools/CBlob.cpp
 tools/CParamsConverter.cpp
+tools/CFirmwareLoader.cpp
+tools/CFirmwareBuffer.cpp
 
 #can_devices:
 can_devices/CCanSimpleSwitchActor.cpp

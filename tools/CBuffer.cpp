@@ -46,25 +46,24 @@ vector<unsigned char> &CBuffer::getBuffer() {
 /// \return requested byte
 
 unsigned char CBuffer::getBuffer(unsigned char index) {
-    if (index < len)
-        return buffer[index];
-    else
-        return 0;
+  
+        return this->operator [](index);
+ 
 }
 
 bool CBuffer::isReady() {
     return ready;
 }
 
-CBuffer CBuffer::subBuffer(unsigned char start, unsigned char length) {
+CBuffer CBuffer::subBuffer(unsigned int start, unsigned int length) {
 
     CBuffer subBuffer;
-    unsigned char end = length + start;
+    unsigned int end = length + start;
     if (length == 0)
         end = buffer.size();
 
-    for (unsigned char i = start; i < end; i++)
-        subBuffer << (unsigned char) buffer[i];
+    for (unsigned int i = start; i < end && i < this->getLength(); i++)
+        subBuffer << (unsigned char) this->operator [](i);
 
     return subBuffer;
 }
@@ -127,17 +126,7 @@ CBuffer::operator string() {
     return str;
 }
 
-wstring CBuffer::getWstring() {
-    //return string((char*)&buffer[0]);
-    wstring str = L"";
-    //while (auto it != buffer.end())
-    // str += *(it++);
-    for (size_t i = 0; i < buffer.size(); i += 2) {
 
-        str += buffer[i] | ((buffer[i + 1] << 8)&0xff00);
-    }
-    return str;
-}
 
 CBuffer& CBuffer::operator <<(int num) {
 

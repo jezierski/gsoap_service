@@ -15,6 +15,9 @@ CLog::CLog() {
 
 int CLog::put(string str, logType level) {
   
+    string output;
+    char formatedBuffer[15];
+    
     gettimeofday(&end, NULL);
     switch (level) {
 
@@ -68,16 +71,20 @@ int CLog::put(string str, logType level) {
         mtime = ((seconds) * 1000 + useconds / 1000.0) + 0.5;
         resetFlag = 0;
 
-        cout << "Last instr. time: \t" << mtime << "ms \t";
+        output = "Last instr. time: \t" +to_string(mtime)+ "ms \t";
     } else {
 
         seconds = end.tv_sec;
         useconds = end.tv_usec;
         mtime = ((seconds) * 1000 + useconds / 1000.0) + 0.5;
-        cout << "[" << convertTime(getCurrentTime(), "%F %T")<<"."<<useconds / 1000<<"]["<<mtime - appStartTime << "ms] \t";
+        output =  "[" + convertTime(getCurrentTime(), "%F %T")+"."+to_string(useconds / 1000)+"]["; 
+        sprintf(formatedBuffer, "%12d", mtime - appStartTime);
+        output += string(formatedBuffer) + "ms]\t";
     }
 
-    cout << str << NC << endl;
+    output += str;
+    
+    cout << output << NC << endl;
 
     //    cout << NC;
 

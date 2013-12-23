@@ -8,7 +8,7 @@
 #ifndef CCANBUFFER_H
 #define	CCANBUFFER_H
 
-#include "../tools/CBuffer.h"
+#include "CBuffer.h"
 
 class CCanBuffer : public CBuffer{
 public:

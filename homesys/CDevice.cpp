@@ -43,6 +43,44 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
     canbusProtocol = protocol;
 }
 
+void CDevice::uploadFirmware() {
+    //quiet other devices
+    CFirmwareLoader loader;
+    CFirmwareBuffer firmware;
+    CBuffer tempBuffer;
+    string fname;
+    unsigned char progress = 255;
+    
+    loader.printFileList();
+    log->put("Enter firmware file name to upload:");
+//    cin >> fname;
+    try {
+//        firmware = loader.readFile(fname);
+//        initBootWrite(firmware.getStartAddress());
+//        tempBuffer = firmware.getDataBlock();
+//        while (tempBuffer.getLength()) {
+//            writeProgramData(tempBuffer);
+//            tempBuffer = firmware.getDataBlock();
+//            if (progress != firmware.getReadingProgress()){
+//                progress = firmware.getReadingProgress();
+//                log->put("Upload progress: " + to_string((int)progress) + "%");
+//            }
+//        }
+
+//
+//        void initBootRead(unsigned int address);
+//        void writeProgramData(CCanBuffer data);
+//        CCanBuffer readProgramData();
+        exitBootMode();
+//        void resetDevice();
+
+
+    } catch (string e) {
+        log->error("Firmware upload failed: " + e);
+    }
+
+}
+
 void CDevice::initBootWrite(unsigned int address) {
     cout << "INIT BOOT WRITE ADR: " << (int) address << endl; //@TODO remove it
     CCanBuffer buffer;
@@ -69,7 +107,7 @@ void CDevice::initBootRead(unsigned int address) {
     }
 }
 
-void CDevice::writeProgramData(CCanBuffer data) {
+void CDevice::writeProgramData(CBuffer data) {
     cout << "WRITE DATA: " << endl; //@TODO remove it
     data.printBuffer(); //@TODO remove it
 

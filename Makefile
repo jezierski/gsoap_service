@@ -591,6 +591,54 @@ tools/CDevicesConfig.cpp.s:
 	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.s
 .PHONY : tools/CDevicesConfig.cpp.s
 
+tools/CFirmwareBuffer.o: tools/CFirmwareBuffer.cpp.o
+.PHONY : tools/CFirmwareBuffer.o
+
+# target to build an object file
+tools/CFirmwareBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareBuffer.cpp.o
+.PHONY : tools/CFirmwareBuffer.cpp.o
+
+tools/CFirmwareBuffer.i: tools/CFirmwareBuffer.cpp.i
+.PHONY : tools/CFirmwareBuffer.i
+
+# target to preprocess a source file
+tools/CFirmwareBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareBuffer.cpp.i
+.PHONY : tools/CFirmwareBuffer.cpp.i
+
+tools/CFirmwareBuffer.s: tools/CFirmwareBuffer.cpp.s
+.PHONY : tools/CFirmwareBuffer.s
+
+# target to generate assembly for a file
+tools/CFirmwareBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareBuffer.cpp.s
+.PHONY : tools/CFirmwareBuffer.cpp.s
+
+tools/CFirmwareLoader.o: tools/CFirmwareLoader.cpp.o
+.PHONY : tools/CFirmwareLoader.o
+
+# target to build an object file
+tools/CFirmwareLoader.cpp.o:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareLoader.cpp.o
+.PHONY : tools/CFirmwareLoader.cpp.o
+
+tools/CFirmwareLoader.i: tools/CFirmwareLoader.cpp.i
+.PHONY : tools/CFirmwareLoader.i
+
+# target to preprocess a source file
+tools/CFirmwareLoader.cpp.i:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareLoader.cpp.i
+.PHONY : tools/CFirmwareLoader.cpp.i
+
+tools/CFirmwareLoader.s: tools/CFirmwareLoader.cpp.s
+.PHONY : tools/CFirmwareLoader.s
+
+# target to generate assembly for a file
+tools/CFirmwareLoader.cpp.s:
+	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareLoader.cpp.s
+.PHONY : tools/CFirmwareLoader.cpp.s
+
 tools/CLog.o: tools/CLog.cpp.o
 .PHONY : tools/CLog.o
 
@@ -828,6 +876,12 @@ help:
 	@echo "... tools/CDevicesConfig.o"
 	@echo "... tools/CDevicesConfig.i"
 	@echo "... tools/CDevicesConfig.s"
+	@echo "... tools/CFirmwareBuffer.o"
+	@echo "... tools/CFirmwareBuffer.i"
+	@echo "... tools/CFirmwareBuffer.s"
+	@echo "... tools/CFirmwareLoader.o"
+	@echo "... tools/CFirmwareLoader.i"
+	@echo "... tools/CFirmwareLoader.s"
 	@echo "... tools/CLog.o"
 	@echo "... tools/CLog.i"
 	@echo "... tools/CLog.s"

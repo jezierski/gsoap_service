@@ -28,12 +28,11 @@ public:
     void clear();
 
     operator string();
-    wstring getWstring();
 
     unsigned char getCommand();
     vector<unsigned char> &getBuffer();
     unsigned char getBuffer(unsigned char index);
-    CBuffer subBuffer(unsigned char start, unsigned char length);
+    CBuffer subBuffer(unsigned int start, unsigned int length);
     size_t getLength();
     bool isReady();
     void setReady();

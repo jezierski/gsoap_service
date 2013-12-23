@@ -20,7 +20,8 @@
 #include "../tools/types.h"
 #include "../tools/FastDelegate.h"
 #include "../tools/Signal.h"
-
+#include "../tools/CFirmwareLoader.h"
+#include "../tools/CFirmwareBuffer.h"
 
 
 
@@ -37,14 +38,13 @@
 
 using namespace Gallant;
 
-
 class CDevice {
 public:
     CDevice();
     //    CDevice(const CDevice& orig);
     virtual ~CDevice();
     Signal3<SDeviceDescription, Command, Params> sensorEvent;
-    
+
 
     void setDeviceCategory(EDeviceCategory category);
     EDeviceCategory getDeviceCategory();
@@ -83,18 +83,21 @@ public:
     CCan232 *getProtocol();
     unsigned char getAddress(SDeviceDescription device);
 
-    
+    void uploadFirmware();
 
-   
- void initBootWrite(unsigned int address);
- void initBootRead(unsigned int address);
-    void writeProgramData(CCanBuffer data);
+
+ /*firmware upload methods*/
+    void initBootWrite(unsigned int address);
+    void initBootRead(unsigned int address);
+    void writeProgramData(CBuffer data);
     CCanBuffer readProgramData();
     void exitBootMode();
     void resetDevice();
+
 private:
    
-    
+
+
     unsigned char getNewAddress();
     void removeAddress(unsigned char address);
 
@@ -103,15 +106,15 @@ private:
 
     bool resetAddresses();
     void findGUIDs();
-//    void pollGUID();
-//    void getGUIDs();
-//    void sendPollACK(unsigned int guid);
+    //    void pollGUID();
+    //    void getGUIDs();
+    //    void sendPollACK(unsigned int guid);
     void assignAddress();
 
     bool resetAllDevicesStatus();
     void checkNewDevicesStatus();
-//    void requestNewDevicesStatus();
-//    void getNewDevicesStatus();
+    //    void requestNewDevicesStatus();
+    //    void getNewDevicesStatus();
     void sendACK(SDeviceDescription device);
 
 
@@ -130,8 +133,8 @@ private:
     unsigned char getDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, Devices devicesList);
     SDeviceDescription getDeviceWithAddress(unsigned char address);
     void setDeviceAddress(unsigned int guid, unsigned char luid, EDeviceCategory category, unsigned char address, Devices &devicesList);
-    
-    
+
+
     void initActionMap();
 
     bool isSensorDevice() {

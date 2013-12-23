@@ -11,6 +11,7 @@
 #include <time.h>
 #include "types.h"
 #include <sys/time.h>
+#include <dirent.h>
 
 template <class T>
 inline std::string to_string(const T& t, bool hex = false) {
@@ -79,10 +80,10 @@ inline string to_string(SDeviceDescription device) {
 
 inline string to_string(Params params) {
     string output = "";
-    for (unsigned char param : params){
-        output += to_string((int)param, true) + " ";
+    for (unsigned char param : params) {
+        output += to_string((int) param, true) + " ";
     }
-    if (output.length() > 1){
+    if (output.length() > 1) {
         output = output.substr(0, output.length() - 1);
     }
     return output;
@@ -97,7 +98,7 @@ inline long long getCurrentDayTime() {
     return secs;
 }
 
-inline long long paramsToLL(Params params){
+inline long long paramsToLL(Params params) {
     long long param = 0;
     for (size_t i = params.size(); i > 0; i--) {
         param |= params[i - 1];
@@ -127,6 +128,21 @@ inline long long getCurrentTime() {
     return (unsigned long long) time.tv_sec * 1000 + time.tv_usec / 1000;
 }
 
+inline int getdir(string dir, vector<string> &files) {
+    DIR *dp;
+    struct dirent *dirp;
+    if ((dp = opendir(dir.c_str())) == NULL) {
+        return -1;
+    }
+
+    while ((dirp = readdir(dp)) != NULL) {
+        if (string(dirp->d_name) != "." && string(dirp->d_name) != "..") {
+            files.push_back(string(dirp->d_name));
+        }
+    }
+    closedir(dp);
+    return 0;
+}
 
 class CTools {
 public:

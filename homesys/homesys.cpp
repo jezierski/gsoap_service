@@ -26,7 +26,7 @@ void CApplication::run() {
     log->info("Server starting...");
     
     
-    
+   
     
     can232device = new CCan232();
         can232device->initCan232Device();
@@ -34,6 +34,9 @@ void CApplication::run() {
         
     CDevice *device = new CDevice();
     device->setCommunicationProtocol(can232device);
+    
+   
+    device->uploadFirmware();
     
 //    device->initBootWrite(0xf00010);
 //    CCanBuffer buf;
@@ -54,10 +57,10 @@ void CApplication::run() {
     
 
 
-    device->initBootRead(0xf00000);
-    device->readProgramData();
-    device->readProgramData();
-    device->readProgramData();
+//    device->initBootRead(0xf00000);
+//    device->readProgramData();
+//    device->readProgramData();
+//    device->readProgramData();
 //     device->readProgramData(0x808);
     
     return;
