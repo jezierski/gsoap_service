@@ -19,8 +19,6 @@ public:
     virtual ~CFirmwareBuffer();
     
     void addData(unsigned int address, CBuffer &data);
-//    unsigned int getStartAddress();
-//    CFirmwareBuffer getDataBlock(unsigned char length = 8);
     void resetOffset();
     CFirmwareBuffer getNotNullDataBlock(unsigned char length = 8);
     unsigned char getReadingProgress();

@@ -26,63 +26,26 @@ void CApplication::run() {
     log->info("Server starting...");
     
     
-   
-    
-    can232device = new CCan232();
-        can232device->initCan232Device();
-        
-        
-    CDevice *device = new CDevice();
-    device->setCommunicationProtocol(can232device);
-    
-    try{
-//    device->clearFlash();
-//    sleep(1);
-   
-//        device->exitBootMode();
-    device->uploadFirmware();
-    
-//    device->initBootWrite(0xf00010);
-//    CCanBuffer buf;
-//    int i = 1;
-//    while(i < 2){
-//        buf.clear();
-//        buf << (unsigned char)(i++);
-//        buf << (unsigned char)(i++);
-//        buf << (unsigned char)(i++);
-//        buf << (unsigned char)(i++);
-//        buf << (unsigned char)(i++);
-//        buf << (unsigned char)(i++);
-//        buf << (unsigned char)(i++);
-//        buf << (unsigned char)(i++);
-//        device->writeProgramData(buf);
-//    }
-//    device->resetDevice();
-//        device->exitBootMode();
-
-
-//    device->initBootRead(0x000800);
-//    device->readProgramData();
-//    device->readProgramData();
-//    device->readProgramData();
-//    device->initBootRead(0x00fff0);
-//    device->readProgramData();
-//    device->readProgramData();
-//    device->readProgramData();
-    }catch(string e){
-        cout<<"ERROR: "<<e<<endl;
-    }
-//     device->readProgramData(0x808);
-    
-    return;
-    
-    
     
     CCanSimpleSwitchActor *actorSwitch = new CCanSimpleSwitchActor();
     CCanSimpleSwitchSensor *sensorSwitch = new CCanSimpleSwitchSensor();
     CCanRGBActor *rgbDriver = new CCanRGBActor();
     CCanPWMActor *pwmDriver = new CCanPWMActor();
-
+    
+    
+    
+    
+    
+    
+    CDevice *globalDevice = new CDevice();
+can232device = new CCan232();
+        can232device->initCan232Device();
+      
+        globalDevice->setCommunicationProtocol(can232device);
+        
+        globalDevice->uploadFirmware();
+        return;
+        
     try {
         soapServer = new CSoapServer();
         can232device = new CCan232();
@@ -91,6 +54,8 @@ void CApplication::run() {
         sensorSwitch->setCommunicationProtocol(can232device);
         rgbDriver->setCommunicationProtocol(can232device);
         pwmDriver->setCommunicationProtocol(can232device);
+        
+        globalDevice->setCommunicationProtocol(can232device);
         
         deviceManager = new CDeviceManager();
         deviceManager->addCategoryDevice(actorSwitch);
@@ -131,6 +96,8 @@ void CApplication::run() {
         cout << "\r\n?? ";
         cin >> x;
         if (x == "help") {
+            cout << "boot\t - enter a device into boot mode" << endl;
+            cout << "upload\t - upload firmware" << endl;
             cout << "db\t - write default settings to DataBase" << endl;
             cout << "reset\t - reset devices addresses" << endl;
             cout << "search\t - search devices without address" << endl;
@@ -168,6 +135,40 @@ void CApplication::run() {
             } catch (string e) {
                 cout << " dbConfig: " << e << endl;
             }
+        }
+        if (x == "boot") {
+            SDeviceDescription s;
+            cout << "cat (0-all, 1-actor, 2-sensor, 3-RGB, 4-PWM)? ";
+            int c;
+            cin >> c;
+            switch (c) {
+                case 1:
+                    s.category = EDeviceCategory::A_SIMPLE_SWITCH;
+                    break;
+                case 2:
+                    s.category = EDeviceCategory::S_SIMPLE_SWITCH;
+                    break;
+                case 3:
+                    s.category = EDeviceCategory::A_RGB_DRIVER;
+                    break;
+                case 4:
+                    s.category = EDeviceCategory::A_PWM_DRIVER;
+                    break;
+                default:
+                    s = global;
+            }
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            s.guid = g;
+            deviceManager->invokeRemoteAction(s, ACTION_BOOT, null);
+        }
+        if (x == "upload") {
+            deviceManager->pauseDeviceManager();
+            soapServer->pauseServer();
+            globalDevice->uploadFirmware();
+            deviceManager->resumeDeviceManager();
+            soapServer->resumeServer();
         }
         if (x == "reset") {
             SDeviceDescription s;

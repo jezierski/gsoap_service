@@ -11,16 +11,16 @@ CFirmwareBuffer::CFirmwareBuffer() {
 }
 
 CFirmwareBuffer::CFirmwareBuffer(const CBuffer& orig) : CBuffer(orig) {
-//    cout<<"KONSTRUKTOR KOP"<<endl;
-    
+    //    cout<<"KONSTRUKTOR KOP"<<endl;
+
 }
 
 CFirmwareBuffer::~CFirmwareBuffer() {
 }
 
 void CFirmwareBuffer::addData(unsigned int address, CBuffer& data) {
-    cout << "ADR: " << address << ", DATA: " << endl;
-    data.printBuffer();
+    //    cout << "ADR: " << address << ", DATA: " << endl;
+    //    data.printBuffer();
     unsigned int currentBufSize = this->getLength();
     if (not startAddress) {
         startAddress = address;
@@ -33,35 +33,32 @@ void CFirmwareBuffer::addData(unsigned int address, CBuffer& data) {
     this->operator <<(data);
 }
 
-void CFirmwareBuffer::resetOffset(){
+void CFirmwareBuffer::resetOffset() {
     offset = 0;
 }
 
-//unsigned int CFirmwareBuffer::getStartAddress() {
-//    offset = 0;
-//    return startAddress;
-//}
-
-//CFirmwareBuffer CFirmwareBuffer::getDataBlock(unsigned char length) {
-//    CFirmwareBuffer buf = this->subBuffer(offset, length);
-//    buf.setOffsetAddress(startAddress + offset);
-//    offset += length;
-//    return buf;
-//}
 
 CFirmwareBuffer CFirmwareBuffer::getNotNullDataBlock(unsigned char length) {
     CFirmwareBuffer buf;
     do {
         buf = this->subBuffer(offset, length);
-        offset += length;
-//        cout<<"taking subbufer"<<endl;
+        offset += buf.getLength();
+      
     } while (buf.isNullDataBuffer() && buf.getLength());
+    
+    if (buf.getLength() > 0 && buf.getLength() < 8) {
+        length = buf.getLength();
+        for (size_t i = length; i < 8; i++) {
+            buf << (unsigned char) NULL_DATA;
+        }
+    }
     buf.setOffsetAddress(startAddress + offset - length);
+
     return buf;
 }
 
 unsigned char CFirmwareBuffer::getReadingProgress() {
-    cout << "offset: " << offset << ", len: " << this->getLength() << ", prog: " << offset * 100 / this->getLength() << endl;
+    //    cout << "offset: " << offset << ", len: " << this->getLength() << ", prog: " << offset * 100 / this->getLength() << endl;
     return (offset * 100 / this->getLength());
 }
 

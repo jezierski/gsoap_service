@@ -77,8 +77,9 @@ int CLog::put(string str, logType level) {
         seconds = end.tv_sec;
         useconds = end.tv_usec;
         mtime = ((seconds) * 1000 + useconds / 1000.0) + 0.5;
-        output =  "[" + convertTime(getCurrentTime(), "%F %T")+"."+to_string(useconds / 1000)+"]["; 
-        sprintf(formatedBuffer, "%12d", mtime - appStartTime);
+        sprintf(formatedBuffer, "%3lu", useconds / 1000);
+        output =  "[" + convertTime(getCurrentTime(), "%F %T")+"."+string(formatedBuffer)+"]["; 
+        sprintf(formatedBuffer, "%12lu", mtime - appStartTime);
         output += string(formatedBuffer) + "ms]\t";
     }
 

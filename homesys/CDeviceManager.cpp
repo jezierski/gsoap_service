@@ -103,10 +103,18 @@ void CDeviceManager::runInThreadRemoteAction(SDeviceDescription device, Command 
 
 void CDeviceManager::runInThreadGlobalRemoteAction(Command command, Blob params) {
 
-    while (1) {
+    while (active) {
         invokeGlobalRemoteAction(command, params);
         msleep(100);
     }
+}
+
+void CDeviceManager::pauseDeviceManager() {
+    active = false;
+}
+
+void CDeviceManager::resumeDeviceManager() {
+    active = true;
 }
 
 list<CDevice*> CDeviceManager::getDevices() {

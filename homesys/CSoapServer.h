@@ -40,6 +40,9 @@ public:
     
     int switchPort(string pinNo, string &result);
     
+    void pauseServer();
+    void resumeServer();
+    
     Signal0<void> operationLoad;
 private:
 
@@ -47,6 +50,7 @@ private:
     CLog *log;
     CParamsConverter *converter;
     CDeviceManager *deviceManager;
+    bool active = true;
 };
 
 #endif	/* CSOAPSERVER_H */

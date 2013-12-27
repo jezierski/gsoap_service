@@ -51,6 +51,7 @@
 #define CMD_PING    5
 #define CMD_RESET_ALL_STAT        6
 #define CMD_REQ_NEW_STAT        7
+#define CMD_ENTER_BOOT        8
 
 enum class EDeviceCategory {
     ALL = ID_MULTICAST,

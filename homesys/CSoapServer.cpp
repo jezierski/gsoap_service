@@ -217,10 +217,17 @@ int CSoapServer::getDevicesList(LONG64 category, struct ns1__getDevicesListRespo
 
 void CSoapServer::start() {
     int error;
-    while (1) {
+    while (active) {
         error = run(1234);
         if (error != SOAP_OK)
             log->error("SOAP server error code: " + to_string(error));
     }
 }
 
+void CSoapServer::pauseServer() {
+    active = false;
+}
+
+void CSoapServer::resumeServer() {
+    active = true;
+}

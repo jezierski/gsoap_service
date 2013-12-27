@@ -33,6 +33,7 @@
 #define ACTION_READ_NEW_STATUS          6
 #define ACTION_SET_NAME                 11
 #define ACTION_PING                     12
+#define ACTION_BOOT                     13
 
 #define GLOBAL_ACTION_LIMIT           10
 
@@ -76,6 +77,7 @@ public:
     Blob check(SDeviceDescription dev, Blob params);
     Blob setName(SDeviceDescription dev, Blob params);
     Blob pingLogicalDevice(SDeviceDescription dev, Blob params);
+    Blob bootDevice(SDeviceDescription dev, Blob params);
     Blob list(SDeviceDescription dev, Blob params);
     Blob resetStatuses(SDeviceDescription dev, Blob params);
     Blob checkNewStatuses(SDeviceDescription dev, Blob params);
@@ -86,7 +88,10 @@ public:
     void uploadFirmware();
 
 
- /*firmware upload methods*/
+
+
+private:
+     /*firmware upload methods*/
     void initBootWrite(unsigned int address);
     void initBootRead(unsigned int address);
     void writeProgramData(CBuffer data);
@@ -94,8 +99,7 @@ public:
     void exitBootMode();
     void resetDevice();
     void clearFlash();
-
-private:
+    void verifyFirmware(CFirmwareBuffer &buffer);
    
 
 

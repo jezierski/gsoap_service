@@ -43,6 +43,9 @@ public:
     void loadActionsChain();
    
     list<CDevice*> getDevices();
+    
+    void pauseDeviceManager();
+    void resumeDeviceManager();
 
 private:
     SAction convertToSAction(SDeviceDescription device, Command command, Blob blob);
@@ -51,6 +54,7 @@ private:
     CActionsChain *actionChain;
     CLog *log;
     mutex action;
+    bool active = true;
 };
 
 #endif	/* CDEVICEMANAGER_H */
