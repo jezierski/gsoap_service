@@ -46,35 +46,29 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
 void CDevice::uploadFirmware() {
     //quiet other devices
     CFirmwareLoader loader;
-    CFirmwareBuffer firmware;
-    CBuffer tempBuffer;
+    CFirmwareBuffer firmware, tempBuffer;
     string fname;
     unsigned char progress = 255;
-    
+
     loader.printFileList();
     log->put("Enter firmware file name to upload:");
-//    cin >> fname;
+    cin >> fname;
     try {
-//        firmware = loader.readFile(fname);
-//        initBootWrite(firmware.getStartAddress());
-//        tempBuffer = firmware.getDataBlock();
-//        while (tempBuffer.getLength()) {
-//            writeProgramData(tempBuffer);
-//            tempBuffer = firmware.getDataBlock();
-//            if (progress != firmware.getReadingProgress()){
-//                progress = firmware.getReadingProgress();
-//                log->put("Upload progress: " + to_string((int)progress) + "%");
-//            }
-//        }
+        firmware = loader.readFile(fname);
+        clearFlash();
+        
+        tempBuffer = firmware.getNotNullDataBlock();
+         while (tempBuffer.getLength()) {
+            initBootWrite(tempBuffer.getDataBlockAddress());
+            writeProgramData(tempBuffer);
+            tempBuffer = firmware.getNotNullDataBlock();
+            if (progress != firmware.getReadingProgress()) {
+                progress = firmware.getReadingProgress();
+                log->put("Upload progress: " + to_string((int) progress) + "%");
+            }
+        }
 
-//
-//        void initBootRead(unsigned int address);
-//        void writeProgramData(CCanBuffer data);
-//        CCanBuffer readProgramData();
         exitBootMode();
-//        void resetDevice();
-
-
     } catch (string e) {
         log->error("Firmware upload failed: " + e);
     }
@@ -133,17 +127,18 @@ CCanBuffer CDevice::readProgramData() {
 
 void CDevice::exitBootMode() {
     log->put("Exiting BOOT mode");
-    initBootRead(EEPROM_DATA_OFFSET + EEPROM_DATA_SIZE - 8);
-    CCanBuffer buffer = readProgramData();
-    CCanBuffer data;
-    for (size_t i = 0; i < buffer.getLength() - 1; i++) {
-        data << (unsigned char) buffer[i];
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_EXIT_BOOT);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Exit boot mode failed");
     }
-    data << (unsigned char) 0;
-
-    initBootWrite(EEPROM_DATA_OFFSET + EEPROM_DATA_SIZE - 8);
-    writeProgramData(data);
     resetDevice();
+
 }
 
 void CDevice::resetDevice() {
@@ -155,6 +150,29 @@ void CDevice::resetDevice() {
     buffer.insertBootCommand(BOOT_CMD_RESET);
     buffer.buildBootBuffer();
     canbusProtocol->send(buffer);
+}
+
+void CDevice::clearFlash() {
+    cout << "CLR PROG" << endl; //@TODO remove it
+    CTimeOut tout;
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_CLR_PROG);
+    buffer.buildBootBuffer();
+    canbusProtocol->send(buffer);
+    tout.SetMilliSec(5000);
+    while (!tout.IsTimeOut()) {
+        buffer = canbusProtocol->getCanFrame();
+        if (buffer.isReady()) {
+            break;
+        }
+    }
+
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Clearing flash failed");
+    }
 }
 
 unsigned char CDevice::getNewAddress() {

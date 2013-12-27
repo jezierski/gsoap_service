@@ -11,8 +11,8 @@
 CCanBuffer::CCanBuffer() {
 }
 
-//CCanBuffer::CCanBuffer(const CCanBuffer& orig) {
-//}
+CCanBuffer::CCanBuffer(const CBuffer& orig) : CBuffer(orig) {
+}
 
 CCanBuffer::~CCanBuffer() {
 }
@@ -34,7 +34,7 @@ void CCanBuffer::insertFlashAddress(unsigned int address) {
 }
 
 void CCanBuffer::insertBootCommand(unsigned char command) {
-    this->bootCommand = command & 0x03;
+    this->bootCommand = command & 0x0f;
 }
 
 void CCanBuffer::insertBootControlBits(unsigned char bits) {

@@ -35,7 +35,11 @@ void CApplication::run() {
     CDevice *device = new CDevice();
     device->setCommunicationProtocol(can232device);
     
+    try{
+//    device->clearFlash();
+//    sleep(1);
    
+//        device->exitBootMode();
     device->uploadFirmware();
     
 //    device->initBootWrite(0xf00010);
@@ -54,13 +58,20 @@ void CApplication::run() {
 //        device->writeProgramData(buf);
 //    }
 //    device->resetDevice();
-    
+//        device->exitBootMode();
 
 
-//    device->initBootRead(0xf00000);
+//    device->initBootRead(0x000800);
 //    device->readProgramData();
 //    device->readProgramData();
 //    device->readProgramData();
+//    device->initBootRead(0x00fff0);
+//    device->readProgramData();
+//    device->readProgramData();
+//    device->readProgramData();
+    }catch(string e){
+        cout<<"ERROR: "<<e<<endl;
+    }
 //     device->readProgramData(0x808);
     
     return;

@@ -13,7 +13,7 @@
 class CCanBuffer : public CBuffer{
 public:
     CCanBuffer();
-//    CCanBuffer(const CCanBuffer& orig);
+    CCanBuffer(const CBuffer& orig);
     virtual ~CCanBuffer();
     
     void insertId(unsigned int id);

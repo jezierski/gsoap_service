@@ -21,6 +21,8 @@
 #define BOOT_CMD_RESET                  1
 #define BOOT_CMD_INIT_CHK               2
 #define BOOT_CMD_CHK_RUN                3
+#define BOOT_CMD_EXIT_BOOT              4
+#define BOOT_CMD_CLR_PROG               5
 
 #define EEPROM_DATA_OFFSET              0xf00000                //@TODO move to config
 #define EEPROM_DATA_SIZE                1024                    //@TODO move to config

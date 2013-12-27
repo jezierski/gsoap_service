@@ -136,7 +136,7 @@ CBuffer& CBuffer::operator <<(int num) {
 }
 
 CBuffer& CBuffer::operator <<(short num) {
-    //to trzeba poprawić chyba
+
     this->buffer.push_back(0xff & (num >> 0));
     this->buffer.push_back(0xff & (num >> 8));
     return *this;

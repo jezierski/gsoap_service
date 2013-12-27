@@ -52,6 +52,8 @@ public:
     bool send(CCanBuffer &frame);
     CCanBuffer request(CCanBuffer &frame);
 
+    CCanBuffer getCanFrame();
+    
     template <class ret>
     CanBuffers broadcastRequest(CCanBuffer &frame, ret(CCanBuffer::*ackFunction)()) {
         lock_guard<mutex> lock(barrier);
@@ -97,7 +99,7 @@ private:
     void setAcceptedFilters(unsigned char filterId, unsigned int filter);
 
 
-    CCanBuffer getCanFrame();
+    
     bool sendCanFrame(CCanBuffer &frame);
     unsigned char getCRC(CBuffer &buffer);
     unsigned char checkCRC(CBuffer& buffer);

@@ -93,6 +93,7 @@ public:
     CCanBuffer readProgramData();
     void exitBootMode();
     void resetDevice();
+    void clearFlash();
 
 private:
    
