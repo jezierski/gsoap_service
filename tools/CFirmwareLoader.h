@@ -18,6 +18,11 @@
 #define OFFSET_FIRMWARE_LENGTH   0
 #define OFFSET_FIRMWARE_ADDR   1
 #define OFFSET_FIRMWARE_DATA     4
+#define OFFSET_FIRMWARE_TYPE     3
+
+#define TYPE_DATA       0
+#define TYPE_EOF        1
+#define TYPE_EXADR      4
 
 using namespace std;
 
@@ -41,6 +46,7 @@ private:
     unsigned int getAddress(RawData &input);
     CBuffer getData(RawData &input);
     RawData parseData (string &input);
+    unsigned int getHighExtendedAddress(RawData &input);
 };
 
 #endif	/* CFIRMWAREDONWLOADER_H */

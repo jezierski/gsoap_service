@@ -36,21 +36,42 @@ CFirmwareBuffer CFirmwareLoader::readFile(string filename) {
     RawData data;
     CFirmwareBuffer buffer;
     CBuffer dataBuffer;
+    unsigned int exAddress = 0;
     string fileContent;
     ifstream myfile;
     myfile.open("../firmware/" + filename);
 
     if (myfile.is_open()) {
+        log->info("Start firmware loading...");
         while (!myfile.eof()) {
             fileContent = "";
             myfile >> fileContent;
             if (fileContent != "") {
                 data = parseData(fileContent);
                 if (checkInputData(data)) {
-                    dataBuffer = getData(data);
-                    if (dataBuffer.getLength()) {
-                        buffer.addData(getAddress(data), dataBuffer);
+                    switch (data[OFFSET_FIRMWARE_TYPE]) {
+                        case TYPE_DATA:
+//                            cout << "TYPE_DATA" << endl;
+                            dataBuffer = getData(data);
+                            if (dataBuffer.getLength()) {
+                                if (exAddress) {
+                                    buffer.addExBufferData(exAddress | getAddress(data), dataBuffer);
+                                } else {
+                                    buffer.addData(getAddress(data), dataBuffer);
+                                }
+                            }
+                            break;
+                        case TYPE_EXADR:
+//                            cout << "TYPE_EXADR" << endl;
+                            exAddress = getHighExtendedAddress(data);
+                            break;
+                        case TYPE_EOF:
+//                            cout << "TYPE_EOF" << endl;
+                            myfile.close();
+                            return buffer;
+                            break;
                     }
+
                 } else {
                     throw string("Incorrect firmware file");
                 }
@@ -87,6 +108,16 @@ unsigned int CFirmwareLoader::getAddress(RawData &input) {
         address |= ((input[OFFSET_FIRMWARE_ADDR + 1] << 0) & 0x00ff);
     }
     return address;
+}
+
+unsigned int CFirmwareLoader::getHighExtendedAddress(RawData &input) {
+    unsigned int address = 0;
+    if (input.size() >= 6) {
+        address |= ((input[OFFSET_FIRMWARE_DATA] << 8) & 0xff00);
+        address |= ((input[OFFSET_FIRMWARE_DATA + 1] << 0) & 0x00ff);
+    }
+    address <<= 16;
+    return address & 0xffff0000;
 }
 
 CBuffer CFirmwareLoader::getData(RawData &input) {

@@ -38,7 +38,8 @@ public:
     void setReady();
     void printBuffer();
     bool operator ==(CBuffer &buf);
-    
+    bool compare(CBuffer &buf, size_t len);
+
     bool isACK();
     bool isNoData();
     unsigned char getErrorCode();

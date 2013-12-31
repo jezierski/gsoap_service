@@ -182,7 +182,6 @@ int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 comman
     }
 
     cout << endl;
-
     return 0;
 }
 

@@ -88,10 +88,7 @@ public:
     void uploadFirmware();
 
 
-
-
-private:
-     /*firmware upload methods*/
+   /*firmware upload methods*/
     void initBootWrite(unsigned int address);
     void initBootRead(unsigned int address);
     void writeProgramData(CBuffer data);
@@ -99,9 +96,14 @@ private:
     void exitBootMode();
     void resetDevice();
     void clearFlash();
+    void uploadExFirmware(CFirmwareBuffer &buffer);
+    void uploadFirmware(CFirmwareBuffer &buffer);
     void verifyFirmware(CFirmwareBuffer &buffer);
-   
+    void verifyExFirmware(CFirmwareBuffer &buffer);
 
+private:
+  
+ 
 
     unsigned char getNewAddress();
     void removeAddress(unsigned char address);

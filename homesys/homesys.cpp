@@ -38,13 +38,26 @@ void CApplication::run() {
     
     
     CDevice *globalDevice = new CDevice();
-can232device = new CCan232();
-        can232device->initCan232Device();
-      
-        globalDevice->setCommunicationProtocol(can232device);
-        
-        globalDevice->uploadFirmware();
-        return;
+//can232device = new CCan232();
+//        can232device->initCan232Device();
+//      
+//        globalDevice->setCommunicationProtocol(can232device);
+//        
+//        globalDevice->uploadFirmware();
+////        try{
+////          globalDevice->initBootWrite(0x300006);
+////          CBuffer buf;
+////          buf<<(unsigned char) 0x90;
+////                globalDevice->writeProgramData(buf);
+////                buf.clear();
+////    globalDevice->initBootRead(0x300006);
+////    CCanBuffer ret = globalDevice->readProgramData();
+////    cout<<"ret"<<endl;
+////    ret.printBuffer();
+////        }catch(string e){
+////            cout<<e<<endl;
+////        }
+//        return;
         
     try {
         soapServer = new CSoapServer();
@@ -137,8 +150,14 @@ can232device = new CCan232();
             }
         }
         if (x == "boot") {
-            SDeviceDescription s;
-            cout << "cat (0-all, 1-actor, 2-sensor, 3-RGB, 4-PWM)? ";
+           SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            cout << "cat (1-actor, 2-sensor, 3-rgb, 4-pwm)? ";
             int c;
             cin >> c;
             switch (c) {
@@ -154,13 +173,9 @@ can232device = new CCan232();
                 case 4:
                     s.category = EDeviceCategory::A_PWM_DRIVER;
                     break;
-                default:
-                    s = global;
             }
-            cout << "guid ? ";
-            unsigned int g;
-            cin >> g;
             s.guid = g;
+            s.luid = (unsigned char) l;
             deviceManager->invokeRemoteAction(s, ACTION_BOOT, null);
         }
         if (x == "upload") {

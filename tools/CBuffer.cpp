@@ -22,6 +22,18 @@ void CBuffer::printBuffer() {
 
 
 
+bool CBuffer::compare(CBuffer &buf, size_t len){
+    if (this->getLength() < len || buf.getLength() < len)
+        return false;
+    
+    for (size_t i = 0; i < len; i++) {
+        if (this->operator [](i) != buf[i])
+            return false;
+    }
+
+    return true;
+}
+
 //////////////////////////////////////////////////////////////////////
 /// Request a command from buffer
 /// \param none
