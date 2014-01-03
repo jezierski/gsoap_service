@@ -24,8 +24,8 @@
 #define BOOT_CMD_EXIT_BOOT              4
 #define BOOT_CMD_CLR_PROG               5
 
-#define EEPROM_DATA_OFFSET              0xf00000                //@TODO move to config
-#define EEPROM_DATA_SIZE                1024                    //@TODO move to config
+#define EEPROM_DATA_OFFSET              0xf00000              
+#define EEPROM_DATA_SIZE                1024                    
 
 #define BOOT_COMMAND_ACK                0x88            
 #define OFFSET_CAT_ID   0

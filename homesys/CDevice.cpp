@@ -79,36 +79,41 @@ void CDevice::uploadExFirmware(CFirmwareBuffer &buffer) {
     }
 }
 
-void CDevice::verifyExFirmware(CFirmwareBuffer &buffer) {
-    unsigned char exQnty = buffer.getExBufferQnty();
-    CFirmwareBuffer exBuffer, tempBuffer;
-    unsigned int lastAddress = 0;
-    CCanBuffer readBuffer;
-    buffer.resetOffset();
-
-    for (unsigned char index = 0; index < exQnty; index++) {
-        log->info("Extended firmware data verifying (" + to_string((int) index + 1) + "/" + to_string((int) exQnty) + ")");
-        exBuffer = buffer.getExBuffer(index);
-        tempBuffer = exBuffer.getDataBlock();
-        while (tempBuffer.getLength()) {
-            if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
-                initBootRead(tempBuffer.getDataBlockAddress());
-            }
-            lastAddress = tempBuffer.getDataBlockAddress();
-            readBuffer = readProgramData();
-//            cout << "ADR: " << lastAddress << endl;
-//            readBuffer.printBuffer();
-            
-//            cout<<"temBuf: "<<tempBuffer.getLength()<<endl;
-//            tempBuffer.printBuffer();
-            
-            if (not readBuffer.compare(tempBuffer, tempBuffer.getLength())) {
-                throw string("Veryfication extended firmware failed");
-            }
-            tempBuffer = exBuffer.getDataBlock();
-        }
-    }
-}
+//int CDevice::readGUID(){
+//    int guid;
+//     initBootRead();
+//}
+//
+//void CDevice::verifyExFirmware(CFirmwareBuffer &buffer) {
+//    unsigned char exQnty = buffer.getExBufferQnty();
+//    CFirmwareBuffer exBuffer, tempBuffer;
+//    unsigned int lastAddress = 0;
+//    CCanBuffer readBuffer;
+//    buffer.resetOffset();
+//
+//    for (unsigned char index = 0; index < exQnty; index++) {
+//        log->info("Extended firmware data verifying (" + to_string((int) index + 1) + "/" + to_string((int) exQnty) + ")");
+//        exBuffer = buffer.getExBuffer(index);
+//        tempBuffer = exBuffer.getDataBlock();
+//        while (tempBuffer.getLength()) {
+//            if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
+//                initBootRead(tempBuffer.getDataBlockAddress());
+//            }
+//            lastAddress = tempBuffer.getDataBlockAddress();
+//            readBuffer = readProgramData();
+////            cout << "ADR: " << lastAddress << endl;
+////            readBuffer.printBuffer();
+//            
+////            cout<<"temBuf: "<<tempBuffer.getLength()<<endl;
+////            tempBuffer.printBuffer();
+//            
+//            if (not readBuffer.compare(tempBuffer, tempBuffer.getLength())) {
+//                throw string("Veryfication extended firmware failed");
+//            }
+//            tempBuffer = exBuffer.getDataBlock();
+//        }
+//    }
+//}
 
 
 void CDevice::uploadFirmware(CFirmwareBuffer &firmware) {
@@ -743,8 +748,6 @@ Blob CDevice::bootDevice(SDeviceDescription dev, Blob params) {
 
     buffer.insertCommand(CMD_ENTER_BOOT);
     buffer.insertId((unsigned char) dev.category);
-//    buffer << (unsigned char) 0;
-//    buffer << (unsigned char) par[0];
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "Enter device into boot mode failed";
 

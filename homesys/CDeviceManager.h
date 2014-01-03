@@ -27,11 +27,7 @@ public:
     virtual ~CDeviceManager();
 
     void addCategoryDevice(CDevice *device);
-    //void searchLogicalDevices();
-    
-//    void resetDeviceAddresses();
-    //void assignAddresses();
-    
+    void addBootDevice(CDevice *device);
 
     Blob invokeRemoteAction(SDeviceDescription, Command, Blob);
     Blob invokeGlobalRemoteAction(Command, Blob);
@@ -44,13 +40,18 @@ public:
    
     list<CDevice*> getDevices();
     
-    void pauseDeviceManager();
-    void resumeDeviceManager();
+    void uploadFirmware();
+    
+    
 
 private:
+    void pauseDeviceManager();
+    void resumeDeviceManager();
+    
     SAction convertToSAction(SDeviceDescription device, Command command, Blob blob);
     CDevice *getDevice(SDeviceDescription deviceDescription);
     list<CDevice*>categoryDevices;
+    CDevice *bootDevice;
     CActionsChain *actionChain;
     CLog *log;
     mutex action;

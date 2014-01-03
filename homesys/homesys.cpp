@@ -31,13 +31,13 @@ void CApplication::run() {
     CCanSimpleSwitchSensor *sensorSwitch = new CCanSimpleSwitchSensor();
     CCanRGBActor *rgbDriver = new CCanRGBActor();
     CCanPWMActor *pwmDriver = new CCanPWMActor();
+    CDevice *bootDevice = new CDevice();
     
     
     
     
     
     
-    CDevice *globalDevice = new CDevice();
 //can232device = new CCan232();
 //        can232device->initCan232Device();
 //      
@@ -63,14 +63,14 @@ void CApplication::run() {
         soapServer = new CSoapServer();
         can232device = new CCan232();
         can232device->initCan232Device();
+        bootDevice->setCommunicationProtocol(can232device);
         actorSwitch->setCommunicationProtocol(can232device);
         sensorSwitch->setCommunicationProtocol(can232device);
         rgbDriver->setCommunicationProtocol(can232device);
         pwmDriver->setCommunicationProtocol(can232device);
         
-        globalDevice->setCommunicationProtocol(can232device);
-        
         deviceManager = new CDeviceManager();
+        deviceManager->addBootDevice(bootDevice);
         deviceManager->addCategoryDevice(actorSwitch);
         deviceManager->addCategoryDevice(sensorSwitch);
         deviceManager->addCategoryDevice(rgbDriver);
@@ -154,9 +154,6 @@ void CApplication::run() {
             cout << "guid ? ";
             unsigned int g;
             cin >> g;
-            cout << "luid ? ";
-            unsigned int l;
-            cin >> l;
             cout << "cat (1-actor, 2-sensor, 3-rgb, 4-pwm)? ";
             int c;
             cin >> c;
@@ -175,15 +172,11 @@ void CApplication::run() {
                     break;
             }
             s.guid = g;
-            s.luid = (unsigned char) l;
+            s.luid = (unsigned char) 0;
             deviceManager->invokeRemoteAction(s, ACTION_BOOT, null);
         }
         if (x == "upload") {
-            deviceManager->pauseDeviceManager();
-            soapServer->pauseServer();
-            globalDevice->uploadFirmware();
-            deviceManager->resumeDeviceManager();
-            soapServer->resumeServer();
+            deviceManager->uploadFirmware();
         }
         if (x == "reset") {
             SDeviceDescription s;

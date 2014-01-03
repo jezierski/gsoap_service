@@ -88,7 +88,10 @@ public:
     void uploadFirmware();
 
 
-   /*firmware upload methods*/
+   
+
+private:
+  /*firmware upload methods*/
     void initBootWrite(unsigned int address);
     void initBootRead(unsigned int address);
     void writeProgramData(CBuffer data);
@@ -99,10 +102,8 @@ public:
     void uploadExFirmware(CFirmwareBuffer &buffer);
     void uploadFirmware(CFirmwareBuffer &buffer);
     void verifyFirmware(CFirmwareBuffer &buffer);
-    void verifyExFirmware(CFirmwareBuffer &buffer);
-
-private:
-  
+//    void verifyExFirmware(CFirmwareBuffer &buffer);
+//    int readGUID();
  
 
     unsigned char getNewAddress();
@@ -154,7 +155,7 @@ private:
 
 
     Devices devicesDescriptionList;
-    EDeviceCategory category;
+    EDeviceCategory category = EDeviceCategory::ALL;
     CCan232 *canbusProtocol;
     CLog *log;
     map<unsigned int, unsigned char> GUIDs;

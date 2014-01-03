@@ -24,6 +24,18 @@ void CDeviceManager::addCategoryDevice(CDevice *device) {
     categoryDevices.push_back(device);
 }
 
+void CDeviceManager::addBootDevice(CDevice *device) {
+    bootDevice = device;
+}
+
+void CDeviceManager::uploadFirmware() {
+    if (bootDevice != NULL) {
+        pauseDeviceManager();
+        bootDevice->uploadFirmware();
+        resumeDeviceManager();
+    }
+}
+
 //void CDeviceManager::searchLogicalDevices(){
 //    
 //}

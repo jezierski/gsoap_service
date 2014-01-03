@@ -103,7 +103,7 @@ private:
     bool sendCanFrame(CCanBuffer &frame);
     unsigned char getCRC(CBuffer &buffer);
     unsigned char checkCRC(CBuffer& buffer);
-    bool isFrameComplete(CBuffer &frame);\
+    bool isFrameComplete(CBuffer &frame);
     bool setCommand(CBuffer &buffer);
     CBuffer getFrame();
     CCanBuffer createCanBuffer(CBuffer &buffer);
