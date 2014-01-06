@@ -178,6 +178,9 @@ void CApplication::run() {
         if (x == "upload") {
             deviceManager->uploadFirmware();
         }
+        if (x == "test") {
+            deviceManager->test();
+        }
         if (x == "reset") {
             SDeviceDescription s;
             cout << "cat (0-all, 1-actor, 2-sensor)? ";

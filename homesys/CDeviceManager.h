@@ -41,7 +41,7 @@ public:
     list<CDevice*> getDevices();
     
     void uploadFirmware();
-    
+    void test();
     
 
 private:
@@ -55,7 +55,7 @@ private:
     CActionsChain *actionChain;
     CLog *log;
     mutex action;
-    bool active = true;
+    bool pause = false;
 };
 
 #endif	/* CDEVICEMANAGER_H */

@@ -88,22 +88,24 @@ public:
     void uploadFirmware();
 
 
-   
-
-private:
-  /*firmware upload methods*/
+    void test();
+    
+      /*firmware upload methods*/
     void initBootWrite(unsigned int address);
     void initBootRead(unsigned int address);
     void writeProgramData(CBuffer data);
     CCanBuffer readProgramData();
-    void exitBootMode();
-    void resetDevice();
+    
     void clearFlash();
     void uploadExFirmware(CFirmwareBuffer &buffer);
     void uploadFirmware(CFirmwareBuffer &buffer);
     void verifyFirmware(CFirmwareBuffer &buffer);
 //    void verifyExFirmware(CFirmwareBuffer &buffer);
-//    int readGUID();
+    int readGUID();
+void exitBootMode();
+    void resetDevice();
+private:
+
  
 
     unsigned char getNewAddress();

@@ -44,8 +44,15 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
     canbusProtocol = protocol;
 }
 
+void CDevice::test(){
+            readGUID();
+//        return;
+}
+
 void CDevice::uploadFirmware() {
     //quiet other devices
+    
+    
     CFirmwareLoader loader;
     CFirmwareBuffer firmware;
     string fname;
@@ -54,6 +61,7 @@ void CDevice::uploadFirmware() {
     log->put("Enter firmware file name to upload:");
     cin >> fname;
     try {
+
         firmware = loader.readFile(fname);
         clearFlash();
         log->info("Start a firmware uploading...");
@@ -79,10 +87,21 @@ void CDevice::uploadExFirmware(CFirmwareBuffer &buffer) {
     }
 }
 
-//int CDevice::readGUID(){
-//    int guid;
-//     initBootRead();
-//}
+int CDevice::readGUID(){
+    cout<<"READ GUID"<<endl;
+    int guid;
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_GET_UID);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+    cout<<"radGUID:"<<endl;
+    buffer.printBuffer();
+    return 0;
+    
+}
 //
 //void CDevice::verifyExFirmware(CFirmwareBuffer &buffer) {
 //    unsigned char exQnty = buffer.getExBufferQnty();

@@ -182,7 +182,7 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
     sendCanFrame(frame);
     CCanBuffer buffer;
     CTimeOut tout;
-    tout.SetMilliSec(200);
+    tout.SetMilliSec(10000);
     while (!tout.IsTimeOut()) {
         buffer = getCanFrame();
         if (buffer.isReady()) {

@@ -10,6 +10,7 @@
 
 #define BOOT_PUT_CMD                    0
 #define BOOT_PUT_DATA                   1
+#define BOOT_GET_CMD                    2
 #define BOOT_GET_DATA                   3
 
 #define BOOT_WRITE_UNLOCK               1
@@ -23,6 +24,8 @@
 #define BOOT_CMD_CHK_RUN                3
 #define BOOT_CMD_EXIT_BOOT              4
 #define BOOT_CMD_CLR_PROG               5
+#define BOOT_CMD_GET_UID               6
+#define BOOT_CMD_SET_UID               7
 
 #define EEPROM_DATA_OFFSET              0xf00000              
 #define EEPROM_DATA_SIZE                1024                    

@@ -36,6 +36,46 @@ void CDeviceManager::uploadFirmware() {
     }
 }
 
+void CDeviceManager::test() {
+    CFirmwareLoader loader;
+    CFirmwareBuffer firmware;
+    string fname;
+
+    if (bootDevice != NULL) {
+        //        pauseDeviceManager();
+        cout << "test, reset, exit, verify, init, read ???" << endl;
+        string in;
+        cin >> in;
+        try {
+            if (in == "test")
+                bootDevice->test();
+            if (in == "reset")
+                bootDevice->resetDevice();
+            if (in == "exit")
+                bootDevice->exitBootMode();
+            if (in == "init")
+                bootDevice->initBootRead(0x800);
+            if (in == "read")
+                bootDevice->readProgramData();
+            if (in == "verify") {
+
+
+                loader.printFileList();
+                log->put("Enter firmware file name to upload:");
+                cin >> fname;
+
+                firmware = loader.readFile(fname);
+
+                bootDevice->verifyFirmware(firmware);
+
+            }
+        } catch (string e) {
+            cout << "ERR: " << e << endl;
+        }
+        //        resumeDeviceManager();
+    }
+}
+
 //void CDeviceManager::searchLogicalDevices(){
 //    
 //}
@@ -61,7 +101,7 @@ CDevice *CDeviceManager::getDevice(SDeviceDescription deviceDescription) {
 
     }
     log->error("Device " + to_string(deviceDescription) + " not found");
-    return NULL;
+    return new CDevice();
 }
 
 Blob CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command command, Blob params) {
@@ -77,9 +117,7 @@ Blob CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command comma
         returnVal = categoryDevice->executeAction(action);
         while (actionChain->isChainExist(action)) {
             categoryDevice = getDevice(device);
-            if (categoryDevice != NULL) {
-                categoryDevice->executeAction(action);
-            }
+            categoryDevice->executeAction(action);
         }
     }
 
@@ -115,18 +153,21 @@ void CDeviceManager::runInThreadRemoteAction(SDeviceDescription device, Command 
 
 void CDeviceManager::runInThreadGlobalRemoteAction(Command command, Blob params) {
 
-    while (active) {
+    while (1) {
         invokeGlobalRemoteAction(command, params);
         msleep(100);
+        while (pause) {
+            msleep(500);
+        }
     }
 }
 
 void CDeviceManager::pauseDeviceManager() {
-    active = false;
+    pause = true;
 }
 
 void CDeviceManager::resumeDeviceManager() {
-    active = true;
+    pause = false;
 }
 
 list<CDevice*> CDeviceManager::getDevices() {
