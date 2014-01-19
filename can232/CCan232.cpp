@@ -182,7 +182,7 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
     sendCanFrame(frame);
     CCanBuffer buffer;
     CTimeOut tout;
-    tout.SetMilliSec(10000);
+    tout.SetMilliSec(200);
     while (!tout.IsTimeOut()) {
         buffer = getCanFrame();
         if (buffer.isReady()) {
@@ -296,7 +296,7 @@ CCanBuffer CCan232::createCanBuffer(CBuffer &buffer) {
     CCanBuffer canBuffer;
     unsigned int id;
     if (!checkCRC(buffer)) {
-        log->error("Received CAN frame CRCfailed");
+        log->error("Received CAN frame CRC failed");
         return canBuffer;
     }
     id = (buffer[1] << 8) & 0xff00;

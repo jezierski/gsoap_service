@@ -34,30 +34,7 @@ void CApplication::run() {
     CDevice *bootDevice = new CDevice();
     
     
-    
-    
-    
-    
-//can232device = new CCan232();
-//        can232device->initCan232Device();
-//      
-//        globalDevice->setCommunicationProtocol(can232device);
-//        
-//        globalDevice->uploadFirmware();
-////        try{
-////          globalDevice->initBootWrite(0x300006);
-////          CBuffer buf;
-////          buf<<(unsigned char) 0x90;
-////                globalDevice->writeProgramData(buf);
-////                buf.clear();
-////    globalDevice->initBootRead(0x300006);
-////    CCanBuffer ret = globalDevice->readProgramData();
-////    cout<<"ret"<<endl;
-////    ret.printBuffer();
-////        }catch(string e){
-////            cout<<e<<endl;
-////        }
-//        return;
+ 
         
     try {
         soapServer = new CSoapServer();
@@ -88,8 +65,8 @@ void CApplication::run() {
 
         deviceManager->initialize();
 
-        soapServer->assignDeviceManager(deviceManager);
-        new thread(&CSoapServer::start, soapServer);
+//        soapServer->assignDeviceManager(deviceManager);
+//        new thread(&CSoapServer::start, soapServer);
     } catch (string err) {
         log->error("Starting system failed: " + err);
         exit(0);

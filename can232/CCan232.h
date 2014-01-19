@@ -51,8 +51,7 @@ public:
 
     bool send(CCanBuffer &frame);
     CCanBuffer request(CCanBuffer &frame);
-
-    CCanBuffer getCanFrame();
+    
     
     template <class ret>
     CanBuffers broadcastRequest(CCanBuffer &frame, ret(CCanBuffer::*ackFunction)()) {
@@ -100,6 +99,7 @@ private:
 
 
     
+CCanBuffer getCanFrame();
     bool sendCanFrame(CCanBuffer &frame);
     unsigned char getCRC(CBuffer &buffer);
     unsigned char checkCRC(CBuffer& buffer);

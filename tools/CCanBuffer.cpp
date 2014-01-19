@@ -98,14 +98,13 @@ void CCanBuffer::buildBootBuffer() {
     buf << (unsigned char) bootCommand;
     buf << (unsigned char) 0;
     buf << (unsigned char) 0;
-    
+
     this->clear();
     for (size_t i = 0; i < buf.getLength(); i++) {
         this->operator <<((unsigned char) buf[i]);
     }
     bootControlBits = bootCommand = flashAddress = 0;
 }
-
 
 unsigned int CCanBuffer::getGUID() {
     unsigned int guid;
@@ -114,6 +113,22 @@ unsigned int CCanBuffer::getGUID() {
     guid |= ((this->operator [](OFFSET_DATA + 2) << 8) & 0x0000ff00);
     guid |= ((this->operator [](OFFSET_DATA + 3) << 0) & 0x000000ff);
     return guid;
+}
+
+int CCanBuffer::getBootGUID() {
+    int guid;
+    guid = ((this->operator [](0) << 24) & 0xff000000);
+    guid |= ((this->operator [](1) << 16) & 0x00ff0000);
+    guid |= ((this->operator [](2) << 8) & 0x0000ff00);
+    guid |= ((this->operator [](3) << 0) & 0x000000ff);
+    return guid;
+}
+
+unsigned int CCanBuffer::getBootCRC(){
+    this->printBuffer();
+    unsigned int crc = this->operator[](0);
+    crc |= (this->operator[](1) << 8);
+    return crc;
 }
 
 unsigned char CCanBuffer::getNmbDevices() {

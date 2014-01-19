@@ -91,19 +91,30 @@ public:
     void test();
     
       /*firmware upload methods*/
+    void resetDevice();
+    bool checkReady();
+    void getDummyFrames();
+    void clearFlash();
+    void exitBootMode();
     void initBootWrite(unsigned int address);
     void initBootRead(unsigned int address);
+    void initSelfCRC();
+    unsigned int getSelfCRC();
     void writeProgramData(CBuffer data);
     CCanBuffer readProgramData();
-    
-    void clearFlash();
+     int readGUID();
+     void initWriteGUID();
+     void writeGUID();
+     
+     void setGuidIfNeed();
     void uploadExFirmware(CFirmwareBuffer &buffer);
-    void uploadFirmware(CFirmwareBuffer &buffer);
-    void verifyFirmware(CFirmwareBuffer &buffer);
+    unsigned int uploadFirmware(CFirmwareBuffer &buffer);
+    void verifyFirmware(unsigned int crc);
+    void calcCRC(unsigned int &crc, CFirmwareBuffer buf);
 //    void verifyExFirmware(CFirmwareBuffer &buffer);
-    int readGUID();
-void exitBootMode();
-    void resetDevice();
+   
+
+    
 private:
 
  

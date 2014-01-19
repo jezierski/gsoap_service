@@ -128,6 +128,14 @@ inline long long getCurrentTime() {
     return (unsigned long long) time.tv_sec * 1000 + time.tv_usec / 1000;
 }
 
+inline int generateGUID(){
+    int uid = 0;
+    struct timeval time;
+    gettimeofday(&time, NULL);
+    uid = (int) time.tv_sec;
+    return uid;
+}
+
 inline int getdir(string dir, vector<string> &files) {
     DIR *dp;
     struct dirent *dirp;

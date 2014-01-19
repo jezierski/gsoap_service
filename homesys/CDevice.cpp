@@ -44,18 +44,21 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
     canbusProtocol = protocol;
 }
 
-void CDevice::test(){
-            readGUID();
-//        return;
+void CDevice::test() {
+    int guid = readGUID();
+    cout << "GUID:" << guid << endl;
+    writeGUID();
+    //        return;
 }
 
 void CDevice::uploadFirmware() {
     //quiet other devices
-    
-    
+
+
     CFirmwareLoader loader;
     CFirmwareBuffer firmware;
     string fname;
+    unsigned int crc;
 
     loader.printFileList();
     log->put("Enter firmware file name to upload:");
@@ -64,17 +67,27 @@ void CDevice::uploadFirmware() {
 
         firmware = loader.readFile(fname);
         clearFlash();
+        initSelfCRC();
         log->info("Start a firmware uploading...");
-        uploadFirmware(firmware);
-        verifyFirmware(firmware);
+        crc = uploadFirmware(firmware);
+        verifyFirmware(crc);
         uploadExFirmware(firmware);
-//        verifyExFirmware(firmware);
-                exitBootMode();
+        setGuidIfNeed();
+        exitBootMode();
         log->info("Upload firmware success");
     } catch (string e) {
         log->error("Firmware upload failed: " + e);
     }
 
+}
+
+void CDevice::setGuidIfNeed(){
+    log->info("Checking device's guid...");
+    int guid = readGUID();
+    if(guid == 0xffffffff){
+        log->info("Setting new guid");
+        writeGUID();
+    }
 }
 
 void CDevice::uploadExFirmware(CFirmwareBuffer &buffer) {
@@ -87,58 +100,50 @@ void CDevice::uploadExFirmware(CFirmwareBuffer &buffer) {
     }
 }
 
-int CDevice::readGUID(){
-    cout<<"READ GUID"<<endl;
-    int guid;
+int CDevice::readGUID() {
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_GET_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(BOOT_AUTO_ERASE | BOOT_AUTO_INC);
+    buffer.insertBootCommand(BOOT_CMD_GET_UID);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+
+    return buffer.getBootGUID();
+
+}
+
+void CDevice::initWriteGUID() {
+
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_CMD);
     buffer.insertFlashAddress(0);
     buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
-    buffer.insertBootCommand(BOOT_CMD_GET_UID);
+    buffer.insertBootCommand(BOOT_CMD_SET_UID);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
-    cout<<"radGUID:"<<endl;
-    buffer.printBuffer();
-    return 0;
-    
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Init writing GUID failed");
+    }
+
+
 }
-//
-//void CDevice::verifyExFirmware(CFirmwareBuffer &buffer) {
-//    unsigned char exQnty = buffer.getExBufferQnty();
-//    CFirmwareBuffer exBuffer, tempBuffer;
-//    unsigned int lastAddress = 0;
-//    CCanBuffer readBuffer;
-//    buffer.resetOffset();
-//
-//    for (unsigned char index = 0; index < exQnty; index++) {
-//        log->info("Extended firmware data verifying (" + to_string((int) index + 1) + "/" + to_string((int) exQnty) + ")");
-//        exBuffer = buffer.getExBuffer(index);
-//        tempBuffer = exBuffer.getDataBlock();
-//        while (tempBuffer.getLength()) {
-//            if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
-//                initBootRead(tempBuffer.getDataBlockAddress());
-//            }
-//            lastAddress = tempBuffer.getDataBlockAddress();
-//            readBuffer = readProgramData();
-////            cout << "ADR: " << lastAddress << endl;
-////            readBuffer.printBuffer();
-//            
-////            cout<<"temBuf: "<<tempBuffer.getLength()<<endl;
-////            tempBuffer.printBuffer();
-//            
-//            if (not readBuffer.compare(tempBuffer, tempBuffer.getLength())) {
-//                throw string("Veryfication extended firmware failed");
-//            }
-//            tempBuffer = exBuffer.getDataBlock();
-//        }
-//    }
-//}
 
+void CDevice::writeGUID() {
+    int guid = generateGUID();
+    initWriteGUID();
+    CBuffer data;
+    data << ((guid >> 16) & 0xffff);
+    data << (guid & 0xffff);
+    writeProgramData(data);
 
-void CDevice::uploadFirmware(CFirmwareBuffer &firmware) {
+}
+
+unsigned int CDevice::uploadFirmware(CFirmwareBuffer &firmware) {
     CFirmwareBuffer tempBuffer;
     unsigned int lastAddress = 0;
     unsigned char progress = 255;
+    unsigned int crc = 0;
 
     tempBuffer = firmware.getNotNullDataBlock();
     while (tempBuffer.getLength()) {
@@ -146,46 +151,42 @@ void CDevice::uploadFirmware(CFirmwareBuffer &firmware) {
             initBootWrite(tempBuffer.getDataBlockAddress());
         }
         lastAddress = tempBuffer.getDataBlockAddress();
-//        cout<<"LAST ADDRESS: "<<lastAddress<<endl;
+        //        cout<<"LAST ADDRESS: "<<lastAddress<<endl;
         writeProgramData(tempBuffer);
+        calcCRC(crc, tempBuffer);
         tempBuffer = firmware.getNotNullDataBlock();
         if (progress != firmware.getReadingProgress()) {
             progress = firmware.getReadingProgress();
-            log->put("Upload progress: " + to_string((int) progress) + "%");
+            log->info("Upload progress: " + to_string((int) progress) + "%");
         }
+    }
+    return crc;
+}
+
+void CDevice::calcCRC(unsigned int &crc, CFirmwareBuffer buf) {
+    for (size_t i = 0; i < buf.getLength(); i++) {
+        crc += buf[i];
+        crc &= 0xffff;
     }
 }
 
-void CDevice::verifyFirmware(CFirmwareBuffer &firmware) {
+void CDevice::verifyFirmware(unsigned int crc) {
     log->info("Verifying firmware...");
-    unsigned int lastAddress = 0;
-    CFirmwareBuffer tempBuffer;
-    CCanBuffer readBuffer;
-    firmware.resetOffset();
-    tempBuffer = firmware.getNotNullDataBlock();
-    while (tempBuffer.getLength()) {
-        if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
-            initBootRead(tempBuffer.getDataBlockAddress());
-        }
-        lastAddress = tempBuffer.getDataBlockAddress();
-        readBuffer = readProgramData();
 
-
-        if (not (readBuffer == tempBuffer)) {
-            throw string("Veryfication firmware failed");
-        }
-        tempBuffer = firmware.getNotNullDataBlock();
+    unsigned int devCRC = getSelfCRC();
+    if (crc != devCRC) {
+        throw string("Veryfication firmware failed");
     }
+
 }
-
-
 
 void CDevice::initBootWrite(unsigned int address) {
-//    cout<<"INIT WRITE ADR: "<<address<<endl;
+    //    cout<<"INIT WRITE ADR: "<<address<<endl;
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_CMD);
     buffer.insertFlashAddress(address);
     buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_INIT_WRITE);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
     if (buffer[0] != BOOT_COMMAND_ACK) {
@@ -198,6 +199,7 @@ void CDevice::initBootRead(unsigned int address) {
     buffer.insertId(0x330 | BOOT_PUT_CMD);
     buffer.insertFlashAddress(address);
     buffer.insertBootControlBits(BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_INIT_READ);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
     if (buffer[0] != BOOT_COMMAND_ACK) {
@@ -205,10 +207,33 @@ void CDevice::initBootRead(unsigned int address) {
     }
 }
 
+void CDevice::initSelfCRC() {
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_PUT_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_INIT_CHK);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Self CRC init failed");
+    }
+}
+
+unsigned int CDevice::getSelfCRC() {
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_GET_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(0);
+    buffer.insertBootCommand(BOOT_CMD_CHK_RUN);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+
+    return buffer.getBootCRC();
+}
+
 void CDevice::writeProgramData(CBuffer data) {
-//    cout<<"WRITE DATA:"<<endl;
-//    data.printBuffer();
-    
+
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_DATA);
     buffer << data;
@@ -255,8 +280,31 @@ void CDevice::resetDevice() {
     canbusProtocol->send(buffer);
 }
 
+bool CDevice::checkReady() {
+    log->info("Checking if device is ready...");
+    CCanBuffer buffer;
+    buffer.insertId(0x330 | BOOT_GET_CMD);
+    buffer.insertFlashAddress(0);
+    buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
+    buffer.insertBootCommand(BOOT_CMD_GET_READY);
+    buffer.buildBootBuffer();
+    buffer = canbusProtocol->request(buffer);
+
+    return (buffer[0] == BOOT_COMMAND_ACK);
+}
+
+void CDevice::getDummyFrames() {
+    CCanBuffer buffer;
+    CBuffer rec;
+    do {
+
+        rec = canbusProtocol->request(buffer);
+
+    } while (rec.getLength());
+}
+
 void CDevice::clearFlash() {
-    log->info("Reseting program data...");
+    log->info("Reseting program memory...");
     CTimeOut tout;
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_CMD);
@@ -264,18 +312,24 @@ void CDevice::clearFlash() {
     buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
     buffer.insertBootCommand(BOOT_CMD_CLR_PROG);
     buffer.buildBootBuffer();
-    canbusProtocol->send(buffer);
-    tout.SetMilliSec(5000);
-    while (!tout.IsTimeOut()) {
-        buffer = canbusProtocol->getCanFrame();
-        if (buffer.isReady()) {
-            break;
-        }
+
+    buffer = canbusProtocol->request(buffer);
+    if (buffer[0] != BOOT_COMMAND_ACK) {
+        throw string("Reseting program memory failed");
     }
 
-    if (buffer[0] != BOOT_COMMAND_ACK) {
-        throw string("Clearing flash failed");
+
+    tout.SetMilliSec(5000);
+    while (!tout.IsTimeOut()) {
+        if (checkReady()) {
+            getDummyFrames();
+            log->info("Reseting program memory complete");
+            return;
+        }
+        msleep(300);
     }
+
+    throw string("Reseting program memory failed");
 }
 
 unsigned char CDevice::getNewAddress() {
@@ -759,7 +813,7 @@ Blob CDevice::pingLogicalDevice(SDeviceDescription dev, Blob params) {
 }
 
 Blob CDevice::bootDevice(SDeviceDescription dev, Blob params) {
-//    Params par = params[BLOB_ACTION_PARAMETER].get<Params>();
+    //    Params par = params[BLOB_ACTION_PARAMETER].get<Params>();
     string response;
     Blob b;
 

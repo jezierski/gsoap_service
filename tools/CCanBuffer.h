@@ -35,6 +35,8 @@ public:
     
     void buildBuffer();
     void buildBootBuffer();
+    int getBootGUID();
+    unsigned int getBootCRC();
     
 private:
     unsigned int flashAddress = 0;

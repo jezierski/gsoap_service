@@ -26,6 +26,9 @@
 #define BOOT_CMD_CLR_PROG               5
 #define BOOT_CMD_GET_UID               6
 #define BOOT_CMD_SET_UID               7
+#define BOOT_CMD_GET_READY             8
+#define BOOT_CMD_INIT_READ             9
+#define BOOT_CMD_INIT_WRITE             10
 
 #define EEPROM_DATA_OFFSET              0xf00000              
 #define EEPROM_DATA_SIZE                1024                    
