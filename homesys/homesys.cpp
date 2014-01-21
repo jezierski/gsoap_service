@@ -65,8 +65,8 @@ void CApplication::run() {
 
         deviceManager->initialize();
 
-//        soapServer->assignDeviceManager(deviceManager);
-//        new thread(&CSoapServer::start, soapServer);
+        soapServer->assignDeviceManager(deviceManager);
+        new thread(&CSoapServer::start, soapServer);
     } catch (string err) {
         log->error("Starting system failed: " + err);
         exit(0);
