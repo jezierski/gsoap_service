@@ -36,75 +36,75 @@ void CDeviceManager::uploadFirmware() {
     }
 }
 
-void CDeviceManager::test() {
-    CFirmwareLoader loader;
-    CFirmwareBuffer firmware;
-    string fname;
-
-//    pauseDeviceManager();
-    if (bootDevice != NULL) {
-        CBuffer buf;
-        buf << 0x1234;
-        buf << 0x5678;
-        buf << 0x9abc;
-        buf << 0xdef0;
-        CBuffer buf2;
-        buf2 << 0x1111;
-        buf2 << 0x2222;
-        buf2 << 0x3333;
-        buf2 << 0x4444;
-        CCanBuffer ret;
-        //        pauseDeviceManager();
-        cout << "test, reset, exit, verify, init, initrd, write, clear, read, crc, crcget ???" << endl;
-        string in;
-        cin >> in;
-        unsigned int crc;
-        try {
-            if (in == "test")
-                bootDevice->test();
-            if (in == "reset")
-                bootDevice->resetDevice();
-            if (in == "exit")
-                bootDevice->exitBootMode();
-            if (in == "init")
-                bootDevice->initBootWrite(0x0880);
-            if (in == "initrd")
-                bootDevice->initBootRead(0x0880);
-            if (in == "read"){
-                ret = bootDevice->readProgramData();
-                ret.printBuffer();
-            }
-            if (in == "write")
-                bootDevice->writeProgramData(buf);
-            if (in == "write2")
-                bootDevice->writeProgramData(buf2);
-            
-            if (in == "clear")
-                bootDevice->clearFlash();
-            if (in == "crc")
-                bootDevice->initSelfCRC();
-            if (in == "crcget"){
-                crc = bootDevice->getSelfCRC();
-                cout<<"CRC: "<<crc<<endl;
-            }
-//            if (in == "verify") {
+//void CDeviceManager::test() {
+//    CFirmwareLoader loader;
+//    CFirmwareBuffer firmware;
+//    string fname;
 //
-//
-//                loader.printFileList();
-//                log->put("Enter firmware file name to upload:");
-//                cin >> fname;
-//
-//                firmware = loader.readFile(fname);
-//
-//                bootDevice->verifyFirmware(firmware);
-//
+////    pauseDeviceManager();
+//    if (bootDevice != NULL) {
+//        CBuffer buf;
+//        buf << 0x1234;
+//        buf << 0x5678;
+//        buf << 0x9abc;
+//        buf << 0xdef0;
+//        CBuffer buf2;
+//        buf2 << 0x1111;
+//        buf2 << 0x2222;
+//        buf2 << 0x3333;
+//        buf2 << 0x4444;
+//        CCanBuffer ret;
+//        //        pauseDeviceManager();
+//        cout << "test, reset, exit, verify, init, initrd, write, clear, read, crc, crcget ???" << endl;
+//        string in;
+//        cin >> in;
+//        unsigned int crc;
+//        try {
+//            if (in == "test")
+//                bootDevice->test();
+//            if (in == "reset")
+//                bootDevice->resetDevice();
+//            if (in == "exit")
+//                bootDevice->exitBootMode();
+//            if (in == "init")
+//                bootDevice->initBootWrite(0x0880);
+//            if (in == "initrd")
+//                bootDevice->initBootRead(0x0880);
+//            if (in == "read"){
+//                ret = bootDevice->readProgramData();
+//                ret.printBuffer();
 //            }
-        } catch (string e) {
-            cout << "ERR: " << e << endl;
-        }
-    }
-//    resumeDeviceManager();
-}
+//            if (in == "write")
+//                bootDevice->writeProgramData(buf);
+//            if (in == "write2")
+//                bootDevice->writeProgramData(buf2);
+//            
+//            if (in == "clear")
+//                bootDevice->clearFlash();
+//            if (in == "crc")
+//                bootDevice->initSelfCRC();
+//            if (in == "crcget"){
+//                crc = bootDevice->getSelfCRC();
+//                cout<<"CRC: "<<crc<<endl;
+//            }
+////            if (in == "verify") {
+////
+////
+////                loader.printFileList();
+////                log->put("Enter firmware file name to upload:");
+////                cin >> fname;
+////
+////                firmware = loader.readFile(fname);
+////
+////                bootDevice->verifyFirmware(firmware);
+////
+////            }
+//        } catch (string e) {
+//            cout << "ERR: " << e << endl;
+//        }
+//    }
+////    resumeDeviceManager();
+//}
 
 //void CDeviceManager::searchLogicalDevices(){
 //    

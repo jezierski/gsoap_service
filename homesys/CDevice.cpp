@@ -44,12 +44,7 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
     canbusProtocol = protocol;
 }
 
-void CDevice::test() {
-    int guid = readGUID();
-    cout << "GUID:" << guid << endl;
-    writeGUID();
-    //        return;
-}
+
 
 void CDevice::uploadFirmware() {
     //quiet other devices
@@ -84,7 +79,7 @@ void CDevice::uploadFirmware() {
 void CDevice::setGuidIfNeed(){
     log->info("Checking device's guid...");
     int guid = readGUID();
-    if(guid == 0xffffffff){
+    if(guid == -1){
         log->info("Setting new guid");
         writeGUID();
     }

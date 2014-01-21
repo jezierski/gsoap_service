@@ -41,7 +41,6 @@ public:
     list<CDevice*> getDevices();
     
     void uploadFirmware();
-    void test();
     
 
 private:

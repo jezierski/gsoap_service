@@ -88,9 +88,12 @@ public:
     void uploadFirmware();
 
 
-    void test();
     
-      /*firmware upload methods*/
+    
+private:
+
+ 
+     /*firmware upload methods*/
     void resetDevice();
     bool checkReady();
     void getDummyFrames();
@@ -111,13 +114,6 @@ public:
     unsigned int uploadFirmware(CFirmwareBuffer &buffer);
     void verifyFirmware(unsigned int crc);
     void calcCRC(unsigned int &crc, CFirmwareBuffer buf);
-//    void verifyExFirmware(CFirmwareBuffer &buffer);
-   
-
-    
-private:
-
- 
 
     unsigned char getNewAddress();
     void removeAddress(unsigned char address);
