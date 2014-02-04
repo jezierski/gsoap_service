@@ -1,0 +1,147 @@
+[
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/homesys.cpp.o -c /home/jezierski/public_html/homesys/homesys/homesys.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/homesys.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.o -c /home/jezierski/public_html/homesys/homesys/CSoapServer.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/CSoapServer.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.o -c /home/jezierski/public_html/homesys/raspberry/CGPIOClass.cpp",
+  "file": "/home/jezierski/public_html/homesys/raspberry/CGPIOClass.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.o -c /home/jezierski/public_html/homesys/homesys/CDevice.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/CDevice.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.o -c /home/jezierski/public_html/homesys/homesys/CDeviceManager.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/CDeviceManager.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/COperation.cpp.o -c /home/jezierski/public_html/homesys/homesys/COperation.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/COperation.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.o -c /home/jezierski/public_html/homesys/homesys/CActionTranslator.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/CActionTranslator.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/CTimer.cpp.o -c /home/jezierski/public_html/homesys/homesys/CTimer.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/CTimer.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/homesys/CActionsChain.cpp.o -c /home/jezierski/public_html/homesys/homesys/CActionsChain.cpp",
+  "file": "/home/jezierski/public_html/homesys/homesys/CActionsChain.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/can232/CCan232.cpp.o -c /home/jezierski/public_html/homesys/can232/CCan232.cpp",
+  "file": "/home/jezierski/public_html/homesys/can232/CCan232.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CBuffer.cpp.o -c /home/jezierski/public_html/homesys/tools/CBuffer.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CBuffer.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.o -c /home/jezierski/public_html/homesys/tools/CCanBuffer.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CCanBuffer.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CSerCom.cpp.o -c /home/jezierski/public_html/homesys/tools/CSerCom.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CSerCom.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CTimeOut.cpp.o -c /home/jezierski/public_html/homesys/tools/CTimeOut.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CTimeOut.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CTools.cpp.o -c /home/jezierski/public_html/homesys/tools/CTools.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CTools.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CConfiguration.cpp.o -c /home/jezierski/public_html/homesys/tools/CConfiguration.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CConfiguration.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.o -c /home/jezierski/public_html/homesys/tools/CDevicesConfig.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CDevicesConfig.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.o -c /home/jezierski/public_html/homesys/tools/CDatabase.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CDatabase.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CLog.cpp.o -c /home/jezierski/public_html/homesys/tools/CLog.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CLog.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CBlob.cpp.o -c /home/jezierski/public_html/homesys/tools/CBlob.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CBlob.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CParamsConverter.cpp.o -c /home/jezierski/public_html/homesys/tools/CParamsConverter.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CParamsConverter.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CFirmwareLoader.cpp.o -c /home/jezierski/public_html/homesys/tools/CFirmwareLoader.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CFirmwareLoader.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/tools/CFirmwareBuffer.cpp.o -c /home/jezierski/public_html/homesys/tools/CFirmwareBuffer.cpp",
+  "file": "/home/jezierski/public_html/homesys/tools/CFirmwareBuffer.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.o -c /home/jezierski/public_html/homesys/can_devices/CCanSimpleSwitchActor.cpp",
+  "file": "/home/jezierski/public_html/homesys/can_devices/CCanSimpleSwitchActor.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.o -c /home/jezierski/public_html/homesys/can_devices/CCanSimpleSwitchSensor.cpp",
+  "file": "/home/jezierski/public_html/homesys/can_devices/CCanSimpleSwitchSensor.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/can_devices/CCanRGBActor.cpp.o -c /home/jezierski/public_html/homesys/can_devices/CCanRGBActor.cpp",
+  "file": "/home/jezierski/public_html/homesys/can_devices/CCanRGBActor.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/can_devices/CCanPWMActor.cpp.o -c /home/jezierski/public_html/homesys/can_devices/CCanPWMActor.cpp",
+  "file": "/home/jezierski/public_html/homesys/can_devices/CCanPWMActor.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/webservice/soapC.cpp.o -c /home/jezierski/public_html/homesys/webservice/soapC.cpp",
+  "file": "/home/jezierski/public_html/homesys/webservice/soapC.cpp"
+},
+{
+  "directory": "/home/jezierski/public_html/homesys",
+  "command": "/usr/bin/g++    -g -Wall -std=gnu++0x -g3 -gdwarf-2   -o CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.o -c /home/jezierski/public_html/homesys/webservice/soaphomesysService.cpp",
+  "file": "/home/jezierski/public_html/homesys/webservice/soaphomesysService.cpp"
+}
+]

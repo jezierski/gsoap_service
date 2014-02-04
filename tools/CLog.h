@@ -7,6 +7,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <syslog.h>
 #include "CTools.h"
 #define put_line(str, level)    put(__FILE__ + string(":") + to_string(__LINE__) + string("->") + string(str), level)
 #define           NC "\033[0m"
@@ -16,44 +17,42 @@
 using namespace std;
 
 class CLog {
-private:
-    struct timeval start, end;
-    unsigned long mtime, seconds, useconds;
-     unsigned char resetFlag;
-    CLog();
-    static CLog *instance;
-    //CLog(const CLog &);
-    // CLog& operator=(const CLog&);
-    unsigned long appStartTime;
 public:
     string ver;
     int resetTimer();
     int printVersion();
 
-        enum logType {
-            INFO,
-            WARNING,
-            ERROR,
-            SUCCESS,
-            DEBUG_INFO,
-            DEBUG_WARNING,
-            DEBUG_ERROR,
-            LOW_DEBUG_WARNING,
-            LOW_LEVEL_DEBUG,
-            ACTION_INFO,
-        };
-
-
-        int put(string str, logType level = INFO);
-        int error(string str);
-        int warning(string str);
-        int success(string str);
-        int info(string str);
- 
-   
-        static CLog * getInstance();
-
-
+    enum logType {
+        INFO,
+        WARNING,
+        ERROR,
+        SUCCESS
     };
+
+
+    int put(string str, logType level = INFO);
+    int error(string str);
+    int warning(string str);
+    int success(string str);
+    int info(string str);
+
+    void log2syslog(string msg, logType level);
+
+
+    static CLog * getInstance();
+
+private:
+    struct timeval start, end;
+    unsigned long mtime, seconds, useconds;
+    unsigned char resetFlag;
+    CLog();
+    static CLog *instance;
+    //CLog(const CLog &);
+    // CLog& operator=(const CLog&);
+    unsigned long appStartTime;
+    string level2str(logType level);
+
+
+};
 
 #endif  /* CLOG_H */

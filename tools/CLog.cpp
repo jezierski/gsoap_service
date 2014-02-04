@@ -8,6 +8,9 @@ CLog::CLog() {
     seconds = end.tv_sec;
     useconds = end.tv_usec;
     appStartTime = ((seconds) * 1000 + useconds / 1000.0) + 0.5;
+    
+    setlogmask(LOG_UPTO(LOG_NOTICE));
+    openlog("homesys", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL7);
 }
 
 
@@ -17,7 +20,7 @@ int CLog::put(string str, logType level) {
   
     string output;
     char formatedBuffer[15];
-    
+    log2syslog(str, level);
     gettimeofday(&end, NULL);
     switch (level) {
 
@@ -39,30 +42,30 @@ int CLog::put(string str, logType level) {
             cout << "\033[" << 32 << "m";
             //cout << "\E[" << 0 << "m" << "\E[" << 34 << "m" << "\E[" << 40 << "m";
             break;
-        case CLog::DEBUG_ERROR:
-           cout << "\033[1;" << 31 << "m";
-            //cout << "\E[" << 0 << "m" << "\E[" << 31 << "m" << "\E[" << 40 << "m";
-            break;
-        case CLog::DEBUG_INFO:
-            cout << "\033[1;" << 32 << "m";
-            break;
-        case CLog::DEBUG_WARNING:
-            cout << "\033[1;" << 33 << "m";
-            
-            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
-            break;
-        case CLog::LOW_DEBUG_WARNING:
-            cout << "\033[1;" << 34 << "m";
-            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
-            break;
-        case CLog::LOW_LEVEL_DEBUG:
-            cout << "\033[1;" << 34 << "m";
-            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
-            break;
-        case CLog::ACTION_INFO:
-            cout << "\033[1;" << 34 << "m";
-            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
-            break;
+//        case CLog::DEBUG_ERROR:
+//           cout << "\033[1;" << 31 << "m";
+//            //cout << "\E[" << 0 << "m" << "\E[" << 31 << "m" << "\E[" << 40 << "m";
+//            break;
+//        case CLog::DEBUG_INFO:
+//            cout << "\033[1;" << 32 << "m";
+//            break;
+//        case CLog::DEBUG_WARNING:
+//            cout << "\033[1;" << 33 << "m";
+//            
+//            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
+//            break;
+//        case CLog::LOW_DEBUG_WARNING:
+//            cout << "\033[1;" << 34 << "m";
+//            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
+//            break;
+//        case CLog::LOW_LEVEL_DEBUG:
+//            cout << "\033[1;" << 34 << "m";
+//            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
+//            break;
+//        case CLog::ACTION_INFO:
+//            cout << "\033[1;" << 34 << "m";
+//            //cout << "\E[" << 0 << "m" << "\E[" << 32 << "m" << "\E[" << 40 << "m";
+//            break;
     };
 
     if (resetFlag) {
@@ -91,6 +94,24 @@ int CLog::put(string str, logType level) {
 
     return 0;
 }
+
+
+ string CLog::level2str(logType level){
+     switch(level){
+         case logType::INFO: return "INFO";
+         case logType::WARNING: return "WARNING";
+         case logType::ERROR: return "ERROR";
+         case logType::SUCCESS: return "SUCCESS";
+         default:
+             return "OTHER";
+     }
+ }
+    
+ void CLog::log2syslog(string msg, logType level){
+     string str = level2str(level) + " " + msg;
+     syslog(LOG_NOTICE, str.c_str(), getuid());
+ }
+        
 
 int CLog::resetTimer() {
     resetFlag = 1;

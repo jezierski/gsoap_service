@@ -64,20 +64,4 @@
 <actor guid="1379795960" luid="0" cat="1" param="101" val="00"/>
 </action>
 </operation>
-<operation name="wlaczanie choinki">
-<condition>
-<time comp="equal" val="58500"/>
-</condition>
-<action>
-<actor guid="1376655840" luid="0" cat="1" param="101" val="01"/>
-</action>
-</operation>
-<operation name="wylaczanie choinki">
-<condition>
-<time comp="equal" val="75600"/>
-</condition>
-<action>
-<actor guid="1376655840" luid="0" cat="1" param="101" val="00"/>
-</action>
-</operation>
 </operations_list>
