@@ -7,6 +7,7 @@
  xmlns:ns1="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl">
  <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
   <ns1:searchNewDevices>
+   <category>0</category>
   </ns1:searchNewDevices>
  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

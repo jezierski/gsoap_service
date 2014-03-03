@@ -47,7 +47,7 @@
     </category>
   </actors>
   <sensors>
-    <category id="100" name="simple switch">
+    <category id="100" name="touch sensor">
       <setters>
   </setters>
       <getters>

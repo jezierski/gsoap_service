@@ -242,7 +242,7 @@ static int serve_ns1__searchNewDevices(homesysService *soap)
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = soap->searchNewDevices(_param_1);
+	soap->error = soap->searchNewDevices(soap_tmp_ns1__searchNewDevices.category, _param_1);
 	if (soap->error)
 		return soap->error;
 	soap_serializeheader(soap);

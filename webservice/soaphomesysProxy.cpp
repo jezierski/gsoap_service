@@ -161,7 +161,7 @@ int homesysProxy::getXML(const char *endpoint, const char *soap_action, std::str
 	return soap_closesock(soap);
 }
 
-int homesysProxy::searchNewDevices(const char *endpoint, const char *soap_action, struct ns1__searchNewDevicesResponse &_param_1)
+int homesysProxy::searchNewDevices(const char *endpoint, const char *soap_action, LONG64 category, struct ns1__searchNewDevicesResponse &_param_1)
 {	struct soap *soap = this;
 	struct ns1__searchNewDevices soap_tmp_ns1__searchNewDevices;
 	if (endpoint)
@@ -171,6 +171,7 @@ int homesysProxy::searchNewDevices(const char *endpoint, const char *soap_action
 	if (!soap_action)
 		soap_action = "";
 	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap_tmp_ns1__searchNewDevices.category = category;
 	soap_begin(soap);
 	soap_serializeheader(soap);
 	soap_serialize_ns1__searchNewDevices(soap, &soap_tmp_ns1__searchNewDevices);

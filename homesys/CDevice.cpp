@@ -369,7 +369,7 @@ void CDevice::findGUIDs() {
     guids = canbusProtocol->broadcastRequest<unsigned int>(buffer, &CCanBuffer::getGUID);
     for (CCanBuffer buf : guids) {
         GUIDs[buf.getGUID()] = buf.getNmbDevices();
-        cout << "> received new GUID: " << hex << (int) buf.getGUID() << dec << ", nmb devs: " << (int) buf.getNmbDevices() << endl; //@TODO remove
+        log->info("Received new GUID: " +to_string((int) buf.getGUID()) + ", number of local devices: " +to_string((int) buf.getNmbDevices()));
     }
 }
 
@@ -421,10 +421,10 @@ void CDevice::assignAddress() {
 
     for (auto &guid : GUIDs) {
         for (size_t cnt = 0; cnt < guid.second; cnt++) {
-            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl; //@TODO remove
+//            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl; //@TODO remove
             address = getNewAddress();
-            cout << "new address: " << (int) address << endl; //@TODO remove
-
+//            cout << "new address: " << (int) address << endl; //@TODO remove
+            log->info("Set address " + to_string((int) address) + " for device with GUID: " + to_string((int)guid.first) + ":" + to_string(cnt));
             buffer.clear();
             buffer.insertCommand(CMD_SET_ADDRESS);
             buffer.insertId((unsigned char) category);
@@ -438,7 +438,8 @@ void CDevice::assignAddress() {
             buffer = canbusProtocol->request(buffer);
             insertDevice(guid.first, cnt, category, address);
             if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()) {
-                cout << "ACK from device CAT: " << (int) buffer[0] << ", ADR: " << (int) buffer[2] << endl; //@TODO remove
+//                cout << "ACK from device CAT: " << (int) buffer[0] << ", ADR: " << (int) buffer[2] << endl; //@TODO remove
+                log->success("Received ACK from device with GUID: " + to_string((int)guid.first) + ":" + to_string(cnt) + " and new address: " + to_string((int) buffer[2]));
             }
 
         }
@@ -604,7 +605,6 @@ unsigned char CDevice::getAddress(SDeviceDescription device) {
 
 bool CDevice::ping(SDeviceDescription device) {
     unsigned char address = getAddress(device);
-    cout << "ADR: " << (int) address << ", CAT: " << (int) category << endl;
     CCanBuffer buffer;
     buffer.insertId((unsigned char) category);
     buffer.insertCommand(CMD_PING);

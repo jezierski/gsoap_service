@@ -15,7 +15,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2013-11-16 15:27:55 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2014-02-07 20:58:53 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -5101,6 +5101,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__setDeviceNameResponse(struct soap *soa
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__searchNewDevices(struct soap *soap, struct ns1__searchNewDevices *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_xsd__integer(soap, &a->category);
 }
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__searchNewDevices(struct soap *soap, const struct ns1__searchNewDevices *a)
@@ -5113,11 +5114,14 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__searchNewDevices(struct soap *soap, cons
 	(void)soap; (void)tag; (void)id; (void)type;
 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__searchNewDevices), type))
 		return soap->error;
+	if (soap_out_xsd__integer(soap, "category", -1, &a->category, ""))
+		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
 
 SOAP_FMAC3 struct ns1__searchNewDevices * SOAP_FMAC4 soap_in_ns1__searchNewDevices(struct soap *soap, const char *tag, struct ns1__searchNewDevices *a, const char *type)
 {
+	size_t soap_flag_category = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
 	a = (struct ns1__searchNewDevices *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__searchNewDevices, sizeof(struct ns1__searchNewDevices), 0, NULL, NULL, NULL);
@@ -5128,6 +5132,11 @@ SOAP_FMAC3 struct ns1__searchNewDevices * SOAP_FMAC4 soap_in_ns1__searchNewDevic
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_category && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_xsd__integer(soap, "category", &a->category, "xsd:integer"))
+				{	soap_flag_category--;
+					continue;
+				}
 			if (soap->error == SOAP_TAG_MISMATCH)
 				soap->error = soap_ignore_element(soap);
 			if (soap->error == SOAP_NO_TAG)
@@ -5142,6 +5151,10 @@ SOAP_FMAC3 struct ns1__searchNewDevices * SOAP_FMAC4 soap_in_ns1__searchNewDevic
 	{	a = (struct ns1__searchNewDevices *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__searchNewDevices, 0, sizeof(struct ns1__searchNewDevices), 0, NULL);
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_category > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
 	}
 	return a;
 }

@@ -108,7 +108,7 @@ int CLog::put(string str, logType level) {
  }
     
  void CLog::log2syslog(string msg, logType level){
-     string str = level2str(level) + " " + msg;
+     string str = "@" + level2str(level) + " " + msg;
      syslog(LOG_NOTICE, str.c_str(), getuid());
  }
         

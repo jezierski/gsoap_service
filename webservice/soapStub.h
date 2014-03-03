@@ -263,10 +263,8 @@ private:
 /* ns1:searchNewDevices */
 struct ns1__searchNewDevices
 {
-#ifdef WITH_NOEMPTYSTRUCT
-private:
-	char dummy;	/* dummy member to enable compilation */
-#endif
+public:
+	LONG64 category;	/* required element of type xsd:integer */
 };
 #endif
 

@@ -72,24 +72,38 @@ class SOAP_CMAC homesysService : public soap
 	///
 
 	/// Web service operation 'getXML' (returns error code or SOAP_OK)
-	virtual	int getXML(std::string id, std::string &result) SOAP_PURE_VIRTUAL{return SOAP_OK;}
+	virtual	int getXML(std::string id, std::string &result) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 
 	/// Web service operation 'searchNewDevices' (returns error code or SOAP_OK)
-	virtual	int searchNewDevices(struct ns1__searchNewDevicesResponse &_param_1) SOAP_PURE_VIRTUAL{return SOAP_OK;}
+	virtual	int searchNewDevices(LONG64 category, struct ns1__searchNewDevicesResponse &_param_1) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 
 	/// Web service operation 'setDeviceName' (returns error code or SOAP_OK)
-	virtual	int setDeviceName(ns1__SDeviceDescription *device, std::string name, std::string &response) SOAP_PURE_VIRTUAL{return SOAP_OK;}
+	virtual	int setDeviceName(ns1__SDeviceDescription *device, std::string name, std::string &response) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 
 	/// Web service operation 'saveXML' (returns error code or SOAP_OK)
-	virtual	int saveXML(std::string id, std::string body, std::string &result) SOAP_PURE_VIRTUAL{return SOAP_OK;}
+	virtual	int saveXML(std::string id, std::string body, std::string &result) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 
 	/// Web service operation 'switchPort' (returns error code or SOAP_OK)
-	virtual	int switchPort(std::string pinNo, std::string &result) SOAP_PURE_VIRTUAL{return SOAP_OK;}
+	virtual	int switchPort(std::string pinNo, std::string &result) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 
 	/// Web service operation 'makeRemoteAction' (returns error code or SOAP_OK)
-	virtual	int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_2) SOAP_PURE_VIRTUAL{return SOAP_OK;}
+	virtual	int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_2) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 
 	/// Web service operation 'getDevicesList' (returns error code or SOAP_OK)
-	virtual	int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_3) SOAP_PURE_VIRTUAL{return SOAP_OK;}
+	virtual	int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_3) SOAP_PURE_VIRTUAL{
+            return SOAP_OK;
+        }
 };
 #endif

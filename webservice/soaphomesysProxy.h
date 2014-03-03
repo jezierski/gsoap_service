@@ -65,8 +65,8 @@ class SOAP_CMAC homesysProxy : public soap
 	virtual	int getXML(const char *endpoint, const char *soap_action, std::string id, std::string &result);
 
 	/// Web service operation 'searchNewDevices' (returns error code or SOAP_OK)
-	virtual	int searchNewDevices(struct ns1__searchNewDevicesResponse &_param_1) { return searchNewDevices(NULL, NULL, _param_1); }
-	virtual	int searchNewDevices(const char *endpoint, const char *soap_action, struct ns1__searchNewDevicesResponse &_param_1);
+	virtual	int searchNewDevices(LONG64 category, struct ns1__searchNewDevicesResponse &_param_1) { return searchNewDevices(NULL, NULL, category, _param_1); }
+	virtual	int searchNewDevices(const char *endpoint, const char *soap_action, LONG64 category, struct ns1__searchNewDevicesResponse &_param_1);
 
 	/// Web service operation 'setDeviceName' (returns error code or SOAP_OK)
 	virtual	int setDeviceName(ns1__SDeviceDescription *device, std::string name, std::string &response) { return setDeviceName(NULL, NULL, device, name, response); }

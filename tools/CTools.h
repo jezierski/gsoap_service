@@ -74,7 +74,11 @@ inline string to_string(EDeviceCategory category) {
 }
 
 inline string to_string(SDeviceDescription device) {
-    string output = "[GUID: " + to_string((unsigned int) device.guid) + "\tLUID: " + to_string((unsigned int) device.luid) + "\t\tCAT: " + to_string(device.category) + "\tNAME: " + device.name + "]";
+    char formatedBuffer[100];
+    sprintf(formatedBuffer, "[%10d:%2d %20s %20s]", device.guid, device.luid, to_string(device.category).c_str(), device.name.c_str());
+//        output += string(formatedBuffer) + "ms]\t";
+//    string output = "[GUID: " + to_string((unsigned int) device.guid) + "\tLUID: " + to_string((unsigned int) device.luid) + "\t\tCAT: " + to_string(device.category) + "\tNAME: " + device.name + "]";
+    string output = string (formatedBuffer);//"[GUID: " + to_string((unsigned int) device.guid) + "\tLUID: " + to_string((unsigned int) device.luid) + "\t\tCAT: " + to_string(device.category) + "\tNAME: " + device.name + "]";
     return output;
 }
 

@@ -69,6 +69,7 @@
 
     <!-- searchNewDevices -->
     <message name="searchNewDevicesRequest">
+        <part name="category" type="xsd:integer"/>
     </message>
 
     <message name="searchNewDevicesResponse">
