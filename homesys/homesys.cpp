@@ -88,6 +88,7 @@ void CApplication::run() {
         if (x == "help") {
             cout << "boot\t - enter a device into boot mode" << endl;
             cout << "upload\t - upload firmware" << endl;
+            cout << "files\t - show firmware files list" << endl;
             cout << "db\t - write default settings to DataBase" << endl;
             cout << "reset\t - reset devices addresses" << endl;
             cout << "search\t - search devices without address" << endl;
@@ -153,7 +154,16 @@ void CApplication::run() {
             deviceManager->invokeRemoteAction(s, ACTION_BOOT, null);
         }
         if (x == "upload") {
-            deviceManager->uploadFirmware();
+            string fname;
+            cout<<"enter filename: "<<flush;
+            cin >> fname;
+            deviceManager->uploadFirmware(fname);
+        }
+        if (x == "files") {
+            vector<string> list = deviceManager->getFirmwareFilesList();
+            for (string f : list){
+                cout<<f<<endl;
+            }
         }
        
         if (x == "reset") {

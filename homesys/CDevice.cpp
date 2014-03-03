@@ -45,22 +45,25 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
 }
 
 
+vector<string> CDevice::getFirmwareFilesList(){
+    CFirmwareLoader loader;
 
-void CDevice::uploadFirmware() {
+    vector<string> fileList = loader.getFileList();
+    return fileList;
+}
+
+
+void CDevice::uploadFirmware(string fileName) {
     //quiet other devices
 
 
     CFirmwareLoader loader;
     CFirmwareBuffer firmware;
-    string fname;
     unsigned int crc;
 
-    loader.printFileList();
-    log->put("Enter firmware file name to upload:");
-    cin >> fname;
     try {
 
-        firmware = loader.readFile(fname);
+        firmware = loader.readFile(fileName);
         clearFlash();
         initSelfCRC();
         log->info("Start a firmware uploading...");

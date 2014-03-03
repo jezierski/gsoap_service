@@ -85,7 +85,8 @@ public:
     CCan232 *getProtocol();
     unsigned char getAddress(SDeviceDescription device);
 
-    void uploadFirmware();
+    vector<string> getFirmwareFilesList();
+    void uploadFirmware(string fileName);
 
 
     

@@ -19,16 +19,20 @@ CFirmwareLoader::~CFirmwareLoader() {
 }
 
 void CFirmwareLoader::printFileList() {
-    vector<string> fileList;
-    if (getdir("../firmware", fileList)) {
-        log->error("Reading firmware path failed or directory not found");
-        return;
-    }
+    vector<string> fileList = getFileList();
     log->put("Firmware files list:");
     int index = 1;
     for (string fileName : fileList) {
         log->put(to_string(index++) + ".\t" + fileName);
     }
+}
+
+vector<string> CFirmwareLoader::getFileList() {
+    vector<string> fileList;
+    if (getdir("../firmware", fileList)) {
+        log->error("Reading firmware path failed or directory not found");
+    }
+    return fileList;
 }
 
 CFirmwareBuffer CFirmwareLoader::readFile(string filename) {

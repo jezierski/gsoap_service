@@ -184,7 +184,7 @@ int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 comman
     }
 
     cout << endl;
-    return 0;
+    return SOAP_OK;
 }
 
 int CSoapServer::getDevicesList(LONG64 category, struct ns1__getDevicesListResponse & _param_1) {
@@ -213,7 +213,21 @@ int CSoapServer::getDevicesList(LONG64 category, struct ns1__getDevicesListRespo
     //    delete device;
     //    cout << "makeRemoteAction, guid: " << device->GUID << ", luid: " << device->LUID << ", cat: " << device->category << ", comm: " << command << endl;
 
-    return 0;
+    return SOAP_OK;
+}
+
+
+int CSoapServer::getFirmwareFilesList(struct ns1__getFilesListResponse & _param_1) {
+    
+    vector<string > fileNames = deviceManager->getFirmwareFilesList();
+    
+    struct ns1__getFilesListResponse response;
+    response.result = new ns1__filesList();
+    response.result->fileName = fileNames;
+    
+    _param_1 = response;
+    
+    return SOAP_OK;
 }
 
 void CSoapServer::start() {
@@ -221,7 +235,8 @@ void CSoapServer::start() {
     while (1) {
         error = run(1234);
         if (error != SOAP_OK)
-            log->error("SOAP server error code: " + to_string(error));
+            log->error("SOAP server error code: " + to_string(error) + ", trying to restart in a 3 sec...");
+        sleep(3);
     }
 }
 

@@ -87,5 +87,9 @@ class SOAP_CMAC homesysProxy : public soap
 	/// Web service operation 'getDevicesList' (returns error code or SOAP_OK)
 	virtual	int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_3) { return getDevicesList(NULL, NULL, category, _param_3); }
 	virtual	int getDevicesList(const char *endpoint, const char *soap_action, LONG64 category, struct ns1__getDevicesListResponse &_param_3);
+
+	/// Web service operation 'getFilesList' (returns error code or SOAP_OK)
+	virtual	int getFilesList(struct ns1__getFilesListResponse &_param_4) { return getFilesList(NULL, NULL, _param_4); }
+	virtual	int getFilesList(const char *endpoint, const char *soap_action, struct ns1__getFilesListResponse &_param_4);
 };
 #endif

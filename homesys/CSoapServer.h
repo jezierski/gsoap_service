@@ -37,6 +37,7 @@ public:
     int makeRemoteAction(ns1__SDeviceDescription *device, LONG64 command, LONG64 params, struct ns1__makeRemoteActionResponse &_param_1);
     int getDevicesList(LONG64 category, struct ns1__getDevicesListResponse &_param_1);
     int searchNewDevices(LONG64 category, struct ns1__searchNewDevicesResponse &_param_1);
+    int getFirmwareFilesList(struct ns1__getFilesListResponse & _param_1);
     
     int switchPort(string pinNo, string &result);
     

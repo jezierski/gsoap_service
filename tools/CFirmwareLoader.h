@@ -37,6 +37,7 @@ public:
     
     
     void printFileList();
+    vector<string> getFileList();
     CFirmwareBuffer readFile(string filename);
 private:
     CLog *log;

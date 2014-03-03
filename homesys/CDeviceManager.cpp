@@ -28,10 +28,14 @@ void CDeviceManager::addBootDevice(CDevice *device) {
     bootDevice = device;
 }
 
-void CDeviceManager::uploadFirmware() {
+vector<string> CDeviceManager::getFirmwareFilesList(){
+    return bootDevice->getFirmwareFilesList();
+}
+
+void CDeviceManager::uploadFirmware(string fileName) {
     if (bootDevice != NULL) {
         pauseDeviceManager();
-        bootDevice->uploadFirmware();
+        bootDevice->uploadFirmware(fileName);
         resumeDeviceManager();
     }
 }

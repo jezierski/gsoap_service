@@ -61,6 +61,12 @@
                     <xsd:element minOccurs="1" maxOccurs="unbounded" name="item" type="ns:SDeviceDescription"/>
                 </xsd:sequence>
             </xsd:complexType>
+            
+            <xsd:complexType name="filesList">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" maxOccurs="unbounded" name="fileName" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
         </schema>
 
     </types>
@@ -133,6 +139,14 @@
     <message name="getDevicesListResponse">
         <part name="result" type="ns:devicesList"/>
     </message>
+    
+     <!-- getFilesList -->
+    <message name="getFilesListRequest">
+    </message>
+
+    <message name="getFilesListResponse">
+        <part name="result" type="ns:filesList"/>
+    </message>
 
 
     <portType name="homesysPortType">
@@ -163,6 +177,10 @@
         <operation name="getDevicesList">
             <input message="tns:getDevicesListRequest"/>
             <output message="tns:getDevicesListResponse"/>
+        </operation>
+        <operation name="getFilesList">
+            <input message="tns:getFilesListRequest"/>
+            <output message="tns:getFilesListResponse"/>
         </operation>
 
     </portType>
@@ -225,6 +243,15 @@
             </output>
         </operation>
         <operation name="getDevicesList">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getFilesList">
             <SOAP:operation style="rpc" soapAction=""/>
             <input>
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

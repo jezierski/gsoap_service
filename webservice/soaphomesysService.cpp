@@ -169,6 +169,7 @@ static int serve_ns1__saveXML(homesysService*);
 static int serve_ns1__switchPort(homesysService*);
 static int serve_ns1__makeRemoteAction(homesysService*);
 static int serve_ns1__getDevicesList(homesysService*);
+static int serve_ns1__getFilesList(homesysService*);
 
 int homesysService::dispatch()
 {	soap_peek_element(this);
@@ -186,6 +187,8 @@ int homesysService::dispatch()
 		return serve_ns1__makeRemoteAction(this);
 	if (!soap_match_tag(this, this->tag, "ns1:getDevicesList"))
 		return serve_ns1__getDevicesList(this);
+	if (!soap_match_tag(this, this->tag, "ns1:getFilesList"))
+		return serve_ns1__getFilesList(this);
 	return this->error = SOAP_NO_METHOD;
 }
 
@@ -469,6 +472,47 @@ static int serve_ns1__getDevicesList(homesysService *soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_ns1__getDevicesListResponse(soap, &_param_3, "ns1:getDevicesListResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_ns1__getFilesList(homesysService *soap)
+{	struct ns1__getFilesList soap_tmp_ns1__getFilesList;
+	struct ns1__getFilesListResponse _param_4;
+	soap_default_ns1__getFilesListResponse(soap, &_param_4);
+	soap_default_ns1__getFilesList(soap, &soap_tmp_ns1__getFilesList);
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	if (!soap_get_ns1__getFilesList(soap, &soap_tmp_ns1__getFilesList, "ns1:getFilesList", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = soap->getFilesList(_param_4);
+	if (soap->error)
+		return soap->error;
+	soap_serializeheader(soap);
+	soap_serialize_ns1__getFilesListResponse(soap, &_param_4);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__getFilesListResponse(soap, &_param_4, "ns1:getFilesListResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__getFilesListResponse(soap, &_param_4, "ns1:getFilesListResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))

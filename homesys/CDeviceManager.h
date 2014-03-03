@@ -40,7 +40,8 @@ public:
    
     list<CDevice*> getDevices();
     
-    void uploadFirmware();
+    vector<string> getFirmwareFilesList();
+    void uploadFirmware(string fileName);
     
 
 private:

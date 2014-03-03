@@ -506,4 +506,59 @@ int homesysProxy::getDevicesList(const char *endpoint, const char *soap_action, 
 		return soap_closesock(soap);
 	return soap_closesock(soap);
 }
+
+int homesysProxy::getFilesList(const char *endpoint, const char *soap_action, struct ns1__getFilesListResponse &_param_4)
+{	struct soap *soap = this;
+	struct ns1__getFilesList soap_tmp_ns1__getFilesList;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (!soap_endpoint)
+		soap_endpoint = "http://192.168.1.39:1234";
+	if (!soap_action)
+		soap_action = "";
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize_ns1__getFilesList(soap, &soap_tmp_ns1__getFilesList);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__getFilesList(soap, &soap_tmp_ns1__getFilesList, "ns1:getFilesList", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__getFilesList(soap, &soap_tmp_ns1__getFilesList, "ns1:getFilesList", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!&_param_4)
+		return soap_closesock(soap);
+	soap_default_ns1__getFilesListResponse(soap, &_param_4);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	if (soap_recv_fault(soap, 1))
+		return soap->error;
+	soap_get_ns1__getFilesListResponse(soap, &_param_4, "", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
 /* End of client proxy code */
