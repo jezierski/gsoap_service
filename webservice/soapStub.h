@@ -415,10 +415,32 @@ private:
 };
 #endif
 
+#ifndef SOAP_TYPE_ns1__uploadFirmwareResponse
+#define SOAP_TYPE_ns1__uploadFirmwareResponse (97)
+/* ns1:uploadFirmwareResponse */
+struct ns1__uploadFirmwareResponse
+{
+#ifdef WITH_NOEMPTYSTRUCT
+private:
+	char dummy;	/* dummy member to enable compilation */
+#endif
+};
+#endif
+
+#ifndef SOAP_TYPE_ns1__uploadFirmware
+#define SOAP_TYPE_ns1__uploadFirmware (100)
+/* ns1:uploadFirmware */
+struct ns1__uploadFirmware
+{
+public:
+	std::string fileName;	/* required element of type xsd:string */
+};
+#endif
+
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (97)
+#define SOAP_TYPE_SOAP_ENV__Header (101)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
@@ -434,7 +456,7 @@ private:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (98)
+#define SOAP_TYPE_SOAP_ENV__Code (102)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -449,7 +471,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (100)
+#define SOAP_TYPE_SOAP_ENV__Detail (104)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -465,7 +487,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (103)
+#define SOAP_TYPE_SOAP_ENV__Reason (107)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
@@ -479,7 +501,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (104)
+#define SOAP_TYPE_SOAP_ENV__Fault (108)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {

@@ -15,7 +15,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2014-03-03 21:07:59 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.7 2014-03-08 18:45:48 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -259,6 +259,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_xsd__base64Binary(soap, NULL, NULL, "xsd:base64Binary");
 	case SOAP_TYPE_xsd__anyType:
 		return soap_in_xsd__anyType(soap, NULL, NULL, "xsd:anyType");
+	case SOAP_TYPE_ns1__uploadFirmware:
+		return soap_in_ns1__uploadFirmware(soap, NULL, NULL, "ns1:uploadFirmware");
+	case SOAP_TYPE_ns1__uploadFirmwareResponse:
+		return soap_in_ns1__uploadFirmwareResponse(soap, NULL, NULL, "ns1:uploadFirmwareResponse");
 	case SOAP_TYPE_ns1__getFilesList:
 		return soap_in_ns1__getFilesList(soap, NULL, NULL, "ns1:getFilesList");
 	case SOAP_TYPE_ns1__getFilesListResponse:
@@ -518,6 +522,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "xsd:unsignedLong"))
 		{	*type = SOAP_TYPE_unsignedLONG64;
 			return soap_in_unsignedLONG64(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:uploadFirmware"))
+		{	*type = SOAP_TYPE_ns1__uploadFirmware;
+			return soap_in_ns1__uploadFirmware(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:uploadFirmwareResponse"))
+		{	*type = SOAP_TYPE_ns1__uploadFirmwareResponse;
+			return soap_in_ns1__uploadFirmwareResponse(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "ns1:getFilesList"))
 		{	*type = SOAP_TYPE_ns1__getFilesList;
@@ -827,6 +839,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return ((xsd__base64Binary *)ptr)->soap_out(soap, tag, id, "xsd:base64Binary");
 	case SOAP_TYPE_xsd__anyType:
 		return ((xsd__anyType *)ptr)->soap_out(soap, tag, id, "xsd:anyType");
+	case SOAP_TYPE_ns1__uploadFirmware:
+		return soap_out_ns1__uploadFirmware(soap, tag, id, (const struct ns1__uploadFirmware *)ptr, "ns1:uploadFirmware");
+	case SOAP_TYPE_ns1__uploadFirmwareResponse:
+		return soap_out_ns1__uploadFirmwareResponse(soap, tag, id, (const struct ns1__uploadFirmwareResponse *)ptr, "ns1:uploadFirmwareResponse");
 	case SOAP_TYPE_ns1__getFilesList:
 		return soap_out_ns1__getFilesList(soap, tag, id, (const struct ns1__getFilesList *)ptr, "ns1:getFilesList");
 	case SOAP_TYPE_ns1__getFilesListResponse:
@@ -955,6 +971,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_xsd__anyType:
 		((xsd__anyType *)ptr)->soap_serialize(soap);
+		break;
+	case SOAP_TYPE_ns1__uploadFirmware:
+		soap_serialize_ns1__uploadFirmware(soap, (const struct ns1__uploadFirmware *)ptr);
+		break;
+	case SOAP_TYPE_ns1__uploadFirmwareResponse:
+		soap_serialize_ns1__uploadFirmwareResponse(soap, (const struct ns1__uploadFirmwareResponse *)ptr);
 		break;
 	case SOAP_TYPE_ns1__getFilesList:
 		soap_serialize_ns1__getFilesList(soap, (const struct ns1__getFilesList *)ptr);
@@ -1140,6 +1162,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 		return (void*)soap_instantiate_ns1__getFilesListResponse(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns1__getFilesList:
 		return (void*)soap_instantiate_ns1__getFilesList(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__uploadFirmwareResponse:
+		return (void*)soap_instantiate_ns1__uploadFirmwareResponse(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__uploadFirmware:
+		return (void*)soap_instantiate_ns1__uploadFirmware(soap, -1, type, arrayType, n);
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
 		return (void*)soap_instantiate_SOAP_ENV__Header(soap, -1, type, arrayType, n);
@@ -1328,6 +1354,18 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 			SOAP_DELETE((struct ns1__getFilesList*)p->ptr);
 		else
 			SOAP_DELETE_ARRAY((struct ns1__getFilesList*)p->ptr);
+		break;
+	case SOAP_TYPE_ns1__uploadFirmwareResponse:
+		if (p->size < 0)
+			SOAP_DELETE((struct ns1__uploadFirmwareResponse*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((struct ns1__uploadFirmwareResponse*)p->ptr);
+		break;
+	case SOAP_TYPE_ns1__uploadFirmware:
+		if (p->size < 0)
+			SOAP_DELETE((struct ns1__uploadFirmware*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((struct ns1__uploadFirmware*)p->ptr);
 		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
@@ -4179,6 +4217,212 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_SOAP_ENV__Header(struct soap *soap, int st,
 }
 
 #endif
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__uploadFirmware(struct soap *soap, struct ns1__uploadFirmware *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_std__string(soap, &a->fileName);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__uploadFirmware(struct soap *soap, const struct ns1__uploadFirmware *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_std__string(soap, &a->fileName);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__uploadFirmware(struct soap *soap, const char *tag, int id, const struct ns1__uploadFirmware *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__uploadFirmware), type))
+		return soap->error;
+	if (soap_out_std__string(soap, "fileName", -1, &a->fileName, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct ns1__uploadFirmware * SOAP_FMAC4 soap_in_ns1__uploadFirmware(struct soap *soap, const char *tag, struct ns1__uploadFirmware *a, const char *type)
+{
+	size_t soap_flag_fileName = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct ns1__uploadFirmware *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__uploadFirmware, sizeof(struct ns1__uploadFirmware), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_ns1__uploadFirmware(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_fileName && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_std__string(soap, "fileName", &a->fileName, "xsd:string"))
+				{	soap_flag_fileName--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct ns1__uploadFirmware *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__uploadFirmware, 0, sizeof(struct ns1__uploadFirmware), 0, soap_copy_ns1__uploadFirmware);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_fileName > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__uploadFirmware(struct soap *soap, const struct ns1__uploadFirmware *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__uploadFirmware);
+	if (soap_out_ns1__uploadFirmware(soap, tag?tag:"ns1:uploadFirmware", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct ns1__uploadFirmware * SOAP_FMAC4 soap_get_ns1__uploadFirmware(struct soap *soap, struct ns1__uploadFirmware *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns1__uploadFirmware(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct ns1__uploadFirmware * SOAP_FMAC2 soap_instantiate_ns1__uploadFirmware(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__uploadFirmware(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__uploadFirmware, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__uploadFirmware);
+		if (size)
+			*size = sizeof(struct ns1__uploadFirmware);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__uploadFirmware[n]);
+		if (!cp->ptr)
+		{	soap->error = SOAP_EOM;
+			return NULL;
+		}
+		if (size)
+			*size = n * sizeof(struct ns1__uploadFirmware);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	return (struct ns1__uploadFirmware*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__uploadFirmware(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__uploadFirmware %p -> %p\n", q, p));
+	*(struct ns1__uploadFirmware*)p = *(struct ns1__uploadFirmware*)q;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__uploadFirmwareResponse(struct soap *soap, struct ns1__uploadFirmwareResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_ns1__uploadFirmwareResponse(struct soap *soap, const struct ns1__uploadFirmwareResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__uploadFirmwareResponse(struct soap *soap, const char *tag, int id, const struct ns1__uploadFirmwareResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__uploadFirmwareResponse), type))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct ns1__uploadFirmwareResponse * SOAP_FMAC4 soap_in_ns1__uploadFirmwareResponse(struct soap *soap, const char *tag, struct ns1__uploadFirmwareResponse *a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct ns1__uploadFirmwareResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__uploadFirmwareResponse, sizeof(struct ns1__uploadFirmwareResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default_ns1__uploadFirmwareResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct ns1__uploadFirmwareResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__uploadFirmwareResponse, 0, sizeof(struct ns1__uploadFirmwareResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_ns1__uploadFirmwareResponse(struct soap *soap, const struct ns1__uploadFirmwareResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_ns1__uploadFirmwareResponse);
+	if (soap_out_ns1__uploadFirmwareResponse(soap, tag?tag:"ns1:uploadFirmwareResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct ns1__uploadFirmwareResponse * SOAP_FMAC4 soap_get_ns1__uploadFirmwareResponse(struct soap *soap, struct ns1__uploadFirmwareResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns1__uploadFirmwareResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct ns1__uploadFirmwareResponse * SOAP_FMAC2 soap_instantiate_ns1__uploadFirmwareResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__uploadFirmwareResponse(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns1__uploadFirmwareResponse, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__uploadFirmwareResponse);
+		if (size)
+			*size = sizeof(struct ns1__uploadFirmwareResponse);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW(struct ns1__uploadFirmwareResponse[n]);
+		if (!cp->ptr)
+		{	soap->error = SOAP_EOM;
+			return NULL;
+		}
+		if (size)
+			*size = n * sizeof(struct ns1__uploadFirmwareResponse);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	return (struct ns1__uploadFirmwareResponse*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns1__uploadFirmwareResponse(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct ns1__uploadFirmwareResponse %p -> %p\n", q, p));
+	*(struct ns1__uploadFirmwareResponse*)p = *(struct ns1__uploadFirmwareResponse*)q;
+}
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_ns1__getFilesList(struct soap *soap, struct ns1__getFilesList *a)
 {

@@ -147,6 +147,14 @@
     <message name="getFilesListResponse">
         <part name="result" type="ns:filesList"/>
     </message>
+    
+     <!-- uploadFirmware -->
+    <message name="uploadFirmwareRequest">
+        <part name="fileName" type="xsd:string"/>
+    </message>
+
+    <message name="uploadFirmwareResponse">
+    </message>
 
 
     <portType name="homesysPortType">
@@ -181,6 +189,10 @@
         <operation name="getFilesList">
             <input message="tns:getFilesListRequest"/>
             <output message="tns:getFilesListResponse"/>
+        </operation>
+        <operation name="uploadFirmware">
+            <input message="tns:uploadFirmwareRequest"/>
+            <output message="tns:uploadFirmwareResponse"/>
         </operation>
 
     </portType>
@@ -252,6 +264,15 @@
             </output>
         </operation>
         <operation name="getFilesList">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="uploadFirmware">
             <SOAP:operation style="rpc" soapAction=""/>
             <input>
                 <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

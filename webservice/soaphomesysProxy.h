@@ -91,5 +91,9 @@ class SOAP_CMAC homesysProxy : public soap
 	/// Web service operation 'getFilesList' (returns error code or SOAP_OK)
 	virtual	int getFilesList(struct ns1__getFilesListResponse &_param_4) { return getFilesList(NULL, NULL, _param_4); }
 	virtual	int getFilesList(const char *endpoint, const char *soap_action, struct ns1__getFilesListResponse &_param_4);
+
+	/// Web service operation 'uploadFirmware' (returns error code or SOAP_OK)
+	virtual	int uploadFirmware(std::string fileName, struct ns1__uploadFirmwareResponse &_param_5) { return uploadFirmware(NULL, NULL, fileName, _param_5); }
+	virtual	int uploadFirmware(const char *endpoint, const char *soap_action, std::string fileName, struct ns1__uploadFirmwareResponse &_param_5);
 };
 #endif

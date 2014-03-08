@@ -217,15 +217,19 @@ int CSoapServer::getDevicesList(LONG64 category, struct ns1__getDevicesListRespo
 }
 
 
-int CSoapServer::getFirmwareFilesList(struct ns1__getFilesListResponse & _param_1) {
-    
+int CSoapServer::getFilesList(struct ns1__getFilesListResponse & _param_1) {
     vector<string > fileNames = deviceManager->getFirmwareFilesList();
-    
     struct ns1__getFilesListResponse response;
     response.result = new ns1__filesList();
     response.result->fileName = fileNames;
     
     _param_1 = response;
+    
+    return SOAP_OK;
+}
+
+int CSoapServer::uploadFirmware(std::string fileName, struct ns1__uploadFirmwareResponse &_param_5){
+    deviceManager->uploadFirmware(fileName);
     
     return SOAP_OK;
 }

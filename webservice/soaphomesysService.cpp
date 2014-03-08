@@ -170,6 +170,7 @@ static int serve_ns1__switchPort(homesysService*);
 static int serve_ns1__makeRemoteAction(homesysService*);
 static int serve_ns1__getDevicesList(homesysService*);
 static int serve_ns1__getFilesList(homesysService*);
+static int serve_ns1__uploadFirmware(homesysService*);
 
 int homesysService::dispatch()
 {	soap_peek_element(this);
@@ -189,6 +190,8 @@ int homesysService::dispatch()
 		return serve_ns1__getDevicesList(this);
 	if (!soap_match_tag(this, this->tag, "ns1:getFilesList"))
 		return serve_ns1__getFilesList(this);
+	if (!soap_match_tag(this, this->tag, "ns1:uploadFirmware"))
+		return serve_ns1__uploadFirmware(this);
 	return this->error = SOAP_NO_METHOD;
 }
 
@@ -513,6 +516,47 @@ static int serve_ns1__getFilesList(homesysService *soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put_ns1__getFilesListResponse(soap, &_param_4, "ns1:getFilesListResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve_ns1__uploadFirmware(homesysService *soap)
+{	struct ns1__uploadFirmware soap_tmp_ns1__uploadFirmware;
+	struct ns1__uploadFirmwareResponse _param_5;
+	soap_default_ns1__uploadFirmwareResponse(soap, &_param_5);
+	soap_default_ns1__uploadFirmware(soap, &soap_tmp_ns1__uploadFirmware);
+	soap->encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/";
+	if (!soap_get_ns1__uploadFirmware(soap, &soap_tmp_ns1__uploadFirmware, "ns1:uploadFirmware", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = soap->uploadFirmware(soap_tmp_ns1__uploadFirmware.fileName, _param_5);
+	if (soap->error)
+		return soap->error;
+	soap_serializeheader(soap);
+	soap_serialize_ns1__uploadFirmwareResponse(soap, &_param_5);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put_ns1__uploadFirmwareResponse(soap, &_param_5, "ns1:uploadFirmwareResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put_ns1__uploadFirmwareResponse(soap, &_param_5, "ns1:uploadFirmwareResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))
