@@ -12,6 +12,7 @@ CDevice::CDevice() {
     log = CLog::getInstance();
 
     initActionMap();
+
 }
 
 //CDevice::CDevice(const CDevice& orig) {
@@ -44,14 +45,12 @@ void CDevice::setCommunicationProtocol(CCan232 *protocol) {
     canbusProtocol = protocol;
 }
 
-
-vector<string> CDevice::getFirmwareFilesList(){
+vector<string> CDevice::getFirmwareFilesList() {
     CFirmwareLoader loader;
 
     vector<string> fileList = loader.getFileList();
     return fileList;
 }
-
 
 void CDevice::uploadFirmware(string fileName) {
     //quiet other devices
@@ -79,10 +78,10 @@ void CDevice::uploadFirmware(string fileName) {
 
 }
 
-void CDevice::setGuidIfNeed(){
+void CDevice::setGuidIfNeed() {
     log->info("Checking device's guid...");
     int guid = readGUID();
-    if(guid == -1){
+    if (guid == -1) {
         log->info("Setting new guid");
         writeGUID();
     }
@@ -120,6 +119,7 @@ void CDevice::initWriteGUID() {
     buffer.insertBootCommand(BOOT_CMD_SET_UID);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
+
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Init writing GUID failed");
     }
@@ -180,14 +180,20 @@ void CDevice::verifyFirmware(unsigned int crc) {
 
 void CDevice::initBootWrite(unsigned int address) {
     //    cout<<"INIT WRITE ADR: "<<address<<endl;
+    CCanBuffer recBuf;
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_CMD);
     buffer.insertFlashAddress(address);
     buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
     buffer.insertBootCommand(BOOT_CMD_INIT_WRITE);
     buffer.buildBootBuffer();
-    buffer = canbusProtocol->request(buffer);
-    if (buffer[0] != BOOT_COMMAND_ACK) {
+
+    int i = 20;
+    do {
+        recBuf = canbusProtocol->request(buffer);
+    } while (i-- && recBuf[0] != BOOT_COMMAND_ACK);
+
+    if (recBuf[0] != BOOT_COMMAND_ACK) {
         throw string("Writing boot init failed");
     }
 }
@@ -200,6 +206,7 @@ void CDevice::initBootRead(unsigned int address) {
     buffer.insertBootCommand(BOOT_CMD_INIT_READ);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
+
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Reading boot init failed");
     }
@@ -213,21 +220,30 @@ void CDevice::initSelfCRC() {
     buffer.insertBootCommand(BOOT_CMD_INIT_CHK);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
+
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Self CRC init failed");
     }
 }
 
 unsigned int CDevice::getSelfCRC() {
+    CCanBuffer recBuf;
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_GET_CMD);
     buffer.insertFlashAddress(0);
     buffer.insertBootControlBits(0);
     buffer.insertBootCommand(BOOT_CMD_CHK_RUN);
     buffer.buildBootBuffer();
-    buffer = canbusProtocol->request(buffer);
 
-    return buffer.getBootCRC();
+    int i = 100;
+    do {
+        cout << "try getSelfCRC" << endl;
+        recBuf = canbusProtocol->request(buffer);
+        recBuf.printBuffer();
+    } while (i-- && (recBuf.getLength() == 0 || recBuf[0] == BOOT_COMMAND_ACK));
+
+
+    return recBuf.getBootCRC();
 }
 
 void CDevice::writeProgramData(CBuffer data) {
@@ -236,6 +252,7 @@ void CDevice::writeProgramData(CBuffer data) {
     buffer.insertId(0x330 | BOOT_PUT_DATA);
     buffer << data;
     buffer = canbusProtocol->request(buffer);
+
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Writing program data failed");
     }
@@ -260,6 +277,7 @@ void CDevice::exitBootMode() {
     buffer.insertBootCommand(BOOT_CMD_EXIT_BOOT);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
+
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Exit boot mode failed");
     }
@@ -286,6 +304,7 @@ bool CDevice::checkReady() {
     buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
     buffer.insertBootCommand(BOOT_CMD_GET_READY);
     buffer.buildBootBuffer();
+
     buffer = canbusProtocol->request(buffer);
 
     return (buffer[0] == BOOT_COMMAND_ACK);
@@ -294,11 +313,10 @@ bool CDevice::checkReady() {
 void CDevice::getDummyFrames() {
     CCanBuffer buffer;
     CBuffer rec;
+    int i = 20;
     do {
-
         rec = canbusProtocol->request(buffer);
-
-    } while (rec.getLength());
+    } while (rec.getLength()); //i--); //rec.getLength());
 }
 
 void CDevice::clearFlash() {
@@ -312,6 +330,7 @@ void CDevice::clearFlash() {
     buffer.buildBootBuffer();
 
     buffer = canbusProtocol->request(buffer);
+
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Reseting program memory failed");
     }
@@ -372,7 +391,7 @@ void CDevice::findGUIDs() {
     guids = canbusProtocol->broadcastRequest<unsigned int>(buffer, &CCanBuffer::getGUID);
     for (CCanBuffer buf : guids) {
         GUIDs[buf.getGUID()] = buf.getNmbDevices();
-        log->info("Received new GUID: " +to_string((int) buf.getGUID()) + ", number of local devices: " +to_string((int) buf.getNmbDevices()));
+        log->info("Received new GUID: " + to_string((int) buf.getGUID()) + " [" + to_string((int) buf.getGUID(), true) + "], number of local devices: " + to_string((int) buf.getNmbDevices()));
     }
 }
 
@@ -424,10 +443,10 @@ void CDevice::assignAddress() {
 
     for (auto &guid : GUIDs) {
         for (size_t cnt = 0; cnt < guid.second; cnt++) {
-//            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl; //@TODO remove
+            //            cout << "guid: " << guid.first << ", cnt" << guid.second << ", iteration: " << cnt + 1 << endl; //@TODO remove
             address = getNewAddress();
-//            cout << "new address: " << (int) address << endl; //@TODO remove
-            log->info("Set address " + to_string((int) address) + " for device with GUID: " + to_string((int)guid.first) + ":" + to_string(cnt));
+            //            cout << "new address: " << (int) address << endl; //@TODO remove
+            log->info("Set address " + to_string((int) address) + " for device with GUID: " + to_string((int) guid.first) + ":" + to_string(cnt));
             buffer.clear();
             buffer.insertCommand(CMD_SET_ADDRESS);
             buffer.insertId((unsigned char) category);
@@ -441,37 +460,68 @@ void CDevice::assignAddress() {
             buffer = canbusProtocol->request(buffer);
             insertDevice(guid.first, cnt, category, address);
             if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()) {
-//                cout << "ACK from device CAT: " << (int) buffer[0] << ", ADR: " << (int) buffer[2] << endl; //@TODO remove
-                log->success("Received ACK from device with GUID: " + to_string((int)guid.first) + ":" + to_string(cnt) + " and new address: " + to_string((int) buffer[2]));
+                //                cout << "ACK from device CAT: " << (int) buffer[0] << ", ADR: " << (int) buffer[2] << endl; //@TODO remove
+                log->success("Received ACK from device with GUID: " + to_string((int) guid.first) + ":" + to_string(cnt) + " and new address: " + to_string((int) buffer[2]));
             }
-
+//            sleep(1);
         }
     }
-
-    checkDevicesAvailability();
-    synchronizeDBdevices();
+    //    sleep(1);
+    //    checkDevicesAvailability();
+    //    synchronizeDBdevices();
 }
 
 Blob CDevice::checkDevicesAvailability() {
     vector<unsigned char>unvlbAddresses;
     Blob b;
-    string response = "";
-    for (auto &device : devicesDescriptionList) {
-        if (!ping(device)) {
-            unvlbAddresses.push_back(device.address);
+        string response = "";
+        for (auto &device : devicesDescriptionList) {
+            if (!ping(device)) {
+                unvlbAddresses.push_back(device.address);
+            }
+//            sleep(1);
         }
-    }
-    for (auto &adr : unvlbAddresses) {
-        removeDevice(adr);
-        try {
-            devicesDB->clearDeviceAddress((unsigned char) category, adr);
-        } catch (string e) {
-            response += "Cannot clear device's address in database: " + e + "\n";
-            log->error(response);
+        for (auto &adr : unvlbAddresses) {
+            removeDevice(adr);
+            try {
+                devicesDB->clearDeviceAddress((unsigned char) category, adr);
+            } catch (string e) {
+                response += "Cannot clear device's address in database: " + e + "\n";
+                log->error(response);
+            }
         }
-    }
-    if (response == "")
-        response = "OK";
+        if (response == "")
+            response = "OK";
+
+
+
+
+//    SDeviceDescription d;
+//    d.guid = 1399031133;
+//    d.category = EDeviceCategory::A_SIMPLE_SWITCH;
+//    while (1) {
+//        d.luid = 0;
+//        d.address = 0xc;
+//        if (!ping(d))log->error("BAD");
+//        
+//        d.address = 0xd;
+//        d.luid = 1;
+//        if (!ping(d))log->error("BAD");
+//        
+//         d.luid = 2;
+//        d.address = 0xe;
+//        if (!ping(d))log->error("BAD");
+//        
+//         d.luid = 3;
+//        d.address = 0xf;
+//        if (!ping(d))log->error("BAD");
+//         d.luid = 4;
+//        d.address = 0x10;
+//        if (!ping(d))log->error("BAD");
+//    }
+
+
+
     b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }
@@ -597,6 +647,13 @@ void CDevice::removeDevice(unsigned char address) {
 }
 
 unsigned char CDevice::getAddress(SDeviceDescription device) {
+
+    cout << "getAddress for device " << to_string(device) << endl;
+    for (SDeviceDescription dev : devicesDescriptionList) {
+        cout << "dev adr: " << (int) dev.address << ", dev.category: " << (int) dev.category << ", dev.guid: " << (int) dev.guid << ", dev.luid: " << (int) dev.luid << endl;
+    }
+
+
     for (SDeviceDescription dev : devicesDescriptionList) {
         if (dev == device) {
             return dev.address;
@@ -613,7 +670,11 @@ bool CDevice::ping(SDeviceDescription device) {
     buffer.insertCommand(CMD_PING);
     buffer << (unsigned char) address;
     buffer.buildBuffer();
+    cout << "PING before" << endl;
+    buffer.printBuffer();
     buffer = canbusProtocol->request(buffer);
+    cout << "PING after" << endl;
+    buffer.printBuffer();
     if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()) {
         return true;
     }
@@ -780,6 +841,7 @@ Blob CDevice::reset(SDeviceDescription dev, Blob params) {
 Blob CDevice::search(SDeviceDescription dev, Blob params) {
     log->info("Start searching devices in category " + to_string(category));
     findGUIDs();
+
     assignAddress();
     return listAddresses();
 }

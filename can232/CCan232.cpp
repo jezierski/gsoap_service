@@ -7,7 +7,6 @@
 
 #include "CCan232.h"
 
-
 CCan232::CCan232() {
 
     config = CConfiguration::getInstance();
@@ -140,9 +139,9 @@ bool CCan232::setCommand(CBuffer &buffer) {
 }
 
 bool CCan232::isFrameComplete(CBuffer &frame) {
-    if (frame[1] >= 0x30){
+    if (frame[1] >= 0x30) {
         return true;
-    }else{
+    } else {
         return (frame[3] == (frame.getLength() - 5));
     }
 
@@ -182,19 +181,44 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
     sendCanFrame(frame);
     CCanBuffer buffer;
     CTimeOut tout;
-    tout.SetMilliSec(200);
-    while (!tout.IsTimeOut()) {
-        buffer = getCanFrame();
-        if (buffer.isReady()) {
-            return buffer;
+
+
+
+    tout.SetMilliSec(50);
+    //    while (!tout.IsTimeOut()) {
+
+    //      log->warning("Requesting CAN frame timeout (200ms)");
+
+
+
+    //       } while (!tout.IsTimeOut());
+
+    cout<<"first requested buffer"<<endl;
+    buffer = getCanFrame();
+    buffer.printBuffer();
+    do {
+        cout<<"do..while requested buffer"<<endl;
+        bufferedRequestingFrame = getCanFrame();
+        bufferedRequestingFrame.printBuffer();
+        
+        if (bufferedRequestingFrame.isReady()) {
+            if (buffer == bufferedRequestingFrame) {
+                tout.SetMilliSec(50);
+        cout<<"received another frame"<<endl;
+            }else{
+                cout<<"requested buffer added"<<endl;
+                return buffer;
+            }
         }
+        //        
+    } while (!tout.IsTimeOut());
+
+    if (not buffer.isReady()){
+        log->error("Requested frame incompleted");
     }
-    log->warning("Requesting CAN frame timeout (200ms)");
-    buffer.clear();
+
     return buffer;
 }
-
-
 
 bool CCan232::sendCanFrame(CCanBuffer &frame) {
     CBuffer buf;
@@ -206,7 +230,7 @@ bool CCan232::sendCanFrame(CCanBuffer &frame) {
     buf << frame;
     buf << (unsigned char) getCRC(buf);
     buf << (unsigned char) CR;
-   
+
     try {
         sendBuffer(buf);
         buf = getFrame();
@@ -221,7 +245,7 @@ bool CCan232::sendCanFrame(CCanBuffer &frame) {
         log->error("Sending CAN frame failed: " + to_string(e));
         return false;
     }
-    
+
     return true;
 }
 
@@ -248,16 +272,16 @@ CBuffer CCan232::getFrame() {
     unsigned char rbyte;
 
     rbyte = receiveByte();
-//        cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
+    //        cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
     if (rbyte != CMD_SEND) {
         return buf;
     }
 
     buf << (unsigned char) rbyte;
-    tout.SetMilliSec(200);
+    tout.SetMilliSec(50);
     while (!tout.IsTimeOut()) {
         buf << (unsigned char) receiveByte();
-//                cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
+        //                cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
         if (isFrameComplete(buf)) {
             buf.setReady();
             return buf;
@@ -268,21 +292,27 @@ CBuffer CCan232::getFrame() {
 }
 
 CCanBuffer CCan232::getCanFrame() {
-    CBuffer buf;
+    CBuffer buf, recBuf;
     CCanBuffer canBuffer;
+
     buf << (unsigned char) HEADER;
     buf << (unsigned char) 4;
     buf << (unsigned char) CMD_REQUEST;
     buf << (unsigned char) CR;
+
     try {
+
         sendBuffer(buf);
-        buf = getFrame();
-        if (buf.isReady()) {
-            if (!buf.isNoData()) {
-                canBuffer = createCanBuffer(buf);
+        recBuf.clear();
+        recBuf = getFrame();
+       
+        if (recBuf.isReady()) {
+            if (!recBuf.isNoData()) {
+                canBuffer = createCanBuffer(recBuf);
                 canBuffer.setReady();
             }
         }
+
 
     } catch (string e) {
         log->error("Receiving CAN frame failed: " + to_string(e));

@@ -63,7 +63,13 @@ public:
         tout.SetMilliSec(TOUT_BROADCAST);
         while (!tout.IsTimeOut()) {
             buffer = getCanFrame();
-
+            
+            if (frame.frameCommand() != 7){
+            cout<<"broadcast rec:"<<endl;
+            buffer.printBuffer();
+            cout<<"frsme id: "<<(int)frame.frameId()<<", buffer id: "<<(int)buffer.sourceId()<<", frame cmd: "<<(int)frame.frameCommand()<<", buffer cmd: "<<(int)buffer.frameCommand()<<endl;
+            }
+            
             if (frame.frameCommand() == buffer.frameCommand() && frame.frameId() == buffer.sourceId()) {
                 buffers.push_back(buffer);
                 sendBuffer.clear();
@@ -77,6 +83,7 @@ public:
                 sendCanFrame(sendBuffer);
                 tout.SetMilliSec(TOUT_BROADCAST);
             }
+                cout<<"TIMEOUT"<<endl;
         }
         return buffers;
     }
@@ -107,6 +114,8 @@ CCanBuffer getCanFrame();
     bool setCommand(CBuffer &buffer);
     CBuffer getFrame();
     CCanBuffer createCanBuffer(CBuffer &buffer);
+    
+    CCanBuffer bufferedRequestingFrame;
 
     CConfiguration *config;
     CLog *log;

@@ -39,8 +39,12 @@
 
 using namespace Gallant;
 
+
 class CDevice {
 public:
+  
+    
+    
     CDevice();
     //    CDevice(const CDevice& orig);
     virtual ~CDevice();

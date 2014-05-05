@@ -44,7 +44,7 @@ public:
     /// @name Byte I/O Functions
     //@{
 //    int SendByte(unsigned char Byte);
-    unsigned char receiveByte(int timeOut = 100);
+    unsigned char receiveByte(int timeOut = 50);
 //    int ReceiveByte(void *pRec);
     //@}
 

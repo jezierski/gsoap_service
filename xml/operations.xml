@@ -64,4 +64,68 @@
 <actor guid="1379795960" luid="0" cat="1" param="101" val="00"/>
 </action>
 </operation>
+<operation name="wylaczanie sufit kuchnia">
+<condition>
+<sensor guid="1382105928" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1382105928" luid="0" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="wlaczanie sufit kuchnia">
+<condition>
+<sensor guid="1382105928" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1382105928" luid="0" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="wylaczanie kuchnia boczne">
+<condition>
+<sensor guid="1382105928" luid="1" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1382105928" luid="1" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="wlaczanie kuchnia boczne">
+<condition>
+<sensor guid="1382105928" luid="1" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1382105928" luid="1" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="NEW1">
+<condition>
+<sensor guid="4064248" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="4064248" luid="0" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="NEW2">
+<condition>
+<sensor guid="4064248" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="4064248" luid="0" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="NEW3">
+<condition>
+<sensor guid="4064248" luid="1" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="4064248" luid="1" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="NEW4">
+<condition>
+<sensor guid="4064248" luid="1" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="4064248" luid="1" cat="1" param="101" val="01"/>
+</action>
+</operation>
 </operations_list>
