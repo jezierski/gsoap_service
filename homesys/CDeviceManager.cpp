@@ -123,9 +123,9 @@ void CDeviceManager::initialize() {
     SDeviceDescription empty;
     Blob null;
     empty.category = EDeviceCategory::ALL;
-//    invokeRemoteAction(empty, ACTION_RESET_CATEGORY, null);
-//    invokeRemoteAction(empty, ACTION_SEARCH_DEVICES, null);
-//    invokeRemoteAction(empty, ACTION_RESET_ALL_STATUS, null);
+    invokeRemoteAction(empty, ACTION_RESET_CATEGORY, null);
+    invokeRemoteAction(empty, ACTION_SEARCH_DEVICES, null);
+    invokeRemoteAction(empty, ACTION_RESET_ALL_STATUS, null);
 }
 
 CDevice *CDeviceManager::getDevice(SDeviceDescription deviceDescription) {

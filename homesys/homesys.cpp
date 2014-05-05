@@ -71,7 +71,7 @@ void CApplication::run() {
         exit(0);
     }
 
-    // new thread(&CDeviceManager::runInThreadGlobalRemoteAction, deviceManager, ACTION_READ_NEW_STATUS, Blob());
+    new thread(&CDeviceManager::runInThreadGlobalRemoteAction, deviceManager, ACTION_READ_NEW_STATUS, Blob());
     new thread(&CActionTranslator::translateActions, actionTranslator);
     new thread(&CTimer::run, timer);
     assignSlots();

@@ -185,36 +185,27 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
 
 
     tout.SetMilliSec(50);
-    //    while (!tout.IsTimeOut()) {
-
-    //      log->warning("Requesting CAN frame timeout (200ms)");
-
-
-
-    //       } while (!tout.IsTimeOut());
-
-    cout<<"first requested buffer"<<endl;
+   
     buffer = getCanFrame();
-    buffer.printBuffer();
     do {
-        cout<<"do..while requested buffer"<<endl;
+       
         bufferedRequestingFrame = getCanFrame();
-        bufferedRequestingFrame.printBuffer();
         
         if (bufferedRequestingFrame.isReady()) {
             if (buffer == bufferedRequestingFrame) {
                 tout.SetMilliSec(50);
-        cout<<"received another frame"<<endl;
+       
             }else{
-                cout<<"requested buffer added"<<endl;
+               
                 return buffer;
             }
         }
-        //        
+                
     } while (!tout.IsTimeOut());
 
     if (not buffer.isReady()){
-        log->error("Requested frame incompleted");
+        log->error("Requesting CAN frame timeout (50ms)");
+		buffer.clear();
     }
 
     return buffer;
@@ -292,7 +283,7 @@ CBuffer CCan232::getFrame() {
 }
 
 CCanBuffer CCan232::getCanFrame() {
-    CBuffer buf, recBuf;
+    CBuffer buf;
     CCanBuffer canBuffer;
 
     buf << (unsigned char) HEADER;
@@ -303,12 +294,10 @@ CCanBuffer CCan232::getCanFrame() {
     try {
 
         sendBuffer(buf);
-        recBuf.clear();
-        recBuf = getFrame();
-       
-        if (recBuf.isReady()) {
-            if (!recBuf.isNoData()) {
-                canBuffer = createCanBuffer(recBuf);
+        buf = getFrame();
+        if (buf.isReady()) {
+            if (!buf.isNoData()) {
+                canBuffer = createCanBuffer(buf);
                 canBuffer.setReady();
             }
         }
