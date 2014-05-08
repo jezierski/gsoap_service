@@ -188,7 +188,7 @@ void CDevice::initBootWrite(unsigned int address) {
     buffer.insertBootCommand(BOOT_CMD_INIT_WRITE);
     buffer.buildBootBuffer();
 
-	buffer = canbusProtocol->request(buffer);
+    buffer = canbusProtocol->request(buffer);
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Writing boot init failed");
     }
@@ -240,7 +240,7 @@ unsigned int CDevice::getSelfCRC() {
     buffer.insertBootCommand(BOOT_CMD_CHK_RUN);
     buffer.buildBootBuffer();
 
-	buffer = canbusProtocol->request(buffer);
+    buffer = canbusProtocol->request(buffer);
 
     return buffer.getBootCRC();
 
@@ -483,23 +483,23 @@ void CDevice::assignAddress() {
 Blob CDevice::checkDevicesAvailability() {
     vector<unsigned char>unvlbAddresses;
     Blob b;
-        string response = "";
-        for (auto &device : devicesDescriptionList) {
-            if (!ping(device)) {
-                unvlbAddresses.push_back(device.address);
-            }
+    string response = "";
+    for (auto &device : devicesDescriptionList) {
+        if (!ping(device)) {
+            unvlbAddresses.push_back(device.address);
         }
-        for (auto &adr : unvlbAddresses) {
-            removeDevice(adr);
-            try {
-                devicesDB->clearDeviceAddress((unsigned char) category, adr);
-            } catch (string e) {
-                response += "Cannot clear device's address in database: " + e + "\n";
-                log->error(response);
-            }
+    }
+    for (auto &adr : unvlbAddresses) {
+        removeDevice(adr);
+        try {
+            devicesDB->clearDeviceAddress((unsigned char) category, adr);
+        } catch (string e) {
+            response += "Cannot clear device's address in database: " + e + "\n";
+            log->error(response);
         }
-        if (response == "")
-            response = "OK";
+    }
+    if (response == "")
+        response = "OK";
 
     b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
@@ -643,7 +643,7 @@ bool CDevice::ping(SDeviceDescription device) {
     buffer.insertCommand(CMD_PING);
     buffer << (unsigned char) address;
     buffer.buildBuffer();
- 
+
     buffer = canbusProtocol->request(buffer);
 
     if (CMD_ACK == buffer.frameCommand() && address == buffer.sourceAddress()) {
@@ -850,11 +850,15 @@ Blob CDevice::bootDevice(SDeviceDescription dev, Blob params) {
 
     CCanBuffer buffer;
 
+
     buffer.insertCommand(CMD_ENTER_BOOT);
     buffer.insertId((unsigned char) dev.category);
+    buffer << (unsigned char) (dev.guid >> 24);
+    buffer << (unsigned char) (dev.guid >> 16);
+    buffer << (unsigned char) (dev.guid >> 8);
+    buffer << (unsigned char) (dev.guid >> 0);
     buffer.buildBuffer();
     response = (getProtocol()->send(buffer)) ? "OK" : "Enter device into boot mode failed";
-
     b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }

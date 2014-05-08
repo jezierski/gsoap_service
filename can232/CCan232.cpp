@@ -179,20 +179,22 @@ bool CCan232::send(CCanBuffer &frame) {
 CCanBuffer CCan232::request(CCanBuffer &frame) {
     lock_guard<mutex> lock(barrier);
     sendCanFrame(frame);
-    CCanBuffer buffer;
+    CCanBuffer buffer, dummyBuffer;
     CTimeOut tout;
-
-
 
     tout.SetMilliSec(50);
    
     buffer = getCanFrame();
+   
     do {
        
-        bufferedRequestingFrame = getCanFrame();
+        dummyBuffer = getCanFrame();
+       
         
-        if (bufferedRequestingFrame.isReady()) {
-            if (buffer == bufferedRequestingFrame) {
+        if (dummyBuffer.isReady()) {
+           
+            if (buffer == dummyBuffer) {
+               
                 tout.SetMilliSec(50);
        
             }else{
@@ -207,7 +209,7 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
         log->error("Requesting CAN frame timeout (50ms)");
 		buffer.clear();
     }
-
+   
     return buffer;
 }
 
