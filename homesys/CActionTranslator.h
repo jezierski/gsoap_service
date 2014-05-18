@@ -39,7 +39,7 @@ private:
     
     bool deviceCondition(SOperation &operation);
     bool timeCondition(SOperation &operation);
-    void makeAction(SOperation &operation);
+    void makeActions(SOperation &operation);
     
     bool compareSDStoSDC(SDeviceCondition condition);
     bool compareTime(STimeCondition condition);

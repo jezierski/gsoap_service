@@ -1,2 +1,29 @@
-make class terminal instead of unnecessary code in homesys.cpp
-make application autoruns on start Rasbian
+devie manager:
+czarne pole dla NAME
+brak polskich znakow dla xml
+scalic przyciski action-reaction i chain....
+zdalny start/stop systemu (z parametrami)
+
+
+lights manager
+brak zapisu konfiguracji gniazdek
+crash aplikacji przy blednym adresie serwera
+
+
+
+homesys
+lista akcji zamiast pojedynczej
+dodac timer miedzy odczytem stanu a wykonaniem akcji
+automatyczny start aplikacji
+
+
+
+drivers
+wgrywanie bootloadera spod linuxa
+kompilacja sterownikow pod linuxem
+dodac wylaczenie dla calego guida
+
+
+widgets
+ustawienie listy akcji dla widgeta
+

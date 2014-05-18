@@ -130,7 +130,7 @@ bool CActionTranslator::compareParams(ECondition condition, Params params1, Para
 
     long long param1 = paramsToLL(params1);
     long long param2 = paramsToLL(params2);
-   
+
     //    cout << "device param[0]: " << (int) params1[0] << ", xml param[0]: " << (int) params2[0] << endl;
     switch (condition) {
         case ECondition::Equal:
@@ -161,10 +161,11 @@ bool CActionTranslator::timeCondition(SOperation &operation) {
     return true;
 }
 
-void CActionTranslator::makeAction(SOperation &operation) {
+void CActionTranslator::makeActions(SOperation &operation) {
     //    cout << ">>>>>>>>> MAKE ACTION <<<<<<<<<<<<<<<[" << endl;
-    deviceManager->invokeRemoteAction(operation.action.device, operation.action.command, operation.action.params);
-
+    for (auto action : operation.actions) {
+        deviceManager->invokeRemoteAction(action.device, action.command, action.params);
+    }
 }
 
 DeviceState CActionTranslator::popDeviceState() {
@@ -203,7 +204,7 @@ void CActionTranslator::translateActions() {
             for (SOperation operation : operations->getOperations()) {
                 if (isOperationForDeviceCondition(operation, deviceState)) {
                     if (deviceCondition(operation) && timeCondition(operation)) {
-                        makeAction(operation);
+                        makeActions(operation);
                     }
                 }
             }
@@ -214,7 +215,7 @@ void CActionTranslator::translateActions() {
             for (SOperation operation : operations->getOperations()) {
                 if (isOperationForTimer(operation)) {
                     if (deviceCondition(operation) && timeCondition(operation)) {
-                        makeAction(operation);
+                        makeActions(operation);
                     }
                 }
             }

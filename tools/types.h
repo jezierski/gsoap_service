@@ -102,7 +102,7 @@ typedef struct {
 typedef struct {
     list<SDeviceCondition>deviceConditions;
     list<STimeCondition>timeConditions;
-    SAction action;
+    list<SAction> actions;
 } SOperation;
 
 
