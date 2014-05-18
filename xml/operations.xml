@@ -96,36 +96,164 @@
 <actor guid="1382105928" luid="1" cat="1" param="101" val="01"/>
 </action>
 </operation>
-<operation name="NEW1">
+<operation name="wylaczanie lazienka sufit">
 <condition>
-<sensor guid="4064248" luid="0" cat="100" param="101" comp="equal" val="00"/>
+<sensor guid="1382105088" luid="0" cat="100" param="101" comp="equal" val="00"/>
 </condition>
 <action>
-<actor guid="4064248" luid="0" cat="1" param="101" val="00"/>
+<actor guid="1382105088" luid="0" cat="1" param="101" val="00"/>
 </action>
 </operation>
-<operation name="NEW2">
+<operation name="wlaczanie lazienka sufit">
 <condition>
-<sensor guid="4064248" luid="0" cat="100" param="101" comp="equal" val="01"/>
+<sensor guid="1382105088" luid="0" cat="100" param="101" comp="equal" val="01"/>
 </condition>
 <action>
-<actor guid="4064248" luid="0" cat="1" param="101" val="01"/>
+<actor guid="1382105088" luid="0" cat="1" param="101" val="01"/>
 </action>
 </operation>
-<operation name="NEW3">
+<operation name="wylaczanie lazienka boczne">
 <condition>
-<sensor guid="4064248" luid="1" cat="100" param="101" comp="equal" val="00"/>
+<sensor guid="1382105088" luid="1" cat="100" param="101" comp="equal" val="00"/>
 </condition>
 <action>
-<actor guid="4064248" luid="1" cat="1" param="101" val="00"/>
+<actor guid="1382105088" luid="1" cat="1" param="101" val="00"/>
 </action>
 </operation>
-<operation name="NEW4">
+<operation name="wlaczanie lazienka boczne">
 <condition>
-<sensor guid="4064248" luid="1" cat="100" param="101" comp="equal" val="01"/>
+<sensor guid="1382105088" luid="1" cat="100" param="101" comp="equal" val="01"/>
 </condition>
 <action>
-<actor guid="4064248" luid="1" cat="1" param="101" val="01"/>
+<actor guid="1382105088" luid="1" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="wlaczanie pokoj swiatlo">
+<condition>
+<sensor guid="1399390464" luid="1" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1399390464" luid="1" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="wylaczanie pokoj swiatlo">
+<condition>
+<sensor guid="1399390464" luid="1" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1399390464" luid="1" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="wlaczanie pokoj swiatlo plus">
+<condition>
+<sensor guid="1399390464" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1399390464" luid="1" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="wylaczanie pokoj swiatlo plus">
+<condition>
+<sensor guid="1399390464" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1399390464" luid="1" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="NEW">
+<condition>
+<sensor guid="1382105088" luid="2" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1382105088" luid="0" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="NEW">
+<condition>
+<sensor guid="1382105088" luid="2" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1382105088" luid="1" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="NEW">
+<condition>
+<sensor guid="1382105088" luid="2" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1382105088" luid="0" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="NEW">
+<condition>
+<sensor guid="1382105088" luid="2" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1382105088" luid="1" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="wlaczanie wc swiatlo">
+<condition>
+<sensor guid="1399663607" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1399663607" luid="0" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="wylaczanie wc swiatlo">
+<condition>
+<sensor guid="1399663607" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1399663607" luid="0" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="wlaczanie korytarz sufit">
+<condition>
+<sensor guid="1399666522" luid="0" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1399666522" luid="0" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="wylaczanie korytarz sufit">
+<condition>
+<sensor guid="1399666522" luid="0" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1399666522" luid="0" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="wlaczanie lustra gl">
+<condition>
+<sensor guid="1399666522" luid="2" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1399753937" luid="0" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="wylaczanie lustra gl">
+<condition>
+<sensor guid="1399666522" luid="2" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1399753937" luid="0" cat="1" param="101" val="00"/>
+</action>
+</operation>
+<operation name="NEW">
+<condition>
+<sensor guid="1382105088" luid="2" cat="100" param="101" comp="equal" val="01"/>
+</condition>
+<action>
+<actor guid="1382105088" luid="4" cat="1" param="101" val="01"/>
+</action>
+</operation>
+<operation name="NEW">
+<condition>
+<sensor guid="1382105088" luid="2" cat="100" param="101" comp="equal" val="00"/>
+</condition>
+<action>
+<actor guid="1382105088" luid="4" cat="1" param="101" val="00"/>
 </action>
 </operation>
 </operations_list>

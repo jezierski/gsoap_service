@@ -29,7 +29,7 @@ using namespace std;
 
 class CApplication{
 public:
-    CApplication();
+    CApplication(vector<string> appParams);
     virtual ~CApplication();
     
     void run();
@@ -37,6 +37,9 @@ public:
 private:
     void dbConfig();
     void assignSlots();
+    vector<string> appParams;
+    
+    bool modeWithInit();
     
     CConfiguration *configuration;
     CDevicesConfig *devicesConfig;

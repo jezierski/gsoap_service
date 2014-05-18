@@ -2,10 +2,11 @@
 
 #include "homesys.h"
 
-CApplication::CApplication() {
+CApplication::CApplication(vector<string> params) {
     configuration = CConfiguration::getInstance();
     devicesConfig = CDevicesConfig::getInstance();
     log = CLog::getInstance();
+    appParams = params;
 }
 
 CApplication::~CApplication() {
@@ -18,6 +19,14 @@ void CApplication::assignSlots() {
     }
     timer->timerEvent.Connect(actionTranslator, &CActionTranslator::updateTimerStack);
     soapServer->operationLoad.Connect(actionTranslator, &CActionTranslator::loadOperations);
+}
+
+bool CApplication::modeWithInit() {
+    for (auto param : appParams) {
+        if (param == "noInit")
+            return false;
+    }
+    return true;
 }
 
 void CApplication::run() {
@@ -61,8 +70,9 @@ void CApplication::run() {
         actionTranslator->loadOperations();
 
 
-
-        deviceManager->initialize();
+        if (modeWithInit()) {
+            deviceManager->initialize();
+        }
 
         soapServer->assignDeviceManager(deviceManager);
         new thread(&CSoapServer::start, soapServer);
@@ -805,9 +815,16 @@ void CApplication::dbConfig() {
     log->success("Loading database success");
 }
 
-int main() {
+int main(int argc, char *argv[]) {
 
-    CApplication *application = new CApplication();
+    vector<string> params;
+    for (int i = 1; i < argc; ++i) {
+        string arg = argv[i];
+        params.push_back(arg);
+    }
+
+
+    CApplication *application = new CApplication(params);
 
     application->run();
 
