@@ -71,41 +71,41 @@ void COperation::loadOperations() {
             node = node->next_sibling();
         }
 
-        for (SOperation op : operations) {
-            cout << "=>OPERATION: " << endl;
-
-            for (SDeviceCondition con : op.deviceConditions) {
-                cout << "===>DEVICE CONDITIONS:" << endl;
-                cout << "param: " << (int) (con.command) << endl;
-                cout << "condi: " << (int) (con.condition) << endl;
-                cout << "guid : " << (int) (con.device.guid) << endl;
-                cout << "luid : " << (int) (con.device.luid) << endl;
-                cout << "categ: " << (int) (con.device.category) << endl;
-                for (int i = 0; i < con.params.size(); i++) {
-                    cout << "param[" << i << "]: " << (int) (con.params[i]) << endl;
-                }
-            }
-
-            for (STimeCondition con : op.timeConditions) {
-                cout << "===>TIME CONDITIONS:" << endl;
-                cout << "condi: " << (int) (con.condition) << endl;
-                cout << "value: " << (long long) (con.time) << endl;
-
-            }
-
-
-            for (SAction act : op.actions) {
-                cout << "===>ACTION:" << endl;
-                cout << "param: " << (int) (act.command) << endl;
-                cout << "guid : " << (int) (act.device.guid) << endl;
-                cout << "luid : " << (int) (act.device.luid) << endl;
-                cout << "categ: " << (int) (act.device.category) << endl;
-//                for (int i = 0; i < act.params.size(); i++) {
-//                    cout << "param[" << i << "]: " << (act.params[i]) << endl;
+//        for (SOperation op : operations) {
+//            cout << "=>OPERATION: " << endl;
+//
+//            for (SDeviceCondition con : op.deviceConditions) {
+//                cout << "===>DEVICE CONDITIONS:" << endl;
+//                cout << "param: " << (int) (con.command) << endl;
+//                cout << "condi: " << (int) (con.condition) << endl;
+//                cout << "guid : " << (int) (con.device.guid) << endl;
+//                cout << "luid : " << (int) (con.device.luid) << endl;
+//                cout << "categ: " << (int) (con.device.category) << endl;
+//                for (int i = 0; i < con.params.size(); i++) {
+//                    cout << "param[" << i << "]: " << (int) (con.params[i]) << endl;
 //                }
-            }
-
-        }
+//            }
+//
+//            for (STimeCondition con : op.timeConditions) {
+//                cout << "===>TIME CONDITIONS:" << endl;
+//                cout << "condi: " << (int) (con.condition) << endl;
+//                cout << "value: " << (long long) (con.time) << endl;
+//
+//            }
+//
+//
+//            for (SAction act : op.actions) {
+//                cout << "===>ACTION:" << endl;
+//                cout << "param: " << (int) (act.command) << endl;
+//                cout << "guid : " << (int) (act.device.guid) << endl;
+//                cout << "luid : " << (int) (act.device.luid) << endl;
+//                cout << "categ: " << (int) (act.device.category) << endl;
+////                for (int i = 0; i < act.params.size(); i++) {
+////                    cout << "param[" << i << "]: " << (act.params[i]) << endl;
+////                }
+//            }
+//
+//        }
 
 
     } catch (parse_error e) {
