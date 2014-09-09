@@ -162,18 +162,10 @@
 </chain>
 <chain>
 <action>
-<actor guid="1399666522" luid="0" cat="1" param="101" val="00"/>
+<actor guid="1399666522" luid="3" cat="1" param="101" val="01"/>
 </action>
 <reaction>
-<actor guid="1399666522" luid="1" cat="1" param="101" val="00"/>
-</reaction>
-</chain>
-<chain>
-<action>
-<actor guid="1399666522" luid="0" cat="1" param="101" val="01"/>
-</action>
-<reaction>
-<actor guid="1399666522" luid="1" cat="1" param="101" val="01"/>
+<actor guid="1401729477" luid="3" cat="1" param="101" val="01"/>
 </reaction>
 </chain>
 <chain>
@@ -190,6 +182,14 @@
 </action>
 <reaction>
 <actor guid="1399666522" luid="3" cat="1" param="101" val="00"/>
+</reaction>
+</chain>
+<chain>
+<action>
+<actor guid="1399666522" luid="3" cat="1" param="101" val="00"/>
+</action>
+<reaction>
+<actor guid="1401729477" luid="3" cat="1" param="101" val="00"/>
 </reaction>
 </chain>
 </action_chains>
