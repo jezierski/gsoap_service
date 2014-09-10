@@ -5,3 +5,6 @@ cmake_install.cmake
 homesys/CmakeFiles/
 webservice/CmakeFiles/
 nbproject/
+db/config.db
+xml/*
+
