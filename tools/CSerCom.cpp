@@ -4,31 +4,20 @@
 #include "CTimeOut.h"
 #include <iostream>
 using namespace std;
-//mutex serialBarrier;
-////////////////////////////////////////////////////////////////////////////////
-// class CSerCom
 
-//extern ofstream fileDebug;
 
 CSerCom::CSerCom() {
-    //    log = CLog::getInstance();
     m_PortFd = -1;
-    //    m_RxTout = RX_TOUT;
 }
 
 CSerCom::CSerCom(CSerCom& orig) {
-    //    log = CLog::getInstance();
     m_PortFd = orig.m_PortFd;
-    //    m_RxTout = RX_TOUT;
 }
 
 CSerCom::~CSerCom() {
     closePort();
 }
-////////////////////////////////////////////////////////////////////////
-/// Open termio library functions with private settings.
-/// \param none
-/// \return 0= ok or error code
+
 
 int CSerCom::openTermio() {
 
@@ -53,18 +42,6 @@ int CSerCom::openTermio() {
     
 }
 
-////////////////////////////////////////////////////////////////////////
-/// Open serial port with given parameter
-/// \param PortName device name as ascii char string
-/// \param Baud baudrate as long integer, if the value don't fit default is 9600 Baud
-/// \param DBits data bits 5...9, if the value don't fit default is 8 data bits
-/// \param SBits stop bist 1,2, if the value don't fit default is 2 stop bits
-/// \param Parity default is none
-///  - 0= none
-///  - 1= odd
-///  - 2= even
-/// \param Mode not used, free for futher options
-/// \return 0= ok or error code
 
 int CSerCom::openSerial(string PortName, long Baud, int DBits, int SBits, int Parity, int Mode) {
     int error = 0;
@@ -188,10 +165,7 @@ int CSerCom::openSerial(string PortName, long Baud, int DBits, int SBits, int Pa
     return error;
 }
 
-////////////////////////////////////////////////////////////////////////
-/// Close the serial port
-/// \param none
-/// \return none
+
 
 void CSerCom::closePort() {
     if (m_PortFd != -1) {
@@ -201,39 +175,6 @@ void CSerCom::closePort() {
     }
 }
 
-////////////////////////////////////////////////////////////////////////
-/// Send one byte
-/// \param Byte byte to send
-/// \return 0= ok or error code
-
-//int CSerCom::SendByte(unsigned char Byte) {
-//    if (IsOpen()) {
-//        if (write(m_PortFd, &Byte, 1) != 1) {
-//            //error = SetError(SIO_SEND_BYTE_ERR);
-//            cout << "$$ throw no.51" << endl;
-//            throw_line("Error during sending byte");
-//        }
-//    } else {
-//        //error = SetError(SIO_NOT_OPEN_ERR);
-//        cout << "$$ throw no.52" << endl;
-//        throw_line("Device's port is not open");
-//    }
-//
-//    return 0;
-//}
-//
-//int CSerCom::countBufferedBytes() {
-//
-//    int ret;
-//    ioctl(m_PortFd, FIONREAD, &ret);
-//    return ret;
-//}
-
-
-////////////////////////////////////////////////////////////////////////
-/// Receive one Byte
-/// \param timeOut timeout in milisec for receiving byte
-/// \return received byte in LSB or <0 as error code
 
 unsigned char CSerCom::receiveByte(int timeOut) {
     int rec = 0;
@@ -258,17 +199,8 @@ unsigned char CSerCom::receiveByte(int timeOut) {
     return rec;
 }
 
-/**
- * Sends buffer object to serial port
- * @param buffer
- * @return  none
- */
+
 int CSerCom::sendBuffer(CBuffer &buffer) {
-
-    if (!isOpen()) {
-        throw string("Port closed.");
-    }
-
 
     size_t len = buffer.getLength();
 
@@ -282,6 +214,7 @@ int CSerCom::sendBuffer(CBuffer &buffer) {
     }
 //    cout << endl;
 
+    flushReceiveBuffer();
     sendBuffer(tempBuf, len);
     delete[] tempBuf;
     return 0;
@@ -316,7 +249,6 @@ int CSerCom::sendBuffer(unsigned char * Buffer, int Len) {
             rest = Len - written;
 
 //        cout << "rep: " << rep << ", rest: " << rest << endl;
-//        sleep(1);
     } while (!err && rest > 0 && rep--);
 
     if (rest > 0) {
@@ -327,11 +259,6 @@ int CSerCom::sendBuffer(unsigned char * Buffer, int Len) {
 }
 
 
-
-////////////////////////////////////////////////////////////////////////
-/// Flush all data from ports receive buffer
-/// \param none
-/// \return 0= OK, <0 error code
 
 int CSerCom::flushReceiveBuffer(void) {
     if (!isOpen()) {

@@ -4,7 +4,7 @@ project(HOMESYS)
 find_package(GSOAP2)
 find_package(SQLITE3)
 
-set(CMAKE_CXX_COMPILER="distcc g++")
+set(CMAKE_CXX_COMPILER="g++-4.8")
 set(CMAKE_CXX_FLAGS "-g -Wall -std=gnu++0x")
 #add_subdirectory(webservice)
 #add_subdirectory(homesys)
@@ -55,5 +55,10 @@ webservice/soapC.cpp webservice/soaphomesysService.cpp
 )
 
 add_executable(${BINARY} ${SOURCES})
-
+#MESSAGE(GSOAP_PATH:_${GSOAP2_LIBRARY_RELEASE})
+#MESSAGE(SQLITE_PATH:_${SQLITE3_LIBRARY_RELEASE})
+#MESSAGE(GSOAP_INCLUDE:_${GSOAP2_INCLUDE_DIR})
+#MESSAGE(SQLITE_INCLUDE:_${SQLITE3_INCLUDE_DIR})
 target_link_libraries(${BINARY} ${GSOAP2_LIBRARY_RELEASE} ${SQLITE3_LIBRARY_RELEASE})
+#include_directories(${SQLITE3_INCLUDE_DIR} ${GSOAP2_INCLUDE_DIR}))
+#include_directories("/usr/include")

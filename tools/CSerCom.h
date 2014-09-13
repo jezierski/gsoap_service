@@ -31,37 +31,20 @@ public:
     CSerCom();
     CSerCom(CSerCom& orig);
     virtual ~CSerCom();
-    /// @name Intitalize  Functions
-    //@{
     int openSerial(string PortName, long Baud = 9600, int DBits = 8, int SBits = 2, int Parity = 0, int Mode = 0);
     void closePort();
 
     bool isOpen() {
         return m_PortFd != -1 ? true : false;
     };
-    //@}
     
-    /// @name Byte I/O Functions
-    //@{
-//    int SendByte(unsigned char Byte);
     unsigned char receiveByte(int timeOut = 50);
-//    int ReceiveByte(void *pRec);
-    //@}
 
-    /// @name Buffered I/O Functions
-    //@{
     int sendBuffer(CBuffer &);
     int sendBuffer(unsigned char * Buffer, int Len);
-    //int SendBuffer(vector<unsigned char>);
 
-//    int ReceiveBuffer(unsigned char * Buffer, int MaxLen);
     int flushReceiveBuffer(void);
-//    int countBufferedBytes();
-    //@}
-    /// @name privates
-    //@{
 private:
-//    CLog *log;
 
 
     int openTermio();
@@ -75,7 +58,6 @@ private:
     long m_PortFd;
     int m_RxTout;
     struct termios m_OldTio, m_ActTio;
-    //@}
 };
 
 

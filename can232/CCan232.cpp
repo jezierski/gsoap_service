@@ -183,33 +183,33 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
     CTimeOut tout;
 
     tout.SetMilliSec(50);
-   
+
     buffer = getCanFrame();
-   
+
     do {
-       
+
         dummyBuffer = getCanFrame();
-       
-        
+
+
         if (dummyBuffer.isReady()) {
-           
+
             if (buffer == dummyBuffer) {
-               
+
                 tout.SetMilliSec(50);
-       
-            }else{
-               
+
+            } else {
+
                 return buffer;
             }
         }
-                
+
     } while (!tout.IsTimeOut());
 
-    if (not buffer.isReady()){
+    if (not buffer.isReady()) {
         log->error("Requesting CAN frame timeout (50ms)");
-		buffer.clear();
+        buffer.clear();
     }
-   
+
     return buffer;
 }
 
@@ -225,8 +225,23 @@ bool CCan232::sendCanFrame(CCanBuffer &frame) {
     buf << (unsigned char) CR;
 
     try {
+        log->put(">>>SENDING");
+        string s;
+        for (unsigned int i = 0; i < buf.getLength(); i++) {
+            s += to_string((int) buf[i], true) + " ";
+        }
+        log->put(s);
+
         sendBuffer(buf);
         buf = getFrame();
+
+        s = "";
+        for (unsigned int i = 0; i < buf.getLength(); i++) {
+            s += to_string((int) buf[i], true) + " ";
+        }
+        log->put(s);
+
+
         if (buf.isReady()) {
             if (buf.getErrorCode()) {
                 log->error("Sending can frame error code: " + to_string((int) buf.getErrorCode()));
@@ -271,7 +286,7 @@ CBuffer CCan232::getFrame() {
     }
 
     buf << (unsigned char) rbyte;
-    tout.SetMilliSec(50);
+    tout.SetMilliSec(100);
     while (!tout.IsTimeOut()) {
         buf << (unsigned char) receiveByte();
         //                cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
@@ -280,6 +295,13 @@ CBuffer CCan232::getFrame() {
             return buf;
         }
     };
+    log->put("incomplete received buffer: ");
+    string s;
+    for (unsigned int i = 0; i < buf.getLength(); i++) {
+        s += to_string((int) buf[i], true) + " ";
+    }
+    log->put(s);
+
     buf.clear();
     return buf;
 }
@@ -294,9 +316,22 @@ CCanBuffer CCan232::getCanFrame() {
     buf << (unsigned char) CR;
 
     try {
+        log->put("<<<REQUESTING");
+        string s;
+        for (unsigned int i = 0; i < buf.getLength(); i++) {
+            s += to_string((int) buf[i], true) + " ";
+        }
+        log->put(s);
 
         sendBuffer(buf);
         buf = getFrame();
+
+        s = "";
+        for (unsigned int i = 0; i < buf.getLength(); i++) {
+            s += to_string((int) buf[i], true) + " ";
+        }
+        log->put(s);
+
         if (buf.isReady()) {
             if (!buf.isNoData()) {
                 canBuffer = createCanBuffer(buf);

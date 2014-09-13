@@ -15,7 +15,7 @@ homesys
 +lista akcji zamiast pojedynczej
 dodac timer miedzy odczytem stanu a wykonaniem akcji
 automatyczny start aplikacji
-
+dodac CRC dla ramek miedzy can232 a aplikacja
 
 
 drivers
