@@ -56,9 +56,10 @@ public:
     template <class ret>
     CanBuffers broadcastRequest(CCanBuffer &frame, ret(CCanBuffer::*ackFunction)()) {
         lock_guard<mutex> lock(barrier);
-        sendCanFrame(frame);
-        CCanBuffer buffer, sendBuffer;
         CanBuffers buffers;
+        if (not sendCanFrame(frame))
+            return buffers;
+        CCanBuffer buffer, sendBuffer;
         CTimeOut tout;
         tout.SetMilliSec(TOUT_BROADCAST);
         while (!tout.IsTimeOut()) {

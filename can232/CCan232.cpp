@@ -247,6 +247,9 @@ bool CCan232::sendCanFrame(CCanBuffer &frame) {
                 log->error("Sending can frame error code: " + to_string((int) buf.getErrorCode()));
                 return false;
             }
+        }else{
+            log->warning("Sending frame problem has occurred");
+            return false;
         }
 
     } catch (string e) {
@@ -337,6 +340,8 @@ CCanBuffer CCan232::getCanFrame() {
                 canBuffer = createCanBuffer(buf);
                 canBuffer.setReady();
             }
+        }else{
+            log->warning("Requesting CAN frame problem has occurred");
         }
 
 
