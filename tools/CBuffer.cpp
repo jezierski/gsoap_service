@@ -220,7 +220,7 @@ bool CBuffer::isACK(){
 }
 
 bool CBuffer::isNoData(){
-    return (this->operator [](1) == '3'); 
+    return (this->operator [](1) == '3' ||  this->operator [](1) == '4'); 
 }
 
 unsigned char CBuffer::getErrorCode(){
