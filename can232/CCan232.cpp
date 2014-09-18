@@ -312,6 +312,7 @@ CBuffer CCan232::getFrame() {
 CCanBuffer CCan232::getCanFrame() {
     CBuffer buf;
     CCanBuffer canBuffer;
+    
 
     buf << (unsigned char) HEADER;
     buf << (unsigned char) 4;
@@ -329,6 +330,8 @@ CCanBuffer CCan232::getCanFrame() {
         sendBuffer(buf);
         buf = getFrame();
 
+       
+        
         s = "";
         for (unsigned int i = 0; i < buf.getLength(); i++) {
             s += to_string((int) buf[i], true) + " ";
