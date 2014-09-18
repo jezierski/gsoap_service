@@ -182,8 +182,7 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
     CCanBuffer buffer, dummyBuffer;
     CTimeOut tout;
 
-//    tout.SetMilliSec(50);
-    tout.SetMilliSec(500);
+    tout.SetMilliSec(50);
 
     buffer = getCanFrame();
 
@@ -196,8 +195,7 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
 
             if (buffer == dummyBuffer) {
 
-                tout.SetMilliSec(500);
-//                tout.SetMilliSec(50);
+                tout.SetMilliSec(50);
 
             } else {
 
