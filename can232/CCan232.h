@@ -115,6 +115,9 @@ CCanBuffer getCanFrame();
     CConfiguration *config;
     CLog *log;
     mutex barrier;
+    
+    
+    void getTestFrame();
 };
 
 #endif	/* CCAN232_H */

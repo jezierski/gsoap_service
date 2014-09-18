@@ -247,7 +247,7 @@ bool CCan232::sendCanFrame(CCanBuffer &frame) {
                 log->error("Sending can frame error code: " + to_string((int) buf.getErrorCode()));
                 return false;
             }
-        }else{
+        } else {
             log->warning("Sending frame problem has occurred");
             return false;
         }
@@ -275,6 +275,30 @@ unsigned char CCan232::checkCRC(CBuffer& buffer) {
 
     //    cout << "crc: " << (int) crc << endl;
     return (0 == crc);
+}
+
+void CCan232::getTestFrame() {
+    unsigned char rbyte;
+    CBuffer buf;
+
+
+    buf << (unsigned char) HEADER;
+    buf << (unsigned char) 4;
+    buf << (unsigned char) 'P';
+    buf << (unsigned char) CR;
+
+    sendBuffer(buf);
+    bool all = false;
+    do {
+        rbyte = receiveByte();
+        cout << rbyte;
+        if (rbyte == ']') {
+            rbyte = receiveByte();
+            cout << rbyte;
+            if (rbyte == 0xf9)
+                all = true;
+        }
+    } while (not all);
 }
 
 CBuffer CCan232::getFrame() {
@@ -312,7 +336,8 @@ CBuffer CCan232::getFrame() {
 CCanBuffer CCan232::getCanFrame() {
     CBuffer buf;
     CCanBuffer canBuffer;
-    
+
+    getTestFrame();
 
     buf << (unsigned char) HEADER;
     buf << (unsigned char) 4;
@@ -330,8 +355,8 @@ CCanBuffer CCan232::getCanFrame() {
         sendBuffer(buf);
         buf = getFrame();
 
-       
-        
+
+
         s = "";
         for (unsigned int i = 0; i < buf.getLength(); i++) {
             s += to_string((int) buf[i], true) + " ";
@@ -343,7 +368,7 @@ CCanBuffer CCan232::getCanFrame() {
                 canBuffer = createCanBuffer(buf);
                 canBuffer.setReady();
             }
-        }else{
+        } else {
             log->warning("Requesting CAN frame problem has occurred");
         }
 
