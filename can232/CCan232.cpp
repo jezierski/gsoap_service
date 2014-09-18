@@ -339,7 +339,7 @@ CCanBuffer CCan232::getCanFrame() {
     CBuffer buf;
     CCanBuffer canBuffer;
 
-    getTestFrame();
+//    getTestFrame();
 
     buf << (unsigned char) HEADER;
     buf << (unsigned char) 4;
