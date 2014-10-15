@@ -64,7 +64,7 @@ void CActionTranslator::updateDeviceState(SDeviceDescription device, Command com
 
 }
 
-void CActionTranslator::updateTimerStack(long long timer) {
+void CActionTranslator::updateTimerStack(LONG64 timer) {
     lock_guard<mutex> lock(timerMutex);
     timerStack.push_back(timer);
 }
@@ -102,7 +102,7 @@ bool CActionTranslator::compareSDStoSDC(SDeviceCondition condition) {
 }
 
 bool CActionTranslator::compareTime(STimeCondition condition) {
-    long long time = getCurrentDayTime();
+    LONG64 time = getCurrentDayTime();
     switch (condition.condition) {
         case ECondition::Equal:
             return time == condition.time;
@@ -128,8 +128,8 @@ bool CActionTranslator::compareParams(ECondition condition, Params params1, Para
     if (params1.size() == 0)
         return false;
 
-    long long param1 = paramsToLL(params1);
-    long long param2 = paramsToLL(params2);
+    LONG64 param1 = paramsToLL(params1);
+    LONG64 param2 = paramsToLL(params2);
 
     //    cout << "device param[0]: " << (int) params1[0] << ", xml param[0]: " << (int) params2[0] << endl;
     switch (condition) {
@@ -175,9 +175,9 @@ DeviceState CActionTranslator::popDeviceState() {
     return dev;
 }
 
-long long CActionTranslator::popTimerSet() {
+LONG64 CActionTranslator::popTimerSet() {
     lock_guard<mutex> lock2(timerMutex);
-    long long timerSet = timerStack.front();
+    LONG64 timerSet = timerStack.front();
     timerStack.pop_front();
     return timerSet;
 
@@ -187,7 +187,7 @@ void CActionTranslator::translateActions() {
 
     while (1) {
         DeviceState deviceState;
-        //        long long timerSet = 0;
+        //        LONG64 timerSet = 0;
         if (deviceStateStack.size()) {
             //            cout<<"\n\n\n#########  STACK SIZE: "<<deviceStateStack.size()<<endl;
             deviceState = popDeviceState();

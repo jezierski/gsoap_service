@@ -23,14 +23,14 @@ public:
     //    CParamsConverter(const CParamsConverter& orig);
     virtual ~CParamsConverter();
 
-    Blob use(int category, int command, long long  params);
+    Blob use(int category, int command, LONG64  params);
 
 
     static CParamsConverter * getInstance();
 
 private:
     typedef
-    Blob(CParamsConverter::*convert)(long long);
+    Blob(CParamsConverter::*convert)(LONG64);
 //    map<int, convert> commandsMap;
     map<int, map<int, convert>> convertionsMap;
 //    map<int, convert> commandsMap;
@@ -38,10 +38,10 @@ private:
 
     void initConvertionsMap();
 
-    Blob singleRGBvalueSet(long long params);
-    Blob allRGBvaluesSet(long long params);
-    Blob setPWM(long long params);
-    Blob changePWM(long long params);
+    Blob singleRGBvalueSet(LONG64 params);
+    Blob allRGBvaluesSet(LONG64 params);
+    Blob setPWM(LONG64 params);
+    Blob changePWM(LONG64 params);
     
     static CParamsConverter *instance;
 };

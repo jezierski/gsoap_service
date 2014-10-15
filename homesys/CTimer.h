@@ -26,12 +26,12 @@ public:
     virtual ~CTimer();
     
     void run();
-    void addTimerSet(long long set);
+    void addTimerSet(LONG64 set);
     void resetTimerSet();
     
-    Signal1<long long> timerEvent;
+    Signal1<LONG64> timerEvent;
 private:
-    list<long long> timerSets;
+    list<LONG64> timerSets;
 
 };
 

@@ -815,6 +815,96 @@ void CApplication::dbConfig() {
     log->success("Loading database success");
 }
 
+int getProcIdByName(string procName)
+{
+    int pid = -1;
+
+    // Open the /proc directory
+    DIR *dp = opendir("/proc");
+    if (dp != NULL)
+    {
+        // Enumerate all entries in directory until process found
+        struct dirent *dirp;
+        while (pid < 0 && (dirp = readdir(dp)))
+        {
+            // Skip non-numeric entries
+            int id = atoi(dirp->d_name);
+            if (id > 0)
+            {
+                // Read contents of virtual /proc/{pid}/cmdline file
+                string cmdPath = string("/proc/") + dirp->d_name + "/cmdline";
+                ifstream cmdFile(cmdPath.c_str());
+                string cmdLine;
+                getline(cmdFile, cmdLine);
+                if (!cmdLine.empty())
+                {
+                    // Keep first cmdline item which contains the program path
+                    size_t pos = cmdLine.find('\0');
+                    if (pos != string::npos)
+                        cmdLine = cmdLine.substr(0, pos);
+                    // Keep program name only, removing the path
+                    pos = cmdLine.rfind('/');
+                    if (pos != string::npos)
+                        cmdLine = cmdLine.substr(pos + 1);
+                    // Compare against requested process name
+                    if (procName == cmdLine)
+                        pid = id;
+                }
+            }
+        }
+    }
+
+    closedir(dp);
+
+    return pid;
+}
+
+void checkAppInstance() {
+    int runningPID = getProcIdByName("homik");
+        
+    pid_t pid = getpid();
+    string spid;
+    fstream file;
+    file.open("homik.pid", ios_base::out | ios_base::in);
+    if (file.is_open()) {
+        getline(file, spid);
+        file.close();
+     
+        if (spid == to_string(runningPID)) {
+            cout << "Process already running, quit..." << endl;
+            exit(1);
+        } else {
+            unlink("homik.pid");
+            file.clear();
+            file.open("homik.pid", ios_base::out);
+            file << pid;
+            file.close();
+        }
+    } else {
+        file.clear();
+        file.open("homik.pid", ios_base::out);
+        file << pid;
+        file.close();
+    }
+}
+
+
+void exitFunction() {
+    pid_t pid = getpid();
+    string spid;
+    fstream file;
+    file.open("homik.pid", ios_base::in);
+    if (file.is_open()) {
+        getline(file, spid);
+        file.close();
+    }
+    if (spid == to_string(pid)) {
+        unlink("homik.pid");
+    }
+
+}
+
+
 int main(int argc, char *argv[]) {
 
     vector<string> params;
@@ -823,6 +913,8 @@ int main(int argc, char *argv[]) {
         params.push_back(arg);
     }
 
+    atexit(exitFunction);
+    checkAppInstance();
 
     CApplication *application = new CApplication(params);
 

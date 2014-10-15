@@ -287,7 +287,7 @@
     <service name="homesys">
         <documentation>gSOAP 2.7.9k generated service definition</documentation>
         <port name="homesys" binding="tns:homesys">
-            <SOAP:address location="http://192.168.1.39:1234"/>
+            <SOAP:address location="http://192.168.1.11:1234"/>
         </port>
     </service>
 

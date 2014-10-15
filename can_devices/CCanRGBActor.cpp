@@ -91,7 +91,7 @@ Blob CCanRGBActor::getSpeed(SDeviceDescription device, Blob params) {
     CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_GET_SPEED);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -100,7 +100,7 @@ Blob CCanRGBActor::getSpeed(SDeviceDescription device, Blob params) {
     if (buffer.getLength() > 0) {
         response = "OK";
         values.push_back(buffer[OFFSET_DATA]);
-        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<LONG64>>(values);
         log->info("Device " + to_string(device) + " SPEED: " + to_string(values[0]) );
     }else{
         response = "RGBActor->getSpeed->Receiving CAN frame failed";
@@ -132,7 +132,7 @@ Blob CCanRGBActor::getRed(SDeviceDescription device, Blob params) {
     CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_GET_CHANNEL_RED);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -140,11 +140,11 @@ Blob CCanRGBActor::getRed(SDeviceDescription device, Blob params) {
     buffer = getProtocol()->request(buffer);
     if (buffer.getLength() > 0) {
         response = "OK";
-        long long val = buffer[OFFSET_DATA] & 0x0f;
+        LONG64 val = buffer[OFFSET_DATA] & 0x0f;
         val <<= 8;
         val |= buffer[OFFSET_DATA + 1];
         values.push_back(val);
-        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<LONG64>>(values);
         log->info("Device " + to_string(device) + " CHANNEL_RED: " + to_string(values[0]) );
     }else{
         response = "RGBActor->getRed->Receiving CAN frame failed";
@@ -158,7 +158,7 @@ Blob CCanRGBActor::getGreen(SDeviceDescription device, Blob params) {
     CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_GET_CHANNEL_GREEN);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -166,11 +166,11 @@ Blob CCanRGBActor::getGreen(SDeviceDescription device, Blob params) {
     buffer = getProtocol()->request(buffer);
     if (buffer.getLength() > 0) {
         response = "OK";
-        long long val = buffer[OFFSET_DATA] & 0x0f;
+        LONG64 val = buffer[OFFSET_DATA] & 0x0f;
         val <<= 8;
         val |= buffer[OFFSET_DATA + 1];
         values.push_back(val);
-        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<LONG64>>(values);
         log->info("Device " + to_string(device) + " CHANNEL_GREEN: " + to_string(values[0]) );
     }else{
         response = "RGBActor->getGreen->Receiving CAN frame failed";
@@ -184,7 +184,7 @@ Blob CCanRGBActor::getBlue(SDeviceDescription device, Blob params) {
     CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_GET_CHANNEL_BLUE);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -192,11 +192,11 @@ Blob CCanRGBActor::getBlue(SDeviceDescription device, Blob params) {
     buffer = getProtocol()->request(buffer);
     if (buffer.getLength() > 0) {
         response = "OK";
-        long long val = buffer[OFFSET_DATA] & 0x0f;
+        LONG64 val = buffer[OFFSET_DATA] & 0x0f;
         val <<= 8;
         val |= buffer[OFFSET_DATA + 1];
         values.push_back(val);
-        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<LONG64>>(values);
         log->info("Device " + to_string(device) + " CHANNEL_BLUE: " + to_string(values[0]) );
     }else{
         response = "RGBActor->getBlue->Receiving CAN frame failed";
@@ -210,7 +210,7 @@ Blob CCanRGBActor::getMode(SDeviceDescription device, Blob params) {
     CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_GET_MODE);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -219,7 +219,7 @@ Blob CCanRGBActor::getMode(SDeviceDescription device, Blob params) {
     if (buffer.getLength() > 0) {
         response = "OK";
         values.push_back(buffer[OFFSET_DATA]);
-        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<LONG64>>(values);
         log->info("Device " + to_string(device) + " MODE: " + to_string(values[0]) );
     }else{
         response = "RGBActor->getMode->Receiving CAN frame failed";
@@ -292,7 +292,7 @@ Blob CCanRGBActor::getRGB(SDeviceDescription device, Blob params) {
      CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_GET_CHANNEL_ALL);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -300,7 +300,7 @@ Blob CCanRGBActor::getRGB(SDeviceDescription device, Blob params) {
     buffer = getProtocol()->request(buffer);
     if (buffer.getLength() > 0) {
         response = "OK";
-        long long val = buffer[OFFSET_DATA] & 0x0f;
+        LONG64 val = buffer[OFFSET_DATA] & 0x0f;
         val <<= 8;
         val |= buffer[OFFSET_DATA + 1];
         values.push_back(val);  //RED
@@ -314,7 +314,7 @@ Blob CCanRGBActor::getRGB(SDeviceDescription device, Blob params) {
         val |= buffer[OFFSET_DATA + 4];
         values.push_back(val);  //BLUE
         
-        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<LONG64>>(values);
         log->info("Device " + to_string(device) + " CHANNEL_ALL R: " + to_string(values[0]) + ", G: " +  to_string(values[1]) + ", B: " +to_string(values[2]));
     }else{
         response = "RGBActor->getRGB->Receiving CAN frame failed";

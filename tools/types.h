@@ -32,6 +32,8 @@ using namespace std;
 
 
 
+typedef int64_t LONG64;
+
 typedef struct DeviceDescriptor {
     unsigned int guid = 0;
     unsigned char luid = 0;
@@ -96,7 +98,7 @@ typedef struct {
 
 typedef struct {
     ECondition condition;
-    long long time;
+    LONG64 time;
 } STimeCondition;
 
 typedef struct {

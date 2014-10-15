@@ -89,7 +89,7 @@ void COperation::loadOperations() {
 //            for (STimeCondition con : op.timeConditions) {
 //                cout << "===>TIME CONDITIONS:" << endl;
 //                cout << "condi: " << (int) (con.condition) << endl;
-//                cout << "value: " << (long long) (con.time) << endl;
+//                cout << "value: " << (LONG64) (con.time) << endl;
 //
 //            }
 //
@@ -253,7 +253,7 @@ void COperation::parseParams(string input, Params &params) {
     if (len % 2 || len > 10) {
         throw string("VALUE wrong format");
     }
-    long long nmb = fromString<long long>(input, 1);
+    LONG64 nmb = fromString<LONG64>(input, 1);
     for (int i = 0; i < len / 2; i++) {
         params.push_back((nmb >> (8 * i)) & 0xff);
     }
@@ -347,12 +347,12 @@ void COperation::parseParams(string value, SDeviceCondition& condition) {
     condition.params = params;
 }
 
-//void COperation::parseParams(string value, long long& time){
+//void COperation::parseParams(string value, LONG64& time){
 //    int len = input.length();
 //    if (len % 2 || len > 10) {
 //        throw string("VALUE wrong format");
 //    }
-//    long long nmb = fromString<long long>(input, 1);
+//    LONG64 nmb = fromString<LONG64>(input, 1);
 //    for (int i = len / 2; i > 0; i--) {
 //        params.push_back((nmb >> (8 * (i - 1))) & 0xff);
 //    }
@@ -375,7 +375,7 @@ void COperation::parseCondition(string value, STimeCondition& condition) {
 }
 
 void COperation::parseParams(string value, STimeCondition& condition) {
-    long long param = fromString<long long>(value);
+    LONG64 param = fromString<LONG64>(value);
     if (param != 0) {
         condition.time = param;
     } else {

@@ -93,17 +93,17 @@ inline string to_string(Params params) {
     return output;
 }
 
-inline long long getCurrentDayTime() {
+inline int64_t getCurrentDayTime() {
     time_t rawtime;
     struct tm * timeinfo;
     time(&rawtime);
     timeinfo = localtime(&rawtime);
-    long long secs = timeinfo->tm_hour * 3600 + timeinfo->tm_min * 60 + timeinfo->tm_sec;
+    int64_t secs = timeinfo->tm_hour * 3600 + timeinfo->tm_min * 60 + timeinfo->tm_sec;
     return secs;
 }
 
-inline long long paramsToLL(Params params) {
-    long long param = 0;
+inline int64_t paramsToLL(Params params) {
+    int64_t param = 0;
     for (size_t i = params.size(); i > 0; i--) {
         param |= params[i - 1];
         param <<= 8;
@@ -111,7 +111,7 @@ inline long long paramsToLL(Params params) {
     return param;
 }
 
-inline string convertTime(long long rawTimeMillis, string format) {
+inline string convertTime(int64_t rawTimeMillis, string format) {
     time_t timeDate = (time_t) (rawTimeMillis / 1000);
 
     struct tm * dateinfo;
@@ -126,10 +126,10 @@ inline string convertTime(long long rawTimeMillis, string format) {
     return strtime;
 }
 
-inline long long getCurrentTime() {
+inline int64_t getCurrentTime() {
     struct timeval time;
     gettimeofday(&time, NULL);
-    return (unsigned long long) time.tv_sec * 1000 + time.tv_usec / 1000;
+    return (unsigned int64_t) time.tv_sec * 1000 + time.tv_usec / 1000;
 }
 
 inline int generateGUID(){

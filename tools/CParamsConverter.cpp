@@ -40,14 +40,14 @@ void CParamsConverter::initConvertionsMap() {
     convertionsMap[static_cast<int> (EDeviceCategory::A_PWM_DRIVER)][ACTION_PWM_DOWN_ALL] = &CParamsConverter::changePWM;
 }
 
-Blob CParamsConverter::singleRGBvalueSet(long long params) {
+Blob CParamsConverter::singleRGBvalueSet(LONG64 params) {
     Blob b;
     unsigned int param = static_cast<unsigned int>(params);
     b[BLOB_RGB_CHANNEL].put<unsigned int>(param);
     return b;
 }
 
-Blob CParamsConverter::allRGBvaluesSet(long long params) {
+Blob CParamsConverter::allRGBvaluesSet(LONG64 params) {
     Blob b;
     vector<unsigned int > rgbVals;
     rgbVals.push_back(static_cast<unsigned int> ((params >> 24) & 0xfff));
@@ -58,7 +58,7 @@ Blob CParamsConverter::allRGBvaluesSet(long long params) {
     return b;
 }
 
-Blob CParamsConverter::setPWM(long long params) {
+Blob CParamsConverter::setPWM(LONG64 params) {
     Blob b;
     unsigned char param = static_cast<unsigned char>(params);
     b[BLOB_PWM_VALUE].put<unsigned char>(param);
@@ -66,14 +66,14 @@ Blob CParamsConverter::setPWM(long long params) {
 }
 
 
-Blob CParamsConverter::changePWM(long long params) {
+Blob CParamsConverter::changePWM(LONG64 params) {
     Blob b;
     unsigned char param = static_cast<unsigned char>(params);
     b[BLOB_PWM_CHANGE].put<unsigned char>(param);
     return b;
 }
 
-Blob CParamsConverter::use(int category, int command, long long params) {
+Blob CParamsConverter::use(int category, int command, LONG64 params) {
     if (convertionsMap.find(category) != convertionsMap.end()) {
         if (convertionsMap[category].find(command) != convertionsMap[category].end()) {
             return (this->*convertionsMap[category][command])(params);

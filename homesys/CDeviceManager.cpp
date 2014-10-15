@@ -155,7 +155,7 @@ Blob CDeviceManager::invokeRemoteAction(SDeviceDescription device, Command comma
             categoryDevice->executeAction(action);
         }
     }
-
+    
     return returnVal;
 }
 

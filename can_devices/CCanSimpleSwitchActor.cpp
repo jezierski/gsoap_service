@@ -58,7 +58,7 @@ Blob CCanSimpleSwitchActor::getActorStatus(SDeviceDescription device, Blob param
     CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_READ_ACTOR);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -67,7 +67,7 @@ Blob CCanSimpleSwitchActor::getActorStatus(SDeviceDescription device, Blob param
     if (buffer.getLength() > 0) {
         response = "OK";
         values.push_back(buffer[OFFSET_DATA]);
-        b[BLOB_RESPONSE_INT_VALUES].put<vector<long long>>(values);
+        b[BLOB_RESPONSE_INT_VALUES].put<vector<LONG64>>(values);
         log->info("Device " + to_string(device) + " OUTPUT STATE: " + to_string(values[0]) );
     }else{
         response = "SimpleSwitchActor->getActorStatus->Receiving CAN frame failed";

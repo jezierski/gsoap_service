@@ -17,10 +17,10 @@ CTimer::~CTimer() {
 }
 
 void CTimer::run() {
-    long long timer;
+    LONG64 timer;
     while(1){
         timer = getCurrentDayTime();
-        for (long long time : timerSets){
+        for (LONG64 time : timerSets){
             if (time == timer){
                 timerEvent(time);
             }
@@ -29,7 +29,7 @@ void CTimer::run() {
     }
 }
 
-void CTimer::addTimerSet(long long set) {
+void CTimer::addTimerSet(LONG64 set) {
     timerSets.push_back(set);
     timerSets.sort();
 }

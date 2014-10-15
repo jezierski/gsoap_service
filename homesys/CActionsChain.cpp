@@ -129,8 +129,8 @@ bool CActionsChain::isChainExist(SAction& action) {
 }
 
 bool CActionsChain::compareParams(Blob param1, Blob param2) {
-    long long p1 = paramsToLL(param1[BLOB_ACTION_PARAMETER].get<Params>());
-    long long p2 = paramsToLL(param2[BLOB_ACTION_PARAMETER].get<Params>());
+    LONG64 p1 = paramsToLL(param1[BLOB_ACTION_PARAMETER].get<Params>());
+    LONG64 p2 = paramsToLL(param2[BLOB_ACTION_PARAMETER].get<Params>());
     return p1 == p2;
 }
 
@@ -278,7 +278,7 @@ void CActionsChain::parseParams(string input, Params &params) {
     if (len % 2 || len > 10) {
         throw string("VALUE wrong format");
     }
-    long long nmb = fromString<long long>(input, 1);
+    LONG64 nmb = fromString<LONG64>(input, 1);
     for (int i = len / 2; i > 0; i--) {
         params.push_back((nmb >> (8 * (i - 1))) & 0xff);
     }

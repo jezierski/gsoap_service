@@ -4,12 +4,12 @@ project(HOMESYS)
 find_package(GSOAP2)
 find_package(SQLITE3)
 
-set(CMAKE_CXX_COMPILER="g++-4.8")
+set(CMAKE_CXX_COMPILER="g++")
 set(CMAKE_CXX_FLAGS "-g -Wall -std=gnu++0x")
 #add_subdirectory(webservice)
 #add_subdirectory(homesys)
 
-set (BINARY build/homesys)
+set (BINARY build/homik)
 
 set (SOURCES 
 

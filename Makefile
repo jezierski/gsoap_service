@@ -99,24 +99,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named build/homesys
+# Target rules for targets named build/homik
 
 # Build rule for target.
-build/homesys: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 build/homesys
-.PHONY : build/homesys
+build/homik: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 build/homik
+.PHONY : build/homik
 
 # fast build rule for target.
-build/homesys/fast:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/build
-.PHONY : build/homesys/fast
+build/homik/fast:
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/build
+.PHONY : build/homik/fast
 
 can232/CCan232.o: can232/CCan232.cpp.o
 .PHONY : can232/CCan232.o
 
 # target to build an object file
 can232/CCan232.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can232/CCan232.cpp.o
 .PHONY : can232/CCan232.cpp.o
 
 can232/CCan232.i: can232/CCan232.cpp.i
@@ -124,7 +124,7 @@ can232/CCan232.i: can232/CCan232.cpp.i
 
 # target to preprocess a source file
 can232/CCan232.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can232/CCan232.cpp.i
 .PHONY : can232/CCan232.cpp.i
 
 can232/CCan232.s: can232/CCan232.cpp.s
@@ -132,7 +132,7 @@ can232/CCan232.s: can232/CCan232.cpp.s
 
 # target to generate assembly for a file
 can232/CCan232.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can232/CCan232.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can232/CCan232.cpp.s
 .PHONY : can232/CCan232.cpp.s
 
 can_devices/CCanPWMActor.o: can_devices/CCanPWMActor.cpp.o
@@ -140,7 +140,7 @@ can_devices/CCanPWMActor.o: can_devices/CCanPWMActor.cpp.o
 
 # target to build an object file
 can_devices/CCanPWMActor.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanPWMActor.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanPWMActor.cpp.o
 .PHONY : can_devices/CCanPWMActor.cpp.o
 
 can_devices/CCanPWMActor.i: can_devices/CCanPWMActor.cpp.i
@@ -148,7 +148,7 @@ can_devices/CCanPWMActor.i: can_devices/CCanPWMActor.cpp.i
 
 # target to preprocess a source file
 can_devices/CCanPWMActor.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanPWMActor.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanPWMActor.cpp.i
 .PHONY : can_devices/CCanPWMActor.cpp.i
 
 can_devices/CCanPWMActor.s: can_devices/CCanPWMActor.cpp.s
@@ -156,7 +156,7 @@ can_devices/CCanPWMActor.s: can_devices/CCanPWMActor.cpp.s
 
 # target to generate assembly for a file
 can_devices/CCanPWMActor.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanPWMActor.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanPWMActor.cpp.s
 .PHONY : can_devices/CCanPWMActor.cpp.s
 
 can_devices/CCanRGBActor.o: can_devices/CCanRGBActor.cpp.o
@@ -164,7 +164,7 @@ can_devices/CCanRGBActor.o: can_devices/CCanRGBActor.cpp.o
 
 # target to build an object file
 can_devices/CCanRGBActor.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanRGBActor.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanRGBActor.cpp.o
 .PHONY : can_devices/CCanRGBActor.cpp.o
 
 can_devices/CCanRGBActor.i: can_devices/CCanRGBActor.cpp.i
@@ -172,7 +172,7 @@ can_devices/CCanRGBActor.i: can_devices/CCanRGBActor.cpp.i
 
 # target to preprocess a source file
 can_devices/CCanRGBActor.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanRGBActor.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanRGBActor.cpp.i
 .PHONY : can_devices/CCanRGBActor.cpp.i
 
 can_devices/CCanRGBActor.s: can_devices/CCanRGBActor.cpp.s
@@ -180,7 +180,7 @@ can_devices/CCanRGBActor.s: can_devices/CCanRGBActor.cpp.s
 
 # target to generate assembly for a file
 can_devices/CCanRGBActor.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanRGBActor.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanRGBActor.cpp.s
 .PHONY : can_devices/CCanRGBActor.cpp.s
 
 can_devices/CCanSimpleSwitchActor.o: can_devices/CCanSimpleSwitchActor.cpp.o
@@ -188,7 +188,7 @@ can_devices/CCanSimpleSwitchActor.o: can_devices/CCanSimpleSwitchActor.cpp.o
 
 # target to build an object file
 can_devices/CCanSimpleSwitchActor.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanSimpleSwitchActor.cpp.o
 .PHONY : can_devices/CCanSimpleSwitchActor.cpp.o
 
 can_devices/CCanSimpleSwitchActor.i: can_devices/CCanSimpleSwitchActor.cpp.i
@@ -196,7 +196,7 @@ can_devices/CCanSimpleSwitchActor.i: can_devices/CCanSimpleSwitchActor.cpp.i
 
 # target to preprocess a source file
 can_devices/CCanSimpleSwitchActor.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanSimpleSwitchActor.cpp.i
 .PHONY : can_devices/CCanSimpleSwitchActor.cpp.i
 
 can_devices/CCanSimpleSwitchActor.s: can_devices/CCanSimpleSwitchActor.cpp.s
@@ -204,7 +204,7 @@ can_devices/CCanSimpleSwitchActor.s: can_devices/CCanSimpleSwitchActor.cpp.s
 
 # target to generate assembly for a file
 can_devices/CCanSimpleSwitchActor.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchActor.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanSimpleSwitchActor.cpp.s
 .PHONY : can_devices/CCanSimpleSwitchActor.cpp.s
 
 can_devices/CCanSimpleSwitchSensor.o: can_devices/CCanSimpleSwitchSensor.cpp.o
@@ -212,7 +212,7 @@ can_devices/CCanSimpleSwitchSensor.o: can_devices/CCanSimpleSwitchSensor.cpp.o
 
 # target to build an object file
 can_devices/CCanSimpleSwitchSensor.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanSimpleSwitchSensor.cpp.o
 .PHONY : can_devices/CCanSimpleSwitchSensor.cpp.o
 
 can_devices/CCanSimpleSwitchSensor.i: can_devices/CCanSimpleSwitchSensor.cpp.i
@@ -220,7 +220,7 @@ can_devices/CCanSimpleSwitchSensor.i: can_devices/CCanSimpleSwitchSensor.cpp.i
 
 # target to preprocess a source file
 can_devices/CCanSimpleSwitchSensor.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanSimpleSwitchSensor.cpp.i
 .PHONY : can_devices/CCanSimpleSwitchSensor.cpp.i
 
 can_devices/CCanSimpleSwitchSensor.s: can_devices/CCanSimpleSwitchSensor.cpp.s
@@ -228,7 +228,7 @@ can_devices/CCanSimpleSwitchSensor.s: can_devices/CCanSimpleSwitchSensor.cpp.s
 
 # target to generate assembly for a file
 can_devices/CCanSimpleSwitchSensor.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/can_devices/CCanSimpleSwitchSensor.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/can_devices/CCanSimpleSwitchSensor.cpp.s
 .PHONY : can_devices/CCanSimpleSwitchSensor.cpp.s
 
 homesys/CActionTranslator.o: homesys/CActionTranslator.cpp.o
@@ -236,7 +236,7 @@ homesys/CActionTranslator.o: homesys/CActionTranslator.cpp.o
 
 # target to build an object file
 homesys/CActionTranslator.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CActionTranslator.cpp.o
 .PHONY : homesys/CActionTranslator.cpp.o
 
 homesys/CActionTranslator.i: homesys/CActionTranslator.cpp.i
@@ -244,7 +244,7 @@ homesys/CActionTranslator.i: homesys/CActionTranslator.cpp.i
 
 # target to preprocess a source file
 homesys/CActionTranslator.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CActionTranslator.cpp.i
 .PHONY : homesys/CActionTranslator.cpp.i
 
 homesys/CActionTranslator.s: homesys/CActionTranslator.cpp.s
@@ -252,7 +252,7 @@ homesys/CActionTranslator.s: homesys/CActionTranslator.cpp.s
 
 # target to generate assembly for a file
 homesys/CActionTranslator.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionTranslator.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CActionTranslator.cpp.s
 .PHONY : homesys/CActionTranslator.cpp.s
 
 homesys/CActionsChain.o: homesys/CActionsChain.cpp.o
@@ -260,7 +260,7 @@ homesys/CActionsChain.o: homesys/CActionsChain.cpp.o
 
 # target to build an object file
 homesys/CActionsChain.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionsChain.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CActionsChain.cpp.o
 .PHONY : homesys/CActionsChain.cpp.o
 
 homesys/CActionsChain.i: homesys/CActionsChain.cpp.i
@@ -268,7 +268,7 @@ homesys/CActionsChain.i: homesys/CActionsChain.cpp.i
 
 # target to preprocess a source file
 homesys/CActionsChain.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionsChain.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CActionsChain.cpp.i
 .PHONY : homesys/CActionsChain.cpp.i
 
 homesys/CActionsChain.s: homesys/CActionsChain.cpp.s
@@ -276,7 +276,7 @@ homesys/CActionsChain.s: homesys/CActionsChain.cpp.s
 
 # target to generate assembly for a file
 homesys/CActionsChain.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CActionsChain.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CActionsChain.cpp.s
 .PHONY : homesys/CActionsChain.cpp.s
 
 homesys/CDevice.o: homesys/CDevice.cpp.o
@@ -284,7 +284,7 @@ homesys/CDevice.o: homesys/CDevice.cpp.o
 
 # target to build an object file
 homesys/CDevice.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CDevice.cpp.o
 .PHONY : homesys/CDevice.cpp.o
 
 homesys/CDevice.i: homesys/CDevice.cpp.i
@@ -292,7 +292,7 @@ homesys/CDevice.i: homesys/CDevice.cpp.i
 
 # target to preprocess a source file
 homesys/CDevice.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CDevice.cpp.i
 .PHONY : homesys/CDevice.cpp.i
 
 homesys/CDevice.s: homesys/CDevice.cpp.s
@@ -300,7 +300,7 @@ homesys/CDevice.s: homesys/CDevice.cpp.s
 
 # target to generate assembly for a file
 homesys/CDevice.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDevice.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CDevice.cpp.s
 .PHONY : homesys/CDevice.cpp.s
 
 homesys/CDeviceManager.o: homesys/CDeviceManager.cpp.o
@@ -308,7 +308,7 @@ homesys/CDeviceManager.o: homesys/CDeviceManager.cpp.o
 
 # target to build an object file
 homesys/CDeviceManager.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CDeviceManager.cpp.o
 .PHONY : homesys/CDeviceManager.cpp.o
 
 homesys/CDeviceManager.i: homesys/CDeviceManager.cpp.i
@@ -316,7 +316,7 @@ homesys/CDeviceManager.i: homesys/CDeviceManager.cpp.i
 
 # target to preprocess a source file
 homesys/CDeviceManager.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CDeviceManager.cpp.i
 .PHONY : homesys/CDeviceManager.cpp.i
 
 homesys/CDeviceManager.s: homesys/CDeviceManager.cpp.s
@@ -324,7 +324,7 @@ homesys/CDeviceManager.s: homesys/CDeviceManager.cpp.s
 
 # target to generate assembly for a file
 homesys/CDeviceManager.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CDeviceManager.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CDeviceManager.cpp.s
 .PHONY : homesys/CDeviceManager.cpp.s
 
 homesys/COperation.o: homesys/COperation.cpp.o
@@ -332,7 +332,7 @@ homesys/COperation.o: homesys/COperation.cpp.o
 
 # target to build an object file
 homesys/COperation.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/COperation.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/COperation.cpp.o
 .PHONY : homesys/COperation.cpp.o
 
 homesys/COperation.i: homesys/COperation.cpp.i
@@ -340,7 +340,7 @@ homesys/COperation.i: homesys/COperation.cpp.i
 
 # target to preprocess a source file
 homesys/COperation.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/COperation.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/COperation.cpp.i
 .PHONY : homesys/COperation.cpp.i
 
 homesys/COperation.s: homesys/COperation.cpp.s
@@ -348,7 +348,7 @@ homesys/COperation.s: homesys/COperation.cpp.s
 
 # target to generate assembly for a file
 homesys/COperation.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/COperation.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/COperation.cpp.s
 .PHONY : homesys/COperation.cpp.s
 
 homesys/CSoapServer.o: homesys/CSoapServer.cpp.o
@@ -356,7 +356,7 @@ homesys/CSoapServer.o: homesys/CSoapServer.cpp.o
 
 # target to build an object file
 homesys/CSoapServer.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CSoapServer.cpp.o
 .PHONY : homesys/CSoapServer.cpp.o
 
 homesys/CSoapServer.i: homesys/CSoapServer.cpp.i
@@ -364,7 +364,7 @@ homesys/CSoapServer.i: homesys/CSoapServer.cpp.i
 
 # target to preprocess a source file
 homesys/CSoapServer.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CSoapServer.cpp.i
 .PHONY : homesys/CSoapServer.cpp.i
 
 homesys/CSoapServer.s: homesys/CSoapServer.cpp.s
@@ -372,7 +372,7 @@ homesys/CSoapServer.s: homesys/CSoapServer.cpp.s
 
 # target to generate assembly for a file
 homesys/CSoapServer.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CSoapServer.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CSoapServer.cpp.s
 .PHONY : homesys/CSoapServer.cpp.s
 
 homesys/CTimer.o: homesys/CTimer.cpp.o
@@ -380,7 +380,7 @@ homesys/CTimer.o: homesys/CTimer.cpp.o
 
 # target to build an object file
 homesys/CTimer.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CTimer.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CTimer.cpp.o
 .PHONY : homesys/CTimer.cpp.o
 
 homesys/CTimer.i: homesys/CTimer.cpp.i
@@ -388,7 +388,7 @@ homesys/CTimer.i: homesys/CTimer.cpp.i
 
 # target to preprocess a source file
 homesys/CTimer.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CTimer.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CTimer.cpp.i
 .PHONY : homesys/CTimer.cpp.i
 
 homesys/CTimer.s: homesys/CTimer.cpp.s
@@ -396,7 +396,7 @@ homesys/CTimer.s: homesys/CTimer.cpp.s
 
 # target to generate assembly for a file
 homesys/CTimer.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/CTimer.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/CTimer.cpp.s
 .PHONY : homesys/CTimer.cpp.s
 
 homesys/homesys.o: homesys/homesys.cpp.o
@@ -404,7 +404,7 @@ homesys/homesys.o: homesys/homesys.cpp.o
 
 # target to build an object file
 homesys/homesys.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/homesys.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/homesys.cpp.o
 .PHONY : homesys/homesys.cpp.o
 
 homesys/homesys.i: homesys/homesys.cpp.i
@@ -412,7 +412,7 @@ homesys/homesys.i: homesys/homesys.cpp.i
 
 # target to preprocess a source file
 homesys/homesys.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/homesys.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/homesys.cpp.i
 .PHONY : homesys/homesys.cpp.i
 
 homesys/homesys.s: homesys/homesys.cpp.s
@@ -420,7 +420,7 @@ homesys/homesys.s: homesys/homesys.cpp.s
 
 # target to generate assembly for a file
 homesys/homesys.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/homesys/homesys.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/homesys/homesys.cpp.s
 .PHONY : homesys/homesys.cpp.s
 
 raspberry/CGPIOClass.o: raspberry/CGPIOClass.cpp.o
@@ -428,7 +428,7 @@ raspberry/CGPIOClass.o: raspberry/CGPIOClass.cpp.o
 
 # target to build an object file
 raspberry/CGPIOClass.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/raspberry/CGPIOClass.cpp.o
 .PHONY : raspberry/CGPIOClass.cpp.o
 
 raspberry/CGPIOClass.i: raspberry/CGPIOClass.cpp.i
@@ -436,7 +436,7 @@ raspberry/CGPIOClass.i: raspberry/CGPIOClass.cpp.i
 
 # target to preprocess a source file
 raspberry/CGPIOClass.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/raspberry/CGPIOClass.cpp.i
 .PHONY : raspberry/CGPIOClass.cpp.i
 
 raspberry/CGPIOClass.s: raspberry/CGPIOClass.cpp.s
@@ -444,7 +444,7 @@ raspberry/CGPIOClass.s: raspberry/CGPIOClass.cpp.s
 
 # target to generate assembly for a file
 raspberry/CGPIOClass.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/raspberry/CGPIOClass.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/raspberry/CGPIOClass.cpp.s
 .PHONY : raspberry/CGPIOClass.cpp.s
 
 tools/CBlob.o: tools/CBlob.cpp.o
@@ -452,7 +452,7 @@ tools/CBlob.o: tools/CBlob.cpp.o
 
 # target to build an object file
 tools/CBlob.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBlob.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CBlob.cpp.o
 .PHONY : tools/CBlob.cpp.o
 
 tools/CBlob.i: tools/CBlob.cpp.i
@@ -460,7 +460,7 @@ tools/CBlob.i: tools/CBlob.cpp.i
 
 # target to preprocess a source file
 tools/CBlob.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBlob.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CBlob.cpp.i
 .PHONY : tools/CBlob.cpp.i
 
 tools/CBlob.s: tools/CBlob.cpp.s
@@ -468,7 +468,7 @@ tools/CBlob.s: tools/CBlob.cpp.s
 
 # target to generate assembly for a file
 tools/CBlob.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBlob.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CBlob.cpp.s
 .PHONY : tools/CBlob.cpp.s
 
 tools/CBuffer.o: tools/CBuffer.cpp.o
@@ -476,7 +476,7 @@ tools/CBuffer.o: tools/CBuffer.cpp.o
 
 # target to build an object file
 tools/CBuffer.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBuffer.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CBuffer.cpp.o
 .PHONY : tools/CBuffer.cpp.o
 
 tools/CBuffer.i: tools/CBuffer.cpp.i
@@ -484,7 +484,7 @@ tools/CBuffer.i: tools/CBuffer.cpp.i
 
 # target to preprocess a source file
 tools/CBuffer.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBuffer.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CBuffer.cpp.i
 .PHONY : tools/CBuffer.cpp.i
 
 tools/CBuffer.s: tools/CBuffer.cpp.s
@@ -492,7 +492,7 @@ tools/CBuffer.s: tools/CBuffer.cpp.s
 
 # target to generate assembly for a file
 tools/CBuffer.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CBuffer.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CBuffer.cpp.s
 .PHONY : tools/CBuffer.cpp.s
 
 tools/CCanBuffer.o: tools/CCanBuffer.cpp.o
@@ -500,7 +500,7 @@ tools/CCanBuffer.o: tools/CCanBuffer.cpp.o
 
 # target to build an object file
 tools/CCanBuffer.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CCanBuffer.cpp.o
 .PHONY : tools/CCanBuffer.cpp.o
 
 tools/CCanBuffer.i: tools/CCanBuffer.cpp.i
@@ -508,7 +508,7 @@ tools/CCanBuffer.i: tools/CCanBuffer.cpp.i
 
 # target to preprocess a source file
 tools/CCanBuffer.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CCanBuffer.cpp.i
 .PHONY : tools/CCanBuffer.cpp.i
 
 tools/CCanBuffer.s: tools/CCanBuffer.cpp.s
@@ -516,7 +516,7 @@ tools/CCanBuffer.s: tools/CCanBuffer.cpp.s
 
 # target to generate assembly for a file
 tools/CCanBuffer.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CCanBuffer.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CCanBuffer.cpp.s
 .PHONY : tools/CCanBuffer.cpp.s
 
 tools/CConfiguration.o: tools/CConfiguration.cpp.o
@@ -524,7 +524,7 @@ tools/CConfiguration.o: tools/CConfiguration.cpp.o
 
 # target to build an object file
 tools/CConfiguration.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CConfiguration.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CConfiguration.cpp.o
 .PHONY : tools/CConfiguration.cpp.o
 
 tools/CConfiguration.i: tools/CConfiguration.cpp.i
@@ -532,7 +532,7 @@ tools/CConfiguration.i: tools/CConfiguration.cpp.i
 
 # target to preprocess a source file
 tools/CConfiguration.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CConfiguration.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CConfiguration.cpp.i
 .PHONY : tools/CConfiguration.cpp.i
 
 tools/CConfiguration.s: tools/CConfiguration.cpp.s
@@ -540,7 +540,7 @@ tools/CConfiguration.s: tools/CConfiguration.cpp.s
 
 # target to generate assembly for a file
 tools/CConfiguration.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CConfiguration.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CConfiguration.cpp.s
 .PHONY : tools/CConfiguration.cpp.s
 
 tools/CDatabase.o: tools/CDatabase.cpp.o
@@ -548,7 +548,7 @@ tools/CDatabase.o: tools/CDatabase.cpp.o
 
 # target to build an object file
 tools/CDatabase.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CDatabase.cpp.o
 .PHONY : tools/CDatabase.cpp.o
 
 tools/CDatabase.i: tools/CDatabase.cpp.i
@@ -556,7 +556,7 @@ tools/CDatabase.i: tools/CDatabase.cpp.i
 
 # target to preprocess a source file
 tools/CDatabase.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CDatabase.cpp.i
 .PHONY : tools/CDatabase.cpp.i
 
 tools/CDatabase.s: tools/CDatabase.cpp.s
@@ -564,7 +564,7 @@ tools/CDatabase.s: tools/CDatabase.cpp.s
 
 # target to generate assembly for a file
 tools/CDatabase.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDatabase.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CDatabase.cpp.s
 .PHONY : tools/CDatabase.cpp.s
 
 tools/CDevicesConfig.o: tools/CDevicesConfig.cpp.o
@@ -572,7 +572,7 @@ tools/CDevicesConfig.o: tools/CDevicesConfig.cpp.o
 
 # target to build an object file
 tools/CDevicesConfig.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CDevicesConfig.cpp.o
 .PHONY : tools/CDevicesConfig.cpp.o
 
 tools/CDevicesConfig.i: tools/CDevicesConfig.cpp.i
@@ -580,7 +580,7 @@ tools/CDevicesConfig.i: tools/CDevicesConfig.cpp.i
 
 # target to preprocess a source file
 tools/CDevicesConfig.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CDevicesConfig.cpp.i
 .PHONY : tools/CDevicesConfig.cpp.i
 
 tools/CDevicesConfig.s: tools/CDevicesConfig.cpp.s
@@ -588,7 +588,7 @@ tools/CDevicesConfig.s: tools/CDevicesConfig.cpp.s
 
 # target to generate assembly for a file
 tools/CDevicesConfig.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CDevicesConfig.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CDevicesConfig.cpp.s
 .PHONY : tools/CDevicesConfig.cpp.s
 
 tools/CFirmwareBuffer.o: tools/CFirmwareBuffer.cpp.o
@@ -596,7 +596,7 @@ tools/CFirmwareBuffer.o: tools/CFirmwareBuffer.cpp.o
 
 # target to build an object file
 tools/CFirmwareBuffer.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareBuffer.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CFirmwareBuffer.cpp.o
 .PHONY : tools/CFirmwareBuffer.cpp.o
 
 tools/CFirmwareBuffer.i: tools/CFirmwareBuffer.cpp.i
@@ -604,7 +604,7 @@ tools/CFirmwareBuffer.i: tools/CFirmwareBuffer.cpp.i
 
 # target to preprocess a source file
 tools/CFirmwareBuffer.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareBuffer.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CFirmwareBuffer.cpp.i
 .PHONY : tools/CFirmwareBuffer.cpp.i
 
 tools/CFirmwareBuffer.s: tools/CFirmwareBuffer.cpp.s
@@ -612,7 +612,7 @@ tools/CFirmwareBuffer.s: tools/CFirmwareBuffer.cpp.s
 
 # target to generate assembly for a file
 tools/CFirmwareBuffer.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareBuffer.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CFirmwareBuffer.cpp.s
 .PHONY : tools/CFirmwareBuffer.cpp.s
 
 tools/CFirmwareLoader.o: tools/CFirmwareLoader.cpp.o
@@ -620,7 +620,7 @@ tools/CFirmwareLoader.o: tools/CFirmwareLoader.cpp.o
 
 # target to build an object file
 tools/CFirmwareLoader.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareLoader.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CFirmwareLoader.cpp.o
 .PHONY : tools/CFirmwareLoader.cpp.o
 
 tools/CFirmwareLoader.i: tools/CFirmwareLoader.cpp.i
@@ -628,7 +628,7 @@ tools/CFirmwareLoader.i: tools/CFirmwareLoader.cpp.i
 
 # target to preprocess a source file
 tools/CFirmwareLoader.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareLoader.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CFirmwareLoader.cpp.i
 .PHONY : tools/CFirmwareLoader.cpp.i
 
 tools/CFirmwareLoader.s: tools/CFirmwareLoader.cpp.s
@@ -636,7 +636,7 @@ tools/CFirmwareLoader.s: tools/CFirmwareLoader.cpp.s
 
 # target to generate assembly for a file
 tools/CFirmwareLoader.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CFirmwareLoader.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CFirmwareLoader.cpp.s
 .PHONY : tools/CFirmwareLoader.cpp.s
 
 tools/CLog.o: tools/CLog.cpp.o
@@ -644,7 +644,7 @@ tools/CLog.o: tools/CLog.cpp.o
 
 # target to build an object file
 tools/CLog.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CLog.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CLog.cpp.o
 .PHONY : tools/CLog.cpp.o
 
 tools/CLog.i: tools/CLog.cpp.i
@@ -652,7 +652,7 @@ tools/CLog.i: tools/CLog.cpp.i
 
 # target to preprocess a source file
 tools/CLog.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CLog.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CLog.cpp.i
 .PHONY : tools/CLog.cpp.i
 
 tools/CLog.s: tools/CLog.cpp.s
@@ -660,7 +660,7 @@ tools/CLog.s: tools/CLog.cpp.s
 
 # target to generate assembly for a file
 tools/CLog.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CLog.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CLog.cpp.s
 .PHONY : tools/CLog.cpp.s
 
 tools/CParamsConverter.o: tools/CParamsConverter.cpp.o
@@ -668,7 +668,7 @@ tools/CParamsConverter.o: tools/CParamsConverter.cpp.o
 
 # target to build an object file
 tools/CParamsConverter.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CParamsConverter.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CParamsConverter.cpp.o
 .PHONY : tools/CParamsConverter.cpp.o
 
 tools/CParamsConverter.i: tools/CParamsConverter.cpp.i
@@ -676,7 +676,7 @@ tools/CParamsConverter.i: tools/CParamsConverter.cpp.i
 
 # target to preprocess a source file
 tools/CParamsConverter.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CParamsConverter.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CParamsConverter.cpp.i
 .PHONY : tools/CParamsConverter.cpp.i
 
 tools/CParamsConverter.s: tools/CParamsConverter.cpp.s
@@ -684,7 +684,7 @@ tools/CParamsConverter.s: tools/CParamsConverter.cpp.s
 
 # target to generate assembly for a file
 tools/CParamsConverter.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CParamsConverter.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CParamsConverter.cpp.s
 .PHONY : tools/CParamsConverter.cpp.s
 
 tools/CSerCom.o: tools/CSerCom.cpp.o
@@ -692,7 +692,7 @@ tools/CSerCom.o: tools/CSerCom.cpp.o
 
 # target to build an object file
 tools/CSerCom.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CSerCom.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CSerCom.cpp.o
 .PHONY : tools/CSerCom.cpp.o
 
 tools/CSerCom.i: tools/CSerCom.cpp.i
@@ -700,7 +700,7 @@ tools/CSerCom.i: tools/CSerCom.cpp.i
 
 # target to preprocess a source file
 tools/CSerCom.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CSerCom.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CSerCom.cpp.i
 .PHONY : tools/CSerCom.cpp.i
 
 tools/CSerCom.s: tools/CSerCom.cpp.s
@@ -708,7 +708,7 @@ tools/CSerCom.s: tools/CSerCom.cpp.s
 
 # target to generate assembly for a file
 tools/CSerCom.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CSerCom.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CSerCom.cpp.s
 .PHONY : tools/CSerCom.cpp.s
 
 tools/CTimeOut.o: tools/CTimeOut.cpp.o
@@ -716,7 +716,7 @@ tools/CTimeOut.o: tools/CTimeOut.cpp.o
 
 # target to build an object file
 tools/CTimeOut.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTimeOut.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CTimeOut.cpp.o
 .PHONY : tools/CTimeOut.cpp.o
 
 tools/CTimeOut.i: tools/CTimeOut.cpp.i
@@ -724,7 +724,7 @@ tools/CTimeOut.i: tools/CTimeOut.cpp.i
 
 # target to preprocess a source file
 tools/CTimeOut.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTimeOut.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CTimeOut.cpp.i
 .PHONY : tools/CTimeOut.cpp.i
 
 tools/CTimeOut.s: tools/CTimeOut.cpp.s
@@ -732,7 +732,7 @@ tools/CTimeOut.s: tools/CTimeOut.cpp.s
 
 # target to generate assembly for a file
 tools/CTimeOut.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTimeOut.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CTimeOut.cpp.s
 .PHONY : tools/CTimeOut.cpp.s
 
 tools/CTools.o: tools/CTools.cpp.o
@@ -740,7 +740,7 @@ tools/CTools.o: tools/CTools.cpp.o
 
 # target to build an object file
 tools/CTools.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTools.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CTools.cpp.o
 .PHONY : tools/CTools.cpp.o
 
 tools/CTools.i: tools/CTools.cpp.i
@@ -748,7 +748,7 @@ tools/CTools.i: tools/CTools.cpp.i
 
 # target to preprocess a source file
 tools/CTools.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTools.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CTools.cpp.i
 .PHONY : tools/CTools.cpp.i
 
 tools/CTools.s: tools/CTools.cpp.s
@@ -756,7 +756,7 @@ tools/CTools.s: tools/CTools.cpp.s
 
 # target to generate assembly for a file
 tools/CTools.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/tools/CTools.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/tools/CTools.cpp.s
 .PHONY : tools/CTools.cpp.s
 
 webservice/soapC.o: webservice/soapC.cpp.o
@@ -764,7 +764,7 @@ webservice/soapC.o: webservice/soapC.cpp.o
 
 # target to build an object file
 webservice/soapC.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soapC.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/webservice/soapC.cpp.o
 .PHONY : webservice/soapC.cpp.o
 
 webservice/soapC.i: webservice/soapC.cpp.i
@@ -772,7 +772,7 @@ webservice/soapC.i: webservice/soapC.cpp.i
 
 # target to preprocess a source file
 webservice/soapC.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soapC.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/webservice/soapC.cpp.i
 .PHONY : webservice/soapC.cpp.i
 
 webservice/soapC.s: webservice/soapC.cpp.s
@@ -780,7 +780,7 @@ webservice/soapC.s: webservice/soapC.cpp.s
 
 # target to generate assembly for a file
 webservice/soapC.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soapC.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/webservice/soapC.cpp.s
 .PHONY : webservice/soapC.cpp.s
 
 webservice/soaphomesysService.o: webservice/soaphomesysService.cpp.o
@@ -788,7 +788,7 @@ webservice/soaphomesysService.o: webservice/soaphomesysService.cpp.o
 
 # target to build an object file
 webservice/soaphomesysService.cpp.o:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.o
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/webservice/soaphomesysService.cpp.o
 .PHONY : webservice/soaphomesysService.cpp.o
 
 webservice/soaphomesysService.i: webservice/soaphomesysService.cpp.i
@@ -796,7 +796,7 @@ webservice/soaphomesysService.i: webservice/soaphomesysService.cpp.i
 
 # target to preprocess a source file
 webservice/soaphomesysService.cpp.i:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.i
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/webservice/soaphomesysService.cpp.i
 .PHONY : webservice/soaphomesysService.cpp.i
 
 webservice/soaphomesysService.s: webservice/soaphomesysService.cpp.s
@@ -804,7 +804,7 @@ webservice/soaphomesysService.s: webservice/soaphomesysService.cpp.s
 
 # target to generate assembly for a file
 webservice/soaphomesysService.cpp.s:
-	$(MAKE) -f CMakeFiles/build/homesys.dir/build.make CMakeFiles/build/homesys.dir/webservice/soaphomesysService.cpp.s
+	$(MAKE) -f CMakeFiles/build/homik.dir/build.make CMakeFiles/build/homik.dir/webservice/soaphomesysService.cpp.s
 .PHONY : webservice/soaphomesysService.cpp.s
 
 # Help Target
@@ -813,7 +813,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... build/homesys"
+	@echo "... build/homik"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... can232/CCan232.o"

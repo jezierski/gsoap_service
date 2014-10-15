@@ -90,7 +90,7 @@ private:
     void parseParams(string value, STimeCondition&);
     
     void parseParams(string, Params&);
-//    void parseParams(string, long long&);
+//    void parseParams(string, LONG64&);
     void addOperation(SOperation operation);
     void clearOperation(SOperation &operation);
     CLog *log;

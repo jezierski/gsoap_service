@@ -53,7 +53,7 @@ Blob CCanPWMActor::getPWM(SDeviceDescription device, Blob params) {
     CCanBuffer buffer;
     Blob b;
     string response;
-    vector<long long> values;
+    vector<LONG64> values;
     buffer.insertCommand(CMD_GET_PWM);
     buffer.insertId((unsigned char) getDeviceCategory());
     buffer << (unsigned char) getAddress(device);
@@ -63,11 +63,14 @@ Blob CCanPWMActor::getPWM(SDeviceDescription device, Blob params) {
         response = "OK";
         unsigned char value = buffer[OFFSET_DATA];
         values.push_back(value);
-        b[BLOB_RESPONSE_INT_VALUES].put < vector<long long >> (values);
+        b[BLOB_RESPONSE_INT_VALUES].put < vector<LONG64 >> (values);
         log->info("Device " + to_string(device) + " PWM_VALUE: " + to_string(values[0]));
     } else {
         response = "PWMActor->getPWM->Receiving CAN frame failed";
     }
+    
+    
+    
     b[BLOB_TXT_RESPONSE_RESULT].put<string>(response);
     return b;
 }

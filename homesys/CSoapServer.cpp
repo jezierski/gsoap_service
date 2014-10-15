@@ -166,6 +166,7 @@ int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 comman
     Blob b = deviceManager->invokeRemoteAction(action.device, action.command, action.params);
     vector<LONG64>values = b[BLOB_RESPONSE_INT_VALUES].get < vector < LONG64 >> ();
 
+    
     struct ns1__makeRemoteActionResponse responseTemp;
     responseTemp.response = new ns1__responseType();
     responseTemp.response->result = b[BLOB_TXT_RESPONSE_RESULT].get<string>();
@@ -175,6 +176,7 @@ int CSoapServer::makeRemoteAction(ns1__SDeviceDescription *device, LONG64 comman
     responseTemp.response->values->values = new ns1__valueType();
     responseTemp.response->values->values->value = values;
 
+    
     response = responseTemp;
     //    actionManager->addAction(action);
     //    delete device;

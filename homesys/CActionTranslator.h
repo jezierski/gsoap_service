@@ -26,7 +26,7 @@ public:
     virtual ~CActionTranslator();
     
     void updateDeviceState(SDeviceDescription, Command, Params);
-    void updateTimerStack(long long timer);
+    void updateTimerStack(LONG64 timer);
     
     void translateActions();
     
@@ -52,11 +52,11 @@ private:
     void setTimer(COperation *operations);
     
     DeviceState popDeviceState();
-    long long popTimerSet();
+    LONG64 popTimerSet();
     
     DeviceState  deviceState;
     list<DeviceState> deviceStateStack;
-    list<long long> timerStack;
+    list<LONG64> timerStack;
     mutex deviceMutex;
     mutex timerMutex;
     CLog *log;
