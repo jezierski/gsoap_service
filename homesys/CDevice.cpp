@@ -93,7 +93,7 @@ void CDevice::uploadExFirmware(CFirmwareBuffer &buffer) {
     for (unsigned char index = 0; index < exQnty; index++) {
         log->info("Extended firmware data uploading (" + to_string((int) index + 1) + "/" + to_string((int) exQnty) + ")...");
         exBuffer = buffer.getExBuffer(index);
-        uploadFirmware(exBuffer);
+        uploadExFirmwarePart(exBuffer);
     }
 }
 
@@ -145,18 +145,69 @@ unsigned int CDevice::uploadFirmware(CFirmwareBuffer &firmware) {
 
     tempBuffer = firmware.getNotNullDataBlock();
     while (tempBuffer.getLength()) {
+
         if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
             initBootWrite(tempBuffer.getDataBlockAddress());
         }
         lastAddress = tempBuffer.getDataBlockAddress();
-        //        cout<<"LAST ADDRESS: "<<lastAddress<<endl;
+        cout << "LAST ADDRESS: " << lastAddress << endl;
         writeProgramData(tempBuffer);
         calcCRC(crc, tempBuffer);
-        tempBuffer = firmware.getNotNullDataBlock();
+
         if (progress != firmware.getReadingProgress()) {
             progress = firmware.getReadingProgress();
             log->info("Upload progress: " + to_string((int) progress) + "%");
         }
+        tempBuffer = firmware.getNotNullDataBlock();
+    }
+    return crc;
+}
+
+unsigned int CDevice::uploadExFirmwarePart(CFirmwareBuffer &firmware) {
+    CFirmwareBuffer tempBuffer;
+    //    unsigned int lastAddress = 0;
+    unsigned int currAddress = 0;
+    unsigned char progress = 255;
+    unsigned int crc = 0;
+
+    tempBuffer = firmware.getNotNullDataBlock();
+    while (tempBuffer.getLength()) {
+
+        currAddress = tempBuffer.getDataBlockAddress();
+        for (size_t i = 0; i < tempBuffer.getLength(); i++) {
+            if (tempBuffer[i] != 0xff) {
+                initBootWrite(currAddress++);
+                writeProgramData(tempBuffer.subBuffer(i, 1));
+            } else {
+                currAddress++;
+            }
+        }
+
+        //        if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
+        //            initBootWrite(tempBuffer.getDataBlockAddress());
+        //        }
+        //        lastAddress = tempBuffer.getDataBlockAddress();
+        //        cout << "LAST ADDRESS: " << lastAddress << endl;
+        //        writeProgramData(tempBuffer);
+        calcCRC(crc, tempBuffer);
+        if (progress != firmware.getReadingProgress()) {
+            progress = firmware.getReadingProgress();
+            log->info("Upload progress: " + to_string((int) progress) + "%");
+        }
+        tempBuffer = firmware.getNotNullDataBlock();
+
+        //        if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
+        //            initBootWrite(tempBuffer.getDataBlockAddress());
+        //        }
+        //        lastAddress = tempBuffer.getDataBlockAddress();
+        //                cout<<"LAST ADDRESS: "<<lastAddress<<endl;
+        //        writeProgramData(tempBuffer);
+        //        calcCRC(crc, tempBuffer);
+        //        tempBuffer = firmware.getNotNullDataBlock();
+        //        if (progress != firmware.getReadingProgress()) {
+        //            progress = firmware.getReadingProgress();
+        //            log->info("Upload progress: " + to_string((int) progress) + "%");
+        //        }
     }
     return crc;
 }
@@ -179,7 +230,7 @@ void CDevice::verifyFirmware(unsigned int crc) {
 }
 
 void CDevice::initBootWrite(unsigned int address) {
-    //    cout<<"INIT WRITE ADR: "<<address<<endl;
+    cout << "INIT WRITE ADR: " << address << endl;
     //CCanBuffer recBuf;
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_CMD);
@@ -257,11 +308,17 @@ unsigned int CDevice::getSelfCRC() {
 
 void CDevice::writeProgramData(CBuffer data) {
 
+    cout << "program data:" << endl;
+    data.printBuffer();
+
+
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_DATA);
     buffer << data;
     buffer = canbusProtocol->request(buffer);
 
+    cout << "requested buffer:" << endl;
+    buffer.printBuffer();
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Writing program data failed");
     }

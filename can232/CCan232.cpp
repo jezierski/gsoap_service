@@ -183,33 +183,47 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
     CTimeOut tout;
 
     tout.SetMilliSec(50);
-
+    cout << "\n--------------------------\nS1 first buffer:" << flush;
     buffer = getCanFrame();
+    buffer.printBuffer();
+    cout << "S2" << flush;
 
     do {
-
+        cout << "S3" << flush;
         dummyBuffer = getCanFrame();
-
+        cout << "S4 dummy buffer:" << flush;
+        dummyBuffer.printBuffer();
 
         if (dummyBuffer.isReady()) {
-
+            cout << "S5" << flush;
             if (buffer == dummyBuffer) {
-
+                cout << "S6" << flush;
                 tout.SetMilliSec(50);
 
             } else {
+                cout << "S7" << flush;
 
-                return buffer;
+                if (buffer.getLength()) {
+                    cout << "S8" << flush;
+                    buffer.printBuffer();
+                    return buffer;
+                } else {
+                    cout << "S9" << flush;
+                    dummyBuffer.printBuffer();
+                    return dummyBuffer;
+                }
+
             }
         }
 
     } while (!tout.IsTimeOut());
-
+    cout << "S8 final buffer:" << flush;
     if (not buffer.isReady()) {
         log->error("Requesting CAN frame timeout (50ms)");
         buffer.clear();
     }
 
+    buffer.printBuffer();
     return buffer;
 }
 
@@ -225,21 +239,21 @@ bool CCan232::sendCanFrame(CCanBuffer &frame) {
     buf << (unsigned char) CR;
 
     try {
-        log->put(">>>SENDING");
-        string s;
-        for (unsigned int i = 0; i < buf.getLength(); i++) {
-            s += to_string((int) buf[i], true) + " ";
-        }
-        log->put(s);
+        //        log->put(">>>SENDING");
+        //        string s;
+        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
+        //            s += to_string((int) buf[i], true) + " ";
+        //        }
+        //        log->put(s);
 
         sendBuffer(buf);
         buf = getFrame();
 
-        s = "";
-        for (unsigned int i = 0; i < buf.getLength(); i++) {
-            s += to_string((int) buf[i], true) + " ";
-        }
-        log->put(s);
+        //        s = "";
+        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
+        //            s += to_string((int) buf[i], true) + " ";
+        //        }
+        //        log->put(s);
 
 
         if (buf.isReady()) {
@@ -307,7 +321,7 @@ CBuffer CCan232::getFrame() {
     unsigned char rbyte;
 
     rbyte = receiveByte();
-    //        cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
+    //            cout << "--<>--rbyte: " << rbyte << ", int: " << (int) rbyte << ", hex: " << hex << (int) rbyte << dec << endl;
     if (rbyte != CMD_SEND) {
         return buf;
     }
@@ -316,7 +330,7 @@ CBuffer CCan232::getFrame() {
     tout.SetMilliSec(100);
     while (!tout.IsTimeOut()) {
         buf << (unsigned char) receiveByte();
-        //                cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
+        //                        cout << "------buf: " << buf[buf.getLength() - 1] << ", int: " << (int) buf[buf.getLength() - 1] << ", hex: " << hex << (int) buf[buf.getLength() - 1] << dec << endl;
         if (isFrameComplete(buf)) {
             buf.setReady();
             return buf;
@@ -337,7 +351,7 @@ CCanBuffer CCan232::getCanFrame() {
     CBuffer buf;
     CCanBuffer canBuffer;
 
-//    getTestFrame();
+    //    getTestFrame();
 
     buf << (unsigned char) HEADER;
     buf << (unsigned char) 4;
@@ -345,23 +359,23 @@ CCanBuffer CCan232::getCanFrame() {
     buf << (unsigned char) CR;
 
     try {
-        log->put("<<<REQUESTING");
-        string s;
-        for (unsigned int i = 0; i < buf.getLength(); i++) {
-            s += to_string((int) buf[i], true) + " ";
-        }
-        log->put(s);
+        //        log->put("<<<REQUESTING");
+        //        string s;
+        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
+        //            s += to_string((int) buf[i], true) + " ";
+        //        }
+        //        log->put(s);
 
         sendBuffer(buf);
         buf = getFrame();
 
 
 
-        s = "";
-        for (unsigned int i = 0; i < buf.getLength(); i++) {
-            s += to_string((int) buf[i], true) + " ";
-        }
-        log->put(s);
+        //        s = "";
+        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
+        //            s += to_string((int) buf[i], true) + " ";
+        //        }
+        //        log->put(s);
 
         if (buf.isReady()) {
             if (!buf.isNoData()) {

@@ -117,6 +117,7 @@ private:
      void setGuidIfNeed();
     void uploadExFirmware(CFirmwareBuffer &buffer);
     unsigned int uploadFirmware(CFirmwareBuffer &buffer);
+    unsigned int uploadExFirmwarePart(CFirmwareBuffer &buffer);
     void verifyFirmware(unsigned int crc);
     void calcCRC(unsigned int &crc, CFirmwareBuffer buf);
 
