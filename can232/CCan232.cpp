@@ -183,33 +183,33 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
     CTimeOut tout;
 
     tout.SetMilliSec(50);
-    cout << "\n--------------------------\nS1 first buffer:" << flush;
+//    cout << "\n--------------------------\nS1 first buffer:" << flush;
     buffer = getCanFrame();
-    buffer.printBuffer();
-    cout << "S2" << flush;
+//    buffer.printBuffer();
+//    cout << "S2" << flush;
 
     do {
-        cout << "S3" << flush;
+//        cout << "S3" << flush;
         dummyBuffer = getCanFrame();
-        cout << "S4 dummy buffer:" << flush;
-        dummyBuffer.printBuffer();
+//        cout << "S4 dummy buffer:" << flush;
+//        dummyBuffer.printBuffer();
 
         if (dummyBuffer.isReady()) {
-            cout << "S5" << flush;
+//            cout << "S5" << flush;
             if (buffer == dummyBuffer) {
-                cout << "S6" << flush;
+//                cout << "S6" << flush;
                 tout.SetMilliSec(50);
 
             } else {
-                cout << "S7" << flush;
+//                cout << "S7" << flush;
 
                 if (buffer.getLength()) {
-                    cout << "S8" << flush;
-                    buffer.printBuffer();
+//                    cout << "S8" << flush;
+//                    buffer.printBuffer();
                     return buffer;
                 } else {
-                    cout << "S9" << flush;
-                    dummyBuffer.printBuffer();
+//                    cout << "S9" << flush;
+//                    dummyBuffer.printBuffer();
                     return dummyBuffer;
                 }
 
@@ -217,13 +217,13 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
         }
 
     } while (!tout.IsTimeOut());
-    cout << "S8 final buffer:" << flush;
+//    cout << "S8 final buffer:" << flush;
     if (not buffer.isReady()) {
         log->error("Requesting CAN frame timeout (50ms)");
         buffer.clear();
     }
 
-    buffer.printBuffer();
+//    buffer.printBuffer();
     return buffer;
 }
 
@@ -305,10 +305,10 @@ void CCan232::getTestFrame() {
     bool all = false;
     do {
         rbyte = receiveByte();
-        cout << rbyte;
+//        cout << rbyte;
         if (rbyte == ']') {
             rbyte = receiveByte();
-            cout << rbyte;
+//            cout << rbyte;
             if (rbyte == 0xf9)
                 all = true;
         }

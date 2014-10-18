@@ -150,7 +150,7 @@ unsigned int CDevice::uploadFirmware(CFirmwareBuffer &firmware) {
             initBootWrite(tempBuffer.getDataBlockAddress());
         }
         lastAddress = tempBuffer.getDataBlockAddress();
-        cout << "LAST ADDRESS: " << lastAddress << endl;
+//        cout << "LAST ADDRESS: " << lastAddress << endl;
         writeProgramData(tempBuffer);
         calcCRC(crc, tempBuffer);
 
@@ -183,12 +183,6 @@ unsigned int CDevice::uploadExFirmwarePart(CFirmwareBuffer &firmware) {
             }
         }
 
-        //        if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
-        //            initBootWrite(tempBuffer.getDataBlockAddress());
-        //        }
-        //        lastAddress = tempBuffer.getDataBlockAddress();
-        //        cout << "LAST ADDRESS: " << lastAddress << endl;
-        //        writeProgramData(tempBuffer);
         calcCRC(crc, tempBuffer);
         if (progress != firmware.getReadingProgress()) {
             progress = firmware.getReadingProgress();
@@ -196,18 +190,7 @@ unsigned int CDevice::uploadExFirmwarePart(CFirmwareBuffer &firmware) {
         }
         tempBuffer = firmware.getNotNullDataBlock();
 
-        //        if (tempBuffer.getDataBlockAddress() != lastAddress + 8) {
-        //            initBootWrite(tempBuffer.getDataBlockAddress());
-        //        }
-        //        lastAddress = tempBuffer.getDataBlockAddress();
-        //                cout<<"LAST ADDRESS: "<<lastAddress<<endl;
-        //        writeProgramData(tempBuffer);
-        //        calcCRC(crc, tempBuffer);
-        //        tempBuffer = firmware.getNotNullDataBlock();
-        //        if (progress != firmware.getReadingProgress()) {
-        //            progress = firmware.getReadingProgress();
-        //            log->info("Upload progress: " + to_string((int) progress) + "%");
-        //        }
+
     }
     return crc;
 }
@@ -230,7 +213,7 @@ void CDevice::verifyFirmware(unsigned int crc) {
 }
 
 void CDevice::initBootWrite(unsigned int address) {
-    cout << "INIT WRITE ADR: " << address << endl;
+//    cout << "INIT WRITE ADR: " << address << endl;
     //CCanBuffer recBuf;
     CCanBuffer buffer;
     buffer.insertId(0x330 | BOOT_PUT_CMD);
@@ -244,14 +227,6 @@ void CDevice::initBootWrite(unsigned int address) {
         throw string("Writing boot init failed");
     }
 
-    //int i = 20;
-    //do {
-    //    recBuf = canbusProtocol->request(buffer);
-    //} while (i-- && recBuf[0] != BOOT_COMMAND_ACK);
-
-    //if (recBuf[0] != BOOT_COMMAND_ACK) {
-    //    throw string("Writing boot init failed");
-    //}
 }
 
 void CDevice::initBootRead(unsigned int address) {
@@ -295,21 +270,13 @@ unsigned int CDevice::getSelfCRC() {
 
     return buffer.getBootCRC();
 
-    //int i = 100;
-    //do {
-    //    cout << "try getSelfCRC" << endl;
-    //    recBuf = canbusProtocol->request(buffer);
-    //    recBuf.printBuffer();
-    //} while (i-- && (recBuf.getLength() == 0 || recBuf[0] == BOOT_COMMAND_ACK));
 
-
-    //return recBuf.getBootCRC();
 }
 
 void CDevice::writeProgramData(CBuffer data) {
 
-    cout << "program data:" << endl;
-    data.printBuffer();
+//    cout << "program data:" << endl;
+//    data.printBuffer();
 
 
     CCanBuffer buffer;
@@ -317,8 +284,8 @@ void CDevice::writeProgramData(CBuffer data) {
     buffer << data;
     buffer = canbusProtocol->request(buffer);
 
-    cout << "requested buffer:" << endl;
-    buffer.printBuffer();
+//    cout << "requested buffer:" << endl;
+//    buffer.printBuffer();
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Writing program data failed");
     }
@@ -329,8 +296,7 @@ CCanBuffer CDevice::readProgramData() {
     buffer.insertId(0x330 | BOOT_GET_DATA);
     buffer.buildBootBuffer();
     buffer = canbusProtocol->request(buffer);
-    //    cout << "received buffer: " << endl; //@TODO remove it
-    //    buffer.printBuffer(); //@TODO remove it
+
     return buffer;
 }
 
