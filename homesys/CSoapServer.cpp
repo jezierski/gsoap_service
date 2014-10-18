@@ -241,7 +241,7 @@ void CSoapServer::start() {
     while (1) {
         error = run(1234);
         if (error != SOAP_OK)
-//            log->error("SOAP server error code: " + to_string(error) + ", trying to restart in a 3 sec...");
+            log->error("SOAP server error code: " + to_string(error) + ", trying to restart in a 3 sec...");
         sleep(3);
     }
 }
