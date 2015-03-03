@@ -1,0 +1,2134 @@
+Registered 'HTTP-DA-1.2' plugin
+stdsoap2_ssl_cpp.cpp(9430): malloc(928) = 0x1271290
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1271670
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12716c0
+Initializing for input from socket=-1/fd=5
+Free namespace stack
+Free any remaining temp blocks
+Free attribute storage
+stdsoap2_ssl_cpp.cpp(8566): free(0x1271290)
+Free pointer hashtable
+Free ID hashtable
+stdsoap2_ssl_cpp.cpp(9430): malloc(928) = 0x1271290
+Free ID hashtable
+Read 12989 bytes from socket=-1/fd=5
+Read count=12989 (+12989)
+XML PI <?xml version="1.0" encoding="UTF-8"?>
+Switching to utf-8 encoding
+Enlarging look-aside buffer to append data, size=0
+New look-aside buffer size=256
+stdsoap2_ssl_cpp.cpp(10698): malloc(256) = 0x1271990
+stdsoap2_ssl_cpp.cpp(10894): malloc(52) = 0x1271ad0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1272020
+stdsoap2_ssl_cpp.cpp(10894): malloc(63) = 0x1271b70
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1272130
+stdsoap2_ssl_cpp.cpp(10894): malloc(57) = 0x1272270
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x12722f0
+stdsoap2_ssl_cpp.cpp(2824): malloc(99) = 0x1270fe0
+Push namespace binding (level=0) 'tns' 'http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl'
+Push NOT OK: no match found for 'http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl' in namespace mapping table (added to stack anyway)
+stdsoap2_ssl_cpp.cpp(10894): malloc(62) = 0x1272460
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x12724e0
+stdsoap2_ssl_cpp.cpp(2824): malloc(40) = 0x1272620
+Push namespace binding (level=0) 'SOAP-ENV' 'http://schemas.xmlsoap.org/soap/envelope/'
+Push OK ('SOAP-ENV' matches 'SOAP-ENV' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(62) = 0x1272680
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1272700
+stdsoap2_ssl_cpp.cpp(2824): malloc(40) = 0x1272840
+Push namespace binding (level=0) 'SOAP-ENC' 'http://schemas.xmlsoap.org/soap/encoding/'
+Push OK ('SOAP-ENC' matches 'SOAP-ENC' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(57) = 0x12728a0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1272920
+stdsoap2_ssl_cpp.cpp(2824): malloc(35) = 0x1272a60
+Push namespace binding (level=0) 'xsi' 'http://www.w3.org/2001/XMLSchema-instance'
+Push OK ('xsi' matches 'xsi' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(57) = 0x1272ac0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1272b40
+stdsoap2_ssl_cpp.cpp(2824): malloc(35) = 0x1272c80
+Push namespace binding (level=0) 'xsd' 'http://www.w3.org/2001/XMLSchema'
+Push OK ('xsd' matches 'xs' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(56) = 0x1272ce0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1272d50
+stdsoap2_ssl_cpp.cpp(2824): malloc(98) = 0x1272e90
+Push namespace binding (level=0) 'ns' 'http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl'
+Push NOT OK: no match found for 'http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl' in namespace mapping table (added to stack anyway)
+stdsoap2_ssl_cpp.cpp(10894): malloc(58) = 0x1272f30
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1272fb0
+stdsoap2_ssl_cpp.cpp(2824): malloc(36) = 0x12730f0
+Push namespace binding (level=0) 'SOAP' 'http://schemas.xmlsoap.org/wsdl/soap/'
+Push OK ('SOAP' matches 'soap' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(58) = 0x1273150
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x12731d0
+stdsoap2_ssl_cpp.cpp(2824): malloc(36) = 0x1273310
+Push namespace binding (level=0) 'MIME' 'http://schemas.xmlsoap.org/wsdl/mime/'
+Push OK ('MIME' matches 'mime' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(58) = 0x1273370
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x12733f0
+stdsoap2_ssl_cpp.cpp(2824): malloc(36) = 0x1273530
+Push namespace binding (level=0) 'DIME' 'http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/'
+Push OK ('DIME' matches 'dime' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(58) = 0x1273590
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1273610
+stdsoap2_ssl_cpp.cpp(2824): malloc(36) = 0x1273750
+Push namespace binding (level=0) 'WSDL' 'http://schemas.xmlsoap.org/wsdl/'
+Push OK ('WSDL' matches 'wsdl' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(53) = 0x12737b0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1273820
+stdsoap2_ssl_cpp.cpp(2824): malloc(32) = 0x1273960
+Push namespace binding (level=0) '' 'http://schemas.xmlsoap.org/wsdl/'
+Push OK ('' matches 'wsdl' in namespace table)
+Tags and (default) namespaces match: 'definitions' 'wsdl:'
+Begin element found (level=1) 'definitions'='wsdl:'
+Enter id='' type=214 loc=0x7fff57183f10 size=496 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12739c0
+Tags match: 'targetNamespace' 'targetNamespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x12710c0
+Tags and (default) namespaces match: 'types' 'wsdl:types'
+Begin element found (level=2) 'types'='wsdl:types'
+Reverting to last element 'types' (level=1)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1273a50
+Registered 'HTTP-DA-1.2' plugin
+stdsoap2_ssl_cpp.cpp(9430): malloc(928) = 0x1274ff0
+Tags and (default) namespaces match: 'types' 'wsdl:types'
+Begin element found (level=2) 'types'='wsdl:types'
+Enter id='' type=344 loc=0x1273ab0 size=464 level=0
+stdsoap2_ssl_cpp.cpp(2824): malloc(40) = 0x12753d0
+Push namespace binding (level=2) 'SOAP-ENV' 'http://schemas.xmlsoap.org/soap/envelope/'
+Push OK ('SOAP-ENV' matches 'SOAP-ENV' in namespace table)
+stdsoap2_ssl_cpp.cpp(2824): malloc(40) = 0x1275430
+Push namespace binding (level=2) 'SOAP-ENC' 'http://schemas.xmlsoap.org/soap/encoding/'
+Push OK ('SOAP-ENC' matches 'SOAP-ENC' in namespace table)
+stdsoap2_ssl_cpp.cpp(2824): malloc(35) = 0x1275490
+Push namespace binding (level=2) 'xsi' 'http://www.w3.org/2001/XMLSchema-instance'
+Push OK ('xsi' matches 'xsi' in namespace table)
+stdsoap2_ssl_cpp.cpp(2824): malloc(35) = 0x12754f0
+Push namespace binding (level=2) 'xsd' 'http://www.w3.org/2001/XMLSchema'
+Push OK ('xsd' matches 'xs' in namespace table)
+stdsoap2_ssl_cpp.cpp(2824): malloc(98) = 0x1274d40
+Push namespace binding (level=2) 'ns' 'http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl'
+Push NOT OK: no match found for 'http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl' in namespace mapping table (added to stack anyway)
+stdsoap2_ssl_cpp.cpp(2824): malloc(32) = 0x1275580
+Push namespace binding (level=2) '' 'http://www.w3.org/2001/XMLSchema'
+Push OK ('' matches 'xs' in namespace table)
+stdsoap2_ssl_cpp.cpp(10894): malloc(66) = 0x12755e0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1275660
+stdsoap2_ssl_cpp.cpp(10894): malloc(68) = 0x12757a0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1275820
+Tags and (default) namespaces match: 'schema' 'xs:schema'
+Begin element found (level=3) 'schema'='xs:schema'
+Reverting to last element 'schema' (level=2)
+Tags and (default) namespaces match: 'schema' 'xs:schema'
+Begin element found (level=3) 'schema'='xs:schema'
+Reverting to last element 'schema' (level=2)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1275960
+Registered 'HTTP-DA-1.2' plugin
+stdsoap2_ssl_cpp.cpp(9430): malloc(928) = 0x1277300
+Tags and (default) namespaces match: 'schema' 'xs:schema'
+Begin element found (level=3) 'schema'='xs:schema'
+Enter id='' type=21 loc=0x1275e10 size=432 level=0
+Tags match: 'targetNamespace' 'targetNamespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1277130
+Tags match: 'attributeFormDefault' 'attributeFormDefault'
+Tags match: 'elementFormDefault' 'elementFormDefault'
+stdsoap2_ssl_cpp.cpp(10894): malloc(57) = 0x1277710
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1277790
+Tags and (default) namespaces match: 'import' 'xs:import'
+Begin element found (level=3) 'import'='xs:import'
+Reverting to last element 'import' (level=3)
+Tags and (default) namespaces match: 'import' 'xs:import'
+Begin element found (level=3) 'import'='xs:import'
+Enter id='' type=158 loc=0x7fff57183be0 size=32 level=0
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x12778d0
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Reverting to last element 'xsd:complexType' (level=3)
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Enter id='' type=23 loc=0x7fff57183b50 size=152 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1277980
+stdsoap2_ssl_cpp.cpp(10894): malloc(57) = 0x12779e0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1277a60
+stdsoap2_ssl_cpp.cpp(10894): malloc(57) = 0x1277ba0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1278120
+Tags and (default) namespaces match: 'xsd:all' 'xs:all'
+Begin element found (level=5) 'xsd:all'='xs:all'
+Reverting to last element 'xsd:all' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1277c50
+Tags and (default) namespaces match: 'xsd:all' 'xs:all'
+Begin element found (level=5) 'xsd:all'='xs:all'
+Enter id='' type=71 loc=0x1277cb0 size=32 level=0
+stdsoap2_ssl_cpp.cpp(10894): malloc(52) = 0x1278230
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x12782a0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12783e0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1278440
+ into 'xs:string'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1278570
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:valuesType'stdsoap2_ssl_cpp.cpp(7684): malloc(96) = 0x1277050
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":valuesType'
+End element found (level=5) 'xsd:all'='xs:all'
+End element found (level=4) 'xsd:complexType'='xs:complexType'
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Reverting to last element 'xsd:complexType' (level=3)
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Enter id='' type=23 loc=0x7fff57183b50 size=152 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1278540
+Tags and (default) namespaces match: 'xsd:all' 'xs:all'
+Begin element found (level=5) 'xsd:all'='xs:all'
+Reverting to last element 'xsd:all' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12787d0
+Tags and (default) namespaces match: 'xsd:all' 'xs:all'
+Begin element found (level=5) 'xsd:all'='xs:all'
+Enter id='' type=71 loc=0x1278830 size=32 level=0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1278860
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12788c0
+ into 'xs:string'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12789f0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:valueType'stdsoap2_ssl_cpp.cpp(7684): malloc(96) = 0x1278a50
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":valueType'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1278920
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1278980
+ into 'xs:integer'
+End element found (level=5) 'xsd:all'='xs:all'
+End element found (level=4) 'xsd:complexType'='xs:complexType'
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Reverting to last element 'xsd:complexType' (level=3)
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Enter id='' type=23 loc=0x7fff57183b50 size=152 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1278c30
+Tags and (default) namespaces match: 'xsd:sequence' 'xs:sequence'
+Begin element found (level=5) 'xsd:sequence'='xs:sequence'
+Reverting to last element 'xsd:sequence' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12784a0
+Tags and (default) namespaces match: 'xsd:sequence' 'xs:sequence'
+Begin element found (level=5) 'xsd:sequence'='xs:sequence'
+Enter id='' type=26 loc=0x1278fc0 size=64 level=0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Enter id='' type=78 loc=0x7fff57183970 size=24 level=0
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1278500
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x1279040 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1279110
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279160
+ into 'xs:integer'
+Tags match: 'minOccurs' 'minOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12791c0
+Tags match: 'maxOccurs' 'maxOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279210
+End element found (level=5) 'xsd:sequence'='xs:sequence'
+End element found (level=4) 'xsd:complexType'='xs:complexType'
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Reverting to last element 'xsd:complexType' (level=3)
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Enter id='' type=23 loc=0x7fff57183b50 size=152 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1278af0
+Tags and (default) namespaces match: 'xsd:all' 'xs:all'
+Begin element found (level=5) 'xsd:all'='xs:all'
+Reverting to last element 'xsd:all' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1278b50
+Tags and (default) namespaces match: 'xsd:all' 'xs:all'
+Begin element found (level=5) 'xsd:all'='xs:all'
+Enter id='' type=71 loc=0x1278bb0 size=32 level=0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1278be0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279500
+ into 'xs:integer'
+Tags match: 'minOccurs' 'minOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1279560
+Tags match: 'maxOccurs' 'maxOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12795b0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12796d0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279720
+ into 'xs:integer'
+Tags match: 'minOccurs' 'minOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1279780
+Tags match: 'maxOccurs' 'maxOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12797d0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279600
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279660
+ into 'xs:integer'
+Tags match: 'minOccurs' 'minOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12799c0
+Tags match: 'maxOccurs' 'maxOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1279a10
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x7fff571838c0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1279820
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279870
+ into 'xs:string'
+Tags match: 'minOccurs' 'minOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12798d0
+Tags match: 'maxOccurs' 'maxOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1279920
+End element found (level=5) 'xsd:all'='xs:all'
+End element found (level=4) 'xsd:complexType'='xs:complexType'
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Reverting to last element 'xsd:complexType' (level=3)
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Enter id='' type=23 loc=0x7fff57183b50 size=152 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279970
+Tags and (default) namespaces match: 'xsd:sequence' 'xs:sequence'
+Begin element found (level=5) 'xsd:sequence'='xs:sequence'
+Reverting to last element 'xsd:sequence' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1279dc0
+Tags and (default) namespaces match: 'xsd:sequence' 'xs:sequence'
+Begin element found (level=5) 'xsd:sequence'='xs:sequence'
+Enter id='' type=26 loc=0x1279e20 size=64 level=0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Enter id='' type=78 loc=0x7fff57183970 size=24 level=0
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1279e70
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x1279ed0 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12799a0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:SDeviceDescription'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x1279fd0
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":SDeviceDescription'
+Tags match: 'minOccurs' 'minOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127a070
+Tags match: 'maxOccurs' 'maxOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127a0c0
+End element found (level=5) 'xsd:sequence'='xs:sequence'
+End element found (level=4) 'xsd:complexType'='xs:complexType'
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Reverting to last element 'xsd:complexType' (level=3)
+Tags and (default) namespaces match: 'xsd:complexType' 'xs:complexType'
+Begin element found (level=4) 'xsd:complexType'='xs:complexType'
+Enter id='' type=23 loc=0x7fff57183b50 size=152 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1279290
+Tags and (default) namespaces match: 'xsd:sequence' 'xs:sequence'
+Begin element found (level=5) 'xsd:sequence'='xs:sequence'
+Reverting to last element 'xsd:sequence' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12792f0
+Tags and (default) namespaces match: 'xsd:sequence' 'xs:sequence'
+Begin element found (level=5) 'xsd:sequence'='xs:sequence'
+Enter id='' type=26 loc=0x1279350 size=64 level=0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Enter id='' type=78 loc=0x7fff57183970 size=24 level=0
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Reverting to last element 'xsd:element' (level=5)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12793a0
+Tags and (default) namespaces match: 'xsd:element' 'xs:element'
+Begin element found (level=5) 'xsd:element'='xs:element'
+Enter id='' type=32 loc=0x1279400 size=200 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12794d0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127a640
+ into 'xs:string'
+Tags match: 'minOccurs' 'minOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127a6a0
+Tags match: 'maxOccurs' 'maxOccurs'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127a6f0
+End element found (level=5) 'xsd:sequence'='xs:sequence'
+End element found (level=4) 'xsd:complexType'='xs:complexType'
+End element found (level=3) 'schema'='xs:schema'
+End element found (level=2) 'types'='wsdl:types'
+Pop namespace binding (level=1) ''
+stdsoap2_ssl_cpp.cpp(2857): free(0x1275580)
+Pop namespace binding (level=1) 'ns'
+stdsoap2_ssl_cpp.cpp(2857): free(0x1274d40)
+Pop namespace binding (level=1) 'xsd'
+stdsoap2_ssl_cpp.cpp(2857): free(0x12754f0)
+Pop namespace binding (level=1) 'xsi'
+stdsoap2_ssl_cpp.cpp(2857): free(0x1275490)
+Pop namespace binding (level=1) 'SOAP-ENC'
+stdsoap2_ssl_cpp.cpp(2857): free(0x1275430)
+Pop namespace binding (level=1) 'SOAP-ENV'
+stdsoap2_ssl_cpp.cpp(2857): free(0x12753d0)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x127a790
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1275430
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12754f0
+ into 'xs:integer'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x127a870
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127a9b0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127aa10
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127aa60
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127a8e0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127a940
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127acf0
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127ad50
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127adb0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127ae00
+ into 'xs:string'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127ae60
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127aeb0
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127af10
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127af70
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127aaf0
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127ab50
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127abb0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127ac00
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127b410
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b470
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b4d0
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127b580
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b5e0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:SDeviceDescription'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x1274d40
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":SDeviceDescription'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127ac30
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b6a0
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127b700
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b760
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127afd0
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x127b030
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b0a0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:SDeviceDescription'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127b100
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":SDeviceDescription'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b1a0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b200
+ into 'xs:integer'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127b2f0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c080
+ into 'xs:integer'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x127b260
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c0e0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:responseType'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127c140
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":responseType'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127c2c0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c320
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:integer'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c380
+ into 'xs:integer'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x127c3e0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c450
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:devicesList'stdsoap2_ssl_cpp.cpp(7684): malloc(96) = 0x127c4b0
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":devicesList'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127c550
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127c5b0
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c610
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'ns:filesList'stdsoap2_ssl_cpp.cpp(7684): malloc(96) = 0x127c670
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":filesList'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127c710
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Reverting to last element 'part' (level=2)
+Tags and (default) namespaces match: 'part' 'wsdl:part'
+Begin element found (level=2) 'part'='wsdl:part'
+Enter id='' type=216 loc=0x7fff57183c10 size=64 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c770
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'xsd:string'stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c7d0
+ into 'xs:string'
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Reverting to last element 'message' (level=1)
+Tags and (default) namespaces match: 'message' 'wsdl:message'
+Begin element found (level=2) 'message'='wsdl:message'
+Enter id='' type=215 loc=0x7fff57183d20 size=96 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x127bed0
+End element found (level=2) 'message'='wsdl:message'
+Tags and (default) namespaces match: 'portType' 'wsdl:portType'
+Begin element found (level=2) 'portType'='wsdl:portType'
+Reverting to last element 'portType' (level=1)
+Tags and (default) namespaces match: 'portType' 'wsdl:portType'
+Begin element found (level=2) 'portType'='wsdl:portType'
+Enter id='' type=315 loc=0x7fff57183d10 size=112 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127c1f0
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127c250
+stdsoap2_ssl_cpp.cpp(10894): malloc(55) = 0x127b790
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x127b800
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127b940
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127b9a0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:getXMLRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127ba10
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":getXMLRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127bab0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127bb10 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:getXMLResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127bb80
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":getXMLResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127bce0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127bd40
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127bda0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:searchNewDevicesRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127d9f0
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":searchNewDevicesRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127daa0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127db00 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:searchNewDevicesResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127db70
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":searchNewDevicesResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127bc20
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127bc80
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127dd90 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:setDeviceNameRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127de00
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":setDeviceNameRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127deb0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127df10 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:setDeviceNameResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127df80
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":setDeviceNameResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127dc20
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127dc80
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127dce0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:saveXMLRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127e300
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":saveXMLRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127e370
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127e3d0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:saveXMLResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127e440
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":saveXMLResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127e4e0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127e540
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127e5a0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:switchPortRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127e610
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":switchPortRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127e6b0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127e710 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:switchPortResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127e780
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":switchPortResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127b530
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127ac80
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127a7d0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:makeRemoteActionRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127b320
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":makeRemoteActionRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127b3a0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127be40 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:makeRemoteActionResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127bf40
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":makeRemoteActionResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127bff0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127e030
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127e090 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:getDevicesListRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127e100
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":getDevicesListRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127e1b0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127e210 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:getDevicesListResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127e280
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":getDevicesListResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127ede0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127ee40
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127eea0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:getFilesListRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127ef10
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":getFilesListRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127efb0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127f010 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:getFilesListResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127f080
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":getFilesListResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=263 loc=0x7fff57183b50 size=176 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127f130
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127f190
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=3) 'input'='wsdl:input'
+Enter id='' type=360 loc=0x127f1f0 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:uploadFirmwareRequest'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127f260
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":uploadFirmwareRequest'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127f310
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=3) 'output'='wsdl:output'
+Enter id='' type=360 loc=0x127f370 size=96 level=0
+Tags match: 'message' 'message'
+Normalized namespace(s) of QNames 'tns:uploadFirmwareResponse'stdsoap2_ssl_cpp.cpp(7684): malloc(112) = 0x127f3e0
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":uploadFirmwareResponse'
+End element found (level=3) 'operation'='wsdl:operation'
+End element found (level=2) 'portType'='wsdl:portType'
+Tags 'type' and 'xsi:type' match but namespaces differ
+Tags and (default) namespaces match: 'binding' 'wsdl:binding'
+Begin element found (level=2) 'binding'='wsdl:binding'
+Reverting to last element 'binding' (level=1)
+Tags and (default) namespaces match: 'binding' 'wsdl:binding'
+Begin element found (level=2) 'binding'='wsdl:binding'
+Enter id='' type=411 loc=0x7fff57183c90 size=232 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127e8a0
+Tags match: 'type' 'type'
+Normalized namespace(s) of QNames 'tns:homesysPortType'stdsoap2_ssl_cpp.cpp(7684): malloc(104) = 0x127e900
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":homesysPortType'
+Tags match: 'type' 'type'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x127e9a0
+stdsoap2_ssl_cpp.cpp(10894): malloc(53) = 0x127ea00
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x127ea70
+stdsoap2_ssl_cpp.cpp(10894): malloc(57) = 0x127ebb0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x127ec30
+Tags and (default) namespaces match: 'SOAP:binding' 'soap:binding'
+Begin element found (level=2) 'SOAP:binding'='soap:binding'
+Reverting to last element 'SOAP:binding' (level=2)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127ed70
+Tags and (default) namespaces match: 'SOAP:binding' 'soap:binding'
+Begin element found (level=2) 'SOAP:binding'='soap:binding'
+Enter id='' type=218 loc=0x127b2d0 size=24 level=0
+Tags match: 'transport' 'transport'
+stdsoap2_ssl_cpp.cpp(7684): malloc(56) = 0x127f4c0
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127b560
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x127f560
+stdsoap2_ssl_cpp.cpp(10894): malloc(58) = 0x127f5c0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x127f640
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127f780
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x127f7e0 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127beb0
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x127f840
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127f890
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x127f8f0 size=192 level=0
+stdsoap2_ssl_cpp.cpp(10894): malloc(51) = 0x127f9c0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x127fa30
+stdsoap2_ssl_cpp.cpp(10894): malloc(61) = 0x127fb70
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x127fbf0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127fd30
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x127fd90 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x127fdc0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x127fe40
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127fed0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x12805e0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x127ff30
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x12806b0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x12806e0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1280760
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x12808c0
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1280920
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x1280980 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12809b0
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1280a00
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1280a50
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x1280ab0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1280b80
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1280be0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1280c10
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1280c90
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1280d20
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x1280d80 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1280e50
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1280eb0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1280ee0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1280f60
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12807f0
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1280850
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x1281180 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12811b0
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1281200
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281250
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x12812b0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281380
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x12813e0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1281410
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1281490
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281520
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x1281580 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281650
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x12816b0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x12816e0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1281760
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1280ff0
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281050
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x12810b0 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12810e0
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1281130
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281b00
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x1281b60 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281c30
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1281c90 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1281cc0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1281d40
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281dd0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x1281e30 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281f00
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1281f60 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1281f90
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1282010
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12820a0
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1282100
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x1282160 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1282190
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12821e0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1282230
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x1282290 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1282360
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x12823c0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x12823f0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1282470
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1282500
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x1282560 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1282630
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1282690 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x12826c0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1282740
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x12817f0
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281850
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x12818b0 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12818e0
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1281930
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281980
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x12819e0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1281ab0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1282e10 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1282e40
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1282ec0
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1282f50
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x1282fb0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283080
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x12830e0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1283110
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1283190
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1283220
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283280
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x12832e0 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1281ae0
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1283340
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283390
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x12833f0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12834c0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1283520 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1283550
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x12835d0
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283660
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x12836c0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283790
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x12837f0 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1283820
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x12838a0
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1283930
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283990
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x12839f0 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1283a20
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1283a70
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283ac0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x1283b20 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283bf0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1283c50 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1283c80
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1283d00
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283d90
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x1283df0 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1283ec0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1283f20 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1283f50
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1283fd0
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Reverting to last element 'operation' (level=2)
+Tags and (default) namespaces match: 'operation' 'wsdl:operation'
+Begin element found (level=3) 'operation'='wsdl:operation'
+Enter id='' type=401 loc=0x7fff57183af0 size=192 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1284060
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Reverting to last element 'SOAP:operation' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12840c0
+Tags and (default) namespaces match: 'SOAP:operation' 'soap:operation'
+Begin element found (level=3) 'SOAP:operation'='soap:operation'
+Enter id='' type=220 loc=0x1284120 size=32 level=0
+Tags match: 'soapAction' 'soapAction'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x1284150
+Tags match: 'style' 'style'
+stdsoap2_ssl_cpp.cpp(7684): malloc(24) = 0x12841a0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Reverting to last element 'input' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12841f0
+Tags and (default) namespaces match: 'input' 'wsdl:input'
+Begin element found (level=4) 'input'='wsdl:input'
+Enter id='' type=383 loc=0x1284250 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x1284320
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1284380 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x12843b0
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1284430
+End element found (level=4) 'input'='wsdl:input'
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Reverting to last element 'output' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12844c0
+Tags and (default) namespaces match: 'output' 'wsdl:output'
+Begin element found (level=4) 'output'='wsdl:output'
+Enter id='' type=383 loc=0x1284520 size=192 level=0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Reverting to last element 'SOAP:body' (level=4)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12845f0
+Tags and (default) namespaces match: 'SOAP:body' 'soap:body'
+Begin element found (level=4) 'SOAP:body'='soap:body'
+Enter id='' type=222 loc=0x1284650 size=40 level=0
+Tags match: 'encodingStyle' 'encodingStyle'
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1284680
+Tags match: 'use' 'use'
+Tags match: 'namespace' 'namespace'
+stdsoap2_ssl_cpp.cpp(7684): malloc(88) = 0x1284700
+End element found (level=4) 'output'='wsdl:output'
+End element found (level=3) 'operation'='wsdl:operation'
+End element found (level=2) 'binding'='wsdl:binding'
+Tags and (default) namespaces match: 'service' 'wsdl:service'
+Begin element found (level=2) 'service'='wsdl:service'
+Reverting to last element 'service' (level=1)
+Tags and (default) namespaces match: 'service' 'wsdl:service'
+Begin element found (level=2) 'service'='wsdl:service'
+Enter id='' type=428 loc=0x7fff57183d00 size=128 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12828c0
+Tags and (default) namespaces match: 'documentation' 'wsdl:documentation'
+Begin element found (level=3) 'documentation'='wsdl:documentation'
+Reading string content, flag=1
+stdsoap2_ssl_cpp.cpp(7684): malloc(64) = 0x1282920
+Enter id='' type=14 loc=0x1282920 size=8 level=0
+End element found (level=3) 'documentation'='wsdl:documentation'
+stdsoap2_ssl_cpp.cpp(10894): malloc(55) = 0x12829a0
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1282a10
+Tags and (default) namespaces match: 'port' 'wsdl:port'
+Begin element found (level=3) 'port'='wsdl:port'
+Reverting to last element 'port' (level=2)
+Tags and (default) namespaces match: 'port' 'wsdl:port'
+Begin element found (level=3) 'port'='wsdl:port'
+Enter id='' type=419 loc=0x7fff57183bb0 size=104 level=0
+Tags match: 'name' 'name'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1282b50
+Tags match: 'binding' 'binding'
+Normalized namespace(s) of QNames 'tns:homesys'stdsoap2_ssl_cpp.cpp(7684): malloc(96) = 0x1282bb0
+ into '"http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl":homesys'
+stdsoap2_ssl_cpp.cpp(10894): malloc(56) = 0x1282c50
+stdsoap2_ssl_cpp.cpp(10953): malloc(256) = 0x1282cc0
+Tags and (default) namespaces match: 'SOAP:address' 'soap:address'
+Begin element found (level=3) 'SOAP:address'='soap:address'
+Reverting to last element 'SOAP:address' (level=3)
+stdsoap2_ssl_cpp.cpp(7987): malloc(32) = 0x12847c0
+Tags and (default) namespaces match: 'SOAP:address' 'soap:address'
+Begin element found (level=3) 'SOAP:address'='soap:address'
+Enter id='' type=242 loc=0x1284820 size=16 level=0
+Tags match: 'location' 'location'
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x1284840
+End element found (level=3) 'port'='wsdl:port'
+End element found (level=2) 'service'='wsdl:service'
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1284a20
+End element found (level=1) 'definitions'='wsdl:'
+End of receive message ok
+Resolving forwarded data
+Resolution phase
+Resolution done
+Free namespace stack
+stdsoap2_ssl_cpp.cpp(8591): free(0x1273960)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1273750)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1273530)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1273310)
+stdsoap2_ssl_cpp.cpp(8591): free(0x12730f0)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1272e90)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1272c80)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1272a60)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1272840)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1272620)
+stdsoap2_ssl_cpp.cpp(8591): free(0x1270fe0)
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1286cc0
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1286d20
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12871b0
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x1287210
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x12876b0
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1287710
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1287bb0
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1287c10
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1288080
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x12880e0
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1288570
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x12885d0
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1288a70
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x1288ad0
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1288f70
+stdsoap2_ssl_cpp.cpp(7684): malloc(40) = 0x1288fd0
+stdsoap2_ssl_cpp.cpp(7684): malloc(32) = 0x1289460
+stdsoap2_ssl_cpp.cpp(7684): malloc(48) = 0x12894c0
+stdsoap2_ssl_cpp.cpp(7901): free(0x12847c0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12845f0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12844c0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1284320)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12841f0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12840c0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283ec0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283d90)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283bf0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283ac0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283990)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283790)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283660)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12834c0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283390)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283280)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1283080)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1282f50)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281ab0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281980)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281850)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1282630)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1282500)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1282360)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1282230)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1282100)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281f00)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281dd0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281c30)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281b00)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281050)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281650)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281520)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281380)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1281250)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1280850)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1280e50)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1280d20)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1280b80)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1280a50)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1280920)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127ff30)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127fed0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127fd30)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127f890)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127f780)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127ed70)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127f310)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127f190)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127efb0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127ee40)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127e1b0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127e030)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127b3a0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127ac80)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127e6b0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127e540)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127e370)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127dc80)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127deb0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127bc80)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127daa0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127bd40)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127bab0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x127b940)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12793a0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12792f0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1279e70)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1279dc0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1278b50)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1278500)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12784a0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x12787d0)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1277c50)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1275960)
+stdsoap2_ssl_cpp.cpp(7901): free(0x1273a50)
+Free namespace stack
+Free any remaining temp blocks
+Free attribute storage
+stdsoap2_ssl_cpp.cpp(8547): free(0x1282cc0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1282c50)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1282a10)
+stdsoap2_ssl_cpp.cpp(8548): free(0x12829a0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x127fbf0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x127fb70)
+stdsoap2_ssl_cpp.cpp(8547): free(0x127fa30)
+stdsoap2_ssl_cpp.cpp(8548): free(0x127f9c0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x127f640)
+stdsoap2_ssl_cpp.cpp(8548): free(0x127f5c0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x127ec30)
+stdsoap2_ssl_cpp.cpp(8548): free(0x127ebb0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x127ea70)
+stdsoap2_ssl_cpp.cpp(8548): free(0x127ea00)
+stdsoap2_ssl_cpp.cpp(8547): free(0x127b800)
+stdsoap2_ssl_cpp.cpp(8548): free(0x127b790)
+stdsoap2_ssl_cpp.cpp(8547): free(0x12782a0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1278230)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1278120)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1277ba0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1277a60)
+stdsoap2_ssl_cpp.cpp(8548): free(0x12779e0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1277790)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1277710)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1275820)
+stdsoap2_ssl_cpp.cpp(8548): free(0x12757a0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1275660)
+stdsoap2_ssl_cpp.cpp(8548): free(0x12755e0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1273820)
+stdsoap2_ssl_cpp.cpp(8548): free(0x12737b0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1272130)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1271b70)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1272020)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1271ad0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x12722f0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1272270)
+stdsoap2_ssl_cpp.cpp(8547): free(0x12724e0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1272460)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1272700)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1272680)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1272920)
+stdsoap2_ssl_cpp.cpp(8548): free(0x12728a0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1272b40)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1272ac0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1272d50)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1272ce0)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1272fb0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1272f30)
+stdsoap2_ssl_cpp.cpp(8547): free(0x12731d0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1273150)
+stdsoap2_ssl_cpp.cpp(8547): free(0x12733f0)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1273370)
+stdsoap2_ssl_cpp.cpp(8547): free(0x1273610)
+stdsoap2_ssl_cpp.cpp(8548): free(0x1273590)
+stdsoap2_ssl_cpp.cpp(8553): free(0x1271990)
+stdsoap2_ssl_cpp.cpp(8566): free(0x1271290)
+Free pointer hashtable
+Free ID hashtable
+Free all soap_malloc() data
+stdsoap2_ssl_cpp.cpp(7843): free(0x12894c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1289460)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1288fd0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1288f70)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1288ad0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1288a70)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12885d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1288570)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12880e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1288080)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1287c10)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1287bb0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1287710)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12876b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1287210)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12871b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1286d20)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1286cc0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1284a20)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1284840)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282bb0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282b50)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282920)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12828c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1284700)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1284680)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1284430)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12843b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12841a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1284150)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1284060)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283fd0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283f50)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283d00)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283c80)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283a70)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283a20)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283930)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12838a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283820)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12835d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283550)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283340)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281ae0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283220)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283190)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1283110)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282ec0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282e40)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281930)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12818e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12817f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282740)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12826c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282470)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12823f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12821e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282190)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12820a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1282010)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281f90)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281d40)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281cc0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281130)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12810e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1280ff0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281760)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12816e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281490)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281410)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1281200)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12811b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12807f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1280f60)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1280ee0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1280c90)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1280c10)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1280a00)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12809b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12808c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1280760)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12806e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127fe40)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127fdc0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127f840)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127beb0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127f560)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b560)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127f4c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e9a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e900)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e8a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127f3e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127f260)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127f130)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127f080)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ef10)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ede0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e280)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e100)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127bff0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127bf40)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b320)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b530)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e780)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e610)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e4e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e440)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127e300)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127dc20)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127df80)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127de00)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127bc20)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127db70)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127d9f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127bce0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127bb80)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ba10)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c250)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c1f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127bed0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c7d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c770)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c710)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c670)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c610)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c5b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c550)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c4b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c450)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c3e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c380)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c320)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c2c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c140)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c0e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b260)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127c080)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b2f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b200)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b1a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b100)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b0a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b030)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127afd0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b760)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b700)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b6a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ac30)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1274d40)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b5e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b580)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b4d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b470)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127b410)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ac00)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127abb0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ab50)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127aaf0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127af70)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127af10)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127aeb0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ae60)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ae00)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127adb0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127ad50)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127acf0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a940)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a8e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127aa60)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127aa10)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a9b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a870)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12754f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1275430)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a790)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a6f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a6a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a640)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12794d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279290)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a0c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x127a070)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279fd0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12799a0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279970)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279920)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12798d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279870)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279820)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279a10)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12799c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279660)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279600)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12797d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279780)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279720)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12796d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12795b0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279560)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279500)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278be0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278af0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279210)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12791c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279160)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1279110)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278c30)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278980)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278920)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278a50)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12789f0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12788c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278860)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278540)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1277050)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278570)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1278440)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12783e0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1277980)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12778d0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1277130)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12710c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12739c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x12716c0)
+stdsoap2_ssl_cpp.cpp(7843): free(0x1271670)
+Done with context
+Free namespace stack
+Free any remaining temp blocks
+Free attribute storage
+Free pointer hashtable
+Free ID hashtable
+Removing plugin 'HTTP-DA-1.2'
+stdsoap2_ssl_cpp.cpp(5238): free(0x126f9c0)
+stdsoap2_ssl_cpp.cpp(5355): free(0x12530d0)
+Free logfiles
+stdsoap2_ssl_cpp.cpp(5367): free(0x1253080)
+stdsoap2_ssl_cpp.cpp(5367): free(0x1253030)
+stdsoap2_ssl_cpp.cpp(5367): free(0x1252fe0)

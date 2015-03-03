@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="homesys"
+             targetNamespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+             xmlns:tns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+             xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+             xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+             xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+             xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+
+        <schema targetNamespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+                xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:ns="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl"
+                xmlns="http://www.w3.org/2001/XMLSchema"
+                elementFormDefault="unqualified"
+                attributeFormDefault="unqualified">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+  
+            <xsd:complexType name="responseType">
+                <xsd:all minOccurs="1" maxOccurs="1">
+                    <xsd:element name="result" type="xsd:string"/>
+                    <xsd:element name="values" type="ns:valuesType"/>
+                </xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="valuesType">
+                <xsd:all minOccurs="1" maxOccurs="1">
+                    <xsd:element name="responseMessage" type="xsd:string"/>
+                    <xsd:element name="values" type="ns:valueType"/>
+                    <xsd:element name="numValues" type="xsd:integer"/>
+                </xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="valueType">
+                <xsd:sequence>
+                    <xsd:element name="value" type="xsd:integer" minOccurs="1" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+                        
+            <xsd:complexType name="SDeviceDescription">
+                <xsd:all>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="GUID" type="xsd:integer"/>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="LUID" type="xsd:integer"/>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="category" type="xsd:integer"/>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string"/>
+                </xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="devicesList">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" maxOccurs="unbounded" name="item" type="ns:SDeviceDescription"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            
+            <xsd:complexType name="filesList">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" maxOccurs="unbounded" name="fileName" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </schema>
+
+    </types>
+
+
+
+    <!-- searchNewDevices -->
+    <message name="searchNewDevicesRequest">
+        <part name="category" type="xsd:integer"/>
+    </message>
+
+    <message name="searchNewDevicesResponse">
+    </message>
+    
+    <!-- getXML -->
+    <message name="getXMLRequest">
+        <part name="id" type="xsd:string"/>
+    </message>
+
+    <message name="getXMLResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
+    
+    <!-- save XML -->
+    <message name="saveXMLRequest">
+        <part name="id" type="xsd:string"/>
+        <part name="body" type="xsd:string"/>
+    </message>
+
+    <message name="saveXMLResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
+
+    <!-- switchPort -->
+    <message name="switchPortRequest">
+        <part name="pinNo" type="xsd:string"/>
+    </message>
+
+    <message name="switchPortResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
+
+
+    <!-- setDeviceName -->
+    <message name="setDeviceNameRequest">
+        <part name="device" type="ns:SDeviceDescription"/>
+        <part name="name" type="xsd:string"/>
+    </message>
+
+    <message name="setDeviceNameResponse">
+        <part name="response" type="xsd:string"/>
+    </message>
+    
+    <!-- makeRemoteAction -->
+    <message name="makeRemoteActionRequest">
+        <part name="device" type="ns:SDeviceDescription"/>
+        <part name="command" type="xsd:integer"/>
+        <part name="params" type="xsd:integer"/>
+    </message>
+
+    <message name="makeRemoteActionResponse">
+        <part name="response" type="ns:responseType"/>
+    </message>
+    
+    <!-- getDevicesList -->
+    <message name="getDevicesListRequest">
+        <part name="category" type="xsd:integer"/>
+    </message>
+
+    <message name="getDevicesListResponse">
+        <part name="result" type="ns:devicesList"/>
+    </message>
+    
+     <!-- getFilesList -->
+    <message name="getFilesListRequest">
+    </message>
+
+    <message name="getFilesListResponse">
+        <part name="result" type="ns:filesList"/>
+    </message>
+    
+     <!-- uploadFirmware -->
+    <message name="uploadFirmwareRequest">
+        <part name="fileName" type="xsd:string"/>
+    </message>
+
+    <message name="uploadFirmwareResponse">
+    </message>
+
+
+    <portType name="homesysPortType">
+        <operation name="getXML">
+            <input message="tns:getXMLRequest"/>
+            <output message="tns:getXMLResponse"/>
+        </operation>
+        <operation name="searchNewDevices">
+            <input message="tns:searchNewDevicesRequest"/>
+            <output message="tns:searchNewDevicesResponse"/>
+        </operation>
+        <operation name="setDeviceName">
+            <input message="tns:setDeviceNameRequest"/>
+            <output message="tns:setDeviceNameResponse"/>
+        </operation>
+        <operation name="saveXML">
+            <input message="tns:saveXMLRequest"/>
+            <output message="tns:saveXMLResponse"/>
+        </operation>
+        <operation name="switchPort">
+            <input message="tns:switchPortRequest"/>
+            <output message="tns:switchPortResponse"/>
+        </operation>
+        <operation name="makeRemoteAction">
+            <input message="tns:makeRemoteActionRequest"/>
+            <output message="tns:makeRemoteActionResponse"/>
+        </operation>
+        <operation name="getDevicesList">
+            <input message="tns:getDevicesListRequest"/>
+            <output message="tns:getDevicesListResponse"/>
+        </operation>
+        <operation name="getFilesList">
+            <input message="tns:getFilesListRequest"/>
+            <output message="tns:getFilesListResponse"/>
+        </operation>
+        <operation name="uploadFirmware">
+            <input message="tns:uploadFirmwareRequest"/>
+            <output message="tns:uploadFirmwareResponse"/>
+        </operation>
+
+    </portType>
+
+    <binding name="homesys" type="tns:homesysPortType">
+        <SOAP:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+       
+        <operation name="getXML">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="searchNewDevices">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="setDeviceName">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="saveXML">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="switchPort">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="makeRemoteAction">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getDevicesList">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getFilesList">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="uploadFirmware">
+            <SOAP:operation style="rpc" soapAction=""/>
+            <input>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <SOAP:body use="encoded" namespace="http://adjserwer.dyndns.org/soap_server/webservice/homesys.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+
+
+    <service name="homesys">
+        <documentation>gSOAP 2.7.9k generated service definition</documentation>
+        <port name="homesys" binding="tns:homesys">
+            <SOAP:address location="http://192.168.1.11:1234"/>
+        </port>
+    </service>
+
+</definitions>

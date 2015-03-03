@@ -7,6 +7,8 @@
 
 #include "CCan232.h"
 
+//#define LOG_BYTES
+
 CCan232::CCan232() {
 
     config = CConfiguration::getInstance();
@@ -206,10 +208,12 @@ CCanBuffer CCan232::request(CCanBuffer &frame) {
                 if (buffer.getLength()) {
 //                    cout << "S8" << flush;
 //                    buffer.printBuffer();
+                    log->put("Return first received buffer");
                     return buffer;
                 } else {
 //                    cout << "S9" << flush;
 //                    dummyBuffer.printBuffer();
+                    log->warning("First received buffer was empty");
                     return dummyBuffer;
                 }
 
@@ -239,22 +243,26 @@ bool CCan232::sendCanFrame(CCanBuffer &frame) {
     buf << (unsigned char) CR;
 
     try {
-        //        log->put(">>>SENDING");
-        //        string s;
-        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
-        //            s += to_string((int) buf[i], true) + " ";
-        //        }
-        //        log->put(s);
-
+        
+#ifdef LOG_BYTES
+                log->put(">>>SENDING");
+                string s;
+                for (unsigned int i = 0; i < buf.getLength(); i++) {
+                    s += to_string((int) buf[i], true) + " ";
+                }
+                log->put(s);
+#endif
+                
         sendBuffer(buf);
         buf = getFrame();
 
-        //        s = "";
-        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
-        //            s += to_string((int) buf[i], true) + " ";
-        //        }
-        //        log->put(s);
-
+#ifdef LOG_BYTES
+                s = "";
+                for (unsigned int i = 0; i < buf.getLength(); i++) {
+                    s += to_string((int) buf[i], true) + " ";
+                }
+                log->put(s);
+#endif
 
         if (buf.isReady()) {
             if (buf.getErrorCode()) {
@@ -359,23 +367,27 @@ CCanBuffer CCan232::getCanFrame() {
     buf << (unsigned char) CR;
 
     try {
-        //        log->put("<<<REQUESTING");
-        //        string s;
-        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
-        //            s += to_string((int) buf[i], true) + " ";
-        //        }
-        //        log->put(s);
+        
+#ifdef LOG_BYTES
+                log->put("<<<REQUESTING");
+                string s;
+                for (unsigned int i = 0; i < buf.getLength(); i++) {
+                    s += to_string((int) buf[i], true) + " ";
+                }
+                log->put(s);
+#endif
 
         sendBuffer(buf);
         buf = getFrame();
 
 
-
-        //        s = "";
-        //        for (unsigned int i = 0; i < buf.getLength(); i++) {
-        //            s += to_string((int) buf[i], true) + " ";
-        //        }
-        //        log->put(s);
+#ifdef LOG_BYTES
+                s = "";
+                for (unsigned int i = 0; i < buf.getLength(); i++) {
+                    s += to_string((int) buf[i], true) + " ";
+                }
+                log->put(s);
+#endif
 
         if (buf.isReady()) {
             if (!buf.isNoData()) {

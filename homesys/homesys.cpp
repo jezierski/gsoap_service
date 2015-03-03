@@ -107,6 +107,7 @@ void CApplication::run() {
             cout << "chain\t - load chain actions" << endl;
             cout << "list\t - print devices list" << endl;
             cout << "ping\t - ping device" << endl;
+            cout << "multi\t - multi-ping device" << endl;
             cout << "check\t - check device availability" << endl;
             cout << "name\t - set device name" << endl;
             cout << "set\t - set actor status" << endl;
@@ -303,6 +304,45 @@ void CApplication::run() {
             s.guid = g;
             s.luid = (unsigned char) l;
             deviceManager->invokeRemoteAction(s, ACTION_PING, null);
+        }
+
+        if (x == "multi") {
+            SDeviceDescription s;
+            cout << "guid ? ";
+            unsigned int g;
+            cin >> g;
+            cout << "luid ? ";
+            unsigned int l;
+            cin >> l;
+            cout << "cat (1-actor, 2-sensor, 3-rgb, 4-pwm)? ";
+            int c;
+            cin >> c;
+            int rep;
+            cout<<"repeat count ? ";
+            cin >> rep;
+            switch (c) {
+                case 1:
+                    s.category = EDeviceCategory::A_SIMPLE_SWITCH;
+                    break;
+                case 2:
+                    s.category = EDeviceCategory::S_SIMPLE_SWITCH;
+                    break;
+                case 3:
+                    s.category = EDeviceCategory::A_RGB_DRIVER;
+                    break;
+                case 4:
+                    s.category = EDeviceCategory::A_PWM_DRIVER;
+                    break;
+            }
+            s.guid = g;
+            s.luid = (unsigned char) l;
+           
+            deviceManager->pauseDeviceManager();
+            while (--rep) {
+                deviceManager->invokeRemoteAction(s, ACTION_PING, null);
+                msleep(1000);
+            }
+            deviceManager->resumeDeviceManager();
         }
 
         if (x == "check") {
@@ -815,29 +855,24 @@ void CApplication::dbConfig() {
     log->success("Loading database success");
 }
 
-int getProcIdByName(string procName)
-{
+int getProcIdByName(string procName) {
     int pid = -1;
 
     // Open the /proc directory
     DIR *dp = opendir("/proc");
-    if (dp != NULL)
-    {
+    if (dp != NULL) {
         // Enumerate all entries in directory until process found
         struct dirent *dirp;
-        while (pid < 0 && (dirp = readdir(dp)))
-        {
+        while (pid < 0 && (dirp = readdir(dp))) {
             // Skip non-numeric entries
             int id = atoi(dirp->d_name);
-            if (id > 0)
-            {
+            if (id > 0) {
                 // Read contents of virtual /proc/{pid}/cmdline file
                 string cmdPath = string("/proc/") + dirp->d_name + "/cmdline";
                 ifstream cmdFile(cmdPath.c_str());
                 string cmdLine;
                 getline(cmdFile, cmdLine);
-                if (!cmdLine.empty())
-                {
+                if (!cmdLine.empty()) {
                     // Keep first cmdline item which contains the program path
                     size_t pos = cmdLine.find('\0');
                     if (pos != string::npos)
@@ -861,7 +896,7 @@ int getProcIdByName(string procName)
 
 void checkAppInstance() {
     int runningPID = getProcIdByName("homik");
-        
+
     pid_t pid = getpid();
     string spid;
     fstream file;
@@ -869,7 +904,7 @@ void checkAppInstance() {
     if (file.is_open()) {
         getline(file, spid);
         file.close();
-     
+
         if (spid == to_string(runningPID)) {
             cout << "Process already running, quit..." << endl;
             exit(1);
@@ -888,7 +923,6 @@ void checkAppInstance() {
     }
 }
 
-
 void exitFunction() {
     pid_t pid = getpid();
     string spid;
@@ -903,7 +937,6 @@ void exitFunction() {
     }
 
 }
-
 
 int main(int argc, char *argv[]) {
 

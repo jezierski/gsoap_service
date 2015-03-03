@@ -44,9 +44,9 @@ public:
     void uploadFirmware(string fileName);
     
 
-private:
     void pauseDeviceManager();
     void resumeDeviceManager();
+private:
     
     SAction convertToSAction(SDeviceDescription device, Command command, Blob blob);
     CDevice *getDevice(SDeviceDescription deviceDescription);

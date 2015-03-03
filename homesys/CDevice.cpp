@@ -206,6 +206,7 @@ void CDevice::verifyFirmware(unsigned int crc) {
     log->info("Verifying firmware...");
 
     unsigned int devCRC = getSelfCRC();
+    log->put("CRC in system: " + to_string(crc) + ", CRC from device: " + to_string(devCRC));
     if (crc != devCRC) {
         throw string("Veryfication firmware failed");
     }
@@ -308,8 +309,9 @@ void CDevice::exitBootMode() {
     buffer.insertBootControlBits(BOOT_WRITE_UNLOCK | BOOT_AUTO_ERASE | BOOT_AUTO_INC | BOOT_SEND_ACK);
     buffer.insertBootCommand(BOOT_CMD_EXIT_BOOT);
     buffer.buildBootBuffer();
+    buffer.printBuffer();
     buffer = canbusProtocol->request(buffer);
-
+    buffer.printBuffer();
     if (buffer[0] != BOOT_COMMAND_ACK) {
         throw string("Exit boot mode failed");
     }
